@@ -1,0 +1,1718 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    
+<div class="tab-content" id="symptoms">
+    <!-- Complaints/Symptoms Section -->
+    <div class="d-flex justify-content-center">
+     <button type="button" class="btn btn-primary btn-sm" id="right-eye-symptom-btn">Right Eye</button>
+       <button type="button" class="btn btn-secondary btn-sm mx-2" id="left-eye-symptom-btn">Left Eye</button>
+       <button type="button" class="btn btn-secondary btn-sm" id="both-eyes-symptom-btn">Both Eyes</button>
+   </div>
+   
+   
+   <div class="section-title" style="font-size: 25px;">Complaints/Symptoms:</div>
+   <div class="tags-container" id="symptom-tags">Selected: None</div>
+   <!-- <input type="text" class="search-box" placeholder="Search Complains/Symptoms" id="symptom-search"> -->
+   
+   <div class="tags-container" id="symptom-tags">
+       <!-- Selected Tags Will Appear Here -->
+   </div>
+   
+   <div id="right-symptom-options" class="options-container">
+       <div class="option">Blurry Vision</div>
+       <div class="option">Black(RE)</div>
+       <div class="option">Black spot in front of eye</div>
+       <div class="option">Light sensitivity</div>
+       <div class="option">Headache</div>
+       <div class="option">Floaters</div>
+       <div class="option">Chemosis</div>
+       <div class="option">Pain in Eye</div>
+       <div class="option">Swelling on lid</div>
+       <div class="option">Irritation</div>
+       <div class="option">Itching</div>
+       <div class="option">Watering</div>
+       <div class="option">Night vision Problem</div>
+       <div class="option">Redness</div>
+       <div class="option">Pain around Eye</div>
+       <div class="option">Discharge</div>
+       <div class="option">Pain in Eye</div>
+       <div class="option">F.B. Sensation</div>
+       <div class="option">White ring around Cornea</div>
+       <div class="option">(BE) DOV</div>
+       <div class="option">Dryness in eye</div>
+       <div class="option">Sudden Loss of Vision</div>
+       <div class="option">Burning</div>
+       <div class="option">Double Vision</div>
+       <div class="option">Barapon</div>
+       <div class="option">Lump on Eyelid</div>
+       <div class="option">Blood spot in Eye</div>
+       <div class="option">Dilated pupil</div>
+       <div class="option">Drooping Eyelid</div>
+   </div>
+   
+   
+   <div class="tags-container" id="symptom-tags1">
+     <!-- Selected Tags Will Appear Here -->
+   </div>
+   
+   
+   
+   <div id="left-symptom-options" class="options-container">
+     <div class="option">Blurry Vision</div>
+     <div class="option">Black</div>
+     <div class="option">Black spot in front of eye(LE)</div>
+     <div class="option">Light sensitivity</div>
+     <div class="option">Headache</div>
+     <div class="option">Floaters</div>
+     <div class="option">Chemosis</div>
+     <div class="option">Pain in Eye</div>
+     <div class="option">Swelling on lid</div>
+     <div class="option">Irritation</div>
+     <div class="option">Itching</div>
+     <div class="option">Watering</div>
+     <div class="option">Night vision Problem</div>
+     <div class="option">Redness</div>
+     <div class="option">Pain around Eye</div>
+     <div class="option">Discharge</div>
+     <div class="option">Pain in Eye</div>
+     <div class="option">F.B. Sensation</div>
+     <div class="option">White ring around Cornea</div>
+     <div class="option">(BE) DOV</div>
+     <div class="option">Dryness in eye</div>
+     <div class="option">Sudden Loss of Vision</div>
+     <div class="option">Burning</div>
+     <div class="option">Double Vision</div>
+     <div class="option">Barapon</div>
+     <div class="option">Lump on Eyelid</div>
+     <div class="option">Blood spot in Eye</div>
+     <div class="option">Dilated pupil</div>
+     <div class="option">Drooping Eyelid</div>
+   </div>
+   
+   <div class="tags-container" id="symptom-tags2">
+     <!-- Selected Tags Will Appear Here -->
+   </div>
+   
+   
+   <div id="both-symptom-options" class="options-container">
+     <div class="option">Blurry Vision</div>
+     <div class="option">Black</div>
+     <div class="option">Black spot in front of eye</div>
+     <div class="option">Light sensitivity(BE)</div>
+     <div class="option">Headache</div>
+     <div class="option">Floaters</div>
+     <div class="option">Chemosis</div>
+     <div class="option">Pain in Eye</div>
+     <div class="option">Swelling on lid</div>
+     <div class="option">Irritation</div>
+     <div class="option">Itching</div>
+     <div class="option">Watering</div>
+     <div class="option">Night vision Problem</div>
+     <div class="option">Redness</div>
+     <div class="option">Pain around Eye</div>
+     <div class="option">Discharge</div>
+     <div class="option">Pain in Eye</div>
+     <div class="option">F.B. Sensation</div>
+     <div class="option">White ring around Cornea</div>
+     <div class="option">(BE) DOV</div>
+     <div class="option">Dryness in eye</div>
+     <div class="option">Sudden Loss of Vision</div>
+     <div class="option">Burning</div>
+     <div class="option">Double Vision</div>
+     <div class="option">Barapon</div>
+     <div class="option">Lump on Eyelid</div>
+     <div class="option">Blood spot in Eye</div>
+     <div class="option">Dilated pupil</div>
+     <div class="option">Drooping Eyelid</div>
+   </div>
+   
+   <hr>
+   <div class="actions">
+    
+    
+   </div>
+   
+   <!-- Medical History Section -->
+   <div class="d-flex justify-content-center">
+     <button type="button" class="btn btn-primary btn-sm" id="right-eye-medical-btn">Right Eye</button>
+     <button type="button" class="btn btn-secondary btn-sm mx-2" id="left-eye-medical-btn">Left Eye</button>
+     <button type="button" class="btn btn-secondary btn-sm" id="both-eyes-medical-btn">Both Eyes</button>
+   </div>
+   <div class="section-title" style="font-size: 25px;">Medical History:</div>
+   <div id="medical-tags" class="tags-container">Selected: None</div>
+   
+   
+   <div id="medical-tags" class="tags-container" style="margin-top: 10px; font-weight: bold;">
+     <!-- Selected Tags Will Appear Here -->
+     
+   </div>
+   
+   <div id="right-medical-options" class="options-container" style="display: none;">
+     <div class="option">Hypertension</div>
+     <div class="option">Asthma</div>
+     <div class="option">Diabetes</div>
+     <div class="option">Paralysis Attack</div>
+     <div class="option">IHD</div>
+     <div class="option">Jaundice</div>
+     <div class="option">Koch's</div>
+     <div class="option">Cancer</div>
+     <div class="option">CABG</div>
+     <div class="option">PTCA</div>
+     <div class="option">Antiplatelet Medication</div>
+   </div>
+   
+   <div id="left-medical-options" class="options-container" style="display: none;">
+     <div class="option">Hypertension</div>
+     <div class="option">Asthma</div>
+     <div class="option">Diabetes</div>
+     <div class="option">Paralysis Attack</div>
+     <div class="option">IHD</div>
+     <div class="option">Jaundice</div>
+     <div class="option">Koch's</div>
+     <div class="option">Cancer</div>
+     <div class="option">CABG</div>
+     <div class="option">PTCA</div>
+     <div class="option">Antiplatelet Medication</div>
+   </div>
+   
+   <div id="both-medical-options" class="options-container" style="display: none;">
+     <div class="option">Hypertension</div>
+     <div class="option">Asthma</div>
+     <div class="option">Diabetes</div>
+     <div class="option">Paralysis Attack</div>
+     <div class="option">IHD</div>
+     <div class="option">Jaundice</div>
+     <div class="option">Koch's</div>
+     <div class="option">Cancer</div>
+     <div class="option">CABG</div>
+     <div class="option">PTCA</div>
+     <div class="option">Antiplatelet Medication</div>
+   </div>
+   <hr>
+   <div class="actions">
+   
+   <!-- Surgical History Section -->
+   <div class="section-title" style="font-size: 25px;">Surgical History:</div>
+   <input type="text" class="search-box" placeholder="Search Surgical History" id="surgical-search">
+   
+   <div class="tags-container" id="surgical-tags">
+       <!-- Selected Tags Will Appear Here -->
+   </div>
+   <div id="surgical-options" class="options-container">
+     <div class="option">Retina surgery</div>
+     <div class="option">Glaucoma surgery</div>
+     <div class="option">Cataract surgery</div>
+     <div class="option">Pterygium surgery</div>
+   </div>
+   
+   <div class="actions">
+       <a onclick="saveGroup()">Save As Group</a>
+       <a onclick="displayGroup()">Display Group</a>
+       <a onclick="clearTags('surgical-tags')">Clear</a>
+   </div>
+   
+   
+   
+   
+   
+     
+    
+   
+   
+   
+   </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <div class="tab-content" id="vitals">
+     <h3> Ophthal</h3>
+     
+     <!-- ##################### ophtal tabs start ############################################# -->
+     <div class="tabs">
+       <div class="ttab" data-section="section1">Visual Acuity</div>
+       <div class="ttab" data-section="section2">Current Power Glass</div>
+       <div class="ttab" data-section="section3">Pupillary Reaction</div>
+       <div class="ttab" data-section="section4">Examination</div>
+       <div class="ttab" data-section="section5">Refraction</div>
+       <div class="ttab" data-section="section6">IOP/GAT</div>
+       <div class="ttab" data-section="section7">Topography</div>
+       <div class="ttab" data-section="section8">A-Scan</div>
+       <div class="ttab" data-section="section9">AR</div>
+     </div>
+     
+     <!-- ##################### ophtal tabs end ############################################# -->
+     
+     <!-- 
+     ################################### start visual acuity section ############################ -->
+     <div id="section1" class="section">
+       <h3>Visual Acuity</h3>
+     
+       <!-- Main Vision Table -->
+       <table class="vision-table">
+         <thead>
+           <tr>
+             <th></th>
+             <th>Right Eye</th>
+             <th>Left Eye</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>Unaided</td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+           </tr>
+           <tr>
+             <td>Glasses</td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+           </tr>
+           <tr>
+             <td>Near Vision</td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" readonly></td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" readonly></td>
+           </tr>
+           <tr>
+             <td>Pinhole Vision</td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+             <td><input type="text" onfocus="showOptions(event, 'myOptionsTable')" readonly></td>
+           </tr>
+         </tbody>
+       </table>
+       
+       <table id="myOptionsTable" style="display: none; width: 218px" class="options-table">
+         <tr>
+           <td>6/6</td>
+           <td>6/6p</td>
+           <td>6/7.5</td>
+           <td>6/7.5P</td>
+         </tr>
+         <tr>
+           <td>6/9</td>
+           <td>6/9p</td>
+           <td>6/12</td>
+           <td>6/12p</td>
+         </tr>
+         <tr>
+           <td>6/15</td>
+           <td>6/15p</td>
+           <td>6/18</td>
+           <td>6/18p</td>
+         </tr>
+         <tr>
+           <td>6/24</td>
+           <td>6/24p</td>
+           <td>6/30</td>
+           <td>6/30p</td>
+         </tr>
+         <tr>
+           <td>6/36</td>
+           <td>6/36p</td>
+           <td>6/48</td>
+           <td>6/60</td>
+         </tr>
+       </table>
+       
+       <!-- Corrected the id here (removed the extra space) -->
+       <table id="myOptionsTable2" style="display: none; width: 160px" class="options-table">
+         <tr>
+           <td>N-5</td>
+           <td>N-6</td>
+           <td>N-8</td>
+         </tr>
+         <tr>
+           <td>N-10</td>
+           <td>N-12</td>
+           <td>N-14</td>
+         </tr>
+         <tr>
+           <td>N-18</td>
+           <td>N-24</td>
+           <td>N-36</td>
+         </tr>
+       </table>
+     
+     </div>
+     
+     <!-- ################################### end visual acuity section ############################ -->
+     
+     <!-- ##################################Current Power Glasses start ################################### -->
+     
+     <div id="section2" class="section">
+     
+     
+       <!-- Step 3: Current Power Glasses -->
+       <div class="form-step" id="step-3">
+         <div class="form-group">
+           <h3>Current Power Glasses:</h3>
+           <table>
+             <thead>
+               <tr>
+                 <th></th>
+                 <th colspan="4">Right Eye</th>
+                 <th colspan="4">Left Eye</th>
+               </tr>
+             </thead>
+             <thead>
+               <tr>
+                 <th></th>
+                 <th>SPH</th>
+                 <th>CYL</th>
+                 <th>Axis</th>
+                 <th>V/A</th>
+                 <th>SPH</th>
+                 <th>CYL</th>
+                 <th>Axis</th>
+                 <th>V/A</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr>
+                 <td>DV</td>
+                 <td><input type="text" id="DV-SPH" /></td>
+                 <td><input type="text" id="DV-CYL" /></td>
+                 <td><input type="text" id="DV-Axis" /></td>
+                 <td><input type="text" id="DV-VA" /></td>
+                 <td><input type="text" id="DV-SPH2" /></td>
+                 <td><input type="text" id="DV-CYL2" /></td>
+                 <td><input type="text" id="DV-Axis2" /></td>
+                 <td><input type="text" id="DV-VA2" /></td>
+               </tr>
+               <tr>
+                 <td>NV</td>
+                 <td><input type="text" id="NV-SPH" /></td>
+                 <td><input type="text" id="NV-CYL" /></td>
+                 <td><input type="text" id="NV-Axis" /></td>
+                 <td><input type="text" id="NV-VA" /></td>
+                 <td><input type="text" id="NV-SPH2" /></td>
+                 <td><input type="text" id="NV-CYL2" /></td>
+                 <td><input type="text" id="NV-Axis2" /></td>
+                 <td><input type="text" id="NV-VA2" /></td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div>
+       
+       
+       <!-- optionsTable teble fast start -->
+       
+        <div
+           id="optionsTable"
+           class="options-table container-fluid"
+           style="height: 280px; width: 630px"
+         >
+           <table border="1" cellspacing="0" cellpadding="5">
+             <!-- Table Head -->
+             <thead>
+               <tr>
+                 <th colspan="6">-ve</th>
+                 <th colspan="6">+ve</th>
+               </tr>
+             </thead>
+             <!-- Table Body -->
+             <tbody>
+               <tr>
+                 <td>-0.00</td>
+                 <td>-0.25</td>
+                 <td>-0.50</td>
+                 <td>-0.75</td>
+                 <td>-1.00</td>
+                 <td>-1.25</td>
+                 <td>+0.00</td>
+                 <td>+0.25</td>
+                 <td>+0.50</td>
+                 <td>+0.75</td>
+                 <td>+1.00</td>
+                 <td>+1.25</td>
+               </tr>
+               <tr>
+                 <td>-1.50</td>
+                 <td>-1.75</td>
+                 <td>-2.00</td>
+                 <td>-2.25</td>
+                 <td>-2.50</td>
+                 <td>-2.75</td>
+                 <td>+1.50</td>
+                 <td>+1.75</td>
+                 <td>+2.00</td>
+                 <td>+2.25</td>
+                 <td>+2.50</td>
+                 <td>+2.75</td>
+               </tr>
+               <tr>
+                 <td>-3.00</td>
+                 <td>-3.25</td>
+                 <td>-3.50</td>
+                 <td>-3.75</td>
+                 <td>-4.00</td>
+                 <td>-4.25</td>
+                 <td>+3.00</td>
+                 <td>+3.25</td>
+                 <td>+3.50</td>
+                 <td>+3.75</td>
+                 <td>+4.00</td>
+                 <td>+4.25</td>
+               </tr>
+               <tr>
+                 <td>-4.50</td>
+                 <td>-4.75</td>
+                 <td>-5.00</td>
+                 <td>-5.25</td>
+                 <td>-5.50</td>
+                 <td>-5.75</td>
+                 <td>+4.50</td>
+                 <td>+4.75</td>
+                 <td>+5.00</td>
+                 <td>+5.25</td>
+                 <td>+5.50</td>
+                 <td>+5.75</td>
+               </tr>
+               <tr>
+                 <td>-6.00</td>
+                 <td>-6.25</td>
+                 <td>-6.50</td>
+                 <td>-6.75</td>
+                 <td>-7.00</td>
+                 <td>-7.25</td>
+                 <td>+6.00</td>
+                 <td>+6.25</td>
+                 <td>+6.50</td>
+                 <td>+6.75</td>
+                 <td>+7.00</td>
+                 <td>+7.25</td>
+               </tr>
+               <tr>
+                 <td>-7.50</td>
+                 <td>-7.75</td>
+                 <td>-8.00</td>
+                 <td>-8.25</td>
+                 <td>-8.50</td>
+                 <td>-8.75</td>
+                 <td>+7.50</td>
+                 <td>+7.75</td>
+                 <td>+8.00</td>
+                 <td>+8.25</td>
+                 <td>+8.50</td>
+                 <td>+8.75</td>
+               </tr>
+               <tr>
+                 <td>-9.00</td>
+                 <td>-9.25</td>
+                 <td>-9.50</td>
+                 <td>-10.00</td>
+                 <td>-10.50</td>
+                 <td>-11.00</td>
+                 <td>+9.00</td>
+                 <td>+9.25</td>
+                 <td>+9.50</td>
+                 <td>+10.00</td>
+                 <td>+10.50</td>
+                 <td>+11.00</td>
+               </tr>
+               <tr>
+                 <td>-11.50</td>
+                 <td>-12.00</td>
+                 <td>-12.50</td>
+                 <td>-13.00</td>
+                 <td>-13.50</td>
+                 <td>-14.00</td>
+                 <td>+11.50</td>
+                 <td>+12.00</td>
+                 <td>+12.50</td>
+                 <td>+13.00</td>
+                 <td>+13.50</td>
+                 <td>+14.00</td>
+               </tr>
+               <tr>
+                 <td>-14.50</td>
+                 <td>-15.00</td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td>+14.50</td>
+                 <td>+15.00</td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+         <!-- optionsTable teble fast end -->
+       
+         <table
+         id="axisOptionsTable"
+         style="display: none; width: 470px"
+         class="options-table"
+       >
+         <tr>
+           <td>0</td>
+           <td>5</td>
+           <td>10</td>
+           <td>15</td>
+           <td>20</td>
+           <td>25</td>
+           <td>30</td>
+           <td>35</td>
+           <td>40</td>
+           <td>45</td>
+         </tr>
+         <tr>
+           <td>50</td>
+           <td>55</td>
+           <td>60</td>
+           <td>65</td>
+           <td>70</td>
+           <td>75</td>
+           <td>80</td>
+           <td>85</td>
+           <td>90</td>
+           <td>95</td>
+         </tr>
+         <tr>
+           <td>100</td>
+           <td>105</td>
+           <td>110</td>
+           <td>115</td>
+           <td>120</td>
+           <td>125</td>
+           <td>130</td>
+           <td>135</td>
+           <td>140</td>
+           <td>145</td>
+         </tr>
+         <tr>
+           <td>150</td>
+           <td>155</td>
+           <td>160</td>
+           <td>165</td>
+           <td>170</td>
+           <td>175</td>
+           <td>180</td>
+         </tr>
+       </table>
+       
+       
+       
+       <table
+       id="NV-VATable"
+       style="display: none; width: 218px"
+       class="options-table"
+       >
+       <tr>
+         <td>6/6</td>
+         <td>6/6p</td>
+         <td>6/7.5</td>
+         <td>6/7.5P</td>
+       </tr>
+       <tr>
+         <td>6/9</td>
+         <td>6/9p</td>
+         <td>6/12</td>
+         <td>6/12p</td>
+       </tr>
+       <tr>
+         <td>6/15</td>
+         <td>6/15p</td>
+         <td>6/18</td>
+         <td>6/18p</td>
+       </tr>
+       <tr>
+         <td>6/24</td>
+         <td>6/24p</td>
+         <td>6/30</td>
+         <td>6/30p</td>
+       </tr>
+       <tr>
+         <td>6/36</td>
+         <td>6/36p</td>
+         <td>6/48</td>
+         <td>6/60</td>
+       </tr>
+       </table>
+       
+       <table
+       id="NVDVATable"
+       style="display: none; width: 160px"
+       class="options-table"
+       >
+       <tr>
+         <td>N-5</td>
+         <td>N-6</td>
+         <td>N-8</td>
+       </tr>
+       <tr>
+         <td>N-10</td>
+         <td>N-12</td>
+         <td>N-14</td>
+       </tr>
+       <tr>
+         <td>N-18</td>
+         <td>N-24</td>
+         <td>N-36</td>
+       </tr>
+       </table>
+       
+       
+       
+       </div>
+       
+     <!-- 
+       ##################################Current Power Glasses END  ################################### -->
+   
+   
+       <!-- ###################################Pupillary Reaction start ################################## -->
+     
+       <div id="section3" class="section">
+         <h2>Pupillary Reaction</h2>
+         <table>
+           <thead>
+               <tr>
+                   <th colspan="2">Right Eye</th>
+                   <th colspan="2">Left Eye</th>
+               </tr>
+               <tr>
+                   <th>Direct</th>
+                   <th>Consensual</th>
+                   <th>Direct</th>
+                   <th>Consensual</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td><input type="text" placeholder=""></td>
+                   <td><input type="text" placeholder=""></td>
+                   <td><input type="text" placeholder=""></td>
+                   <td><input type="text" placeholder=""></td>
+               </tr>
+           </tbody>
+       </table>
+       </div>
+       
+   
+   
+        <!-- <!-- ###################################Pupillary Reaction start ################################## -->
+   
+   <!-- 
+       ############################################ eye Examination start #################################### -->
+   <div id="section4" class="section">
+     <h3>Eye Examination:</h3>
+     <table class="table-container table-responsive" style=" height: 200px;
+   overflow-y: auto; width: 50%;">
+       <thead>
+         <tr>
+           <th scope="col" style="width: 10%;"></th>
+           <th scope="col" style="width: 10%;">Right Eye</th>
+           <th scope="col" style="width: 10%;">Left Eye</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td>Eyelids & Adnexa</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control" ></td>
+         </tr>
+         
+         <tr>
+           <td>Conjunctiva</td>
+           <td><input type="text" class="form-control"></td>
+           <td><input type="text" class="form-control"></td>
+         </tr>
+         <tr>
+           <td>Sclera</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control" ></td>
+         </tr>
+         <tr>
+           <td>Cornea</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control"></td>
+         </tr>
+         <tr>
+           <td>Anterior Chamber</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control"></td>
+         </tr>
+         <tr>
+           <td>Iris</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control"></td>
+         </tr>
+         <tr>
+           <td>Pupil</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control" ></td>
+         </tr>
+         <tr>
+           <td>Lens</td>
+           <td><input type="text" class="form-control"></td>
+           <td><input type="text" class="form-control" ></td>
+         </tr>
+         
+         <tr>
+           <td>Fundus</td>
+           <td><input type="text" class="form-control" ></td>
+           <td><input type="text" class="form-control" ></td>
+         </tr>
+        
+       </tbody>
+     </table>
+   </div>
+   
+   
+   <!-- ############################################ eye Examination end #################################### -->
+   
+   <!-- 
+   ######################################################Refraction start ################################### -->
+   
+   <div id="section5" class="section">
+     <h3>Refraction</h3>
+     <table>
+       <thead>
+           <tr>
+               <th rowspan="2"></th>
+               <th colspan="4">Right Eye</th>
+               <th colspan="4">Left Eye</th>
+           </tr>
+           <tr>
+               <th>SPH</th>
+               <th>CYL</th>
+               <th>Axis</th>
+               <th>V/A</th>
+               <th>SPH</th>
+               <th>CYL</th>
+               <th>Axis</th>
+               <th>V/A</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>Distance</td>
+               <td><input type="text" id="rSPH"></td>
+               <td><input type="text" id="rCYL"></td>
+               <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
+               <td><input type="text" id="rV/A" ></td>
+               <td><input type="text" id="lrSPH"></td>
+               <td><input type="text" id="lrCYL"></td>
+               <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
+               <td><input type="text" id="rV/A2"></td>
+           </tr>
+           <tr>
+               <td>Near</td>
+               <td><input type="text" id="rSPH1"></td>
+               <td><input type="text" id="rCYL1"></td>
+            
+               <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
+               <td><input type="text" id="rva2"" ></td>
+               <td><input type="text" id="lrSPH2" ></td>
+               <td><input type="text"id="lrCYL2"></td>
+               <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
+               <td><input type="text" id="rva2"></td>
+           </tr>
+           <tr>
+               <td>IPD (mm)</td>
+               <td colspan="4"><input type="text"></td>
+               <td colspan="4"><input type="text"></td>
+           </tr>
+           <tr>
+               <td>Type of Glass</td>
+               <td colspan="4"><input type="text"></td>
+               <td colspan="4"><input type="text"></td>
+           </tr>
+           <tr>
+               <td>Remark</td>
+               <td colspan="4"><input type="text"></td>
+               <td colspan="4"><input type="text"></td>
+           </tr>
+       </tbody>
+   </table>
+   
+   
+   <table
+     id="nRefraction"
+     style="display: none; width: 450px"
+     class="options-table"
+   >
+     <tr>
+       <td>0</td>
+       <td>5</td>
+       <td>10</td>
+       <td>15</td>
+       <td>20</td>
+       <td>25</td>
+       <td>30</td>
+       <td>35</td>
+       <td>40</td>
+       <td>45</td>
+     </tr>
+     <tr>
+       <td>50</td>
+       <td>55</td>
+       <td>60</td>
+       <td>65</td>
+       <td>70</td>
+       <td>75</td>
+       <td>80</td>
+       <td>85</td>
+       <td>90</td>
+       <td>95</td>
+     </tr>
+     <tr>
+       <td>100</td>
+       <td>105</td>
+       <td>110</td>
+       <td>115</td>
+       <td>120</td>
+       <td>125</td>
+       <td>130</td>
+       <td>135</td>
+       <td>140</td>
+       <td>145</td>
+     </tr>
+     <tr>
+       <td>150</td>
+       <td>155</td>
+       <td>160</td>
+       <td>165</td>
+       <td>170</td>
+       <td>175</td>
+       <td>180</td>
+     </tr>
+   </table>
+   
+   
+   <table
+   id="nRefraction1"
+   style="display: none; width: 160px"
+   class="options-table"
+   >
+   <tr>
+     <td>N-5</td>
+     <td>N-6</td>
+     <td>N-8</td>
+   </tr>
+   <tr>
+     <td>N-10</td>
+     <td>N-12</td>
+     <td>N-14</td>
+   </tr>
+   <tr>
+     <td>N-18</td>
+     <td>N-24</td>
+     <td>N-36</td>
+   </tr>
+   </table>
+   
+   
+   
+   
+   <table
+   id="nRefraction3"
+   style="display: none; width: 218px"
+   class="options-table"
+   >
+   <tr>
+     <td>6/6</td>
+     <td>6/6p</td>
+     <td>6/7.5</td>
+     <td>6/7.5P</td>
+   </tr>
+   <tr>
+     <td>6/9</td>
+     <td>6/9p</td>
+     <td>6/12</td>
+     <td>6/12p</td>
+   </tr>
+   <tr>
+     <td>6/15</td>
+     <td>6/15p</td>
+     <td>6/18</td>
+     <td>6/18p</td>
+   </tr>
+   <tr>
+     <td>6/24</td>
+     <td>6/24p</td>
+     <td>6/30</td>
+     <td>6/30p</td>
+   </tr>
+   <tr>
+     <td>6/36</td>
+     <td>6/36p</td>
+     <td>6/48</td>
+     <td>6/60</td>
+   </tr>
+   </table>
+   
+       
+        
+       <!-- optionsTable teble fast start -->
+       
+       <div
+       id="nRefraction2"
+       class="options-table container-fluid"
+       style="height: 280px; width: 600px"
+     >
+       <table border="1" cellspacing="0" cellpadding="5">
+         <!-- Table Head -->
+         <thead>
+           <tr>
+             <th colspan="6">-ve</th>
+             <th colspan="6">+ve</th>
+           </tr>
+         </thead>
+         <!-- Table Body -->
+         <tbody>
+           <tr>
+             <td>-0.00</td>
+             <td>-0.25</td>
+             <td>-0.50</td>
+             <td>-0.75</td>
+             <td>-1.00</td>
+             <td>-1.25</td>
+             <td>+0.00</td>
+             <td>+0.25</td>
+             <td>+0.50</td>
+             <td>+0.75</td>
+             <td>+1.00</td>
+             <td>+1.25</td>
+           </tr>
+           <tr>
+             <td>-1.50</td>
+             <td>-1.75</td>
+             <td>-2.00</td>
+             <td>-2.25</td>
+             <td>-2.50</td>
+             <td>-2.75</td>
+             <td>+1.50</td>
+             <td>+1.75</td>
+             <td>+2.00</td>
+             <td>+2.25</td>
+             <td>+2.50</td>
+             <td>+2.75</td>
+           </tr>
+           <tr>
+             <td>-3.00</td>
+             <td>-3.25</td>
+             <td>-3.50</td>
+             <td>-3.75</td>
+             <td>-4.00</td>
+             <td>-4.25</td>
+             <td>+3.00</td>
+             <td>+3.25</td>
+             <td>+3.50</td>
+             <td>+3.75</td>
+             <td>+4.00</td>
+             <td>+4.25</td>
+           </tr>
+           <tr>
+             <td>-4.50</td>
+             <td>-4.75</td>
+             <td>-5.00</td>
+             <td>-5.25</td>
+             <td>-5.50</td>
+             <td>-5.75</td>
+             <td>+4.50</td>
+             <td>+4.75</td>
+             <td>+5.00</td>
+             <td>+5.25</td>
+             <td>+5.50</td>
+             <td>+5.75</td>
+           </tr>
+           <tr>
+             <td>-6.00</td>
+             <td>-6.25</td>
+             <td>-6.50</td>
+             <td>-6.75</td>
+             <td>-7.00</td>
+             <td>-7.25</td>
+             <td>+6.00</td>
+             <td>+6.25</td>
+             <td>+6.50</td>
+             <td>+6.75</td>
+             <td>+7.00</td>
+             <td>+7.25</td>
+           </tr>
+           <tr>
+             <td>-7.50</td>
+             <td>-7.75</td>
+             <td>-8.00</td>
+             <td>-8.25</td>
+             <td>-8.50</td>
+             <td>-8.75</td>
+             <td>+7.50</td>
+             <td>+7.75</td>
+             <td>+8.00</td>
+             <td>+8.25</td>
+             <td>+8.50</td>
+             <td>+8.75</td>
+           </tr>
+           <tr>
+             <td>-9.00</td>
+             <td>-9.25</td>
+             <td>-9.50</td>
+             <td>-10.00</td>
+             <td>-10.50</td>
+             <td>-11.00</td>
+             <td>+9.00</td>
+             <td>+9.25</td>
+             <td>+9.50</td>
+             <td>+10.00</td>
+             <td>+10.50</td>
+             <td>+11.00</td>
+           </tr>
+           <tr>
+             <td>-11.50</td>
+             <td>-12.00</td>
+             <td>-12.50</td>
+             <td>-13.00</td>
+             <td>-13.50</td>
+             <td>-14.00</td>
+             <td>+11.50</td>
+             <td>+12.00</td>
+             <td>+12.50</td>
+             <td>+13.00</td>
+             <td>+13.50</td>
+             <td>+14.00</td>
+           </tr>
+           <tr>
+             <td>-14.50</td>
+             <td>-15.00</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td>+14.50</td>
+             <td>+15.00</td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+     <!-- optionsTable teble fast end -->
+   </div>
+   
+   <!-- 
+   ######################################################Refraction end ################################### -->/
+   
+   
+   <div id="section6" class="section">
+     <h3>IOP/GAT</h3>
+     <table>
+       <thead>
+           <tr>
+               <th colspan="2">Right Eye</th>
+               <th colspan="2">Left Eye</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td class="input-wrapper">
+                   <input type="text" placeholder="" style="width: 150px;">
+                   <span>mmHg</span>
+               </td>
+               <td><input type="text" value="00:00"style="width: 150px;" ></td>
+               <td class="input-wrapper">
+                   <input type="text" placeholder="" style="width: 150px;">
+                   <span>mmHg</span>
+               </td>
+               <td><input type="text" value="00:00"style="width: 150px;" ></td>
+           </tr>
+       </tbody>
+   </table>
+   </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   <div id="section7" class="section">
+     <h3>Topography</h3>
+     <table>
+       <thead>
+           <tr>
+               <th></th>
+               <th colspan="2">Right Eye</th>
+               <th colspan="2">Left Eye</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>IOP</td>
+               <td><input type="text" name="right_iop"></td>
+               <td class="unit">mmHg</td>
+               <td><input type="text" name="left_iop"></td>
+               <td class="unit">mmHg</td>
+           </tr>
+           <tr>
+               <td>Pachymetry</td>
+               <td><input type="text" name="right_pachymetry"></td>
+               <td class="unit">µm</td>
+               <td><input type="text" name="left_pachymetry"></td>
+               <td class="unit">µm</td>
+           </tr>
+           <tr>
+               <td>Steepest K</td>
+               <td><input type="text" name="right_steepest_k"></td>
+               <td></td>
+               <td><input type="text" name="left_steepest_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Flattest K</td>
+               <td><input type="text" name="right_flattest_k"></td>
+               <td></td>
+               <td><input type="text" name="left_flattest_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Av.K</td>
+               <td><input type="text" name="right_av_k"></td>
+               <td></td>
+               <td><input type="text" name="left_av_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Cly Power</td>
+               <td><input type="text" name="right_cly_power"></td>
+               <td></td>
+               <td><input type="text" name="left_cly_power"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Degree</td>
+               <td><input type="text" name="right_degree"></td>
+               <td></td>
+               <td><input type="text" name="left_degree"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>KSI/KCI</td>
+               <td><input type="text" name="right_ksi_kci"></td>
+               <td></td>
+               <td><input type="text" name="left_ksi_kci"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Schirmer Test</td>
+               <td><input type="text" name="right_schirmer_test"></td>
+               <td></td>
+               <td><input type="text" name="left_schirmer_test"></td>
+               <td></td>
+           </tr>
+       </tbody>
+   </table>
+   </div>
+   <div id="section7" class="section">
+     <h3>Topography</h3>
+     <table>
+       <thead>
+           <tr>
+               <th></th>
+               <th colspan="2">Right Eye</th>
+               <th colspan="2">Left Eye</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>IOP</td>
+               <td><input type="text" name="right_iop"></td>
+               <td class="unit">mmHg</td>
+               <td><input type="text" name="left_iop"></td>
+               <td class="unit">mmHg</td>
+           </tr>
+           <tr>
+               <td>Pachymetry</td>
+               <td><input type="text" name="right_pachymetry"></td>
+               <td class="unit">µm</td>
+               <td><input type="text" name="left_pachymetry"></td>
+               <td class="unit">µm</td>
+           </tr>
+           <tr>
+               <td>Steepest K</td>
+               <td><input type="text" name="right_steepest_k"></td>
+               <td></td>
+               <td><input type="text" name="left_steepest_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Flattest K</td>
+               <td><input type="text" name="right_flattest_k"></td>
+               <td></td>
+               <td><input type="text" name="left_flattest_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Av.K</td>
+               <td><input type="text" name="right_av_k"></td>
+               <td></td>
+               <td><input type="text" name="left_av_k"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Cly Power</td>
+               <td><input type="text" name="right_cly_power"></td>
+               <td></td>
+               <td><input type="text" name="left_cly_power"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Degree</td>
+               <td><input type="text" name="right_degree"></td>
+               <td></td>
+               <td><input type="text" name="left_degree"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>KSI/KCI</td>
+               <td><input type="text" name="right_ksi_kci"></td>
+               <td></td>
+               <td><input type="text" name="left_ksi_kci"></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Schirmer Test</td>
+               <td><input type="text" name="right_schirmer_test"></td>
+               <td></td>
+               <td><input type="text" name="left_schirmer_test"></td>
+               <td></td>
+           </tr>
+       </tbody>
+   </table>
+   </div>
+   
+   
+   
+   
+   
+   <div id="section8" class="section">
+     <h3>A-Scan</h3>
+     <table>
+       <thead>
+           <tr>
+               <th></th>
+               <th>Right Eye</th>
+               <th>Left Eye</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>K1</td>
+               <td><input type="text" name="right_k1"></td>
+               <td><input type="text" name="left_k1"></td>
+           </tr>
+           <tr>
+               <td>K2</td>
+               <td><input type="text" name="right_k2"></td>
+               <td><input type="text" name="left_k2"></td>
+           </tr>
+           <tr>
+               <td>LT</td>
+               <td><input type="text" name="right_lt"></td>
+               <td><input type="text" name="left_lt"></td>
+           </tr>
+           <tr>
+               <td>AL</td>
+               <td><input type="text" name="right_al"></td>
+               <td><input type="text" name="left_al"></td>
+           </tr>
+           <tr>
+               <td>ACD</td>
+               <td><input type="text" name="right_acd"></td>
+               <td><input type="text" name="left_acd"></td>
+           </tr>
+           <tr>
+               <td>L.Power</td>
+               <td><input type="text" name="right_lpower"></td>
+               <td><input type="text" name="left_lpower"></td>
+           </tr>
+           <tr>
+               <td>A.Constant</td>
+               <td><input type="text" name="right_a_constant"></td>
+               <td><input type="text" name="left_a_constant"></td>
+           </tr>
+       </tbody>
+   </table>
+   
+   </div>
+   
+   
+   
+   <div id="section9" class="section">
+     <h3>AR</h3>
+     <table>
+       <thead>
+           <tr>
+               <th colspan="5">Right Eye</th>
+               <th colspan="5">Left Eye</th>
+           </tr>
+           <tr>
+               <th>SPH</th>
+               <th>CYL</th>
+               <th>Axis</th>
+               <th>V/A</th>
+               <th>DV</th>
+               <th>SPH</th>
+               <th>CYL</th>
+               <th>Axis</th>
+               <th>V/A</th>
+               <th>DV</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td><input type="text"  id="ar1SPH"></td>
+               <td><input type="text" id="ar1CYL"></td>
+               <td><input type="text" id="arAxis"></td>
+               <td><input type="text" id="arV/A" onclick="openTable(this)" ></td>
+               <td><input type="text" id="ar1DV"></td>
+               <td><input type="text" id="ar1SPH1""></td>
+               <td><input type="text"id="ar1CYL1"></td>
+               <td><input type="text" id="arAxis1"></td>
+               <td><input type="text" id="arV/A1" onclick="openTable(this)"></td>
+               <td><input type="text" id="ar1DV1"></td>
+           </tr>
+           <tr>
+               <th colspan="2">IPD (mm)</th>
+               <td colspan="8"><input type="text" placeholder="Enter IPD"></td>
+           </tr>
+       </tbody>
+   </table>
+   </div>
+   
+   
+   
+   
+   <table
+     id="arRefraction"
+     style="display: none; width: 450px"
+     class="options-table"
+   >
+     <tr>
+       <td>0</td>
+       <td>5</td>
+       <td>10</td>
+       <td>15</td>
+       <td>20</td>
+       <td>25</td>
+       <td>30</td>
+       <td>35</td>
+       <td>40</td>
+       <td>45</td>
+     </tr>
+     <tr>
+       <td>50</td>
+       <td>55</td>
+       <td>60</td>
+       <td>65</td>
+       <td>70</td>
+       <td>75</td>
+       <td>80</td>
+       <td>85</td>
+       <td>90</td>
+       <td>95</td>
+     </tr>
+     <tr>
+       <td>100</td>
+       <td>105</td>
+       <td>110</td>
+       <td>115</td>
+       <td>120</td>
+       <td>125</td>
+       <td>130</td>
+       <td>135</td>
+       <td>140</td>
+       <td>145</td>
+     </tr>
+     <tr>
+       <td>150</td>
+       <td>155</td>
+       <td>160</td>
+       <td>165</td>
+       <td>170</td>
+       <td>175</td>
+       <td>180</td>
+     </tr>
+   </table>
+   
+   
+   <div
+   
+   id="raRefraction2"
+   class="options-table container-fluid"
+   style="height: 280px; width: 600px"
+   >
+   <table border="1" cellspacing="0" cellpadding="5">
+     <!-- Table Head -->
+     <thead>
+       <tr>
+         <th colspan="6">-ve</th>
+         <th colspan="6">+ve</th>
+       </tr>
+     </thead>
+     <!-- Table Body -->
+     <tbody>
+       <tr>
+         <td>-0.00</td>
+         <td>-0.25</td>
+         <td>-0.50</td>
+         <td>-0.75</td>
+         <td>-1.00</td>
+         <td>-1.25</td>
+         <td>+0.00</td>
+         <td>+0.25</td>
+         <td>+0.50</td>
+         <td>+0.75</td>
+         <td>+1.00</td>
+         <td>+1.25</td>
+       </tr>
+       <tr>
+         <td>-1.50</td>
+         <td>-1.75</td>
+         <td>-2.00</td>
+         <td>-2.25</td>
+         <td>-2.50</td>
+         <td>-2.75</td>
+         <td>+1.50</td>
+         <td>+1.75</td>
+         <td>+2.00</td>
+         <td>+2.25</td>
+         <td>+2.50</td>
+         <td>+2.75</td>
+       </tr>
+       <tr>
+         <td>-3.00</td>
+         <td>-3.25</td>
+         <td>-3.50</td>
+         <td>-3.75</td>
+         <td>-4.00</td>
+         <td>-4.25</td>
+         <td>+3.00</td>
+         <td>+3.25</td>
+         <td>+3.50</td>
+         <td>+3.75</td>
+         <td>+4.00</td>
+         <td>+4.25</td>
+       </tr>
+       <tr>
+         <td>-4.50</td>
+         <td>-4.75</td>
+         <td>-5.00</td>
+         <td>-5.25</td>
+         <td>-5.50</td>
+         <td>-5.75</td>
+         <td>+4.50</td>
+         <td>+4.75</td>
+         <td>+5.00</td>
+         <td>+5.25</td>
+         <td>+5.50</td>
+         <td>+5.75</td>
+       </tr>
+       <tr>
+         <td>-6.00</td>
+         <td>-6.25</td>
+         <td>-6.50</td>
+         <td>-6.75</td>
+         <td>-7.00</td>
+         <td>-7.25</td>
+         <td>+6.00</td>
+         <td>+6.25</td>
+         <td>+6.50</td>
+         <td>+6.75</td>
+         <td>+7.00</td>
+         <td>+7.25</td>
+       </tr>
+       <tr>
+         <td>-7.50</td>
+         <td>-7.75</td>
+         <td>-8.00</td>
+         <td>-8.25</td>
+         <td>-8.50</td>
+         <td>-8.75</td>
+         <td>+7.50</td>
+         <td>+7.75</td>
+         <td>+8.00</td>
+         <td>+8.25</td>
+         <td>+8.50</td>
+         <td>+8.75</td>
+       </tr>
+       <tr>
+         <td>-9.00</td>
+         <td>-9.25</td>
+         <td>-9.50</td>
+         <td>-10.00</td>
+         <td>-10.50</td>
+         <td>-11.00</td>
+         <td>+9.00</td>
+         <td>+9.25</td>
+         <td>+9.50</td>
+         <td>+10.00</td>
+         <td>+10.50</td>
+         <td>+11.00</td>
+       </tr>
+       <tr>
+         <td>-11.50</td>
+         <td>-12.00</td>
+         <td>-12.50</td>
+         <td>-13.00</td>
+         <td>-13.50</td>
+         <td>-14.00</td>
+         <td>+11.50</td>
+         <td>+12.00</td>
+         <td>+12.50</td>
+         <td>+13.00</td>
+         <td>+13.50</td>
+         <td>+14.00</td>
+       </tr>
+       <tr>
+         <td>-14.50</td>
+         <td>-15.00</td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td>+14.50</td>
+         <td>+15.00</td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+       </tr>
+     </tbody>
+   </table>
+   </div>
+   <!-- optionsTable teble fast end -->
+   
+   <table
+   id="raRefraction3"
+   style="display: none; width: 218px"
+   class="options-table"
+   >
+   <tr>
+     <td onclick="selectValue(this)">6/6</td>
+     <td onclick="selectValue(this)">6/6p</td>
+     <td onclick="selectValue(this)">6/7.5</td>
+     <td onclick="selectValue(this)">6/7.5P</td>
+   </tr>
+   <tr>
+     <td onclick="selectValue(this)">6/9</td>
+     <td onclick="selectValue(this)">6/9p</td>
+     <td onclick="selectValue(this)">6/12</td>
+     <td onclick="selectValue(this)">6/12p</td>
+   </tr>
+   <tr>
+     <td onclick="selectValue(this)">6/15</td>
+     <td onclick="selectValue(this)">6/15p</td>
+     <td onclick="selectValue(this)">6/18</td>
+     <td onclick="selectValue(this)">6/18p</td>
+   </tr>
+   <tr>
+     <td onclick="selectValue(this)">6/24</td>
+     <td onclick="selectValue(this)">6/24p</td>
+     <td onclick="selectValue(this)">6/30</td>
+     <td onclick="selectValue(this)">6/30p</td>
+   </tr>
+   <tr>
+     <td onclick="selectValue(this)">6/36</td>
+     <td onclick="selectValue(this)">6/36p</td>
+     <td onclick="selectValue(this)">6/48</td>
+     <td onclick="selectValue(this)">6/60</td>
+   </tr>
+   </table>
+   
+       
+     
+       </div>
+
+
+       <!-- Add New Option Modal -->
+<div id="addOptionModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h4>Add New Symptom</h4>
+    <input type="text" id="newOptionInput" class="form-control" placeholder="Enter the new symptom">
+    <button type="button" id="saveNewOption" class="btn btn-success mt-2">Add</button>
+  </div>
+</div>
+
+   
+</body>
+<script>
+    const tabs = document.querySelectorAll('.ttab'); // Updated class name to 'ttab'
+const sections = document.querySelectorAll('.section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Remove 'active' class from all tabs and sections
+    tabs.forEach(t => t.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+
+    // Add 'active' class to the clicked tab and corresponding section
+    tab.classList.add('active');
+    const sectionId = tab.getAttribute('data-section');
+    document.getElementById(sectionId).classList.add('active');
+  });
+});
+
+// Activate the first tab and section by default
+tabs[0].classList.add('active');
+sections[0].classList.add('active');
+
+</script>
+</html>
+
+
+
+  
