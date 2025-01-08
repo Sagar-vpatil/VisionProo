@@ -15,9 +15,6 @@ Thumbs.db
 # Environment files
 .env
 
-
-# output folder
-output
- 
+  
 # Ignore .idea directory
 .idea/

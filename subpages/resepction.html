@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Bar</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../frontend/css/style.css">
     <style>
 
 /* Center button for Add New Patient */
@@ -96,7 +96,7 @@
 <body>
     <nav class="navbar">
         <div class="brand">
-            <img src="../Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Logo" class="logo">
+            <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Logo" class="logo">
             <span class="company-name">रविकल्प हॉस्पिटल</span>
         </div>
     </nav>
@@ -130,7 +130,7 @@
             </div>
             <div class="form-group">
                 <label for="mobileNo">Mobile No.</label>
-                <input type="tel" id="mobileNo" name="mobileNo" pattern="[0-9]{10}" required placeholder="+91">
+                <input type="tel" id="mobileNo" name="mobileNo" placeholder="+91">
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
@@ -142,8 +142,7 @@
         </form>
     </div>
 </div>
-  <!-- JavaScript to handle the popup functionality -->
-  <!-- JavaScript to handle the popup functionality -->
+   <!-- JavaScript to handle the popup functionality -->
    <script src="../backend/reception.js"></script>
   <script>
     // Open the popup form when the button is clicked
@@ -167,28 +166,21 @@
     document.getElementById('visitDate').valueAsDate = new Date();
 
 
+ 
 
+    // document.getElementById('mobileNo').addEventListener('focus', function() {
+    //     if (this.value === "") {
+    //         this.value = "+91";  // Pre-fill the country code when the user focuses on the input
+    //     }
+    // });
 
-
-
-
-
-
-
-
-    document.getElementById('mobileNo').addEventListener('focus', function() {
-        if (this.value === "") {
-            this.value = "+91";  // Pre-fill the country code when the user focuses on the input
-        }
-    });
-
-    document.getElementById('mobileNo').addEventListener('input', function() {
-        if (this.value.startsWith("+91")) {
-            this.setCustomValidity('');  // Allow only the input after the country code
-        } else {
-            this.setCustomValidity('Please enter a valid mobile number starting with +91');
-        }
-    });
+    // document.getElementById('mobileNo').addEventListener('input', function() {
+    //     if (this.value.startsWith("+91")) {
+    //         this.setCustomValidity('');  // Allow only the input after the country code
+    //     } else {
+    //         this.setCustomValidity('Please enter a valid mobile number starting with +91');
+    //     }
+    // });
 </script>
 
 </body>
