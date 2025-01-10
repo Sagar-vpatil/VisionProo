@@ -17,11 +17,32 @@
 
 <body>
     <section>
-        <ul class="nav nav-tabs">
-            <li class="nav-item"></li>
-            <li class="nav-item"></li>
-            <li class="nav-item"></li>
-        </ul>
+     <!-- Top Nav -->
+  <nav class="navbar top-navbar navbar-light bg-light px-5 d-flex justify-content-between align-items-center">
+    <!-- Menu Button -->
+    <div class="d-flex align-items-center">
+      <a class="btn border-0" id="menu-btn"><i class="bx bx-menu" style="background-color: #fff;"></i></a>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex align-items-center gap-3">
+
+      
+      <!-- Add New Patient Button -->
+      <!-- <button class="btn btn-primary" onclick="" id="add-patient-btn">Add New Patient</button> -->
+ 
+
+      <!-- Bill Button -->
+      <button class="btn btn-secondary" id="add-bill-btn">Bill</button>
+
+      <!-- Add Receptionist Button -->
+      <button class="btn btn-success" id="exit">Exit</button>
+      <!-- Add Receptionist Button -->
+     
+
+
+    </div>
+  </nav>
         <div class="row register-form" style="margin-right: 7px;">
             <div class="col-md-8 offset-md-2 text-bg-secondary" style="background: var(--bs-warning);">
                 <form class="custom-form">
@@ -94,6 +115,16 @@
             <h3 id="success-1" class="text-center text-success d-none"><br>Form Submitted Successfully&nbsp;<a href="contact.html">Send Another Response</a><br><br></h3>
         </div>
     </section>
+
+    <script>
+        
+  // ipc back butotn 
+  const backButton = document.getElementById('exit');
+  backButton.addEventListener('click',()=>{
+    window.electronAPI.navigateBack();
+  })
+
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/Application-Form-Bootstrap-Image-Uploader.js"></script>
     <script src="assets/js/Application-Form-submit-form.js"></script>
