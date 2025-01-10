@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Appoinement</title>
+     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="../assets/css/Application-Form.css">
+    <link rel="stylesheet" href="../assets/css/Pretty-Registration-Form-.css">
+    <link rel="stylesheet" href="../assets/css/Table-With-Search-search-table.css">
+    <link rel="stylesheet" href="../assets/css/Table-With-Search.css">
+</head>
+
+<body>
+    <section>
+        <ul class="nav nav-tabs">
+            <li class="nav-item"></li>
+            <li class="nav-item"></li>
+            <li class="nav-item"></li>
+        </ul>
+        <div class="row register-form" style="margin-right: 7px;">
+            <div class="col-md-8 offset-md-2 text-bg-secondary" style="background: var(--bs-warning);">
+                <form class="custom-form">
+                    <h1>Patient Register Form</h1>
+                    <a href="./main.html">Main</a>
+                    <div class="row form-group">
+                        <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Name </label></div>
+                        <div class="col-sm-6 input-column"><input class="form-control" type="text"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4 label-column"><label class="col-form-label" for="email-input-field">Age</label></div>
+                        <div class="col-sm-6 input-column"><input class="form-control" type="email"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Address</label></div>
+                        <div class="col-sm-6 input-column"><input class="form-control" type="password"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Mobile No</label></div>
+                        <div class="col-sm-6 input-column"><input class="form-control" type="password"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4 label-column"><label class="col-form-label" for="dropdown-input-field">Old Patient ?</label></div>
+                        <div class="col-sm-4 input-column">
+                            <div class="dropdown"><button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select</button>
+                                <div class="dropdown-menu"><a class="dropdown-item" href="#">Yes</a><a class="dropdown-item" href="#">No</a></div>
+                            </div>
+                        </div>
+                    </div><button class="btn btn-primary" type="button">Submit</button>
+                </form>
+            </div>
+        </div>
+        <h2 class="text-center" style="margin-top: 38px;border-style: solid;background: var(--bs-warning);">Availaible Patients</h2>
+        <div class="container">
+            <div class="col-md-12 col-xxl-12 search-table-col" style="margin-top: 2px;">
+                <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search Patient"></div><span class="counter pull-right"></span>
+                <div class="table-responsive table table-hover table-bordered results">
+                    <table class="table table-hover table-bordered">
+                        <thead class="bill-header cs">
+                            <tr>
+                                <th id="trs-hd-1" class="col-lg-1">SL. No.</th>
+                                <th id="trs-hd-2" class="col-lg-2">Patient Name</th>
+                                <th id="trs-hd-3" class="col-lg-3">Address</th>
+                                <th id="trs-hd-4" class="col-lg-2">AGE</th>
+                                <th id="trs-hd-5" class="col-lg-2">Patient Since</th>
+                                <th id="trs-hd-6" class="col-lg-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="warning no-result">
+                                <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                            </tr>
+                            <tr>
+                                <td>01</td>
+                                <td>Pratham Mistari</td>
+                                <td>Pune</td>
+                                <td>20</td>
+                                <td>2014</td>
+                                <td><button class="btn btn-success" style="margin-left: 5px;" type="submit"><i class="fa fa-check" style="font-size: 15px;"></i></button><button class="btn btn-danger" style="margin-left: 5px;" type="submit"><i class="fa fa-trash" style="font-size: 15px;"></i></button><button class="btn btn-primary" style="margin-left: 5px;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-fill" style="font-size: 17px;">
+                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                                        </svg></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h3 id="fail" class="text-center text-danger d-none"><br>Form not Submitted&nbsp;<a href="contact.html">Try Again</a><br><br></h3>
+            <h3 id="success-1" class="text-center text-success d-none"><br>Form Submitted Successfully&nbsp;<a href="contact.html">Send Another Response</a><br><br></h3>
+        </div>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/Application-Form-Bootstrap-Image-Uploader.js"></script>
+    <script src="assets/js/Application-Form-submit-form.js"></script>
+    <script src="assets/js/Table-With-Search-search-table.js"></script>
+</body>
+
+</html>
