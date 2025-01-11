@@ -1,0 +1,25 @@
+/* Styling for the button */
+.styled-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 14px 20px; /* Padding for size */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    font-size: small;
+  }
+  
+  .styled-button:hover {
+    background-color:rebeccapurple; /* Darker green on hover */
+  }
+  
+  .styled-button:focus {
+    outline: none; /* Remove the focus outline */
+  }
+  
+  .styled-button:active {
+    background-color: orangered; /* Even darker green when clicked */
+  }
+  

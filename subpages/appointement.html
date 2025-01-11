@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../assets/css/Pretty-Registration-Form-.css">
     <link rel="stylesheet" href="../assets/css/Table-With-Search-search-table.css">
     <link rel="stylesheet" href="../assets/css/Table-With-Search.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
@@ -28,17 +29,14 @@
     <div class="d-flex align-items-center gap-3">
 
       
-      <!-- Add New Patient Button -->
-      <!-- <button class="btn btn-primary" onclick="" id="add-patient-btn">Add New Patient</button> -->
  
 
       <!-- Bill Button -->
-      <button class="btn btn-secondary" id="add-bill-btn">Bill</button>
 
-      <!-- Add Receptionist Button -->
-      <button class="btn btn-success" id="exit">Exit</button>
-      <!-- Add Receptionist Button -->
-     
+      <a href="../subpages/main.html">
+        <button class="btn btn-success">Home</button>
+      </a>
+ 
 
 
     </div>
@@ -46,8 +44,8 @@
         <div class="row register-form" style="margin-right: 7px;">
             <div class="col-md-8 offset-md-2 text-bg-secondary" style="background: var(--bs-warning);">
                 <form class="custom-form">
-                    <h1>Patient Register Form</h1>
-                    <a href="./main.html">Main</a>
+                    <h1 >Patient Register Form</h1>
+                   
                     <div class="row form-group">
                         <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Name </label></div>
                         <div class="col-sm-6 input-column"><input class="form-control" type="text"></div>
@@ -64,18 +62,13 @@
                         <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Mobile No</label></div>
                         <div class="col-sm-6 input-column"><input class="form-control" type="password"></div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-sm-4 label-column"><label class="col-form-label" for="dropdown-input-field">Old Patient ?</label></div>
-                        <div class="col-sm-4 input-column">
-                            <div class="dropdown"><button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">Yes</a><a class="dropdown-item" href="#">No</a></div>
-                            </div>
-                        </div>
-                    </div><button class="btn btn-primary" type="button">Submit</button>
+                     
+                    
+                    <button class="btn btn-primary" type="button">Submit</button>
                 </form>
             </div>
         </div>
-        <h2 class="text-center" style="margin-top: 38px;border-style: solid;background: var(--bs-warning);">Availaible Patients</h2>
+        <h2 class="text-center" style="margin-top: 38px;border-style: solid;background: var(--bs-warning);">Existing Patients</h2>
         <div class="container">
             <div class="col-md-12 col-xxl-12 search-table-col" style="margin-top: 2px;">
                 <div class="form-group pull-right col-lg-4"><input type="text" class="search form-control" placeholder="Search Patient"></div><span class="counter pull-right"></span>
