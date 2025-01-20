@@ -14,7 +14,7 @@ const firebaseConfig = {
   const firebaseApp = initializeApp(firebaseConfig);
   const db = getFirestore(firebaseApp);
   
-  // Function to add a patient with a unique ID
+// Function to add a patient with a unique ID
 async function addPatient(name, age, condition) {
   try {
     const patientsCollection = collection(db, "patients");
@@ -45,7 +45,8 @@ async function addPatient(name, age, condition) {
   }
 }
 // addPatient("John Doe", 45, "Cataract");
-document.getElementById("add-data").addEventListener("click", function () {
+document.getElementById('add-patient-btn').addEventListener('click', async (event) => {
     console.log("add-data button clicked");
-    addPatient("John Doe", 45, "Cataract");
+    ipcRenderer.send('log-to-terminal', "Loading Forwarded Excel Data");
+  
   });

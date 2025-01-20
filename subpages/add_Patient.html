@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/Pretty-Registration-Form-.css">
     <link rel="stylesheet" href="../assets/css/Table-With-Search-search-table.css">
     <link rel="stylesheet" href="../assets/css/Table-With-Search.css">
-    <link rel="stylesheet" href="../frontend/css/global.css">
+    <!-- <link rel="stylesheet" href="../frontend/css/global.css"> -->
     <style>
         /* General Body and Container Styling */
 body {
@@ -115,6 +115,7 @@ body {
     margin: 0;
 }
 
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -166,7 +167,12 @@ body {
      
     <form class="custom-form">
         <h1 style="color: #002D62;text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">Patient Register Form</h1>
-       
+
+        <div class="row form-group" id="patient-id-class" style="display: none;">
+            <div class="col-sm-4 label-column"><label class="col-form-label" for="patient-id-input-field">Patient ID</label></div>
+            <div class="col-sm-6 input-column"><input class="form-control" type="text" id="patient-id-input-field" readonly></div>
+        </div>
+        
         <div class="row form-group">
             <div class="col-sm-4 label-column"><label class="col-form-label" for="name-input-field">Name</label></div>
             <div class="col-sm-6 input-column"><input class="form-control" type="text" id="name-input-field"></div>
@@ -198,8 +204,9 @@ body {
         
         <!-- Buttons -->
         <div class="d-flex justify-content-center gap-3">
-            <button class="btn btn-success" id="add-patient-btn">Add Patient</button>
-            <button class="btn btn-success" id="add-appointment-btn">Add Appointment</button>
+            <button class="btn btn-success" id="add-patient-btn" type="button" >Add Patient</button>
+            <button class="btn btn-success" id="add-appointment-btn" type="button" disabled >Add Appointment</button>
+            <button class="btn btn-success" id="refresh-btn" type="button" style="background-color: rgb(243, 38, 38); border: none;">Refresh</button>
         </div>
     </form>
     
@@ -221,64 +228,10 @@ body {
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Rows will be dynamically added here using JavaScript -->
                     <tr>
-                        <td>001</td>
-                        <td>Pratham Mistari</td>
-                        <td>123-456-7890</td>
-                        <td><button class="btn btn-info" style="margin-left: 5px;" type="button" onclick="openPatientDetails()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"  viewBox="0 0 16 16" class="bi bi-eye-fill" style="font-size: 17px;">
-                                <path d="M8 3c-3.465 0-6.99 2.128-8 5 1.01 2.872 4.535 5 8 5s6.99-2.128 8-5c-1.01-2.872-4.535-5-8-5zm0 8c-1.838 0-3.624-1.163-4.48-2.843.183-.517.48-.976.823-1.417A3.283 3.283 0 0 1 8 8c1.758 0 3.22 1.335 3.216 3.001.004.067.007.134.007.201A3.283 3.283 0 0 1 8 11zm0-7c-1.408 0-2.651.63-3.538 1.602a6.866 6.866 0 0 0-1.072 1.742C4.35 7.292 5.97 7 8 7s3.65.292 4.61 1.642a6.866 6.866 0 0 0-1.072-1.742C10.651 3.63 9.408 3 8 3z"></path>
-                            </svg>
-                        </button>
-                        
+                        <td colspan="4" class="text-center">Start typing in the search box to see results.</td>
                     </tr>
-
-                    <tr>
-                        <td>001</td>
-                        <td>Pratham Mistari</td>
-                        <td>123-456-7890</td>
-                        <td><button class="btn btn-info" style="margin-left: 5px;" type="button" onclick="openPatientDetails()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"  viewBox="0 0 16 16" class="bi bi-eye-fill" style="font-size: 17px;">
-                                <path d="M8 3c-3.465 0-6.99 2.128-8 5 1.01 2.872 4.535 5 8 5s6.99-2.128 8-5c-1.01-2.872-4.535-5-8-5zm0 8c-1.838 0-3.624-1.163-4.48-2.843.183-.517.48-.976.823-1.417A3.283 3.283 0 0 1 8 8c1.758 0 3.22 1.335 3.216 3.001.004.067.007.134.007.201A3.283 3.283 0 0 1 8 11zm0-7c-1.408 0-2.651.63-3.538 1.602a6.866 6.866 0 0 0-1.072 1.742C4.35 7.292 5.97 7 8 7s3.65.292 4.61 1.642a6.866 6.866 0 0 0-1.072-1.742C10.651 3.63 9.408 3 8 3z"></path>
-                            </svg>
-                        </button>
-                        
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>Pratham Mistari</td>
-                        <td>123-456-7890</td>
-                        <td><button class="btn btn-info" style="margin-left: 5px;" type="button" onclick="openPatientDetails()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"  viewBox="0 0 16 16" class="bi bi-eye-fill" style="font-size: 17px;">
-                                <path d="M8 3c-3.465 0-6.99 2.128-8 5 1.01 2.872 4.535 5 8 5s6.99-2.128 8-5c-1.01-2.872-4.535-5-8-5zm0 8c-1.838 0-3.624-1.163-4.48-2.843.183-.517.48-.976.823-1.417A3.283 3.283 0 0 1 8 8c1.758 0 3.22 1.335 3.216 3.001.004.067.007.134.007.201A3.283 3.283 0 0 1 8 11zm0-7c-1.408 0-2.651.63-3.538 1.602a6.866 6.866 0 0 0-1.072 1.742C4.35 7.292 5.97 7 8 7s3.65.292 4.61 1.642a6.866 6.866 0 0 0-1.072-1.742C10.651 3.63 9.408 3 8 3z"></path>
-                            </svg>
-                        </button>
-                        
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>Pratham Mistari</td>
-                        <td>123-456-7890</td>
-                        <td><button class="btn btn-info" style="margin-left: 5px;" type="button" onclick="openPatientDetails()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"  viewBox="0 0 16 16" class="bi bi-eye-fill" style="font-size: 17px;">
-                                <path d="M8 3c-3.465 0-6.99 2.128-8 5 1.01 2.872 4.535 5 8 5s6.99-2.128 8-5c-1.01-2.872-4.535-5-8-5zm0 8c-1.838 0-3.624-1.163-4.48-2.843.183-.517.48-.976.823-1.417A3.283 3.283 0 0 1 8 8c1.758 0 3.22 1.335 3.216 3.001.004.067.007.134.007.201A3.283 3.283 0 0 1 8 11zm0-7c-1.408 0-2.651.63-3.538 1.602a6.866 6.866 0 0 0-1.072 1.742C4.35 7.292 5.97 7 8 7s3.65.292 4.61 1.642a6.866 6.866 0 0 0-1.072-1.742C10.651 3.63 9.408 3 8 3z"></path>
-                            </svg>
-                        </button>
-                        
-                    </tr>
-                    <tr>
-                        <td>001</td>
-                        <td>Pratham Mistari</td>
-                        <td>123-456-7890</td>
-                        <td><button class="btn btn-info" style="margin-left: 5px;" type="button" onclick="openPatientDetails()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"  viewBox="0 0 16 16" class="bi bi-eye-fill" style="font-size: 17px;">
-                                <path d="M8 3c-3.465 0-6.99 2.128-8 5 1.01 2.872 4.535 5 8 5s6.99-2.128 8-5c-1.01-2.872-4.535-5-8-5zm0 8c-1.838 0-3.624-1.163-4.48-2.843.183-.517.48-.976.823-1.417A3.283 3.283 0 0 1 8 8c1.758 0 3.22 1.335 3.216 3.001.004.067.007.134.007.201A3.283 3.283 0 0 1 8 11zm0-7c-1.408 0-2.651.63-3.538 1.602a6.866 6.866 0 0 0-1.072 1.742C4.35 7.292 5.97 7 8 7s3.65.292 4.61 1.642a6.866 6.866 0 0 0-1.072-1.742C10.651 3.63 9.408 3 8 3z"></path>
-                            </svg>
-                        </button>
-                        
-                    </tr>
-                    
-                    <!-- More rows can be added here -->
                 </tbody>
             </table>
         </div>
@@ -327,40 +280,33 @@ body {
             <h3 id="success-1" class="text-center text-success d-none"><br>Form Submitted Successfully&nbsp;<a href="contact.html">Send Another Response</a><br><br></h3>
         </div>
     </section> -->
-
     <script>
-        
-  // ipc back butotn 
-  const backButton = document.getElementById('exit');
-  backButton.addEventListener('click',()=>{
-    window.electronAPI.navigateBack();
-  })
-
-  function calculateAge() {
-    var dobInput = document.getElementById('dob-input-field');
-    var ageInput = document.getElementById('age-input-field');
-    
-    var dob = new Date(dobInput.value);
-    var today = new Date();
-    
-    var age = today.getFullYear() - dob.getFullYear();
-    var month = today.getMonth() - dob.getMonth();
-    
-    // If the birthday hasn't occurred yet this year, subtract 1 from the age
-    if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
-        age--;
-    }
-    
-    // Set the calculated age in the age input field
-    ageInput.value = age;
-}
-
-
+        // ipc back butotn 
+//   const backButton = document.getElementById('exit');
+//   backButton.addEventListener('click',()=>{
+//     window.electronAPI.navigateBack();
+//   })
+        function calculateAge() {
+                var dobInput = document.getElementById('dob-input-field');
+                var ageInput = document.getElementById('age-input-field');
+                
+                var dob = new Date(dobInput.value);
+                var today = new Date();
+                
+                var age = today.getFullYear() - dob.getFullYear();
+                var month = today.getMonth() - dob.getMonth();
+                
+                // If the birthday hasn't occurred yet this year, subtract 1 from the age
+                if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                
+                // Set the calculated age in the age input field
+                ageInput.value = age;
+            }
     </script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Application-Form-Bootstrap-Image-Uploader.js"></script>
-    <script src="assets/js/Application-Form-submit-form.js"></script>
-    <script src="assets/js/Table-With-Search-search-table.js"></script>
+    <script type="module" src="../backend/add_Patient.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
