@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            width: 210mm;
+            height: 297mm;
+            box-sizing: border-box;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            box-shadow: 0 0 5px rgba(5, 0, 0, 0.1);
+            background: #fff;
+            align-items: center;
+            margin-left: 230px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+        .header .left {
+            text-align: left;
+            font-size: 14px;
+        }
+        .header .right {
+            text-align: right;
+            font-size: 14px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 5px 0;
+        }
+        .medicines {
+            display: flex;
+            border-top: 2px solid black;
+            padding: 10px 0;
+        }
+        .medicines .left {
+            width: 30%;
+            padding-right: 10px;
+            border-right: 2px solid black;
+        }
+        .medicines .right {
+            width: 70%;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .patient-details {
+            margin-top: 20px;
+        }
+        .patient-details h3 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .patient-details p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .complaints {
+            font-size: 18px;
+            color: #333;
+        }
+        .medical-history, .surgical-history {
+            font-size: 14px;
+            margin-top: 10px;
+            padding-left: 10px;
+            padding-top: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .diagnosis-list,
+        .investigation-list {
+            margin-top: 5px;
+        }
+        .diagnosis-list h3,
+        .investigation-list h3 {
+            font-size: 18px;
+        }
+        .diagnosis-list ul,
+        .investigation-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .diagnosis-list li,
+        .investigation-list li {
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 2px;
+            text-align: left;
+        }
+        th {
+            color: #002D62;
+            font-size: 16px;
+            margin: 0px;
+        }
+        td {
+            font-size: 14px;
+        }
+        @media print {
+            body {
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .print-btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="left">
+                <p><strong>Name:</strong> [Patient Name]</p>
+                <p><strong>Age:</strong> [Patient Age]</p>
+            </div>
+            <div class="right">
+                <p><strong>Date:</strong> [Date]</p>
+                <p><strong>Gender:</strong> [Patient Gender]</p>
+            </div>
+        </div>
+
+        <div class="medicines">
+            <div class="left">
+                <div class="diagnosis-list">
+                    <h3>Diagnosis</h3>
+                    <ul>
+                        <li>Cataract</li>
+                        <li>Macular Degeneration</li>
+                        <li>Dry Eye Syndrome</li>
+                    </ul>
+                </div>
+                <div class="investigation-list">
+                    <h3>Investigation </h3>
+                    <ul>
+                        <li>Blood Test</li>
+                        <li>OCT Scan</li>
+                        <li>Fundus Photography</li>
+                        <li>Corneal Topography</li>
+                    </ul>
+                </div>
+                <div class="investigation-list">
+                <h3>Advice </h3>
+                <ul>
+                    <li>Regular Eye Checkup</li>
+                    <li>Avoid Bright Lights</li>
+                    <li>Take Prescribed Medication</li>
+                    <li>Wear Sunglasses Outdoors</li>
+                    <li>Follow Up in 2 Weeks</li>
+                </ul>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="patient-details">
+                    <p class="complaints">
+                        <span style="font-weight: bold; font-size: 17px;">Complaints/Symptoms:</span> Blurry Vision (RE) | Spot in Front of Eye 
+                    </p>
+                    <div class="medical-history" style="margin-top: 0px;">
+                        <p class="complaints">
+                            <span style="font-weight: bold; font-size: 17px;">Medical History:</span> Blurry Vision (RE) | Spot in Front of Eye (RE)
+                        </p>
+                    </div>
+                    <div class="surgical-history">
+                        <p class="complaints">
+                            <span style="font-weight: bold; font-size: 17px;">Surgical History :</span> Retina Surgery (RE) | Glaucoma Surgery (RE)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Table Section -->
+                <h3>Visual Acuity:</h3>
+                <table style="margin-top: 0px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Right Eye</th>
+                            <th>Left Eye</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unaided</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Glasses</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Near Vision</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Pinhole Vision</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-step" id="step-3">
+                    <div class="form-group">
+                      <h3>Current Power Glasses:</h3>
+                      <div class="table-container">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th colspan="4">Right Eye</th>
+                              <th colspan="4">Left Eye</th>
+                            </tr>
+                          </thead>
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>SPH</th>
+                              <th>CYL</th>
+                              <th>Axis</th>
+                              <th>V/A</th>
+                              <th>SPH</th>
+                              <th>CYL</th>
+                              <th>Axis</th>
+                              <th>V/A</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>DV</td>
+                              <td>+1.25</td>
+                              <td>-0.50</td>
+                              <td>90</td>
+                              <td>6/6</td>
+                              <td>+1.00</td>
+                              <td>-0.75</td>
+                              <td>80</td>
+                              <td>6/9</td>
+                            </tr>
+                            <tr>
+                              <td>NV</td>
+                              <td>+2.00</td>
+                              <td>-1.00</td>
+                              <td>85</td>
+                              <td>6/7.5</td>
+                              <td>+1.75</td>
+                              <td>-0.25</td>
+                              <td>95</td>
+                              <td>6/6</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <h3>Pupillary Reaction</h3>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th colspan="2">Right Eye</th>
+                              <th colspan="2">Left Eye</th>
+                          </tr>
+                          <tr>
+                              <th>Direct</th>
+                              <th>Consensual</th>
+                              <th>Direct</th>
+                              <th>Consensual</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>+3</td>
+                              <td>+3</td>
+                              <td>+2</td>
+                              <td>+2</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <div id="section4" class="section">
+                    <h3>Eye Examination:</h3>
+                    <table class="table-container table-responsive" ">
+                        <thead>
+                            <tr>
+                                <th scope="col" ></th>
+                                <th scope="col" ">Right Eye</th>
+                                <th scope="col"">Left Eye</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Eyelids & Adnexa</td>
+                                <td>Normal</td>
+                                <td>Slight Swelling</td>
+                            </tr>
+                            <tr>
+                                <td>Conjunctiva</td>
+                                <td>Clear</td>
+                                <td>Redness</td>
+                            </tr>
+                            <tr>
+                                <td>Sclera</td>
+                                <td>White</td>
+                                <td>Yellowish</td>
+                            </tr>
+                            <tr>
+                                <td>Cornea</td>
+                                <td>Transparent</td>
+                                <td>Hazy</td>
+                            </tr>
+                            <tr>
+                                <td>Anterior Chamber</td>
+                                <td>Deep</td>
+                                <td>Shallow</td>
+                            </tr>
+                            <tr>
+                                <td>Iris</td>
+                                <td>Normal Pattern</td>
+                                <td>Discolored</td>
+                            </tr>
+                            <tr>
+                                <td>Pupil</td>
+                                <td>Reactive</td>
+                                <td>Non-reactive</td>
+                            </tr>
+                            <tr>
+                                <td>Lens</td>
+                                <td>Clear</td>
+                                <td>Cataract</td>
+                            </tr>
+                            <tr>
+                                <td>Fundus</td>
+                                <td>Normal</td>
+                                <td>Macular Degeneration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="section5" class="section">
+                    <h3>Medicines Prescribed:</h3>
+                    <table class="table-container table-responsive"">
+                        <thead>
+                            <tr>
+                                <th scope="col" ">Medicine Name</th>
+                                <th scope="col" >Type</th>
+                                <th scope="col" >Dose</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Paracetamol</td>
+                                <td>Tablet</td>
+                                <td>1-1-1</td>
+                               
+                            </tr>
+                            <tr>
+                                <td>Amoxicillin</td>
+                                <td>Capsule</td>
+                                <td>1-0-1</td>
+                                
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="footer">
+         
+        </div>
+    </div>
+
+     <!-- Print Button -->
+     <button class="print-btn" onclick="window.print()">Print</button>
+
+</script>
+</html>
