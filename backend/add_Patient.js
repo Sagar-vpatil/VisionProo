@@ -67,6 +67,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
           Age: age,
           MobileNo: mobileNo,
           Address: address,
+          AppointmentStatus: "Deactive",
       });
 
       console.log("Patient added with ID:", newId);
@@ -247,31 +248,48 @@ document.getElementById("add-appointment-btn").addEventListener("click", async (
     if (response === 0) { // "Yes" button clicked
         try {
             // Query Firestore to check if an appointment already exists for the patient
-            const q = query(collection(db, "TodayAppointments"), where("patientId", "==", patientId));
-            const querySnapshot = await getDocs(q);
+            // const q = query(collection(db, "TodayAppointments"), where("patientId", "==", patientId));
+            // const querySnapshot = await getDocs(q);
 
-            if (!querySnapshot.empty) {
-                window.electronAPI.showErrorBox("Error", "An appointment already exists for this patient.");
-                return;
-            }
+            // if (!querySnapshot.empty) {
+            //     window.electronAPI.showErrorBox("Error", "An appointment already exists for this patient.");
+            //     return;
+            // }
 
-            const name = document.getElementById("name-input-field").value;
-            const dob = document.getElementById("dob-input-field").value;
-            const mobileNo = document.getElementById("mobile-input-field").value;
-            const address = document.getElementById("address-input-field").value;
-            const todaysDate = new Date().toISOString().split('T')[0];
+            // const name = document.getElementById("name-input-field").value;
+            // const dob = document.getElementById("dob-input-field").value;
+            // const mobileNo = document.getElementById("mobile-input-field").value;
+            // const address = document.getElementById("address-input-field").value;
+            // const todaysDate = new Date().toISOString().split('T')[0];
 
-            const appointmentData = {
-                patientId: patientId,
-                name: name,
-                dob: dob,
-                mobileNo: mobileNo,
-                address: address,
-                appointmentDate: todaysDate,
-            };
+            // const appointmentData = {
+            //     patientId: patientId,
+            //     name: name,
+            //     dob: dob,
+            //     mobileNo: mobileNo,
+            //     address: address,
+            //     appointmentDate: todaysDate,
+            // };
 
             // Add to TodayAppointments collection in Firestore
-            await addDoc(collection(db, "TodayAppointments"), appointmentData);
+            // await addDoc(collection(db, "TodayAppointments"), appointmentData);
+
+            // Change the appointment status in the Patients collection
+            //check if the appointment status already Active or not
+
+            const patientDocRef = doc(db, "patients", patientId);
+            const patientDoc = await getDoc(patientDocRef);
+            if (patientDoc.exists()) {
+                const patientData = patientDoc.data();
+                if (patientData.AppointmentStatus === "Active") {
+                    window.electronAPI.showErrorBox("Error", "An appointment already exists for this patient.");
+                    return;
+                }
+            }
+
+            // Update the appointment status in the Patients collection
+            await setDoc(patientDocRef, { AppointmentStatus: "Active" }, { merge: true });
+
 
             window.electronAPI.showSuccessBox("Success", "Appointment added successfully!");
             document.getElementById("patient-id-input-field").value = "";
