@@ -13,6 +13,72 @@
   <!-- custom css -->
   <link rel="stylesheet" href="../frontend/css/main.css" />
   <link rel="stylesheet" href="../assets/css/global.css">
+  <style>
+   
+    .header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .time {
+      color: #ccc;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      max-width: 400px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      height: 70px;
+    }
+
+    .icon {
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      font-size: 24px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+    }
+
+    .details h2 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .details p {
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .due {
+      color: #ff0000;
+      font-weight: bold;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
 
 </head>
 <!-- Side-Nav -->
@@ -67,12 +133,21 @@
     <!-- Menu Button -->
     <div class="d-flex align-items-center">
       <a class="btn border-0" id="menu-btn"><i class="bx bx-menu" style="background-color: #fff;"></i></a>
+      <div class="details" style="margin-left: 30px;"" >
+        <h2>(P1) PRATHAM MISTARI</h2>
+        <p>Patient id :- <span class="due">1</span></p>
+       
+      </div>
     </div>
 
     <!-- Action Buttons -->
     <div class="d-flex align-items-center gap-3">
+      
+     
+   
+     
 
-         <h2><b style="display: inline-flex; text-align: center; justify-content: center;">रविकल्प हॉस्पिटल</b> </h2>
+         <!-- <h2><b style="display: inline-flex; text-align: center; justify-content: center;">रविकल्प हॉस्पिटल</b> </h2> -->
        
  
       <a href="../subpages/add_Patient.html">
@@ -95,8 +170,10 @@
     </div>
   </nav>
 
+ 
+
   <!-- ######################### tebs start ########################### -->
-  <div class="tabs">
+  <div class="tabs" style="text-decoration: none;">
     <div class="tab active" data-target="summary">Summary</div>
     <div class="tab" data-target="symptoms">Symptoms / History</div>
     <div class="tab" data-target="vitals">Ophthal</div>
@@ -106,7 +183,7 @@
     <div class="tab" data-target="advice">Advice</div>
     <div class="tab">img</div>
     <div class="tab">Save</div>
-    <div class="tab">Save and print </div>
+    <a href="../subpages/print.html" class="tab">Save and print </a>
   </div>
 
   <!-- ######################### tebs end  ########################### -->
