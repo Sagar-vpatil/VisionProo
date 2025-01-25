@@ -150,15 +150,13 @@ body {
     <!-- Action Buttons -->
     <div class="d-flex align-items-center gap-3">
         <!-- Bill Button -->
-        <button class="btn btn-secondary" id="add-bill-btn">Bill</button>
+        <!-- <button class="btn btn-secondary" id="add-bill-btn">Bill</button> -->
 
         <!-- Add Receptionist Button -->
-        <button class="btn btn-success" id="add-receptionist-btn">Add Receptionist</button>
+        <button class="btn btn-success" id="home-btn" type="button">Home</button>
 
         <!-- Home Button -->
-        <a href="../subpages/main.html">
-            <button class="btn btn-danger">Home</button>
-        </a>
+            <button class="btn btn-danger" id="logout" type="button">Logout</button>
     </div>
 </nav>
 
@@ -182,6 +180,19 @@ body {
         <div class="row form-group">
             <div class="col-sm-4 label-column"><label class="col-form-label" for="dob-input-field">Date of Birth</label></div>
             <div class="col-sm-6 input-column"><input class="form-control" type="date" id="dob-input-field" onchange="calculateAge()"></div>
+        </div>
+
+        <!-- Gender Dropdown -->
+        <div class="row form-group">
+            <div class="col-sm-4 label-column"><label class="col-form-label" for="gender-select">Gender</label></div>
+            <div class="col-sm-6 input-column">
+                <select class="form-control" id="gender-select">
+                    <option value="" disabled selected>Select Gender 🔽</option>
+                    <option value="Male">👨 Male</option>
+                    <option value="Female">👩 Female</option>
+                    <option value="Other">⚧️ Other</option>
+                </select>
+            </div>
         </div>
         
         <div class="row form-group">

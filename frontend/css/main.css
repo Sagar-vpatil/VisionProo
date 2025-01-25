@@ -309,11 +309,6 @@
               font-size: 14px;
           }
   
-          .option.selected {
-              background-color: #a0d2eb;
-              border-color: #00aaff;
-          }
-  
           .actions {
               margin-top: 10px;
           }
@@ -521,44 +516,7 @@
 }
 
 
-
-
-
-    /* Highlight the selected option */
-    .option.selected {
-      background-color: #007bff; /* Blue background for selected options */
-      color: white;
-      border-color: #007bff; /* Blue border */
-    }
-
-    /* Hover effect for options */
-    .option:hover {
-      background-color: #e0e0e0;
-    }
-
-    /* Styling for selected options in a different color */
-    .option.selected:hover {
-      background-color: #0056b3; /* Darker blue for hover on selected */
-    }
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Modal Styles Sagar */
 
     .modal {
       position: fixed;
@@ -594,3 +552,132 @@
 
 
 
+/* -------------------------------------- Important Selected Code For Options -----------------------------------*/
+
+
+   /* General styling for options */
+   .option {
+    padding: 10px 15px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Highlight the selected option */
+  .option.selected {
+    background-color: #007bff; /* Blue background for selected options */
+    color: white; /* White text for better contrast */
+    border-color: #007bff; /* Blue border */
+  }
+  
+  /* Hover effect for options */
+  .option:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Hover effect for selected options */
+  .option.selected:hover {
+    background-color: #0056b3; /* Darker blue for hover on selected */
+  }
+  
+     
+  
+     /* General styling for symptoms */
+     .symptoms {
+      padding: 10px 15px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Highlight the selected symptoms */
+    .symptoms.selected {
+      background-color: #007bff; /* Blue background for selected options */
+      color: white; /* White text for better contrast */
+      border-color: #007bff; /* Blue border */
+    }
+    
+    /* Hover effect for symptoms */
+    .symptoms:hover {
+      background-color: #e0e0e0;
+    }
+    
+    /* Hover effect for selected symptoms */
+    .symptoms.selected:hover {
+      background-color: #0056b3; /* Darker blue for hover on selected */
+    }
+
+
+    /* General styling for diagnosis */
+    .diagnosis {
+      padding: 10px 15px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Highlight the selected diagnosis */
+    .diagnosis.selected {
+      background-color: #007bff; /* Blue background for selected options */
+      color: white; /* White text for better contrast */
+      border-color: #007bff; /* Blue border */
+    }
+
+    /* Hover effect for diagnosis */
+    .diagnosis:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Hover effect for selected diagnosis */
+    .diagnosis.selected:hover {
+      background-color: #0056b3; /* Darker blue for hover on selected */
+    }
+
+
+     /* General styling for medicalHistory */
+      .medicalHistory {
+        padding: 10px 15px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Highlight the selected medicalHistory */
+      .medicalHistory.selected {
+        background-color: #007bff; /* Blue background for selected options */
+        color: white; /* White text for better contrast */
+        border-color: #007bff; /* Blue border */
+      }
+
+      /* Hover effect for medicalHistory */
+      .medicalHistory:hover {
+        background-color: #e0e0e0;
+      }
+
+      /* Hover effect for selected medicalHistory */
+      .medicalHistory.selected:hover {
+        background-color: #0056b3; /* Darker blue for hover on selected */
+      }
+
+
+
+
+    
+    
+  /* -------------------------------------- Important Selected Code For Options -----------------------------------*/

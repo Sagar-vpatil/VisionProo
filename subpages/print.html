@@ -162,25 +162,25 @@
     <div class="page">
         <div class="header">
             <div class="left">
-                <p><strong>Name:</strong> [Patient Name]</p>
-                <p><strong>Age:</strong> [Patient Age]</p>
+                <p><strong>Name:</strong> <span id="patient-name"></span></p>
+                <p><strong>Age:</strong> <span id="patient-age"></span></p>
             </div>
             <div class="right">
-                <p><strong>Date:</strong> [Date]</p>
-                <p><strong>Gender:</strong> [Patient Gender]</p>
+                <p><strong>Date:</strong> <span id="appointment-date"></span></p>
+                <p><strong>Gender:</strong> <span id="patient-gender"></span></p>
             </div>
+            
         </div>
 
         <div class="medicines">
             <div class="left">
-                <div class="diagnosis-list">
+                <div class="diagnosis-list" style="margin-top: 20px;">
                     <h3>Diagnosis</h3>
                     <ul>
-                        <li>Cataract</li>
-                        <li>Macular Degeneration</li>
-                        <li>Dry Eye Syndrome</li>
+                      <!-- Diagnoses will be dynamically populated here -->
                     </ul>
-                </div>
+                  </div>
+                  
                 <div class="investigation-list">
                     <h3>Investigation </h3>
                     <ul>
@@ -204,24 +204,23 @@
             
             <div class="right">
                 <div class="patient-details">
-                    <p class="complaints">
-                        <span style="font-weight: bold; font-size: 17px;">Complaints/Symptoms:</span> Blurry Vision (RE) | Spot in Front of Eye 
-                    </p>
-                    <div class="medical-history" style="margin-top: 0px;">
-                        <p class="complaints">
-                            <span style="font-weight: bold; font-size: 17px;">Medical History:</span> Blurry Vision (RE) | Spot in Front of Eye (RE)
+                    <p class="complaints show-symptoms" style="font-size: 16px; margin-top: 10px;"></p>
+
+                   
+                        <p class="complaints show-medical-history" style="font-size: 16px; margin-top: 10px;">
+    
                         </p>
-                    </div>
-                    <div class="surgical-history">
+                    
+                    <!-- <div class="surgical-history">
                         <p class="complaints">
                             <span style="font-weight: bold; font-size: 17px;">Surgical History :</span> Retina Surgery (RE) | Glaucoma Surgery (RE)
                         </p>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Table Section -->
-                <h3>Visual Acuity:</h3>
-                <table style="margin-top: 0px;">
+                <h3 id="Visual-Acuity-Heading">Visual Acuity:</h3>
+                <table style="margin-top: 0px;" id="Visual-Acuity-Table">
                     <thead>
                         <tr>
                             <th></th>
@@ -232,31 +231,31 @@
                     <tbody>
                         <tr>
                             <td>Unaided</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td id="UnaidedR">0</td>
+                            <td id="UnaidedL">0</td>
                         </tr>
                         <tr>
                             <td>Glasses</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td id="GlassesR">0</td>
+                            <td id="GlassesL">0</td>
                         </tr>
                         <tr>
                             <td>Near Vision</td>
-                            <td>1</td>
-                            <td>0</td>
+                            <td id="NearVisionR">1</td>
+                            <td id="NearVisionL">0</td>
                         </tr>
                         <tr>
                             <td>Pinhole Vision</td>
-                            <td>1</td>
-                            <td>0</td>
+                            <td id="PinholeR">1</td>
+                            <td id="PinholeL">0</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="form-step" id="step-3">
                     <div class="form-group">
-                      <h3>Current Power Glasses:</h3>
-                      <div class="table-container">
-                        <table>
+                      <h3 id="Current-Power-Heading">Current Power Glasses:</h3>
+                      <div class="table-container" id="Current-Power-Section">
+                        <table id="Current-Power-Table">
                           <thead>
                             <tr>
                               <th></th>
@@ -280,25 +279,25 @@
                           <tbody>
                             <tr>
                               <td>DV</td>
-                              <td>+1.25</td>
-                              <td>-0.50</td>
-                              <td>90</td>
-                              <td>6/6</td>
-                              <td>+1.00</td>
-                              <td>-0.75</td>
-                              <td>80</td>
-                              <td>6/9</td>
+                              <td id="DVSPH">+1.25</td>
+                              <td id="DVCYL">-0.50</td>
+                              <td id="DVAxis">90</td>
+                              <td id="DVVA">6/6</td>
+                              <td id="DVSPH2">+1.00</td>
+                              <td id="DVCYL2">-0.75</td>
+                              <td id="DVAxis2">80</td>
+                              <td id="DVVA2">6/9</td>
                             </tr>
                             <tr>
                               <td>NV</td>
-                              <td>+2.00</td>
-                              <td>-1.00</td>
-                              <td>85</td>
-                              <td>6/7.5</td>
-                              <td>+1.75</td>
-                              <td>-0.25</td>
-                              <td>95</td>
-                              <td>6/6</td>
+                              <td id="NVSPH">+2.00</td>
+                              <td id="NVCYL">-1.00</td>
+                              <td id="NVAxis">85</td>
+                              <td id="NVVA">6/7.5</td>
+                              <td id="NVSPH2">+1.75</td>
+                              <td id="NVCYL2">-0.25</td>
+                              <td id="NVAxis2">95</td>
+                              <td id="NVVA2" >6/6</td>
                             </tr>
                           </tbody>
                         </table>
@@ -333,9 +332,9 @@
                     <table class="table-container table-responsive" ">
                         <thead>
                             <tr>
-                                <th scope="col" ></th>
-                                <th scope="col" ">Right Eye</th>
-                                <th scope="col"">Left Eye</th>
+                                <th scope="col"></th>
+                                <th scope="col">Right Eye</th>
+                                <th scope="col">Left Eye</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -392,7 +391,7 @@
                     <table class="table-container table-responsive"">
                         <thead>
                             <tr>
-                                <th scope="col" ">Medicine Name</th>
+                                <th scope="col">Medicine Name</th>
                                 <th scope="col" >Type</th>
                                 <th scope="col" >Dose</th>
                                
@@ -427,6 +426,157 @@
 
      <!-- Print Button -->
      <button class="print-btn" onclick="window.print()">Print</button>
+     <!-- Home Button -->
+     <a href="../subpages/main.html" class="btn" style="background: #f44336;">Home</a>
 
-</script>
+     <script>
+
+        // Load the appointment details from localStorage
+
+        // Retrieve the appointment object from localStorage
+        const appointment = JSON.parse(window.localStorage.getItem("appointment"));
+
+        // Populate the fields with the data
+        if (appointment) {
+            document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+            document.getElementById("patient-age").textContent = appointment.Age || "N/A";
+            document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
+        }
+
+        // Get today's date in the desired format (e.g., DD/MM/YYYY)
+        const today = new Date();
+        const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+
+        // Populate the date field
+        document.getElementById("appointment-date").textContent = formattedDate;
+
+       // Load the selected symptoms from local storage
+       const selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms")) || [];
+
+       const complaintsSection = document.querySelector(".show-symptoms");
+       if (selectedSymptoms.length === 0) {
+       // Hide the complaints section if no symptoms are selected
+       complaintsSection.style.display = "none";
+       } else {
+       // Show the complaints section and update the content
+       complaintsSection.style.display = "block";
+       complaintsSection.innerHTML = `
+           <span style="font-weight: bold; font-size: 17px;">Complaints/Symptoms:</span> 
+          ${selectedSymptoms.join(' <span style="font-weight: bold; color: black;">|</span> ')}
+
+       `;
+       }
+
+       // Load the selected medicalHistory from local storage
+       const selectedMedicalHistory = JSON.parse(localStorage.getItem("selectedMedicalHistory")) || [];
+       const medicalHistorySection = document.querySelector(".show-medical-history");
+
+       if (selectedMedicalHistory.length === 0) {
+          // Hide the medical history section if no history is selected
+          medicalHistorySection.style.display = "none";
+        } else {
+          // Show the medical history section and update the content
+          medicalHistorySection.style.display = "block";
+          medicalHistorySection.innerHTML = `
+              <span style="font-weight: bold; font-size: 17px;">Medical History:</span> 
+              ${selectedMedicalHistory.join(' <span style="font-weight: bold; color: black;">|</span> ')}
+          `;
+        }
+
+
+
+       // Load the diagnosis list from local storage
+       const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+
+       const diagnosisSection = document.querySelector(".diagnosis-list");
+       const diagnosisList = diagnosisSection.querySelector("ul");
+
+       if (selectedDiagnosis.length === 0) {
+            // Hide the diagnosis section if no diagnoses are selected
+            diagnosisSection.style.display = "none";
+        } else {
+            // Show the diagnosis section and update the list
+            diagnosisSection.style.display = "block";
+
+            // Clear the existing list
+            diagnosisList.innerHTML = "";
+
+            // Add each diagnosis as a list item
+            selectedDiagnosis.forEach((diagnosis) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = diagnosis;
+            diagnosisList.appendChild(listItem);
+            });
+        }
+
+
+       // Load the vision table from local storage
+
+       const visionTable = JSON.parse(localStorage.getItem("visionTable")) || {};
+
+        const table = document.getElementById("Visual-Acuity-Table");
+        const heading = document.getElementById("Visual-Acuity-Heading");
+        const rows = table.querySelectorAll("tbody tr");
+
+        // Define the mapping for each row and its respective keys in visionTable
+        const rowMapping = [
+            { rowIndex: 0, rightKey: "UnaidedR", leftKey: "UnaidedL" },
+            { rowIndex: 1, rightKey: "GlassesR", leftKey: "GlassesL" },
+            { rowIndex: 2, rightKey: "NearVisionR", leftKey: "NearVisionL" },
+            { rowIndex: 3, rightKey: "PinholeR", leftKey: "PinholeL" },
+        ];
+
+        let visibleRowCount = 0;
+
+        rowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+            const rightValue = visionTable[rightKey] || "";
+            const leftValue = visionTable[leftKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+            rows[rowIndex].style.display = "none";
+            } else {
+            rows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+            rows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "0";
+            rows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "0";
+            visibleRowCount++;
+            }
+        });
+
+        // Show or hide the entire table if all rows are hidden
+        table.style.display = visibleRowCount > 0 ? "table" : "none";
+
+        // Show or hide the heading based on whether the table is visible
+        heading.style.display = visibleRowCount > 0 ? "block" : "none";
+
+
+        // Load the current power table from local storage
+
+        const currentPowerGlasses = JSON.parse(localStorage.getItem("currentPowerGlasses")) || {};
+
+        const currentPowerSection = document.getElementById("Current-Power-Section");
+        const currentPowerHeading = document.getElementById("Current-Power-Heading");
+
+        // Check if all values in currentPowerGlasses are empty
+        const allEmpty = Object.values(currentPowerGlasses).every(value => value === "");
+        if (allEmpty) {
+            // Hide the entire section if all values are empty
+            currentPowerSection.style.display = "none";
+            currentPowerHeading.style.display = "none";
+        } else {
+            // Show the section and update the table
+            currentPowerSection.style.display = "block";
+            currentPowerHeading.style.display = "block";
+
+            // Update each cell in the table with the corresponding value
+            Object.entries(currentPowerGlasses).forEach(([key, value]) => {
+            const cell = currentPowerSection.querySelector(`#${key}`);
+            cell.textContent = value || "";
+            });
+        }
+
+        
+
+     </script>
+</body>
 </html>

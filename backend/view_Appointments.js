@@ -36,7 +36,7 @@ async function loadTodayAppointments() {
                 <td>${appointment.MobileNo}</td>
                 <td>
                     <button class="btn btn-info btn-sm view-summary-btn" data-id="${appointment.id}">
-                        <span style="font-size: 20px;">👁️</span> View Summary
+                        <span style="font-size: 20px;">👁️</span> Open Appointment
                     </button>
                 </td>
                 <td>
@@ -70,7 +70,7 @@ async function loadTodayAppointments() {
             button.addEventListener("click", (event) => {
                 console.log("View Summary button clicked");
                 const appointmentId = event.currentTarget.dataset.id; // Get the ID from the button's data attribute
-                // viewSummary(appointmentId);
+                viewSummary(appointmentId);
             });
         });
     } catch (error) {
@@ -115,6 +115,33 @@ async function deleteAppointment(appointmentId) {
     } catch (error) {
         console.error("Error updating appointment status:", error);
         window.electronAPI.showErrorBox("Error", "Failed to delete appointment. Please try again.");
+    }
+}
+
+// Function to view appointment summary
+async function viewSummary(appointmentId) {
+    try {
+        const appointmentRef = doc(db, "patients", appointmentId);
+        const appointmentDoc = await getDoc(appointmentRef);
+        if (!appointmentDoc.exists()) {
+            console.error("No such document!");
+            window.electronAPI.showErrorBox("Error", "Appointment not found.");
+            return;
+        }
+        const appointment = appointmentDoc.data();
+        // Store the appointment details in the local storage
+        window.localStorage.setItem("appointment", JSON.stringify(appointment));
+
+        // get the appointment details from local storage
+        // const appointment1 = JSON.parse(window.localStorage.getItem("appointment"));
+        // console.log("Viewing appointment summary:", appointment1.id);
+
+        // Navigate to the appointment summary page
+        window.location.href = "main.html";
+
+    } catch (error) {
+        console.error("Error fetching appointment details:", error);
+        window.electronAPI.showErrorBox("Error", "Failed to view appointment summary. Please try again.");
     }
 }
 

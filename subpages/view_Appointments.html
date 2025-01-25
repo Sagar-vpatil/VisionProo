@@ -115,7 +115,7 @@
          <h2><b style="display: inline-flex; text-align: center; justify-content: center;">रविकल्प हॉस्पिटल</b> </h2>
        
  
-      <a href="../subpages/newpatient.html">
+      <a href="../subpages/add_Patient.html">
         <button class="styled-button">Add Patient</button>
       </a>
       
@@ -129,7 +129,7 @@
       <button class="btn btn-success" id="add-receptionist-btn">Add Receptionist</button>
     
       <!-- Add Receptionist Button -->
-      <button class="btn-danger" id="exit">Back</button>
+      <button class="btn-danger" id="exit">Logout</button>
 
 
     </div>
@@ -234,8 +234,26 @@
 
   // ipc back butotn 
   const backButton = document.getElementById('exit');
-  backButton.addEventListener('click',()=>{
-    window.electronAPI.navigateBack();
+  backButton.addEventListener('click',async()=>{
+    console.log("Logout button clicked");
+    // Trigger confirmation dialog for logout
+    const response = await window.electronAPI.showMessageBox(
+      "warning",
+      "Are you sure you want to logout?",
+      "Logout",
+      ["Yes", "No"]
+    );
+
+      if (response === 1) {
+          return;
+      }
+        // Clear user data from local storage
+        localStorage.removeItem("user");
+
+        // Redirect the user to index.html
+        // window.location.href = "../frontend/index.html";
+
+        window.electronAPI.navigateBack();
   })
 
 </script>

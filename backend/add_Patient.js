@@ -6,13 +6,14 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
 
   const name = document.getElementById("name-input-field").value.trim();
   const birthDate = document.getElementById("dob-input-field").value.trim();
+  const gender = document.getElementById("gender-select").value.trim();
   const age = parseInt(document.getElementById("age-input-field").value, 10);
   const mobileNo = document.getElementById("mobile-input-field").value.trim();
   const address = document.getElementById("address-input-field").value.trim();
 
   console.log("Patient Details:", { name, birthDate, age, mobileNo, address });
 
-  if (!name || !birthDate || isNaN(age) || !mobileNo || !address) {
+  if (!name || !birthDate || isNaN(age) || !mobileNo || !address || !gender) {
       window.electronAPI.showErrorBox("Error", "Please fill in all the fields.");
       return;
   }
@@ -64,6 +65,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
           id: newId,
           Name: name,
           BirthDate: birthDate,
+          Gender: gender,
           Age: age,
           MobileNo: mobileNo,
           Address: address,
@@ -75,6 +77,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
       // Clear the input fields
       document.getElementById("name-input-field").value = "";
       document.getElementById("dob-input-field").value = "";
+      document.getElementById("gender-select").value = "";
       document.getElementById("age-input-field").value = "";
       document.getElementById("mobile-input-field").value = "";
       document.getElementById("address-input-field").value = "";
@@ -86,7 +89,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
 
 
 
-document.getElementById("name-input-field").addEventListener("input", async function () {
+document.getElementById("search-box").addEventListener("input", async function () {
     const searchValue = this.value.trim(); // Get the search value and trim whitespace
     console.log("Search value:", searchValue);
 
@@ -98,30 +101,62 @@ document.getElementById("name-input-field").addEventListener("input", async func
 
     try {
         const patientsCollection = collection(db, "patients");
-        const q = query(
+        const results = [];
+
+        // Search by Name
+        const nameQuery = query(
             patientsCollection,
             where("Name", ">=", searchValue),
             where("Name", "<", searchValue + "\uf8ff"),
-            limit(5) // Limit to top 5 results
+            limit(5)
         );
-
-        const querySnapshot = await getDocs(q);
-        console.log("Query Snapshot:", querySnapshot);
-        const patients = [];
-
-        querySnapshot.forEach(doc => {
+        const nameSnapshot = await getDocs(nameQuery);
+        nameSnapshot.forEach(doc => {
             const data = doc.data();
-            patients.push({
-                id: data.id,
+            results.push({
+                id: doc.id,
                 name: data.Name,
                 mobileNo: data.MobileNo,
             });
         });
 
-        console.log("Patients:", patients);
+        // Search by MobileNo
+        const mobileQuery = query(
+            patientsCollection,
+            where("MobileNo", ">=", searchValue),
+            where("MobileNo", "<", searchValue + "\uf8ff"),
+            limit(5)
+        );
+        const mobileSnapshot = await getDocs(mobileQuery);
+        mobileSnapshot.forEach(doc => {
+            const data = doc.data();
+            if (!results.some(patient => patient.id === doc.id)) {
+                results.push({
+                    id: doc.id,
+                    name: data.Name,
+                    mobileNo: data.MobileNo,
+                });
+            }
+        });
+
+        // Search by ID (Document ID)
+        const idDocRef = doc(patientsCollection, searchValue);
+        const idDocSnapshot = await getDoc(idDocRef);
+        if (idDocSnapshot.exists()) {
+            const data = idDocSnapshot.data();
+            if (!results.some(patient => patient.id === idDocSnapshot.id)) {
+                results.push({
+                    id: idDocSnapshot.id,
+                    name: data.Name,
+                    mobileNo: data.MobileNo,
+                });
+            }
+        }
+
+        console.log("Patients:", results);
 
         // Update the table with search results
-        updatePatientTable(patients);
+        updatePatientTable(results);
     } catch (error) {
         console.error("Error fetching patients: ", error);
     }
@@ -148,6 +183,7 @@ export async function openPatientDetails(patientId) {
             // Populate form fields
             document.getElementById("name-input-field").value = patientData.Name || "";
             document.getElementById("dob-input-field").value = patientData.BirthDate || "";
+            document.getElementById("gender-select").value = patientData.Gender || "";
             document.getElementById("age-input-field").value = patientData.Age || "";
             document.getElementById("mobile-input-field").value = patientData.MobileNo || "";
             document.getElementById("address-input-field").value = patientData.Address || "";
@@ -326,4 +362,58 @@ document.getElementById("refresh-btn").addEventListener("click", async function 
   }
 
   window.location.reload();
+});
+
+document.getElementById("logout").addEventListener("click", async function () {
+     // Trigger confirmation dialog for logout
+     const response = await window.electronAPI.showMessageBox(
+        "warning",
+        "Are you sure you want to logout?",
+        "Logout",
+        ["Yes", "No"]
+      );
+  
+    if (response === 1) {
+        return;
+    }
+        // Clear user data from local storage
+        localStorage.removeItem("user");
+  
+      window.electronAPI.navigateBack();
+});
+
+// Check Local Storage for existing user session
+const storedUser = JSON.parse(localStorage.getItem("user"));
+
+// Reference the home button
+const homeBtn = document.getElementById("home-btn");
+
+// Logic to display the button
+if (storedUser && storedUser.position === "Doctor") {
+    // Show the button if the position is 'Doctor'
+    homeBtn.style.display = "inline-block";
+} else if (!storedUser) {
+    // Show the button if no user is stored
+    homeBtn.style.display = "inline-block";
+} else {
+    // Hide the button for other cases
+    homeBtn.style.display = "none";
+}
+
+// Add event listener for the home button
+homeBtn.addEventListener("click", async () => {
+   // Redirect the user to main.html
+    window.location.href = "main.html";
+});
+
+
+// Restrict the date picker to allow only previous dates
+document.addEventListener("DOMContentLoaded", function () {
+    const dobInput = document.getElementById("dob-input-field");
+    
+    // Get today's date in the format YYYY-MM-DD
+    const today = new Date().toISOString().split("T")[0];
+    
+    // Set the max attribute to today's date
+    dobInput.setAttribute("max", today);
 });
