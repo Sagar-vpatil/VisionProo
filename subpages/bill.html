@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            margin: 20px;
             background-color: #f9f9f9;
         }
         .invoice-container {
@@ -19,28 +19,42 @@
             border-radius: 10px;
         }
         .header {
-            text-align: center;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f8f8;
+            padding: 15px;
+            border-bottom: 3px solid #d00000;
         }
-        .header img {
-            width: 100px;
+        .logo img {
+            width: 190px;
+            height: auto; /* Adjust as needed */
         }
         .hospital-name {
-            font-size: 28px;
-            color: #d32f2f;
+            color: red;
+            font-size: 32px;
             font-weight: bold;
-            margin-top: 10px;
+            font-family: 'Mangal', sans-serif;
+            margin-left: 20px; /* Space between logo and name */
         }
-        .doctors-info {
-            display: flex;
-            justify-content: space-between;
+        .sub-heading {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px; /* Space between hospital name and subheading */
+        }
+        .doctor-info {
+            text-align: right;
             font-size: 14px;
         }
-        .doctors-info strong {
-            color: #d32f2f;
+        .doctor-info p {
+            margin: 5px 0;
         }
+        .doctor-info .name {
+            font-weight: bold;
+            color: red;
+        }
+
         .invoice-details {
             margin: 20px 0;
         }
@@ -95,105 +109,225 @@
         .buttons button:hover {
             background: #b71c1c;
         }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .pr{
+                width: 70px;
+            }
+            .invoice-container {
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+            }
+            .buttons {
+                display: none;
+            }
+            input[type="number"] {
+                border: none;
+                background: transparent;
+                width: 70px;
+            }
+            .invoice-details span,
+            .hospital-name span,
+            .doctors-info strong,
+            .total {
+                color: #000;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+            }
+            
+        }
     </style>
 </head>
 <body>
     <div class="invoice-container">
-        <div class="header">
-            <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
-            <div class="hospital-name">
-                रविकल्प हॉस्पिटल <br>
-                <span style="font-size: 18px; color: black;">EYE & GENERAL HOSPITAL PHACO & LASER CENTER</span>
+        <!-- Header Section -->
+        <div class="header"  style="height:73px ;">
+            <!-- Logo and Hospital Name in One Line -->
+            <div style="display: flex; align-items: center; margin-left: 110px ;">
+                <div class="logo">
+                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+                </div>
+                <div class="hospital-name">रविकला हॉस्पिटल <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
+                
+             
             </div>
+            
         </div>
 
-        <div class="doctors-info">
-            <div>
-                <strong>Dr. Alvin R. Rane</strong> <br>
-                <em>Md. (Ayu)</em> <br>
-                Consulting Phaco Surgeon <br>
-                Reg No: 55858 A
-            </div>
-            <div>
-                <strong>Dr. Selina A Rane</strong> <br>
-                <em>Md. (Ayu)</em> <br>
-                Consulting Family Physician <br>
-                Reg No: 76448 A
-            </div>
-        </div>
-<hr>
+        <!-- Subheading Below the Logo and Hospital Name -->
+
+       
+        <!-- Invoice Details -->
         <div class="invoice-details">
-            <p><span>Sr No -</span> 124545 &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 480px;">Date:</span> 01 July 2022</p>
-            <p><span>Patient Name -</span> John Doe &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Address:</span> MH</p>
+            <p><span>Sr No -</span> 124545 &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Date:</span> 01 July 2022</p>
+            <p><span>Patient Name -</span> John Doe &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 300px;">Mobile No:</span> 1234567890</p>
         </div>
-<hr>
-        <table id="invoiceTable">
+        <hr>
+
+        <!-- Invoice Table -->
+        <table id="invoiceTable" style="width: 630px; margin-left: 80px;">
             <thead>
                 <tr>
                     <th>NO</th>
                     <th>PARTICULAR</th>
                     <th>PRICE (₹)</th>
-                    <th>SUBTOTAL (₹)</th>
-                    <!-- <th>ACTION</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td><input type="text" value="Hinged wardrobe"></td>
-                    <td><input type="number" value="1200"></td>
-                    <td>₹1200</td>
-                    <!-- <td><button onclick="removeRow(this)">🗑️</button></td> -->
+                    <td>Consultation</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Follow Up</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Stay Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Nursing Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Surgeon Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Anesthesia Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Operation Theatre Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Visiting DR. Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Pathology Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Visit Charge</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>O.L. Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Healon Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Other Charges/Medical/A-scan</td>
+                    <td class="pr"style="width:70px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
             </tbody>
         </table>
 
-        <p class="total">TOTAL - ₹1200</p>
+        <!-- Total Amount -->
+        <p class="total" style="margin-right: 100px;">TOTAL - ₹0</p>
 
-<hr>
- 
+        <!-- Footer Section -->
         <div class="footer" style="color: black;">
-            <strong >Ravikalp Hospital</strong> <br>
-            Address: Near Panchamukhibr <br> Hanuman Mandir,Sindhi Colony Jalgaon <br>
-            Mob No: 123-456-7890
-        </div>
-
-        <div class="signature">
-             
-            <p>Dr. Alvin R Rane</p>
+            <div class="signature" style="margin-right: 30px;">
+                <p>Dr. Alvin R Rane</p>
+            </div>
         </div>
     </div>
- 
+
+    <!-- Buttons for Adding Items and Printing -->
+    <div class="buttons">
         
-        <div class="buttons">
-            <button onclick="addRow()">➕ Add New Item</button>
-            <button onclick="window.print()">🖨️ Prinrrrt Invoice</button>
-        </div>
- 
+        <button onclick="printInvoice()">🖨️ Print Invoice</button>
+    </div>
 
     <script>
-        function addRow() {
+        let itemCounter = 14; // Start counting from the next item
+
+        function addNewItem() {
             let table = document.getElementById('invoiceTable').getElementsByTagName('tbody')[0];
             let newRow = table.insertRow();
-            newRow.innerHTML = '<td></td><td><input type="text" placeholder="Item"></td><td><input type="number" placeholder="Price" oninput="calculateTotal()"></td><td>₹0</td><td><button onclick="removeRow(this)">🗑️</button></td>';
-            updateRowNumbers();
+            newRow.innerHTML = `
+                <td>${itemCounter}</td>
+                <td><input type="text" placeholder="New Item"></td>
+                <td><input type="number" value="0" oninput="calculateTotal()"></td>
+            `;
+            itemCounter++;
+            calculateTotal();
         }
-        function removeRow(btn) {
-            let row = btn.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-            updateRowNumbers();
-        }
-        function updateRowNumbers() {
+
+        function calculateTotal() {
             let rows = document.querySelectorAll('#invoiceTable tbody tr');
             let total = 0;
-            rows.forEach((row, index) => {
-                row.cells[0].innerText = index + 1;
+            rows.forEach((row) => {
                 let price = parseFloat(row.cells[2].querySelector('input').value) || 0;
-                row.cells[3].innerText = `₹${price}`;
                 total += price;
             });
             document.querySelector('.total').innerText = `TOTAL - ₹${total}`;
         }
+
+        function printInvoice() {
+            let printContents = document.querySelector('.invoice-container').innerHTML;
+            let originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Reload to restore the original content
+        }
     </script>
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            let inputs = document.querySelectorAll("#invoiceTable tbody input[type='number']");
+            inputs.forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            document.querySelector(".total").innerText = `TOTAL - ₹${total}`;
+        }
+    
+        function printInvoice() {
+            window.print();
+        }
+    </script>
+    
 </body>
 </html>
