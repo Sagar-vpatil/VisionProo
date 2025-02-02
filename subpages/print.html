@@ -139,6 +139,24 @@
             .print-btn {
                 display: none;
             }
+            body {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+    }
+    .page {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+    }
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
         }
         .print-btn {
             position: fixed;
@@ -156,10 +174,49 @@
         .print-btn:hover {
             background: #45a049;
         }
+
+
+        .heade {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        
+            padding: 15px;
+            border-bottom: 3px solid #120d0d;
+        }
+        .logo img {
+            width: 190px;
+            height: auto; /* Adjust as needed */
+        }
+        .hospital-name {
+            color: red;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Mangal', sans-serif;
+            margin-left: 20px; /* Space between logo and name */
+        }
+        .sub-heading {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px; /* Space between hospital name and subheading */
+        }
     </style>
 </head>
 <body>
     <div class="page">
+        <div class="heade"  style="height:90px ; margin-bottom: 0px;">
+            <!-- Logo and Hospital Name in One Line -->
+            <div style="display: flex; align-items: center; margin-left: 110px ;">
+                <div class="logo">
+                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+                </div>
+                <div class="hospital-name">रविकला हॉस्पिटल <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
+                
+             
+            </div>
+            
+        </div>
         <div class="header">
             <div class="left">
                 <p><strong>Name:</strong> <span id="patient-name"></span></p>
@@ -174,14 +231,14 @@
 
         <div class="medicines">
             <div class="left">
-                <div class="diagnosis-list" style="margin-top: 20px;">
+                <!-- <div class="diagnosis-list" style="margin-top: 20px;">
                     <h3>Diagnosis</h3>
                     <ul>
-                      <!-- Diagnoses will be dynamically populated here -->
-                    </ul>
-                  </div>
+                       Diagnoses will be dynamically populated here -->
+                    <!-- </ul>
+                  </div> -->
                   
-                <div class="investigation-list">
+                <div class="investigation-list" style="margin-top: 160px;">
                     <h3>Investigation </h3>
                     <ul>
                         <li>Blood Test</li>
@@ -211,18 +268,17 @@
     
                         </p>
                     
-                    <!-- <div class="surgical-history">
-                        <p class="complaints">
-                            <span style="font-weight: bold; font-size: 17px;">Surgical History :</span> Retina Surgery (RE) | Glaucoma Surgery (RE)
+                        <p class="complaints" style="margin-right: 120px;">
+                            <span style="font-weight: bold; font-size: 17px;">Surgical History :</span> Retina Surgery (RE) 
                         </p>
-                    </div> -->
+                    
                 </div>
 
                 <!-- Table Section -->
                 <h3 id="Visual-Acuity-Heading">Visual Acuity:</h3>
-                <table style="margin-top: 0px;" id="Visual-Acuity-Table">
+                <table style="margin-top: 0px; width: 280px; margin-left: 120px;" id="Visual-Acuity-Table" >
                     <thead>
-                        <tr>
+                        <tr >
                             <th></th>
                             <th>Right Eye</th>
                             <th>Left Eye</th>
@@ -255,7 +311,7 @@
                     <div class="form-group">
                       <h3 id="Current-Power-Heading">Current Power Glasses:</h3>
                       <div class="table-container" id="Current-Power-Section">
-                        <table id="Current-Power-Table">
+                        <table id="Current-Power-Table" style="width: 390px; margin-left: 90px;">
                           <thead>
                             <tr>
                               <th></th>
@@ -304,32 +360,69 @@
                       </div>
                     </div>
                   </div>
-                  <h3>Pupillary Reaction</h3>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th colspan="2">Right Eye</th>
-                              <th colspan="2">Left Eye</th>
-                          </tr>
-                          <tr>
-                              <th>Direct</th>
-                              <th>Consensual</th>
-                              <th>Direct</th>
-                              <th>Consensual</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>+3</td>
-                              <td>+3</td>
-                              <td>+2</td>
-                              <td>+2</td>
-                          </tr>
-                      </tbody>
+                  <h3>Refraction</h3>
+                  <table style="width: 450px; margin-left: 60px;">
+                    <thead>
+                      <tr>
+                        <th rowspan="2"></th>
+                        <th colspan="4">Right Eye</th>
+                        <th colspan="4">Left Eye</th>
+                      </tr>
+                      <tr>
+                        <th>SPH</th>
+                        <th>CYL</th>
+                        <th>Axis</th>
+                        <th>V/A</th>
+                        <th>SPH</th>
+                        <th>CYL</th>
+                        <th>Axis</th>
+                        <th>V/A</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Distance</td>
+                        <td>85</td>
+                        <td>7</td>
+                        <td>56</td>
+                        <td>56</td>
+                        <td>89</td>
+                        <td>56</td>
+                        <td>565</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <td>Near</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>9</td>
+                        <td>96</td>
+                        <td>5</td>
+                        <td>23</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>IPD (mm)</td>
+                        <td colspan="4"></td>
+                        <td colspan="4"></td>
+                      </tr>
+                      <tr>
+                        <td>Type of Glass</td>
+                        <td colspan="4"></td>
+                        <td colspan="4"></td>
+                      </tr>
+                      <tr>
+                        <td>Remark</td>
+                        <td colspan="4"></td>
+                        <td colspan="4"></td>
+                      </tr>
+                    </tbody>
                   </table>
+                  
                   <div id="section4" class="section">
                     <h3>Eye Examination:</h3>
-                    <table class="table-container table-responsive" ">
+                    <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" >
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -387,6 +480,103 @@
                     </table>
                 </div>
                 <div id="section5" class="section">
+
+                    <div class="patient-details">
+                        
+                            <p class="complaints" style="margin-right: 120px;">
+                                <span style="font-weight: bold; font-size: 17px;">Diagnosis :</span> Retina Surgery (RE) 
+                            </p>
+
+                            <p class="complaints" style="margin-right: 120px;">
+                                <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
+                            </p>
+                        
+                    </div>
+                    <h3> Pre-Operative Procedure</h3>
+
+                    <table style="width: 370px; margin-left: 90px;">
+                        <thead>
+                          <tr>
+                            <th colspan="2">Right Eye</th>
+                            <th colspan="2">Left Eye</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="input-wrapper">
+                              <span>Data</span>
+                              <span>mmHg</span>
+                            </td>
+                            <td><span>00:00</span></td>
+                            <td class="input-wrapper">
+                              <span>Data</span>
+                              <span>mmHg</span>
+                            </td>
+                            <td><span>00:00</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h3>A-Scan</h3>
+                      <table style="width: 280px; margin-left: 90px;">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Right Eye</th>
+                            <th>Left Eye</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>K1</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>K2</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>LT</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>AL</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>ACD</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>L.Power</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>A.Constant</td>
+                            <td><span>Data</span></td>
+                            <td><span>Data</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="patient-details">
+                        
+                        <p class="complaints" style="margin-right: 120px;">
+                            <span style="font-weight: bold; font-size: 17px;">BP :</span> 
+                        </p>
+
+                        <p class="complaints" style="margin-right: 120px;">
+                            <span style="font-weight: bold; font-size: 17px;"> P:</span> 
+                        </p>
+                        <p class="complaints" style="margin-right: 120px;">
+                            <span style="font-weight: bold; font-size: 17px;"> Sac:</span> 
+                        </p>
+                    
+                </div>
                     <h3>Medicines Prescribed:</h3>
                     <table class="table-container table-responsive"">
                         <thead>
@@ -413,6 +603,7 @@
                             
                         </tbody>
                     </table>
+
                 </div>
                 
             </div>

@@ -465,7 +465,7 @@ document.addEventListener("click", (e) => {
 });
 
 let currentInputField_lradiPrjrnty = null; // Track the active input field
-const table = document.getElementById('nRefraction2'); // Table element
+const table = document.getElementById(''); // Table element
 
 // Function to show the table for a specific input field
 function attachInputFieldListener(inputId) {
@@ -484,14 +484,14 @@ function attachInputFieldListener(inputId) {
 }
 
 // Attach listeners to each input field (including the new ones)
-attachInputFieldListener('rSPH');
-attachInputFieldListener('rCYL');
-attachInputFieldListener('lrSPH');
-attachInputFieldListener('lrCYL');
-attachInputFieldListener('rSPH1');
-attachInputFieldListener('rCYL1');
-attachInputFieldListener('lrSPH2');
-attachInputFieldListener('lrCYL2');
+// attachInputFieldListener('rSPH');
+// attachInputFieldListener('rCYL');
+// attachInputFieldListener('lrSPH');
+// attachInputFieldListener('lrCYL');
+// attachInputFieldListener('rSPH1');
+// attachInputFieldListener('rCYL1');
+// attachInputFieldListener('lrSPH2');
+// attachInputFieldListener('lrCYL2');
 
 // Handle table cell click to set the value in the active input field
 table.addEventListener('click', (event) => {
@@ -750,91 +750,99 @@ document.addEventListener("click", function (event) {
 // // Initialize the functionality
 // initializeSymptomSelection();
 // Get the buttons and sections
-const bothEyesBtn = document.getElementById('both-eyes-symptom-btn');
-const rightEyeBtn = document.getElementById('right-eye-symptom-btn');
-const leftEyeBtn = document.getElementById('left-eye-symptom-btn');
 
-const bothEyesSection = document.getElementById('both-eyes-section');
-const rightEyeSection = document.getElementById('right-eye-section');
-const leftEyeSection = document.getElementById('left-eye-section');
 
-// Function to hide all sections
-function hideAllSections() {
-  bothEyesSection.classList.remove('active');
-  rightEyeSection.classList.remove('active');
-  leftEyeSection.classList.remove('active');
+function toggleInvestigation(element) {
+  // Toggle the 'selected' class for visual feedback
+  element.classList.toggle("selected");
 
-  bothEyesBtn.classList.remove('btn-primary');
-  bothEyesBtn.classList.add('btn-secondary');
-  rightEyeBtn.classList.remove('btn-primary');
-  rightEyeBtn.classList.add('btn-secondary');
-  leftEyeBtn.classList.remove('btn-primary');
-  leftEyeBtn.classList.add('btn-secondary');
+  // Add or remove the selected option from the investigation tags container
+ 
+
+  if (element.classList.contains("selected")) {
+    document.getElementById("investigation-tags").appendChild(tag);
+  } else {
+    const tags = document.querySelectorAll(".investigation-tag");
+    tags.forEach((t) => {
+      if (t.textContent === element.textContent) {
+        t.remove();
+      }
+    });
+  }
 }
 
-// Event listeners for buttons
-bothEyesBtn.addEventListener('click', function () {
-  hideAllSections();
-  bothEyesSection.classList.add('active');
-  bothEyesBtn.classList.remove('btn-secondary');
-  bothEyesBtn.classList.add('btn-primary');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to handle button clicks and show the corresponding diagnosis content
+document.getElementById('both-diagnosis-btn').addEventListener('click', function() {
+  showDiagnosisContent('both');
+  setActiveButton(this);
 });
 
-rightEyeBtn.addEventListener('click', function () {
-  hideAllSections();
-  rightEyeSection.classList.add('active');
-  rightEyeBtn.classList.remove('btn-secondary');
-  rightEyeBtn.classList.add('btn-primary');
+document.getElementById('right-diagnosis-btn').addEventListener('click', function() {
+  showDiagnosisContent('right');
+  setActiveButton(this);
 });
 
-leftEyeBtn.addEventListener('click', function () {
-  hideAllSections();
-  leftEyeSection.classList.add('active');
-  leftEyeBtn.classList.remove('btn-secondary');
-  leftEyeBtn.classList.add('btn-primary');
+document.getElementById('left-diagnosis-btn').addEventListener('click', function() {
+  showDiagnosisContent('left');
+  setActiveButton(this);
 });
 
-// Handle option selection (multi-select)
-const medicalHistoryOptions = document.querySelectorAll('.option');
-medicalHistoryOptions.forEach(option => {
-  option.addEventListener('click', function () {
-    this.classList.toggle('selected');
-  });
-});
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Toggle functions for Symptoms Section
-  const symptomButtons = [
-    { btnId: "both-eyes-symptom-btn", sectionId: "both-eyes-section" },
-    { btnId: "right-eye-symptom-btn", sectionId: "right-eye-section" },
-    { btnId: "left-eye-symptom-btn", sectionId: "left-eye-section" },
-  ];
-
-  symptomButtons.forEach(({ btnId, sectionId }) => {
-    document.getElementById(btnId).addEventListener("click", function () {
-      symptomButtons.forEach(({ sectionId }) => {
-        document.getElementById(sectionId).classList.remove("active");
-      });
-      document.getElementById(sectionId).classList.add("active");
-    });
+function showDiagnosisContent(eye) {
+  // Hide all diagnosis content sections
+  document.querySelectorAll('.diagnosis-content').forEach(function(section) {
+      section.style.display = 'none';
   });
 
-  // Toggle functions for Surgical History Section
-  const surgicalButtons = [
-    { btnId: "both-eyes-surgical-btn", sectionId: "both-eyes-surgical-section" },
-    { btnId: "right-eye-surgical-btn", sectionId: "right-eye-surgical-section" },
-    { btnId: "left-eye-surgical-btn", sectionId: "left-eye-surgical-section" },
-  ];
+  // Show the selected diagnosis content section
+  document.getElementById(eye + '-diagnosis-content').style.display = 'block';
+}
 
-  surgicalButtons.forEach(({ btnId, sectionId }) => {
-    document.getElementById(btnId).addEventListener("click", function () {
-      surgicalButtons.forEach(({ sectionId }) => {
-        document.getElementById(sectionId).classList.remove("active");
-      });
-      document.getElementById(sectionId).classList.add("active");
-    });
+function setActiveButton(activeButton) {
+  // Remove active class from all buttons
+  document.querySelectorAll('#diagnosis .btn').forEach(function(button) {
+      button.classList.remove('active');
+      button.style.backgroundColor = 'white';
+      button.style.color = 'black';
+      button.style.border = '2px solid #6c757d';
   });
-});
+
+  // Add active class to the clicked button
+  activeButton.classList.add('active');
+  activeButton.style.backgroundColor = 'green';
+  activeButton.style.color = 'white';
+  activeButton.style.border = '2px solid darkgreen';
+}
+
+// Set "Both Eyes" as active by default
+document.getElementById('both-diagnosis-btn').click();
+
+
+
+
+
+
+
+
+
+
+    // Function to toggle surgical history selection
+    function toggleSurgicalHistory(element) {
+      element.classList.toggle('selected');
+    }

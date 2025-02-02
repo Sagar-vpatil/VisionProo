@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f8f8;
+            padding: 15px;
+            border-bottom: 3px solid #d00000;
+        }
+        .logo img {
+            width: 190px;
+            height: auto; /* Adjust as needed */
+        }
+        .hospital-name {
+            color: red;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Mangal', sans-serif;
+            margin-left: 20px; /* Space between logo and name */
+        }
+        .sub-heading {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px; /* Space between hospital name and subheading */
+        }
+        .doctor-info {
+            text-align: right;
+            font-size: 14px;
+        }
+        .doctor-info p {
+            margin: 5px 0;
+        }
+        .doctor-info .name {
+            font-weight: bold;
+            color: red;
+        }
+
+        .invoice-details {
+            margin: 20px 0;
+        }
+        .invoice-details span {
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background: #e0d6c9;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 14px;
+            color: #d32f2f;
+        }
+        .signature {
+            margin-top: 30px;
+            text-align: right;
+            font-style: italic;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+        .buttons button:hover {
+            background: #b71c1c;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .pr{
+                width: 70px;
+            }
+            .invoice-container {
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+                padding: 10px;
+            }
+            .buttons {
+                display: none;
+            }
+            input[type="number"] {
+                border: none;
+                background: transparent;
+                width: 70px;
+            }
+            .invoice-details span,
+            .hospital-name span,
+            .doctors-info strong,
+            .total {
+                color: #000;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Header Section -->
+        <div class="header"  style="height:73px ;">
+            <!-- Logo and Hospital Name in One Line -->
+            <div style="display: flex; align-items: center; margin-left: 110px ;">
+                <div class="logo">
+                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+                </div>
+                <div class="hospital-name">रविकला हॉस्पिटल <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
+                
+             
+            </div>
+            
+        </div>
+
+        <!-- Subheading Below the Logo and Hospital Name -->
+
+       
+        <!-- Invoice Details -->
+        <div class="invoice-details">
+            <p><span>Sr No -</span> 124545 &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Date:</span> 01 July 2022</p>
+            <p><span>Patient Name -</span> John Doe &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 300px;">Mobile No:</span> 1234567890</p>
+        </div>
+        <hr>
+
+        <!-- Invoice Table -->
+        <table id="invoiceTable" style="width: 630px; margin-left: 80px;">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>PARTICULAR</th>
+                    <th>PRICE (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Consultation</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Follow Up</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Stay Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Nursing Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Surgeon Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Anesthesia Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Operation Theatre Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Visiting DR. Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Pathology Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Visit Charge</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>O.L. Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Healon Charges</td>
+                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Other Charges/Medical/A-scan</td>
+                    <td class="pr"style="width:70px;"><input type="number" value="" oninput="calculateTotal()"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Total Amount -->
+        <p class="total" style="margin-right: 100px;">TOTAL - ₹0</p>
+
+        <!-- Footer Section -->
+        <div class="footer" style="color: black;">
+            <div class="signature" style="margin-right: 30px;">
+                <p>Dr. Alvin R Rane</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons for Adding Items and Printing -->
+    <div class="buttons">
+        
+        <button onclick="printInvoice()">🖨️ Print Invoice</button>
+    </div>
+
+    <script>
+        let itemCounter = 14; // Start counting from the next item
+
+        function addNewItem() {
+            let table = document.getElementById('invoiceTable').getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td>${itemCounter}</td>
+                <td><input type="text" placeholder="New Item"></td>
+                <td><input type="number" value="0" oninput="calculateTotal()"></td>
+            `;
+            itemCounter++;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let rows = document.querySelectorAll('#invoiceTable tbody tr');
+            let total = 0;
+            rows.forEach((row) => {
+                let price = parseFloat(row.cells[2].querySelector('input').value) || 0;
+                total += price;
+            });
+            document.querySelector('.total').innerText = `TOTAL - ₹${total}`;
+        }
+
+        function printInvoice() {
+            let printContents = document.querySelector('.invoice-container').innerHTML;
+            let originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Reload to restore the original content
+        }
+    </script>
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            let inputs = document.querySelectorAll("#invoiceTable tbody input[type='number']");
+            inputs.forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+            document.querySelector(".total").innerText = `TOTAL - ₹${total}`;
+        }
+    
+        function printInvoice() {
+            window.print();
+        }
+    </script>
+    
+</body>
+</html>
