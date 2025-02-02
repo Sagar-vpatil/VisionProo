@@ -144,10 +144,10 @@ document.getElementById("print-btn").addEventListener("click", function () {
   );
 
   // Open print.html using href
-  // window.location.href = "print.html";
+  window.location.href = "print.html";
 
   // Open print.html using window.open
-   window.open("print.html", "_blank");
+  //  window.open("print.html", "_blank");
   
 });
  

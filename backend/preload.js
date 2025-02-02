@@ -8,4 +8,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     showSuccessBox: (title, content) => ipcRenderer.invoke('show-success-box', title, content),
     showMessageBox: (type, message, title, buttons) =>
         ipcRenderer.invoke("showMessageBox", type, message, title, buttons),
+    printPage: () => ipcRenderer.send('print-page'),
 });

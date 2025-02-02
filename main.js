@@ -1,6 +1,10 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';  // Use ES Module import
 import { fileURLToPath } from 'url';  // Import for file URL conversion
 import { dirname, join } from 'path';  // Import path for manipulating paths
+import { shell } from 'electron'; // Add this to use shell to open files
+import fs from 'fs'; // For file operations
+import path from 'path'; // For managing file paths
+
 
 // Get the directory name (equivalent to __dirname in CommonJS)
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +20,8 @@ function createMainWindow() {
             preload: join(__dirname, 'backend', 'preload.js'), // Use preload script for better security
             nodeIntegration: false, // Disabling Node.js integration
             contextIsolation: true, // Secure communication between renderer and main process
-            enableRemoteModule: false, // Disable remote module for security
+            // enableRemoteModule: false, // Disable remote module for security
+            sandbox: true
         },
         icon: join(__dirname, 'assets', 'logo', 'app-icon.png'), // App icon
     });
@@ -51,6 +56,21 @@ function createMainWindow() {
         });
         return result.response; // Index of the button clicked
     });
+
+    ipcMain.on('print-page', (event) => {
+        const win = BrowserWindow.getFocusedWindow();
+        if (win) {
+            win.webContents.print({
+                printBackground: true,
+                pageSize: 'A4',
+                // Add these 2 properties
+                enablePrintPreview: true,
+                disablePrintPreviewTimeout: 0
+              }, (success) => { /* ... */ });
+        }
+    });
+    
+    
 }
 
 // Handle IPC communication (Example)
