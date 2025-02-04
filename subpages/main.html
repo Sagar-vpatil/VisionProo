@@ -533,10 +533,10 @@
     <button type="button" class="btn">Add Option </button>
   </div>
       <div class="options-container active">
-        <div class="option" onclick="toggleSurgicalHistory(this)">Cataract Surgery(BE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">LASIK (BE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(BE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Corneal Transplant(BE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(BE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">LASIK (BE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(BE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(BE)</div>
       </div>
     </div>
 
@@ -549,10 +549,10 @@
     <button type="button" class="btn">Add Option </button>
   </div>
       <div class="options-container active">
-        <div class="option" onclick="toggleSurgicalHistory(this)">Cataract Surgery(RE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">LASIK (RE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(RE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Corneal Transplant(RE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(RE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">LASIK (RE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(RE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(RE)</div>
       </div>
     </div>
 
@@ -564,10 +564,10 @@
     <button type="button" class="btn">Add Option </button>
   </div>
       <div class="options-container active">
-        <div class="option" onclick="toggleSurgicalHistory(this)">Cataract Surgery(LE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">LASIK (LE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(LE)</div>
-        <div class="option" onclick="toggleSurgicalHistory(this)">Corneal Transplant(LE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(LE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">LASIK (LE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(LE)</div>
+        <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(LE)</div>
       </div>
     </div>
 
@@ -1088,50 +1088,50 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>Eyelids & Adnexa</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="EyelidsR"></td>
+            <td><input type="text" class="form-control" id="EyelidsL"></td>
           </tr>
-
+          
           <tr>
             <td>Conjunctiva</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="ConjunctivaR"></td>
+            <td><input type="text" class="form-control" id="ConjunctivaL"></td>
           </tr>
           <tr>
             <td>Sclera</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="ScleraR"></td>
+            <td><input type="text" class="form-control" id="ScleraL"></td>
           </tr>
           <tr>
             <td>Cornea</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="CorneaR"></td>
+            <td><input type="text" class="form-control" id="CorneaL"></td>
           </tr>
           <tr>
             <td>Anterior Chamber</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="AnteriorR"></td>
+            <td><input type="text" class="form-control" id="AnteriorL"></td>
           </tr>
           <tr>
             <td>Iris</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="IrisR"></td>
+            <td><input type="text" class="form-control" id="IrisL"></td>
           </tr>
           <tr>
             <td>Pupil</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="PupilR"></td>
+            <td><input type="text" class="form-control" id="PupilL"></td>
           </tr>
           <tr>
             <td>Lens</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" id="LensR"></td>
+            <td><input type="text" class="form-control" id="LensL"></td>
           </tr>
-
+          
           <tr>
-            <td>Fundus</td>
-            <td><input type="text" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
+             <td>Fundus</td>
+            <td><input type="text" class="form-control" id="FundusR"></td>
+            <td><input type="text" class="form-control" id="FundusL"></td>
           </tr>
 
         </tbody>
@@ -1167,41 +1167,40 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>Distance</td>
-            <td><input type="text" id="rSPH"></td>
-            <td><input type="text" id="rCYL"></td>
-            <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" id="rV/A"></td>
-            <td><input type="text" id="lrSPH" style="width: 90px;"></td>
-            <td><input type="text" id="lrCYL"></td>
-            <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" id="rV/A2"></td>
+            <td><input type="text" name="Distance-SPH" id="rSPH"></td>
+            <td><input type="text" name="Distance-CYL" id="rCYL"></td>
+            <td><input type="text" name="Distance-Axis" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="Distance-VA" id="rV/A"></td>
+            <td><input type="text" name="Distance-SPH2" id="lrSPH" style="width: 90px;"></td>
+            <td><input type="text" name="Distance-CYL2" id="lrCYL"></td>
+            <td><input type="text" name="Distance-Axis2" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="Distance-VA2" id="rV/A2"></td>
           </tr>
           <tr>
             <td>Near</td>
-            <td><input type="text" id="rSPH1"></td>
-            <td><input type="text" id="rCYL1"></td>
-
-            <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" id="rva2" ></td>
-            <td><input type=" text" id="lrSPH2" style="width: 90px; height: 40px;"></td>
-            <td><input type="text" id="lrCYL2"></td>
-            <td><input type="text" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" id="rva2"></td>
+            <td><input type="text" name="Near-SPH" id="rSPH1"></td>
+            <td><input type="text" name="Near-CYL" id="rCYL1"></td>
+            <td><input type="text" name="Near-Axis" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="Near-VA" id="rva2" ></td>
+            <td><input type=" text" name="Near-SPH2" id="lrSPH2" style="width: 90px; height: 40px;"></td>
+            <td><input type="text" name="Near-CYL2" id="lrCYL2"></td>
+            <td><input type="text" name="Near-Axis2" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="Near-VA2" id="rva2"></td>
           </tr>
           <tr>
             <td>IPD (mm)</td>
-            <td colspan="4"><input type="text"></td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4"><input type="text" id="RE-IPD"></td>
+            <td colspan="4"><input type="text" id="LE-IPD"></td>
           </tr>
           <tr>
             <td>Type of Glass</td>
-            <td colspan="4"><input type="text"></td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4"><input type="text" id="RE-TypeOfGlass"></td>
+            <td colspan="4"><input type="text" id="LE-TypeOfGlass"></td>
           </tr>
           <tr>
             <td>Remark</td>
-            <td colspan="4"><input type="text"></td>
-            <td colspan="4"><input type="text"></td>
+            <td colspan="4"><input type="text" id="RE-Remark"></td>
+            <td colspan="4"><input type="text" id="LE-Remark"></td>
           </tr>
         </tbody>
       </table>
@@ -2260,18 +2259,18 @@ overflow-y: auto; width: 50%;">
       <!-- Selected Tags Will Appear Here -->
     </div>
     <div id="diagnosis-options" class="options-container" style="display: flex;">
-      <div class="diagnosis" onclick="toggleInvestigation(this)">CBC</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">BSL (R)</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">BSL (fasting)</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">BSL (postprandial)</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">HBSAg</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">HIV</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Urine (R)</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Mountox</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Uric Acid</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Sr. Creat</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Sr. Urea</div>
-      <div class="diagnosis" onclick="toggleInvestigation(this)">Virc Acid</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">CBC</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">BSL (R)</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">BSL (fasting)</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">BSL (postprandial)</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">HBSAg</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">HIV</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Urine (R)</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Mountox</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Uric Acid</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Sr. Creat</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Sr. Urea</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Virc Acid</div>
     </div>
    
    
@@ -2304,11 +2303,11 @@ overflow-y: auto; width: 50%;">
     </div>
     <div class="tags-container" id="advice-tags">
       <div id="diagnosis-options" class="options-container" style="display: flex;">
-        <div class="diagnosis" onclick="toggleInvestigation(this)">संरक्षणात्मक चष्मा वापरा</div>
-        <div class="diagnosis" onclick="toggleInvestigation(this)">नियमित डोळ्यांचे ड्रॉप्स लावा</div>
-        <div class="diagnosis" onclick="toggleInvestigation(this)">स्क्रीन एक्सपोजर टाळा</div>
-        <div class="diagnosis" onclick="toggleInvestigation(this)">१ आठवड्यानंतर फॉलोअप घ्या</div>
-        <div class="diagnosis" onclick="toggleInvestigation(this)">नेत्रतज्ज्ञांचा सल्ला घ्या</div>
+        <div class="advice" onclick="toggleAdvices(this)">संरक्षणात्मक चष्मा वापरा</div>
+        <div class="advice" onclick="toggleAdvices(this)">नियमित डोळ्यांचे ड्रॉप्स लावा</div>
+        <div class="advice" onclick="toggleAdvices(this)">स्क्रीन एक्सपोजर टाळा</div>
+        <div class="advice" onclick="toggleAdvices(this)">१ आठवड्यानंतर फॉलोअप घ्या</div>
+        <div class="advice" onclick="toggleAdvices(this)">नेत्रतज्ज्ञांचा सल्ला घ्या</div>
 
       </div>
     </div>

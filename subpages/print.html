@@ -241,21 +241,14 @@
                 <div class="investigation-list" style="margin-top: 160px;">
                     <h3>Investigation </h3>
                     <ul>
-                        <li>Blood Test</li>
-                        <li>OCT Scan</li>
-                        <li>Fundus Photography</li>
-                        <li>Corneal Topography</li>
-                    </ul>
+                        <!-- Investigation will be dynamically populated here  -->
+                      </ul>
                 </div>
-                <div class="investigation-list">
+                <div class="investigation-list advice-list">
                 <h3>Advice </h3>
                 <ul>
-                    <li>Regular Eye Checkup</li>
-                    <li>Avoid Bright Lights</li>
-                    <li>Take Prescribed Medication</li>
-                    <li>Wear Sunglasses Outdoors</li>
-                    <li>Follow Up in 2 Weeks</li>
-                </ul>
+                    <!-- Advice will be dynamically populated here  -->
+                  </ul>
                 </div>
             </div>
             
@@ -268,8 +261,7 @@
     
                         </p>
                     
-                        <p class="complaints" style="margin-right: 120px;">
-                            <span style="font-weight: bold; font-size: 17px;">Surgical History :</span> Retina Surgery (RE) 
+                        <p class="complaints show-surgical-history" style="margin-right: 120px;">
                         </p>
                     
                 </div>
@@ -360,8 +352,8 @@
                       </div>
                     </div>
                   </div>
-                  <h3>Refraction</h3>
-                  <table style="width: 450px; margin-left: 60px;">
+                  <h3 id="Refraction-Heading">Refraction</h3>
+                  <table id="Refraction-Table" style="width: 450px; margin-left: 60px;" >
                     <thead>
                       <tr>
                         <th rowspan="2"></th>
@@ -382,47 +374,47 @@
                     <tbody>
                       <tr>
                         <td>Distance</td>
-                        <td>85</td>
-                        <td>7</td>
-                        <td>56</td>
-                        <td>56</td>
-                        <td>89</td>
-                        <td>56</td>
-                        <td>565</td>
-                        <td>8</td>
+                        <td id="DistanceSPH">85</td>
+                        <td id="DistanceCYL">7</td>
+                        <td id="DistanceAxis">56</td>
+                        <td id="DistanceVA">56</td>
+                        <td id="DistanceSPH2">89</td>
+                        <td id="DistanceCYL2">56</td>
+                        <td id="DistanceAxis2">565</td>
+                        <td id="DistanceVA2">8</td>
                       </tr>
                       <tr>
                         <td>Near</td>
-                        <td>8</td>
-                        <td>5</td>
-                        <td>5</td>
-                        <td>9</td>
-                        <td>96</td>
-                        <td>5</td>
-                        <td>23</td>
-                        <td>2</td>
+                        <td id="NearSPH">8</td>
+                        <td id="NearCYL">5</td>
+                        <td id="NearAxis">5</td>
+                        <td id="NearVA">9</td>
+                        <td id="NearSPH2">96</td>
+                        <td id="NearCYL2">5</td>
+                        <td id="NearAxis2">23</td>
+                        <td id="NearVA2">2</td>
                       </tr>
                       <tr>
                         <td>IPD (mm)</td>
-                        <td colspan="4"></td>
-                        <td colspan="4"></td>
+                        <td id="REIPD" colspan="4"></td>
+                        <td id="LEIPD" colspan="4"></td>
                       </tr>
                       <tr>
                         <td>Type of Glass</td>
-                        <td colspan="4"></td>
-                        <td colspan="4"></td>
+                        <td id="RETypeOfGlass" colspan="4"></td>
+                        <td id="LETypeOfGlass" colspan="4"></td>
                       </tr>
                       <tr>
                         <td>Remark</td>
-                        <td colspan="4"></td>
-                        <td colspan="4"></td>
+                        <td id="RERemark" colspan="4"></td>
+                        <td id="LERemark" colspan="4"></td>
                       </tr>
                     </tbody>
                   </table>
                   
                   <div id="section4" class="section">
-                    <h3>Eye Examination:</h3>
-                    <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" >
+                    <h3 id="Eye-Examination-Heading">Eye Examination:</h3>
+                    <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" id="Eye-Examination-Table">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -433,48 +425,48 @@
                         <tbody>
                             <tr>
                                 <td>Eyelids & Adnexa</td>
-                                <td>Normal</td>
-                                <td>Slight Swelling</td>
+                                <td id="EyelidsR"></td>
+                                <td id="EyelidsL"></td>
                             </tr>
                             <tr>
                                 <td>Conjunctiva</td>
-                                <td>Clear</td>
-                                <td>Redness</td>
+                                <td id="ConjunctivaR"></td>
+                                <td id="ConjunctivaL"></td>
                             </tr>
                             <tr>
                                 <td>Sclera</td>
-                                <td>White</td>
-                                <td>Yellowish</td>
+                                <td id="ScleraR"></td>
+                                <td id="ScleraL"></td>
                             </tr>
                             <tr>
                                 <td>Cornea</td>
-                                <td>Transparent</td>
-                                <td>Hazy</td>
+                                <td id="CorneaR"></td>
+                                <td id="CorneaL"></td>
                             </tr>
                             <tr>
                                 <td>Anterior Chamber</td>
-                                <td>Deep</td>
-                                <td>Shallow</td>
+                                <td id="AnteriorR"></td>
+                                <td id="AnteriorL"></td>
                             </tr>
                             <tr>
                                 <td>Iris</td>
-                                <td>Normal Pattern</td>
-                                <td>Discolored</td>
+                                <td id="IrisR"></td>
+                                <td id="IrisL"></td>
                             </tr>
                             <tr>
                                 <td>Pupil</td>
-                                <td>Reactive</td>
-                                <td>Non-reactive</td>
+                                <td id="PupilR"></td>
+                                <td id="PupilL"></td>
                             </tr>
                             <tr>
                                 <td>Lens</td>
-                                <td>Clear</td>
-                                <td>Cataract</td>
+                                <td id="LensR"></td>
+                                <td id="LensL"></td>
                             </tr>
                             <tr>
                                 <td>Fundus</td>
-                                <td>Normal</td>
-                                <td>Macular Degeneration</td>
+                                <td id="FundusR"></td>
+                                <td id="FundusL"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -483,9 +475,7 @@
 
                     <div class="patient-details">
                         
-                            <p class="complaints" style="margin-right: 120px;">
-                                <span style="font-weight: bold; font-size: 17px;">Diagnosis :</span> Retina Surgery (RE) 
-                            </p>
+                            <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
 
                             <p class="complaints" style="margin-right: 120px;">
                                 <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
@@ -577,8 +567,8 @@
                         </p>
                     
                 </div>
-                    <h3>Medicines Prescribed:</h3>
-                    <table class="table-container table-responsive"">
+                    <h3 id="Medicines-Heading">Medicines Prescribed:</h3>
+                    <table class="table-container table-responsive" id="Medicines-Table">
                         <thead>
                             <tr>
                                 <th scope="col">Medicine Name</th>
@@ -587,21 +577,9 @@
                                
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Paracetamol</td>
-                                <td>Tablet</td>
-                                <td>1-1-1</td>
-                               
-                            </tr>
-                            <tr>
-                                <td>Amoxicillin</td>
-                                <td>Capsule</td>
-                                <td>1-0-1</td>
-                                
-                            </tr>
-                            
-                        </tbody>
+                        <tbody id="medicines-tbody">
+                            <!-- Medicines will be dynamically inserted here -->                            
+                       </tbody>
                     </table>
 
                 </div>
@@ -675,28 +653,106 @@
         }
 
 
+        // Load the selected surgicalHistory from local storage
+        const selectedSurgicalHistory = JSON.parse(localStorage.getItem("selectedSurgicalHistory")) || [];
+        const surgicalHistorySection = document.querySelector(".show-surgical-history");
+
+        if (selectedSurgicalHistory.length === 0) {
+            // Hide the surgical history section if no history is selected
+            surgicalHistorySection.style.display = "none";
+        } else {
+            // Show the surgical history section and update the content
+            surgicalHistorySection.style.display = "block";
+            surgicalHistorySection.innerHTML = `
+                <span style="font-weight: bold; font-size: 17px;">Surgical History:</span> 
+                ${selectedSurgicalHistory.join(' <span style="font-weight: bold; color: black;">|</span> ')}
+            `;
+        }
+
+
 
        // Load the diagnosis list from local storage
-       const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+        const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+        const diagnosisSection = document.querySelector(".show-diagnosis");
 
-       const diagnosisSection = document.querySelector(".diagnosis-list");
-       const diagnosisList = diagnosisSection.querySelector("ul");
-
-       if (selectedDiagnosis.length === 0) {
-            // Hide the diagnosis section if no diagnoses are selected
+        if(selectedDiagnosis.length === 0) {
+            // Hide the diagnosis section if no diagnosis is selected
             diagnosisSection.style.display = "none";
         } else {
-            // Show the diagnosis section and update the list
+            // Show the diagnosis section and update the content
             diagnosisSection.style.display = "block";
+            diagnosisSection.innerHTML = `
+                <span style="font-weight: bold; font-size: 17px;">Diagnosis:</span> 
+                ${selectedDiagnosis.join(' <span style="font-weight: bold; color: black;">|</span> ')}
+            `;
+        }
+
+    //    const diagnosisSection = document.querySelector(".diagnosis-list");
+    //    const diagnosisList = diagnosisSection.querySelector("ul");
+
+    //    if (selectedDiagnosis.length === 0) {
+    //         // Hide the diagnosis section if no diagnoses are selected
+    //         diagnosisSection.style.display = "none";
+    //     } else {
+    //         // Show the diagnosis section and update the list
+    //         diagnosisSection.style.display = "block";
+
+    //         // Clear the existing list
+    //         diagnosisList.innerHTML = "";
+
+    //         // Add each diagnosis as a list item
+    //         selectedDiagnosis.forEach((diagnosis) => {
+    //         const listItem = document.createElement("li");
+    //         listItem.textContent = diagnosis;
+    //         diagnosisList.appendChild(listItem);
+    //         });
+    //     }
+
+
+       // Load the investigation list from local storage
+         const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
+         const investigationSection = document.querySelector(".investigation-list");
+         const investigationList = investigationSection.querySelector("ul");
+
+            if (selectedInvestigations.length === 0) {
+                // Hide the investigation section if no investigations are selected
+                investigationSection.style.display = "none";
+            } else {
+                // Show the investigation section and update the list
+                investigationSection.style.display = "block";
+    
+                // Clear the existing list
+                investigationList.innerHTML = "";
+    
+                // Add each investigation as a list item
+                selectedInvestigations.forEach((investigation) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = investigation;
+                investigationList.appendChild(listItem);
+                });
+            }
+
+        // Load the advice list from local storage
+        const selectedAdvice = JSON.parse(localStorage.getItem("selectedAdvices")) || [];
+        const adviceSection = document.querySelector(".advice-list");
+        const adviceList = adviceSection.querySelector("ul");
+
+        if (selectedAdvice.length === 0) {
+            // Hide the advice section if no advice is selected
+            adviceSection.style.display = "none";
+        } else {
+            // Show the advice section and update the list
+            adviceSection.style.display = "block";
 
             // Clear the existing list
-            diagnosisList.innerHTML = "";
+            adviceList.innerHTML = "";
 
-            // Add each diagnosis as a list item
-            selectedDiagnosis.forEach((diagnosis) => {
+            // Add each advice as a list item
+            selectedAdvice.forEach((advice) => {
             const listItem = document.createElement("li");
-            listItem.textContent = diagnosis;
-            diagnosisList.appendChild(listItem);
+            listItem.textContent = advice;
+            listItem.style.listStyleType = "disc"; // Add bullet points
+            adviceList.appendChild(listItem);
             });
         }
 
@@ -747,7 +803,7 @@
 
         const currentPowerSection = document.getElementById("Current-Power-Section");
         const currentPowerHeading = document.getElementById("Current-Power-Heading");
-
+        console.log(currentPowerGlasses);
         // Check if all values in currentPowerGlasses are empty
         const allEmpty = Object.values(currentPowerGlasses).every(value => value === "");
         if (allEmpty) {
@@ -765,6 +821,118 @@
             cell.textContent = value || "";
             });
         }
+
+
+
+        // Load the eye examination table from local storage
+        const eyeExaminationTable = JSON.parse(localStorage.getItem("eyeExaminationTable")) || {};
+
+        // Get table and heading elements
+        const eyeTable = document.getElementById("Eye-Examination-Table");
+        const eyeHeading = document.getElementById("Eye-Examination-Heading");
+        const eyeRows = eyeTable.querySelectorAll("tbody tr");
+
+        // Define the mapping for each row and its respective keys in eyeExaminationTable
+        const eyeRowMapping = [
+            { rowIndex: 0, rightKey: "EyelidsR", leftKey: "EyelidsL" },
+            { rowIndex: 1, rightKey: "ConjunctivaR", leftKey: "ConjunctivaL" },
+            { rowIndex: 2, rightKey: "ScleraR", leftKey: "ScleraL" },
+            { rowIndex: 3, rightKey: "CorneaR", leftKey: "CorneaL" },
+            { rowIndex: 4, rightKey: "AnteriorR", leftKey: "AnteriorL" },
+            { rowIndex: 5, rightKey: "IrisR", leftKey: "IrisL" },
+            { rowIndex: 6, rightKey: "PupilR", leftKey: "PupilL" },
+            { rowIndex: 7, rightKey: "LensR", leftKey: "LensL" },
+            { rowIndex: 8, rightKey: "FundusR", leftKey: "FundusL" }
+        ];
+
+        let visibleEyeRowCount = 0;
+
+        eyeRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+            const rightValue = eyeExaminationTable[rightKey] || "";
+            const leftValue = eyeExaminationTable[leftKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                eyeRows[rowIndex].style.display = "none";
+            } else {
+                eyeRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                eyeRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "N/A";
+                eyeRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "N/A";
+                visibleEyeRowCount++;
+            }
+        });
+
+        // Show or hide the entire table if all rows are hidden
+        eyeTable.style.display = visibleEyeRowCount > 0 ? "table" : "none";
+
+        // Show or hide the heading based on whether the table is visible
+        eyeHeading.style.display = visibleEyeRowCount > 0 ? "block" : "none";
+
+
+
+        // Load refraction table data from local storage
+        const refractionTable = JSON.parse(localStorage.getItem("refractionTable")) || {};
+
+        // Get the Refraction Table section and heading
+        const refractionSection = document.getElementById("Refraction-Table");
+        const refractionHeading = document.getElementById("Refraction-Heading");
+
+        console.log(refractionTable);
+
+        // Check if all values in refractionTable are empty
+        const allEmptyRefraction = Object.values(refractionTable).every(value => value === "");
+        if (allEmptyRefraction) {
+            // Hide the entire section if all values are empty
+            refractionSection.style.display = "none";
+            refractionHeading.style.display = "none";
+        } else {
+            // Show the section and update the table
+            refractionSection.style.display = "table";
+            refractionHeading.style.display = "block";
+
+            // Update each cell in the table with the corresponding value
+            Object.entries(refractionTable).forEach(([key, value]) => {
+                const cell = document.getElementById(key);
+                if (cell) {
+                    cell.textContent = value || "-"; // Default to "-" if value is empty
+                }
+            });
+        }
+
+
+        // Load the medicines table from local storage
+        const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+        const medicinesTable = document.getElementById("Medicines-Table");
+        const medicinesTbody = medicinesTable.querySelector("tbody");
+        const medicinesHeading = document.getElementById("Medicines-Heading");
+
+        if (medicines.length === 0) {
+            // Hide the table if no medicines are selected
+            medicinesTable.style.display = "none";
+            medicinesHeading.style.display = "none";
+
+        } else {
+            // Show the table and update the content
+            medicinesTable.style.display = "table";
+
+            // Clear the existing table body
+            medicinesTbody.innerHTML = "";
+
+            // Add each medicine as a row in the table
+            medicines.forEach((medicine) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${medicine.medicineSelect || "-"}</td>
+                    <td>${medicine.medicineDose || "-"}</td>
+                    <td>${medicine.medicineQuantity || "-"}</td>
+                `;
+                medicinesTbody.appendChild(row);
+            });
+        }
+
+
+
 
         
 

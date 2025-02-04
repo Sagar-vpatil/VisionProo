@@ -670,6 +670,96 @@
       }
 
 
+       /* General styling for surgicalHistory */
+        .surgicalHistory {
+          padding: 10px 15px;
+          margin: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Highlight the selected surgicalHistory */
+        .surgicalHistory.selected {
+          background-color: #007bff; /* Blue background for selected options */
+          color: white; /* White text for better contrast */
+          border-color: #007bff; /* Blue border */
+        }
+
+        /* Hover effect for surgicalHistory */
+        .surgicalHistory:hover {
+          background-color: #e0e0e0;
+        }
+
+        /* Hover effect for selected surgicalHistory */
+        .surgicalHistory.selected:hover {
+          background-color: #0056b3; /* Darker blue for hover on selected */
+        }
+
+
+        /* General styling for investigation */
+        .investigation {
+          padding: 10px 15px;
+          margin: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Highlight the selected investigation */
+        .investigation.selected {
+          background-color: #007bff; /* Blue background for selected options */
+          color: white; /* White text for better contrast */
+          border-color: #007bff; /* Blue border */
+        }
+
+        /* Hover effect for investigation */
+        .investigation:hover {
+          background-color: #e0e0e0;
+        }
+
+        /* Hover effect for selected investigation */
+        .investigation.selected:hover {
+          background-color: #0056b3; /* Darker blue for hover on selected */
+        }
+
+
+        /* General styling for advice */
+        .advice {
+          padding: 10px 15px;
+          margin: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Highlight the selected advice */
+        .advice.selected {
+          background-color: #007bff; /* Blue background for selected options */
+          color: white; /* White text for better contrast */
+          border-color: #007bff; /* Blue border */
+        }
+
+        /* Hover effect for advice */
+        .advice:hover {
+          background-color: #e0e0e0;
+        }
+
+        /* Hover effect for selected advice */
+        .advice.selected:hover {
+          background-color: #0056b3; /* Darker blue for hover on selected */
+        }
+
+
 
   /* -------------------------------------- Important Selected Code For Options -----------------------------------*/
 
