@@ -760,6 +760,66 @@
         }
 
 
+        /* General styling for medication-treatment */
+        .medication-treatment {
+          padding: 10px 15px;
+          margin: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Highlight the selected medication-treatment */
+        .medication-treatment.selected {
+          background-color: #007bff; /* Blue background for selected options */
+          color: white; /* White text for better contrast */
+          border-color: #007bff; /* Blue border */
+        }
+
+        /* Hover effect for medication-treatment */
+        .medication-treatment:hover {
+          background-color: #e0e0e0;
+        }
+
+        /* Hover effect for selected medication-treatment */
+        .medication-treatment.selected:hover {
+          background-color: #0056b3; /* Darker blue for hover on selected */
+        }
+
+
+        /* General styling for surgical-treatment */
+        .surgical-treatment {
+          padding: 10px 15px;
+          margin: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          color: #333;
+          cursor: pointer;
+          transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Highlight the selected surgical-treatment */
+        .surgical-treatment.selected {
+          background-color: #007bff; /* Blue background for selected options */
+          color: white; /* White text for better contrast */
+          border-color: #007bff; /* Blue border */
+        }
+
+        /* Hover effect for surgical-treatment */
+        .surgical-treatment:hover {
+          background-color: #e0e0e0;
+        }
+
+        /* Hover effect for selected surgical-treatment */
+        .surgical-treatment.selected:hover {
+          background-color: #0056b3; /* Darker blue for hover on selected */
+        }
+
+
 
   /* -------------------------------------- Important Selected Code For Options -----------------------------------*/
 

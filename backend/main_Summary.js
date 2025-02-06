@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.removeItem("selectedSurgicalHistory");
   localStorage.removeItem("selectedInvestigation");
   localStorage.removeItem("selectedAdvices");
+  localStorage.removeItem("selectedMedicationTreatment");
+  localStorage.removeItem("selectedSurgicalTreatment");
 });
 
 // Toggle selection for symptoms, medical history, and surgical history
@@ -142,6 +144,66 @@ function toggleSymptoms(element) {
       console.error("An error occurred:", e);
     }
   }
+
+  function toggleMedicationTreatment(element) {
+    try {
+      // Toggle the 'selected' class
+      element.classList.toggle("selected");
+  
+      // Get all items with the 'selected' class
+      const selectedItems = Array.from(
+        document.querySelectorAll(".medication-treatment.selected")
+      ).map((item) => item.textContent.trim());
+  
+      // Save the selected items to local storage
+      localStorage.setItem("selectedMedicationTreatment", JSON.stringify(selectedItems));
+  
+      // Log the updated array for debugging
+      console.log(selectedItems);
+    } catch (e) {
+      console.error("An error occurred:", e);
+    }
+  }
+
+  function toggleSurgicalTreatment(element) {
+    try {
+      // Toggle the 'selected' class
+      element.classList.toggle("selected");
+  
+      // Get all items with the 'selected' class
+      const selectedItems = Array.from(
+        document.querySelectorAll(".surgical-treatment.selected")
+      ).map((item) => item.textContent.trim());
+  
+      // Save the selected items to local storage
+      localStorage.setItem("selectedSurgicalTreatment", JSON.stringify(selectedItems));
+  
+      // Log the updated array for debugging
+      console.log(selectedItems);
+    } catch (e) {
+      console.error("An error occurred:", e);
+    }
+  }
+
+  function getCurrentTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let amPm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12 || 12; // Convert 24-hour to 12-hour format
+    minutes = minutes < 10 ? "0" + minutes : minutes; // Add leading zero if needed
+
+    return `${hours}:${minutes} ${amPm}`;
+  }
+
+  document.getElementById("Right-mmHg-Time").addEventListener("focus", function () {
+    this.value = getCurrentTime();
+  });
+
+  document.getElementById("Left-mmHg-Time").addEventListener("focus", function () {
+    this.value = getCurrentTime();
+  });
   
 document.getElementById("print-btn").addEventListener("click", function () {
   // Store Vision Table the dictionary name and value
@@ -276,6 +338,62 @@ document.getElementById("print-btn").addEventListener("click", function () {
   );
 
 
+   // Store Topography Table the dictionary name and value
+   const topographyTable = {
+    RightIOP : document.getElementById("Right-IOP").value,
+    LeftIOP : document.getElementById("Left-IOP").value,
+    RightPachymetry : document.getElementById("Right-Pachymetry").value,
+    LeftPachymetry : document.getElementById("Left-Pachymetry").value,
+    RightSteepest : document.getElementById("Right-Steepest").value,
+    LeftSteepest : document.getElementById("Left-Steepest").value,
+    RightFlattest : document.getElementById("Right-Flattest").value,
+    LeftFlattest : document.getElementById("Left-Flattest").value,
+    RightAv : document.getElementById("Right-Av").value,
+    LeftAv : document.getElementById("Left-Av").value,
+    RightClyPower : document.getElementById("Right-Cly-Power").value,
+    LeftClyPower : document.getElementById("Left-Cly-Power").value,
+    RightDegree : document.getElementById("Right-Degree").value,
+    LeftDegree : document.getElementById("Left-Degree").value,
+    RightKSIKCI : document.getElementById("Right-KSI-KCI").value,
+    LeftKSIKCI : document.getElementById("Left-KSI-KCI").value,
+    RightSchirmerTest : document.getElementById("Right-Schirmer-Test").value,
+    LeftSchirmerTest : document.getElementById("Left-Schirmer-Test").value,
+   }
+
+    console.log(topographyTable);
+
+    // Save the values in local storage
+    localStorage.setItem(
+      "topographyTable",
+      JSON.stringify(topographyTable)
+    );
+
+
+    // Store AR Table the dictionary name and value
+    const arTable = {
+      ARSPH : document.getElementsByName("AR-SPH")[0].value,
+      ARCYL : document.getElementsByName("AR-CYL")[0].value,
+      ARAxis : document.getElementsByName("AR-Axis")[0].value,
+      ARVA : document.getElementsByName("AR-VA")[0].value,
+      ARDV : document.getElementsByName("AR-DV")[0].value,
+      ARSPH2 : document.getElementsByName("AR-SPH2")[0].value,
+      ARCYL2 : document.getElementsByName("AR-CYL2")[0].value,
+      ARAxis2 : document.getElementsByName("AR-Axis2")[0].value,
+      ARVA2 : document.getElementsByName("AR-VA2")[0].value,
+      ARDV2 : document.getElementsByName("AR-DV2")[0].value,
+      ARIPD : document.getElementById("AR-IPD").value,
+    };
+
+    console.log(arTable);
+
+    // Save the values in local storage
+    localStorage.setItem(
+      "arTable",
+      JSON.stringify(arTable)
+    );
+
+
+
    // Get the medicine entries
    const medicineEntries = document.querySelectorAll(".medicine-entry");
 
@@ -306,6 +424,70 @@ document.getElementById("print-btn").addEventListener("click", function () {
 
     // Save the medicines array to local storage
     localStorage.setItem("medicines", JSON.stringify(medicines));
+
+   
+
+    // ======== Pre-Operative Workup Investigations Section ==========
+
+    // Store PreOperativeDetails the dictionary name and value
+     const PreOperativeDetails = {
+      BPResult : document.getElementById("BP-Result").value,
+      PulseRate : document.getElementById("Pulse-Rate").value,
+      SACResult : document.getElementById("SAC-Result").value,
+      NCTResult : document.getElementById("NCT-Result").value,
+     }
+
+      console.log(PreOperativeDetails);
+
+      // Save the values in local storage
+      localStorage.setItem(
+        "PreOperativeDetails",
+        JSON.stringify(PreOperativeDetails)
+      );
+
+
+    // Store A-Scan Table the dictionary name and value
+    const aScanTable = {
+      RightK1 : document.getElementById("Right-K1").value,
+      LeftK1 : document.getElementById("Left-K1").value,
+      RightK2 : document.getElementById("Right-K2").value,
+      LeftK2 : document.getElementById("Left-K2").value,
+      RightLT : document.getElementById("Right-LT").value,
+      LeftLT : document.getElementById("Left-LT").value,
+      RightAL : document.getElementById("Right-AL").value,
+      LeftAL : document.getElementById("Left-AL").value,
+      RightACD : document.getElementById("Right-ACD").value,
+      LeftACD : document.getElementById("Left-ACD").value,
+      RightLPower : document.getElementById("Right-LPower").value,
+      LeftLPower : document.getElementById("Left-LPower").value,
+      RightAConstant : document.getElementById("Right-AConstant").value,
+      LeftAConstant : document.getElementById("Left-AConstant").value,
+    }
+
+    console.log(aScanTable);
+
+    // Save the values in local storage
+    localStorage.setItem(
+      "aScanTable",
+      JSON.stringify(aScanTable)
+    );
+
+    // Store IOP/GAT Table the dictionary name and value
+    const iopGatTable = {
+      RightmmHg : document.getElementById("Right-mmHg").value,
+      RightmmHgTime : document.getElementById("Right-mmHg-Time").value,
+      LeftmmHg : document.getElementById("Left-mmHg").value,
+      LeftmmHgTime : document.getElementById("Left-mmHg-Time").value,
+    }
+
+    console.log(iopGatTable);
+
+    // Save the values in local storage
+    localStorage.setItem(
+      "iopGatTable",
+      JSON.stringify(iopGatTable)
+    );
+
 
   // Open print.html using href
   // window.location.href = "print.html";

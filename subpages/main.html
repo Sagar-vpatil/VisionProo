@@ -303,24 +303,24 @@
       <!-- First Row: BP and Pulse Rate -->
       <div class="row form-row">
           <div class="col-md-6 form-group">
-              <label for="bpResult" class="form-label">BP =</label>
-              <input type="text" id="bpResult" class="form-control" placeholder="Enter BP">
+              <label for="BP-Result" class="form-label">BP =</label>
+              <input type="text" id="BP-Result" class="form-control" placeholder="Enter BP">
           </div>
           <div class="col-md-6 form-group">
-              <label for="pulseRate" class="form-label">P =</label>
-              <input type="text" id="pulseRate" class="form-control" placeholder="Enter Pulse Rate">
+              <label for="Pulse-Rate" class="form-label">P =</label>
+              <input type="text" id="Pulse-Rate" class="form-control" placeholder="Enter Pulse Rate">
           </div>
       </div>
 
       <!-- Second Row: Sac and NCT -->
       <div class="row form-row">
           <div class="col-md-6 form-group">
-              <label for="sacResult" class="form-label">Sac =</label>
-              <input type="text" id="sacResult" class="form-control" placeholder="Enter Sac">
+              <label for="SAC-Result" class="form-label">SAC =</label>
+              <input type="text" id="SAC-Result" class="form-control" placeholder="Enter Sac">
           </div>
           <div class="col-md-6 form-group">
-              <label for="nctResult" class="form-label">NCT =</label>
-              <input type="text" id="nctResult" class="form-control" placeholder="Enter NCT">
+              <label for="NCT-Result" class="form-label">NCT =</label>
+              <input type="text" id="NCT-Result" class="form-control" placeholder="Enter NCT">
           </div>
       </div>
 
@@ -339,38 +339,38 @@
     <tbody>
       <tr>
         <td>K1</td>
-        <td><input type="text" name="right_k1"></td>
-        <td><input type="text" name="left_k1"></td>
+        <td><input type="text" name="right_k1" id="Right-K1"></td>
+        <td><input type="text" name="left_k1" id="Left-K1"></td>
       </tr>
       <tr>
         <td>K2</td>
-        <td><input type="text" name="right_k2"></td>
-        <td><input type="text" name="left_k2"></td>
+        <td><input type="text" name="right_k2" id="Right-K2"></td>
+        <td><input type="text" name="left_k2" id="Left-K2"></td>
       </tr>
       <tr>
         <td>LT</td>
-        <td><input type="text" name="right_lt"></td>
-        <td><input type="text" name="left_lt"></td>
+        <td><input type="text" name="right_lt" id="Right-LT"></td>
+        <td><input type="text" name="left_lt" id="Left-LT"></td>
       </tr>
       <tr>
         <td>AL</td>
-        <td><input type="text" name="right_al"></td>
-        <td><input type="text" name="left_al"></td>
+        <td><input type="text" name="right_al" id="Right-AL"></td>
+        <td><input type="text" name="left_al" id="Left-AL"></td>
       </tr>
       <tr>
         <td>ACD</td>
-        <td><input type="text" name="right_acd"></td>
-        <td><input type="text" name="left_acd"></td>
+        <td><input type="text" name="right_acd" id="Right-ACD"></td>
+        <td><input type="text" name="left_acd" id="Left-ACD"></td>
       </tr>
       <tr>
         <td>L.Power</td>
-        <td><input type="text" name="right_lpower"></td>
-        <td><input type="text" name="left_lpower"></td>
+        <td><input type="text" name="right_lpower" id="Right-LPower"></td>
+        <td><input type="text" name="left_lpower" id="Left-LPower"></td>
       </tr>
       <tr>
         <td>A.Constant</td>
-        <td><input type="text" name="right_a_constant"></td>
-        <td><input type="text" name="left_a_constant"></td>
+        <td><input type="text" name="right_a_constant" id="Right-AConstant"></td>
+        <td><input type="text" name="left_a_constant" id="Left-AConstant"></td>
       </tr>
     </tbody>
   </table>
@@ -386,15 +386,15 @@
     <tbody>
       <tr>
         <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;">
+          <input type="text" placeholder="" style="width: 150px;" id="Right-mmHg">
           <span>mmHg</span>
         </td>
-        <td><input type="text" value="00:00" style="width: 150px;"></td>
+        <td><input type="text" value="00:00" style="width: 150px;" id="Right-mmHg-Time"></td>
         <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;">
+          <input type="text" placeholder="" style="width: 150px;" id="Left-mmHg">
           <span>mmHg</span>
         </td>
-        <td><input type="text" value="00:00" style="width: 150px;"></td>
+        <td><input type="text" value="00:00" style="width: 150px;" id="Left-mmHg-Time"></td>
       </tr>
     </tbody>
   </table>
@@ -1596,65 +1596,65 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>IOP</td>
-            <td><input type="text" name="right_iop"></td>
+            <td><input type="text" name="right_iop" id="Right-IOP"></td>
             <td class="unit">mmHg</td>
-            <td><input type="text" name="left_iop"></td>
+            <td><input type="text" name="left_iop" id="Left-IOP"></td>
             <td class="unit">mmHg</td>
           </tr>
           <tr>
             <td>Pachymetry</td>
-            <td><input type="text" name="right_pachymetry"></td>
+            <td><input type="text" name="right_pachymetry" id="Right-Pachymetry"></td>
             <td class="unit">µm</td>
-            <td><input type="text" name="left_pachymetry"></td>
+            <td><input type="text" name="left_pachymetry" id="Left-Pachymetry"></td>
             <td class="unit">µm</td>
           </tr>
           <tr>
             <td>Steepest K</td>
-            <td><input type="text" name="right_steepest_k"></td>
+            <td><input type="text" name="right_steepest_k" id="Right-Steepest"></td>
             <td></td>
-            <td><input type="text" name="left_steepest_k"></td>
+            <td><input type="text" name="left_steepest_k" id="Left-Steepest"></td>
             <td></td>
           </tr>
           <tr>
             <td>Flattest K</td>
-            <td><input type="text" name="right_flattest_k"></td>
+            <td><input type="text" name="right_flattest_k" id="Right-Flattest"></td>
             <td></td>
-            <td><input type="text" name="left_flattest_k"></td>
+            <td><input type="text" name="left_flattest_k" id="Left-Flattest"></td>
             <td></td>
           </tr>
           <tr>
             <td>Av.K</td>
-            <td><input type="text" name="right_av_k"></td>
+            <td><input type="text" name="right_av_k" id="Right-Av"></td>
             <td></td>
-            <td><input type="text" name="left_av_k"></td>
+            <td><input type="text" name="left_av_k" id="Left-Av"></td>
             <td></td>
           </tr>
           <tr>
             <td>Cly Power</td>
-            <td><input type="text" name="right_cly_power"></td>
+            <td><input type="text" name="right_cly_power" id="Right-Cly-Power"></td>
             <td></td>
-            <td><input type="text" name="left_cly_power"></td>
+            <td><input type="text" name="left_cly_power" id="Left-Cly-Power"></td>
             <td></td>
           </tr>
           <tr>
             <td>Degree</td>
-            <td><input type="text" name="right_degree"></td>
+            <td><input type="text" name="right_degree" id="Right-Degree"></td>
             <td></td>
-            <td><input type="text" name="left_degree"></td>
+            <td><input type="text" name="left_degree" id="Left-Degree"></td>
             <td></td>
           </tr>
           <tr>
             <td>KSI/KCI</td>
-            <td><input type="text" name="right_ksi_kci"></td>
+            <td><input type="text" name="right_ksi_kci" id="Right-KSI-KCI"></td>
             <td></td>
-            <td><input type="text" name="left_ksi_kci"></td>
+            <td><input type="text" name="left_ksi_kci" id="Left-KSI-KCI"></td>
             <td></td>
           </tr>
           <tr>
             <td>Schirmer Test</td>
-            <td><input type="text" name="right_schirmer_test"></td>
+            <td><input type="text" name="right_schirmer_test" id="Right-Schirmer-Test"></td>
             <td></td>
-            <td><input type="text" name="left_schirmer_test"></td>
+            <td><input type="text" name="left_schirmer_test" id="Left-Schirmer-Test"></td>
             <td></td>
           </tr>
         </tbody>
@@ -1741,20 +1741,20 @@ overflow-y: auto; width: 50%;">
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="ar1SPH"></td>
-            <td><input type="text" id="ar1CYL"></td>
-            <td><input type="text" id="arAxis"></td>
-            <td><input type="text" id="arV/A" onclick="openTable(this)"></td>
-            <td><input type="text" id="ar1DV"></td>
-            <td><input type="text" id="ar1SPH1"></td>
-            <td><input type=" text"id="ar1CYL1" style="width: 90px;height: 40px;"></td>
-            <td><input type="text" id="arAxis1"></td>
-            <td><input type="text" id="arV/A1" onclick="openTable(this)"></td>
-            <td><input type="text" id="ar1DV1"></td>
+            <td><input type="text" id="ar1SPH" name="AR-SPH"></td>
+            <td><input type="text" id="ar1CYL" name="AR-CYL"></td>
+            <td><input type="text" id="arAxis" name="AR-Axis"></td>
+            <td><input type="text" id="arV/A" onclick="openTable(this)" name="AR-VA"></td>
+            <td><input type="text" id="ar1DV" name="AR-DV"></td>
+            <td><input type="text" id="ar1SPH1" name="AR-SPH2"></td>
+            <td><input type=" text"id="ar1CYL1" style="width: 90px;height: 40px;" name="AR-CYL2"></td>
+            <td><input type="text" id="arAxis1" name="AR-Axis2"></td>
+            <td><input type="text" id="arV/A1" onclick="openTable(this)" name="AR-VA2"></td>
+            <td><input type="text" id="ar1DV1" name="AR-DV2"></td>
           </tr>
           <tr>
             <th colspan="2">IPD (mm)</th>
-            <td colspan="8"><input type="text" placeholder="Enter IPD"></td>
+            <td colspan="8"><input type="text" placeholder="Enter IPD" id="AR-IPD"></td>
           </tr>
         </tbody>
       </table>
@@ -2137,20 +2137,20 @@ overflow-y: auto; width: 50%;">
 
 <!-- Treatment History Content -->
 <div id="medication-content" class="treatment-history-content">
-  <h2>Medication History</h2>
+  <h2>Medication History</h2> 
   <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
-    <div class="diagnosis" onclick="toggleMedical(this)">Eye Drops</div>
-    <div class="diagnosis" onclick="toggleMedical(this)">Eye Drops'</div>
-    <div class="diagnosis" onclick="toggleMedical(this)">Antibiotics</div>
+    <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Eye Drops</div>
+    <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Eye Drops</div>
+    <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Antibiotics</div>
 </div>
 </div>
 
 <div id="surgical-content" class="treatment-history-content">
   <h2>Surgical History</h2>
   <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
-    <div class="diagnosis" onclick="toggleMedical(this)">Cataract Surgery</div>
-    <div class="diagnosis" onclick="toggleMedical(this)">Glaucoma Surgery</div>
-    <div class="diagnosis" onclick="toggleMedical(this)">LASIK</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Cataract Surgery</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Glaucoma Surgery</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LASIK</div>
 </div>
 
 </div>

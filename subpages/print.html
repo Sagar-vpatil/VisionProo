@@ -477,14 +477,14 @@
                         
                             <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
 
-                            <p class="complaints" style="margin-right: 120px;">
+                            <p class="complaints show-treatment" style="margin-right: 120px;">
                                 <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
                             </p>
                         
                     </div>
-                    <h3> Pre-Operative Procedure</h3>
+                    <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure</h3>
 
-                    <table style="width: 370px; margin-left: 90px;">
+                    <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
                         <thead>
                           <tr>
                             <th colspan="2">Right Eye</th>
@@ -494,20 +494,21 @@
                         <tbody>
                           <tr>
                             <td class="input-wrapper">
-                              <span>Data</span>
+                              <span id="RightmmHg">Data</span>
                               <span>mmHg</span>
                             </td>
-                            <td><span>00:00</span></td>
+                            <td><span id="RightmmHgTime">00:00</span></td>
                             <td class="input-wrapper">
-                              <span>Data</span>
+                              <span id="LeftmmHg">Data</span>
                               <span>mmHg</span>
                             </td>
-                            <td><span>00:00</span></td>
+                            <td><span id="LeftmmHgTime">00:00</span></td>
                           </tr>
                         </tbody>
                       </table>
-                      <h3>A-Scan</h3>
-                      <table style="width: 280px; margin-left: 90px;">
+
+                      <h3 id="A-Scan-Heading">A-Scan</h3>
+                      <table style="width: 280px; margin-left: 90px;" id="A-Scan-Table">
                         <thead>
                           <tr>
                             <th></th>
@@ -518,170 +519,172 @@
                         <tbody>
                           <tr>
                             <td>K1</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightK1"><span>Data</span></td>
+                            <td id="LeftK1"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>K2</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightK2"><span>Data</span></td>
+                            <td id="LeftK2"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>LT</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightLT"><span>Data</span></td>
+                            <td id="LeftLT"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>AL</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightAL"><span>Data</span></td>
+                            <td id="LeftAL"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>ACD</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightACD"><span>Data</span></td>
+                            <td id="LeftACD"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>L.Power</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightLPower"><span>Data</span></td>
+                            <td id="LeftLPower"><span>Data</span></td>
                           </tr>
                           <tr>
                             <td>A.Constant</td>
-                            <td><span>Data</span></td>
-                            <td><span>Data</span></td>
+                            <td id="RightAConstant"><span>Data</span></td>
+                            <td id="LeftAConstant"><span>Data</span></td>
                           </tr>
                         </tbody>
                       </table>
-                      <div class="patient-details">
+                      <div class="patient-details Pre-Operative-Details">
                         
-                        <p class="complaints" style="margin-right: 120px;">
-                            <span style="font-weight: bold; font-size: 17px;">BP :</span> 
+                        <p class="complaints show-BP" style="margin-right: 120px;">
+          
                         </p>
 
-                        <p class="complaints" style="margin-right: 120px;">
-                            <span style="font-weight: bold; font-size: 17px;"> P:</span> 
+                        <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
+                            
                         </p>
-                        <p class="complaints" style="margin-right: 120px;">
-                            <span style="font-weight: bold; font-size: 17px;"> Sac:</span> 
+                        <p class="complaints show-SAC" style="margin-right: 120px;">
+                            
                         </p>
-                    
+                        <p class="complaints show-NCT" style="margin-right: 120px;">
+                          
+                      </p>                                          
                 </div>
-                <h3>Topography</h3>
-<table border="1" style="width: 280px; margin-left: 120px;">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="2">Right Eye</th>
-      <th colspan="2">Left Eye</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>IOP</td>
-      <td id="right_iop" style="width: 50px;"></td>
-      <td class="unit">mmHg</td>
-      <td id="left_iop"></td>
-      <td class="unit"  style="width: 50px;">mmHg</td>
-    </tr>
-    <tr>
-      <td>Pachymetry</td>
-      <td id="right_pachymetry"  style="width: 50px;"></td>
-      <td class="unit">µm</td>
-      <td id="left_pachymetry"  style="width: 50px;"></td>
-      <td class="unit">µm</td>
-    </tr>
-    <tr>
-      <td>Steepest K</td>
-      <td id="right_steepest_k"></td>
-      <td></td>
-      <td id="left_steepest_k"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Flattest K</td>
-      <td id="right_flattest_k"></td>
-      <td></td>
-      <td id="left_flattest_k"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Av.K</td>
-      <td id="right_av_k"></td>
-      <td></td>
-      <td id="left_av_k"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Cly Power</td>
-      <td id="right_cly_power"></td>
-      <td></td>
-      <td id="left_cly_power"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Degree</td>
-      <td id="right_degree"></td>
-      <td></td>
-      <td id="left_degree"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>KSI/KCI</td>
-      <td id="right_ksi_kci"></td>
-      <td></td>
-      <td id="left_ksi_kci"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Schirmer Test</td>
-      <td id="right_schirmer_test"></td>
-      <td></td>
-      <td id="left_schirmer_test"></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+                <h3 id="Topography-Heading">Topography</h3>
+                <table border="1" style="width: 280px; margin-left: 120px;" id="Topography-Table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th colspan="2">Right Eye</th>
+                      <th colspan="2">Left Eye</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>IOP</td>
+                      <td id="RightIOP" style="width: 50px;"></td>
+                      <td class="unit">mmHg</td>
+                      <td id="LeftIOP"></td>
+                      <td class="unit"  style="width: 50px;">mmHg</td>
+                    </tr>
+                    <tr>
+                      <td>Pachymetry</td>
+                      <td id="RightPachymetry"  style="width: 50px;"></td>
+                      <td class="unit">µm</td>
+                      <td id="LeftPachymetry"  style="width: 50px;"></td>
+                      <td class="unit">µm</td>
+                    </tr>
+                    <tr>
+                      <td>Steepest K</td>
+                      <td id="RightSteepest"></td>
+                      <td></td>
+                      <td id="LeftSteepest"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Flattest K</td>
+                      <td id="RightFlattest"></td>
+                      <td></td>
+                      <td id="LeftFlattest"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Av.K</td>
+                      <td id="RightAv"></td>
+                      <td></td>
+                      <td id="LeftAv"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Cly Power</td>
+                      <td id="RightClyPower"></td>
+                      <td></td>
+                      <td id="LeftClyPower"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Degree</td>
+                      <td id="RightDegree"></td>
+                      <td></td>
+                      <td id="LeftDegree"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>KSI/KCI</td>
+                      <td id="RightKSIKCI"></td>
+                      <td></td>
+                      <td id="LeftKSIKCI"></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Schirmer Test</td>
+                      <td id="RightSchirmerTest"></td>
+                      <td></td>
+                      <td id="LeftSchirmerTest"></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
 
-<h3>AR</h3>
-<table style="width: 300px; margin-left: 120px;" border="1">
-  <thead>
-    <tr>
-      <th colspan="5">Right Eye</th>
-      <th colspan="5">Left Eye</th>
-    </tr>
-    <tr>
-      <th>SPH</th>
-      <th>CYL</th>
-      <th>Axis</th>
-      <th>V/A</th>
-      <th>DV</th>
-      <th>SPH</th>
-      <th>CYL</th>
-      <th>Axis</th>
-      <th>V/A</th>
-      <th>DV</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="height: 30px;">
-      <td id="ar1SPH"></td>
-      <td id="ar1CYL"></td>
-      <td id="arAxis"></td>
-      <td id="arVA"></td>
-      <td id="ar1DV"></td>
-      <td id="ar1SPH1"></td>
-      <td id="ar1CYL1"></td>
-      <td id="arAxis1"></td>
-      <td id="arVA1"></td>
-      <td id="ar1DV1"></td>
-    </tr>
-    <tr>
-      <th colspan="2">IPD </th>
-      <td colspan="8" id="ipdValue"></td>
-    </tr>
-  </tbody>
-</table>
+              <h3 id="AR-Heading">AR</h3>
+              <table style="width: 300px; margin-left: 120px;" border="1" id="AR-Table">
+                <thead>
+                  <tr>
+                    <th colspan="5">Right Eye</th>
+                    <th colspan="5">Left Eye</th>
+                  </tr>
+                  <tr>
+                    <th>SPH</th>
+                    <th>CYL</th>
+                    <th>Axis</th>
+                    <th>V/A</th>
+                    <th>DV</th>
+                    <th>SPH</th>
+                    <th>CYL</th>
+                    <th>Axis</th>
+                    <th>V/A</th>
+                    <th>DV</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="height: 30px;">
+                    <td id="ARSPH"></td>
+                    <td id="ARCYL"></td>
+                    <td id="ARAxis"></td>
+                    <td id="ARVA"></td>
+                    <td id="ARDV"></td>
+                    <td id="ARSPH2"></td>
+                    <td id="ARCYL2"></td>
+                    <td id="ARAxis2"></td>
+                    <td id="ARVA2"></td>
+                    <td id="ARDV2"></td>
+                  </tr>
+                  <tr>
+                    <th colspan="2">IPD </th>
+                    <td colspan="8" id="ARIPD"></td>
+                  </tr>
+                </tbody>
+              </table>
 
 
                     <h3 id="Medicines-Heading">Medicines Prescribed:</h3>
@@ -804,6 +807,8 @@
             `;
         }
 
+        
+
     //    const diagnosisSection = document.querySelector(".diagnosis-list");
     //    const diagnosisList = diagnosisSection.querySelector("ul");
 
@@ -872,6 +877,35 @@
             adviceList.appendChild(listItem);
             });
         }
+
+
+        // Load the Treatment list from local storage
+        const selectedMedicationTreatment = JSON.parse(localStorage.getItem("selectedMedicationTreatment")) || [];
+        const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+        const treatmentSection = document.querySelector(".show-treatment");
+
+        // Check if there are any treatments selected
+        if (selectedMedicationTreatment.length === 0 && selectedSurgicalTreatment.length === 0) {
+            treatmentSection.style.display = "none";
+        } else {
+            treatmentSection.style.display = "block";
+            
+            let content = `<span style="font-weight: bold; font-size: 18px; color: black;"> Treatment -</span><br>`;
+
+            if (selectedMedicationTreatment.length > 0) {
+                content += `<span style="font-weight: bold; font-size: 17px;"> Medication :</span> 
+                            ${selectedMedicationTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ')}<br>`;
+            }
+
+            if (selectedSurgicalTreatment.length > 0) {
+                content += `<span style="font-weight: bold; font-size: 17px;"> Surgical :</span> 
+                            ${selectedSurgicalTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ')}`;
+            }
+
+            treatmentSection.innerHTML = content;
+        }
+
+
 
 
        // Load the vision table from local storage
@@ -1017,6 +1051,106 @@
         }
 
 
+        // Load the topography table from local storage
+        const topographyTable = JSON.parse(localStorage.getItem("topographyTable")) || {};
+
+        // Get table and heading elements
+        const topographyTableElement = document.getElementById("Topography-Table");
+        const topographyHeading = document.getElementById("Topography-Heading");
+        const topographyRows = topographyTableElement.querySelectorAll("tbody tr");
+
+        // Define the mapping for each row and its respective keys in topographyTable
+        const topographyRowMapping = [
+            { rowIndex: 0, rightKey: "RightIOP", leftKey: "LeftIOP" },
+            { rowIndex: 1, rightKey: "RightPachymetry", leftKey: "LeftPachymetry" },
+            { rowIndex: 2, rightKey: "RightSteepest", leftKey: "LeftSteepest" },
+            { rowIndex: 3, rightKey: "RightFlattest", leftKey: "LeftFlattest" },
+            { rowIndex: 4, rightKey: "RightAv", leftKey: "LeftAv" },
+            { rowIndex: 5, rightKey: "RightClyPower", leftKey: "LeftClyPower" },
+            { rowIndex: 6, rightKey: "RightDegree", leftKey: "LeftDegree" },
+            { rowIndex: 7, rightKey: "RightKSIKCI", leftKey: "LeftKSIKCI" },
+            { rowIndex: 8, rightKey: "RightSchirmerTest", leftKey: "LeftSchirmerTest" }
+        ];
+
+        let visibleTopographyRowCount = 0;
+
+        topographyRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+            const rightValue = topographyTable[rightKey] || "";
+            const leftValue = topographyTable[leftKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                topographyRows[rowIndex].style.display = "none";
+            } else {
+                topographyRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                topographyRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
+                topographyRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
+                visibleTopographyRowCount++;
+            }
+        });
+
+        // Show or hide the entire table if all rows are hidden
+        topographyTableElement.style.display = visibleTopographyRowCount > 0 ? "table" : "none";
+
+        // Show or hide the heading based on whether the table is visible
+        topographyHeading.style.display = visibleTopographyRowCount > 0 ? "block" : "none";
+
+
+
+        
+        // Load AR table data from local storage
+        const arTable = JSON.parse(localStorage.getItem("arTable")) || {};
+
+        // Get AR table and heading elements
+        const arTableElement = document.getElementById("AR-Table");
+        const arHeading = document.getElementById("AR-Heading");
+
+        // Get all rows in the AR table body
+        const arRows = arTableElement.querySelectorAll("tbody tr");
+
+        // Define row mappings
+        const arRowMappings = [
+            { rowIndex: 0, keys: ["ARSPH", "ARCYL", "ARAxis", "ARVA", "ARDV", "ARSPH2", "ARCYL2", "ARAxis2", "ARVA2", "ARDV2"] },
+            { rowIndex: 1, keys: ["ARIPD"] } // Second row for IPD
+        ];
+
+        let visibleARRowCount = 0;
+
+        // Iterate through each row mapping and update table cells
+        arRowMappings.forEach(({ rowIndex, keys }) => {
+            let isRowEmpty = true; // Assume the row is empty initially
+
+            keys.forEach(key => {
+                const cell = document.getElementById(key);
+                const value = arTable[key]?.trim() || ""; // Trim to handle whitespace
+
+                if (cell) {
+                    cell.textContent = value || "-"; // Set value, default to "N/A"
+
+                    // Check if at least one value is not empty
+                    if (value) {
+                        isRowEmpty = false;
+                    }
+                }
+            });
+
+            // Hide row if all values are empty
+            if (isRowEmpty) {
+                arRows[rowIndex].style.display = "none";
+            } else {
+                arRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                visibleARRowCount++;
+            }
+        });
+
+        // Show or hide the entire table based on row visibility
+        arTableElement.style.display = visibleARRowCount > 0 ? "table" : "none";
+        arHeading.style.display = visibleARRowCount > 0 ? "block" : "none";
+
+
+       
+
+
         // Load the medicines table from local storage
         const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
 
@@ -1047,6 +1181,129 @@
                 medicinesTbody.appendChild(row);
             });
         }
+
+        // Load the A-Scan table from local storage like eye examination table
+        const aScanTable = JSON.parse(localStorage.getItem("aScanTable")) || {};
+        
+        // Get table and heading elements
+        const aScanTableElement = document.getElementById("A-Scan-Table");
+        const aScanHeading = document.getElementById("A-Scan-Heading");
+        const aScanRows = aScanTableElement.querySelectorAll("tbody tr");
+
+        // Define the mapping for each row and its respective keys in aScanTable
+        const aScanRowMapping = [
+            { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
+            { rowIndex: 1, rightKey: "RightK2", leftKey: "LeftK2" },
+            { rowIndex: 2, rightKey: "RightLT", leftKey: "LeftLT" },
+            { rowIndex: 3, rightKey: "RightAL", leftKey: "LeftAL" },
+            { rowIndex: 4, rightKey: "RightACD", leftKey: "LeftACD" },
+            { rowIndex: 5, rightKey: "RightLPower", leftKey: "LeftLPower" },
+            { rowIndex: 6, rightKey: "RightAConstant", leftKey: "LeftAConstant" }
+        ];
+
+        let visibleAScanRowCount = 0;
+
+        aScanRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+            const rightValue = aScanTable[rightKey] || "";
+            const leftValue = aScanTable[leftKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                aScanRows[rowIndex].style.display = "none";
+            } else {
+                aScanRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                aScanRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
+                aScanRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
+                visibleAScanRowCount++;
+            }
+        });
+
+
+        // Show or hide the entire table if all rows are hidden
+        aScanTableElement.style.display = visibleAScanRowCount > 0 ? "table" : "none";
+
+        // Show or hide the heading based on whether the table is visible
+        aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
+
+
+        // Load PreOperativeDetails data from local storage
+        const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
+
+        // Define field mappings
+        const fieldMappings = [
+            { key: "BPResult", className: "show-BP", label: "BP" },
+            { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
+            { key: "SACResult", className: "show-SAC", label: "SAC" },
+            { key: "NCTResult", className: "show-NCT", label: "NCT" }
+        ];
+
+        let visibleCount = 0;
+
+        // Iterate through each field and update the content
+        fieldMappings.forEach(({ key, className, label }) => {
+            const element = document.querySelector(`.${className}`);
+
+            if (element) {
+                const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
+
+                if (value) {
+                    element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
+                    visibleCount++;
+                } else {
+                    element.style.display = "none"; // Hide element if value is empty
+                }
+            }
+        });
+
+        // Hide the entire section if no details are available
+        const patientDetailsSection = document.querySelector(".Pre-Operative-Details");
+        if (visibleCount === 0 && patientDetailsSection) {
+            patientDetailsSection.style.display = "none";
+        }
+        
+
+        // Load IOP/GAT data from local storage like eye examination table
+        const iopGatTable = JSON.parse(localStorage.getItem("iopGatTable")) || {};
+
+        // Get table and heading elements
+        const iopGatTableElement = document.getElementById("Pre-Operative-Table");
+        const iopGatHeading = document.getElementById("Pre-Operative-Heading");
+
+        // Get all rows in the IOP/GAT table body
+        const iopGatRows = iopGatTableElement.querySelectorAll("tbody tr");
+
+        // Define row mappings
+        const iopGatRowMappings = [
+            { rowIndex: 0, rightKey: "RightmmHg", rightTimeKey: "RightmmHgTime", leftKey: "LeftmmHg", leftTimeKey: "LeftmmHgTime" }
+        ];
+
+        let visibleIopGatRowCount = 0;
+
+        // Iterate through each row mapping and update table cells
+
+        iopGatRowMappings.forEach(({ rowIndex, rightKey, rightTimeKey, leftKey, leftTimeKey }) => {
+            const rightValue = iopGatTable[rightKey] || "";
+            const rightTimeValue = iopGatTable[rightTimeKey] || "";
+            const leftValue = iopGatTable[leftKey] || "";
+            const leftTimeValue = iopGatTable[leftTimeKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                iopGatRows[rowIndex].style.display = "none";
+            } else {
+                iopGatRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                iopGatRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${rightTimeKey}`).textContent = rightTimeValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${leftTimeKey}`).textContent = leftTimeValue || "-";
+                visibleIopGatRowCount++;
+            }
+        });
+
+        // Show or hide the entire table based on row visibility
+        iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
+        iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
+
 
 
 
