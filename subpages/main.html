@@ -14,7 +14,98 @@
   <link rel="stylesheet" href="../frontend/css/main.css" />
   <link rel="stylesheet" href="../assets/css/global.css">
   <style>
-   
+    .treatment-history-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.treatment-history-tabs button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.treatment-history-tabs button.active {
+    background-color: green;
+    color: white;
+}
+
+.treatment-history-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.treatment-history-content.active {
+    display: block;
+}
+
+    .surgical-history-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.surgical-history-tabs button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.surgical-history-tabs button.active {
+    background-color: green;
+    color: white;
+}
+
+.surgical-history-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.surgical-history-content.active {
+    display: block;
+}
+
+
+
+          .symptoms-types, .diagnosis-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .symptoms-types button, .diagnosis-buttons button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            background-color: lightgray;
+        }
+        .symptoms-types button.active, .diagnosis-buttons button.active {
+            background-color:green;
+            color: white;
+        }
+        .symptoms-content, .diagnosis-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .symptoms-content.active, .diagnosis-content.active {
+            display: block;
+        }
+        .options-table {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -318,32 +409,22 @@
   <!-- ############################### symptoms start ############################# -->
 
   <div class="tab-content" id="symptoms">
-    <!-- Complaints/Symptoms Section -->
-   <div class="d-flex justify-content-center mt-4">
-    <button type="button" class="btn" id="both-eyes-symptom-btn" 
-        style="background-color: green; color: white; border: 2px solid darkgreen;">
-        Both Eyes
-    </button>
-    <button type="button" class="btn btn-secondary btn-sm mx-2" id="right-eye-symptom-btn" 
-        style="background-color: white; color: black; border: 2px solid #6c757d;">
-        Right Eye
-    </button>
-    <button type="button" class="btn btn-secondary btn-sm mx-2" id="left-eye-symptom-btn" 
-        style="background-color: white; color: black; border: 2px solid #6c757d;">
-        Left Eye
-    </button>
-</div>
 
-  
 
-    <div id="both-eyes-section" class="section active" style="margin-top: 10px;">
-      <h3>Both Eye Symptoms</h3>
 
-  <div class="flex-container">
-    <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
-    <button type="button" class="btn">Add Option </button>
+    <!-- Symptoms Tabs -->
+    <div class="symptoms-types">
+      <button id="bothBtn" onclick="showTab('both')">Both Eyes</button>
+      <button id="leftBtn" onclick="showTab('left')">Left Eye</button>
+      <button id="rightBtn" onclick="showTab('right')">Right Eye</button>
   </div>
 
+  <div id="both" class="symptoms-content">
+      <h2>Both Eyes Symptoms</h2>
+      <div class="flex-container">
+        <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
+        <button type="button" class="btn">Add Option </button>
+      </div>
       <div class="options-container active">
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (BE)</div>
@@ -384,57 +465,11 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Fleshy growth on Cornea (BE)</div>
         <!-- Add more options as needed -->
       </div>
-    </div>
-    
 
+  </div>
 
-    <div id="right-eye-section" class="section " style="margin-top: 10px;">
-
-      <h3>Right Eye Symptoms</h3>
-      <div class="flex-container">
-        <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
-        <button type="button" class="btn">Add Option </button>
-      </div>
-
-      <div class="options-container active ">
-        <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Headache (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Floaters (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Pain in Eye (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Irritation (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Itching (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Watering (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Redness (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">DISCHARGE (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">f.b.sensation (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">DOV (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Dryness in Eye (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Double Vision (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Lumps on Eyelid (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Blood Spot in Eye (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Dilated Pupil (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Drooping Eyelid (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Chemosis (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Burning (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Pain Around Eyes (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">White Ring Around Cornea (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Sudden Loss of Vision (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Fleshy Growth on Cornea (RE)</div>
-        
-        
-      
-      </div>
-    </div>
-
-    <div id="left-eye-section" class="section " style="margin-top: 10px;">
-      <h3>Left Eye Symptoms</h3>
-
+  <div id="left" class="symptoms-content">
+      <h2>Left Eye Symptoms</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
         <button type="button" class="btn">Add Option </button>
@@ -473,7 +508,52 @@
         
         <!-- Add more options as needed -->
       </div>
-    </div>
+
+  </div>
+
+  <div id="right" class="symptoms-content">
+      <h2>Right Eye Symptoms</h2>
+      <div class="flex-container">
+        <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
+        <button type="button" class="btn">Add Option </button>
+      </div>
+      <div class="options-container active ">
+        <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Headache (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Floaters (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Pain in Eye (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Irritation (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Itching (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Watering (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Redness (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">DISCHARGE (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">f.b.sensation (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">DOV (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Dryness in Eye (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Double Vision (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Lumps on Eyelid (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Blood Spot in Eye (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Dilated Pupil (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Drooping Eyelid (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Chemosis (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Burning (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Pain Around Eyes (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">White Ring Around Cornea (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Sudden Loss of Vision (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Fleshy Growth on Cornea (RE)</div>
+        
+        
+      
+      </div>
+
+  </div>
+
 
 
     <div id="medical-history-section" style="margin-top: 20px;">
@@ -505,29 +585,16 @@
   
 
 
-
-
-
-
-
-  <div class="d-flex justify-content-center mt-4">
-    <button type="button" class="btn" id="both-eyes-surgical-btn" 
-        style="background-color: green; color: white; border: 2px solid darkgreen;">
-        Both Eyes
-    </button>
-    <button type="button" class="btn btn-secondary btn-sm mx-2" id="right-eye-surgical-btn"
-        style="background-color: white; color: black; border: 2px solid #6c757d;">
-        Right Eye
-    </button>
-    <button type="button" class="btn btn-secondary btn-sm mx-2" id="left-eye-surgical-btn"
-        style="background-color: white; color: black; border: 2px solid #6c757d;">
-        Left Eye
-    </button>
+<!-- Surgical History Tabs -->
+<div class="surgical-history-tabs">
+  <button id="both-surgery-btn" onclick="showSurgeryTab('both')">Both Eyes</button>
+  <button id="right-surgery-btn" onclick="showSurgeryTab('right')">Right Eye</button>
+  <button id="left-surgery-btn" onclick="showSurgeryTab('left')">Left Eye</button>
 </div>
 
-    <div id="both-eyes-surgical-section" class="section active" style="margin-top: 10px;">
-      <h3>Both Eyes Surgical History</h3>
-      
+<!-- Surgical History Content -->
+<div id="both-surgery-content" class="surgical-history-content">
+  <h2>Both Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
     <button type="button" class="btn">Add Option </button>
@@ -538,12 +605,10 @@
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(BE)</div>
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(BE)</div>
       </div>
-    </div>
+</div>
 
-    <div id="right-eye-surgical-section" class="section" style="margin-top:10px">
-  
-      <h3>Right Eye Surgical History</h3>
-      
+<div id="right-surgery-content" class="surgical-history-content">
+  <h2>Right Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
     <button type="button" class="btn">Add Option </button>
@@ -554,11 +619,11 @@
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(RE)</div>
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(RE)</div>
       </div>
-    </div>
 
-    <div id="left-eye-surgical-section" class="section"  style="margin-top: 10px;">
-      <h3>Left Eye Surgical History</h3>
-      
+</div>
+
+<div id="left-surgery-content" class="surgical-history-content">
+  <h2>Left Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
     <button type="button" class="btn">Add Option </button>
@@ -569,9 +634,36 @@
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Retinal Detachment Repair(LE)</div>
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Corneal Transplant(LE)</div>
       </div>
-    </div>
+</div>
 
-  </div>
+
+
+<script>
+  function showSurgeryTab(eye) {
+      const contents = document.querySelectorAll('.surgical-history-content');
+      const buttons = document.querySelectorAll('.surgical-history-tabs button');
+
+      contents.forEach(content => content.style.display = 'none');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(eye + '-surgery-content').style.display = 'block';
+      document.getElementById(eye + '-surgery-btn').classList.add('active');
+  }
+
+  // Default: Show Both Eyes Surgical History on load
+  showSurgeryTab('both');
+</script>
+
+
+ 
+
+    
+
+  
+
+   
+
+  </div> 
 
 
   <!-- Medical History Section -->
@@ -1491,85 +1583,6 @@ overflow-y: auto; width: 50%;">
 
 
 
-
-
-    <div id="section7" class="section">
-      <h3>Topography</h3>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th colspan="2">Right Eye</th>
-            <th colspan="2">Left Eye</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>IOP</td>
-            <td><input type="text" name="right_iop"></td>
-            <td class="unit">mmHg</td>
-            <td><input type="text" name="left_iop"></td>
-            <td class="unit">mmHg</td>
-          </tr>
-          <tr>
-            <td>Pachymetry</td>
-            <td><input type="text" name="right_pachymetry"></td>
-            <td class="unit">µm</td>
-            <td><input type="text" name="left_pachymetry"></td>
-            <td class="unit">µm</td>
-          </tr>
-          <tr>
-            <td>Steepest K</td>
-            <td><input type="text" name="right_steepest_k"></td>
-            <td></td>
-            <td><input type="text" name="left_steepest_k"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Flattest K</td>
-            <td><input type="text" name="right_flattest_k"></td>
-            <td></td>
-            <td><input type="text" name="left_flattest_k"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Av.K</td>
-            <td><input type="text" name="right_av_k"></td>
-            <td></td>
-            <td><input type="text" name="left_av_k"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Cly Power</td>
-            <td><input type="text" name="right_cly_power"></td>
-            <td></td>
-            <td><input type="text" name="left_cly_power"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Degree</td>
-            <td><input type="text" name="right_degree"></td>
-            <td></td>
-            <td><input type="text" name="left_degree"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>KSI/KCI</td>
-            <td><input type="text" name="right_ksi_kci"></td>
-            <td></td>
-            <td><input type="text" name="left_ksi_kci"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Schirmer Test</td>
-            <td><input type="text" name="right_schirmer_test"></td>
-            <td></td>
-            <td><input type="text" name="left_schirmer_test"></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     <div id="section7" class="section">
       <h3>Topography</h3>
       <table>
@@ -1750,7 +1763,7 @@ overflow-y: auto; width: 50%;">
 
 
 
-    <table id="arRefraction0" style="display: none; width: 450px" class="options-table">
+    <table id="arRefraction" style="display: none; width: 450px" class="options-table">
       <tr>
         <td>0</td>
         <td>5</td>
@@ -1799,7 +1812,7 @@ overflow-y: auto; width: 50%;">
     </table>
 
 
-    <div id="raRefractionooo" class="options-table container-fluid" style="height: 280px; width: 600px">
+    <div id="raRefraction3" class="options-table container-fluid" >
       <table border="1" cellspacing="0" cellpadding="5">
         <!-- Table Head -->
         <thead>
@@ -1941,7 +1954,7 @@ overflow-y: auto; width: 50%;">
     </div>
     <!-- optionsTable teble fast end -->
 
-    <table id="raRefraction0000" style="display: none; width: 218px" class="options-table">
+    <table id="raRefraction" style="display: none; width: 218px" class="options-table">
       <tr>
         <td onclick="selectValue(this)">6/6</td>
         <td onclick="selectValue(this)">6/6p</td>
@@ -1983,264 +1996,189 @@ overflow-y: auto; width: 50%;">
   <!-- 
 ################################ Diagnosis star ######################################## -->
 <div class="tab-content" id="diagnosis">
-  <!-- Diagnosis Buttons -->
-  <div class="d-flex justify-content-center mt-4">
-      <button type="button" class="btn active" id="both-eyes-diagnosis-btn" 
-          style="background-color: green; color: white; border: 2px solid darkgreen;">
-          Both Eyes
-      </button>
-      <button type="button" class="btn btn-secondary btn-sm mx-2" id="right-eye-diagnosis-btn" 
-          style="background-color: white; color: black; border: 2px solid #6c757d;">
-          Right Eye
-      </button>
-      <button type="button" class="btn btn-secondary btn-sm mx-2" id="left-eye-diagnosis-btn" 
-          style="background-color: white; color: black; border: 2px solid #6c757d;">
-          Left Eye
-      </button>
+
+    <!-- Diagnosis Buttons -->
+    <div class="diagnosis-buttons">
+      <button id="both-diagnosis-btn" onclick="showDiagnosisContent('both')">Both Eyes</button>
+      <button id="right-diagnosis-btn" onclick="showDiagnosisContent('right')">Right Eye</button>
+      <button id="left-diagnosis-btn" onclick="showDiagnosisContent('left')">Left Eye</button>
   </div>
 
-  <!-- Diagnosis Options Container -->
-  <div id="diagnosis-options-container" class="section active" style="margin-top: 10px;">
-      <h3 id="diagnosis-title">Both Eyes Diagnosis</h3>
+  <div id="both-diagnosis-content" class="diagnosis-content">
+      <h2>Both Eyes Diagnosis</h2>
+       <div class="flex-container">
+        <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
+        <button type="button" class="btn">Add Option</button>
+    </div>
+      <div id="diagnosis-options" class="options-container" style="display: flex;">
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Pucker(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Age-related Macular Degeneration (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinitis Pigmentosa (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Aphakia (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP (Retinopathy of Prematurity) (BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Iritis(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Uveitis(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Amblyopia(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Vitreous Detachment(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Color Blindness(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Immature Senile Cataract(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Esotropia(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Exotropia(BE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Convergent Squint(BE)</div>
+      </div>
+     
+  
+  </div>
+
+  <div id="right-diagnosis-content" class="diagnosis-content">
+      <h2>Right Eye Diagnosis</h2>
       <div class="flex-container">
-          <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
-          <button type="button" class="btn">Add Option</button>
-      </div>
-      <div class="options-container active" id="dynamic-diagnosis-options-container">
-          <!-- Diagnosis options will be dynamically populated here -->
-      </div>
+        <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
+        <button type="button" class="btn">Add Option</button>
+    </div>
+      <div id="diagnosis-options" class="options-container" style="display: flex; flex-wrap: wrap;">
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Pucker (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors (BE)</div> <!-- This remains unchanged -->
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Age-related Macular Degeneration (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinitis Pigmentosa (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Aphakia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP (Retinopathy of Prematurity) (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Iritis (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Uveitis (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Amblyopia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Vitreous Detachment (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Color Blindness (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Immature Senile Cataract (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Esotropia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Exotropia (RE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Convergent Squint (RE)</div>
+    </div>
+    
   </div>
-</div>
 
+  <div id="left-diagnosis-content" class="diagnosis-content">
+      <h2>Left Eye Diagnosis</h2>
+      <div class="flex-container">
+        <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
+        <button type="button" class="btn">Add Option</button>
+    </div>
+      <div id="diagnosis-options" class="options-container" style="display: flex; flex-wrap: wrap;">
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Blepharitis (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Hypermetropia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Edema (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Astigmatism (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Hole (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Stye (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Macular Pucker (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Chalazion (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Presbyopia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Conjunctivitis (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Refractive Errors (BE)</div> <!-- This remains unchanged -->
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Glaucoma (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinal Detachment (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Age-related Macular Degeneration (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Pseudophakia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Retinitis Pigmentosa (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Aphakia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">ROP (Retinopathy of Prematurity) (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Diabetic Retinopathy (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Iritis (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Uveitis (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Amblyopia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Vitreous Detachment (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Color Blindness (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Immature Senile Cataract (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Esotropia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Alternate Exotropia (LE)</div>
+        <div class="diagnosis" onclick="toggleDiagnosis(this)">Convergent Squint (LE)</div>
+    </div>
+    
+  </div>
+  </div>
 
 <!-- Treatment Section -->
+ 
 <div class="tab-content" id="treatment">
-  <!-- Treatment Buttons -->
-  <div class="d-flex justify-content-center mt-4">
-      <button type="button" class="btn btn-secondary btn-sm mx-2" id="medical-treatment-btn" 
-          style="background-color: white; color: black; border: 2px solid #6c757d;">
-          Medical
-      </button>
-      <button type="button" class="btn btn-secondary btn-sm mx-2" id="surgical-treatment-btn" 
-          style="background-color: white; color: black; border: 2px solid #6c757d;">
-          Surgical
-      </button>
-  </div>
+<!-- Treatment History Tabs -->
+<div class="treatment-history-tabs">
+  <button id="medication-btn" onclick="showTreatmentTab('medication')">Medication</button>
+  <button id="surgical-btn" onclick="showTreatmentTab('surgical')">Surgical</button>
+</div>
 
-  <!-- Treatment Options Container -->
-  <div id="treatment-options-container" class="section active" style="margin-top: 10px;">
-      <h3 id="treatment-title">Medical Treatment Options</h3>
-      <div class="flex-container">
-          <input type="text" class="input-field" placeholder="Enter New Treatment Option">
-          <button type="button" class="btn">Add Option</button>
-      </div>
-      <div class="options-container active" id="dynamic-treatment-options-container">
-          <!-- Treatment options will be dynamically populated here -->
-      </div>
-  </div>
+<!-- Treatment History Content -->
+<div id="medication-content" class="treatment-history-content">
+  <h2>Medication History</h2>
+  <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
+    <div class="diagnosis" onclick="toggleMedical(this)">Eye Drops</div>
+    <div class="diagnosis" onclick="toggleMedical(this)">Eye Drops'</div>
+    <div class="diagnosis" onclick="toggleMedical(this)">Antibiotics</div>
+</div>
+</div>
+
+<div id="surgical-content" class="treatment-history-content">
+  <h2>Surgical History</h2>
+  <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
+    <div class="diagnosis" onclick="toggleMedical(this)">Cataract Surgery</div>
+    <div class="diagnosis" onclick="toggleMedical(this)">Glaucoma Surgery</div>
+    <div class="diagnosis" onclick="toggleMedical(this)">LASIK</div>
+</div>
+
 </div>
 
 <script>
-  // Data for diagnosis options
-  const diagnosisOptions = {
-    'both-eyes': [
+  function showTreatmentTab(type) {
+      const contents = document.querySelectorAll('.treatment-history-content');
+      const buttons = document.querySelectorAll('.treatment-history-tabs button');
+
+      contents.forEach(content => content.style.display = 'none');
+      buttons.forEach(button => button.classList.remove('active'));
+
+      document.getElementById(type + '-content').style.display = 'block';
+      document.getElementById(type + '-btn').classList.add('active');
+  }
+
+  // Default: Show Medication History on load
+  showTreatmentTab('medication');
+  function toggleMedical(element) {
         
-        'Myopia (BE)',
-        'Blepharitis (BE)',
-        'Hypermetropia (BE)',
-        'Age Related Macular Degeneration (BE)',
-        'Aphakia (BE)',
-        'Amblyopia (BE)',
-        'Color Blindness (BE)',
-        'Immature Senile Cataract (BE)',
-        'Ulternate Exotropia (BE)',
-        'Ulternate Esotropia (BE)',
-        'Convergent Squint (BE)',
-        'Macular Hole (BE)',
-        'Macular Pucker (BE)',
-        'Macular Edema (BE)',
-        'Astigmatism (BE)',
-        'Stye (BE)',
-        'Chalazion (BE)',
-        'Presbyopia (BE)',
-        'Refractive Errors (BE)',
-        'Retinitis Pigmentosa (BE)',
-        'ROP (BE)',
-        'Iritis (BE)',
-        'Uveitis (BE)',
-        'Vitreous Detachment (BE)',
-        'Retinal Detachment (BE)',
-        'Pseudophakia (BE)'
-    ],
-    'right-eye': [
-        'Myopia (RE)',
-        'Blepharitis (RE)',
-        'Hypermetropia (RE)',
-        'Age Related Macular Degeneration (RE)',
-        'Aphakia (RE)',
-        'Amblyopia (RE)',
-        'Color Blindness (RE)',
-        'Immature Senile Cataract (RE)',
-        'Ulternate Exotropia (RE)',
-        'Ulternate Esotropia (RE)',
-        'Convergent Squint (RE)',
-        'Macular Hole (RE)',
-        'Macular Pucker (RE)',
-        'Macular Edema (RE)',
-        'Astigmatism (RE)',
-        'Stye (RE)',
-        'Chalazion (RE)',
-        'Presbyopia (RE)',
-        'Conjunctivitis (RE)',
-        'Refractive Errors (RE)',
-        'Retinitis Pigmentosa (RE)',
-        'ROP (RE)',
-        'Iritis (RE)',
-        'Uveitis (RE)',
-        'Vitreous Detachment (RE)',
-        'Retinal Detachment (RE)',
-        'Pseudophakia (RE)',
-        'Diabetic Retinopathy (RE)'
-    ],
-    'left-eye': [
-        'Myopia (LE)',
-        'Blepharitis (LE)',
-        'Hypermetropia (LE)',
-        'Age Related Macular Degeneration (LE)',
-        'Aphakia (LE)',
-        'Amblyopia (LE)',
-        'Color Blindness (LE)',
-        'Immature Senile Cataract (LE)',
-        'Ulternate Exotropia (LE)',
-        'Ulternate Esotropia (LE)',
-        'Convergent Squint (LE)',
-        'Macular Hole (LE)',
-        'Macular Pucker (LE)',
-        'Macular Edema (LE)',
-        'Astigmatism (LE)',
-        'Stye (LE)',
-        'Chalazion (LE)',
-        'Presbyopia (LE)',
-        'Conjunctivitis (LE)',
-        'Refractive Errors (LE)',
-        'Retinitis Pigmentosa (LE)',
-        'ROP (LE)',
-        'Iritis (LE)',
-        'Uveitis (LE)',
-        'Vitreous Detachment (LE)',
-        'Retinal Detachment (LE)',
-        'Pseudophakia (LE)',
-        'Diabetic Retinopathy (LE)'
-    ]
-};
+        // Add 'selected' class to the clicked element
+        element.classList.add('selected');
+    }
 
-
-  // Data for treatment options
-  const treatmentOptions = {
-      'medical-treatment': [
-          'Eye Drops',
-          'Oral Medications',
-          'Antibiotics',
-          'Anti-inflammatory Drugs'
-      ],
-      'surgical-treatment': [
-          'Cataract Surgery',
-          'Glaucoma Surgery',
-          'LASIK',
-          'Retinal Detachment Surgery'
-      ]
-  };
-
-  // Function to handle diagnosis button clicks
-  document.getElementById('both-eyes-diagnosis-btn').addEventListener('click', function() {
-      updateOptions('diagnosis', 'both-eyes');
-      setActiveButton(this, 'diagnosis');
-  });
-
-  document.getElementById('right-eye-diagnosis-btn').addEventListener('click', function() {
-      updateOptions('diagnosis', 'right-eye');
-      setActiveButton(this, 'diagnosis');
-  });
-
-  document.getElementById('left-eye-diagnosis-btn').addEventListener('click', function() {
-      updateOptions('diagnosis', 'left-eye');
-      setActiveButton(this, 'diagnosis');
-  });
-
-  // Function to handle treatment button clicks
-  document.getElementById('medical-treatment-btn').addEventListener('click', function() {
-      updateOptions('treatment', 'medical-treatment');
-      setActiveButton(this, 'treatment');
-  });
-
-  document.getElementById('surgical-treatment-btn').addEventListener('click', function() {
-      updateOptions('treatment', 'surgical-treatment');
-      setActiveButton(this, 'treatment');
-  });
-
-  // Function to update options based on the selected section (diagnosis or treatment)
-  function updateOptions(section, optionType) {
-      const container = section === 'diagnosis' 
-          ? document.getElementById('dynamic-diagnosis-options-container') 
-          : document.getElementById('dynamic-treatment-options-container');
-      const title = section === 'diagnosis' 
-          ? document.getElementById('diagnosis-title') 
-          : document.getElementById('treatment-title');
-
-      // Clear the container
-      container.innerHTML = '';
-
-      // Update the title
-      if (section === 'diagnosis') {
-          title.textContent = optionType === 'both-eyes' ? 'Both Eyes Diagnosis' :
-                              optionType === 'right-eye' ? 'Right Eye Diagnosis' :
-                              'Left Eye Diagnosis';
-      } else {
-          title.textContent = optionType === 'medical-treatment' ? 'Medical Treatment Options' :
-                              'Surgical Treatment Options';
-      }
-
-      // Populate the container with options
-      const options = section === 'diagnosis' ? diagnosisOptions[optionType] : treatmentOptions[optionType];
-      options.forEach(option => {
-          const optionElement = document.createElement('div');
-          optionElement.className = 'diagnosis';
-          optionElement.textContent = option;
-          optionElement.onclick = function() { toggleDiagnosis(this); };
-          container.appendChild(optionElement);
-      });
-  }
-
-  // Function to set the active button
-  function setActiveButton(activeButton, section) {
-      // Remove active class from all buttons in the same section
-      const buttons = section === 'diagnosis' 
-          ? document.querySelectorAll('#diagnosis .btn') 
-          : document.querySelectorAll('#treatment .btn');
-      buttons.forEach(function(button) {
-          button.classList.remove('active');
-          button.style.backgroundColor = 'white';
-          button.style.color = 'black';
-          button.style.border = '2px solid #6c757d';
-      });
-
-      // Add active class to the clicked button
-      activeButton.classList.add('active');
-      activeButton.style.backgroundColor = 'green';
-      activeButton.style.color = 'white';
-      activeButton.style.border = '2px solid darkgreen';
-  }
-
-  // Function to toggle diagnosis selection
-  function toggleDiagnosis(element) {
-      element.classList.toggle('selected');
-  }
-
-  // Set "Both Eyes" as active by default
-  document.getElementById('both-eyes-diagnosis-btn').click();
-  // Set "Medical" as active by default in the treatment section
-  document.getElementById('medical-treatment-btn').click();
 </script>
+
+</div>
+
   <!-- ################################ Diagnosis End ######################################## -->
 
   <!-- ###################################### investigation start ################################ -->
@@ -2656,60 +2594,143 @@ document.addEventListener('click', (event) => {
 
 
  </script>
+ <script>
+  // Function to show the selected tab
+  function showTab(tab) {
+      const contents = document.querySelectorAll('.symptoms-content');
+      const buttons = document.querySelectorAll('.symptoms-types button');
 
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(button => button.classList.remove('active'));
 
-<script>
-  // Function to toggle selection
-  function toggleSelection(element) {
-      element.classList.toggle('selected');
+      document.getElementById(tab).classList.add('active');
+      document.getElementById(tab + "Btn").classList.add('active');
   }
 
-  // Function to handle section toggling
-  function toggleSection(buttons, sections, activeButtonClass, inactiveButtonClass) {
-      buttons.forEach((button, index) => {
-          button.addEventListener('click', () => {
-              // Remove active class from all buttons and sections
-              buttons.forEach(btn => btn.classList.remove(activeButtonClass));
-              buttons.forEach(btn => btn.classList.add(inactiveButtonClass));
-              sections.forEach(section => section.classList.remove('active'));
+  // Function to show the selected diagnosis content
+  function showDiagnosisContent(eye) {
+      const contents = document.querySelectorAll('.diagnosis-content');
+      const buttons = document.querySelectorAll('.diagnosis-buttons button');
 
-              // Add active class to the clicked button and corresponding section
-              button.classList.remove(inactiveButtonClass);
-              button.classList.add(activeButtonClass);
-              sections[index].classList.add('active');
+      contents.forEach(content => content.style.display = 'none');
+      buttons.forEach(button => {
+          button.classList.remove('active');
+          button.style.backgroundColor = 'white';
+          button.style.color = 'black';
+          button.style.border = '2px solid #6c757d';
+      });
+
+      document.getElementById(eye + '-diagnosis-content').style.display = 'block';
+      document.getElementById(eye + '-diagnosis-btn').classList.add('active');
+      document.getElementById(eye + '-diagnosis-btn').style.backgroundColor = 'green';
+      document.getElementById(eye + '-diagnosis-btn').style.color = 'white';
+      document.getElementById(eye + '-diagnosis-btn').style.border = '2px solid darkgreen';
+  }
+
+  // Default: Show Both Eyes tab and diagnosis on load
+  showTab('both');
+  showDiagnosisContent('both');
+
+  
+
+
+</script>
+
+<script>
+  let activeInput = null;
+
+  function openTable(input, tableId) {
+      const table = document.getElementById(tableId);
+      activeInput = input;
+
+      // Position the table near the input field
+      const rect = input.getBoundingClientRect();
+      table.style.left = `${rect.left + window.scrollX}px`;
+      table.style.top = `${rect.bottom + window.scrollY}px`;
+      table.style.display = "table";
+  }
+
+  function attachInputFieldListener(inputIds, tableId) {
+      const table = document.getElementById(tableId);
+      
+      inputIds.forEach(inputId => {
+          const inputField = document.getElementById(inputId);
+
+          inputField.addEventListener('click', (event) => {
+              if (activeInput !== event.target) {
+                  table.style.display = 'none';
+              }
+
+              activeInput = event.target;
+              const rect = inputField.getBoundingClientRect();
+              table.style.left = `${rect.left + window.scrollX}px`;
+              table.style.top = `${rect.bottom + window.scrollY}px`;
+              table.style.display = 'table';
           });
+      });
+
+      table.addEventListener('click', (event) => {
+          if (event.target.tagName === 'TD' && activeInput) {
+              activeInput.value = event.target.textContent;
+              table.style.display = 'none';
+          }
+      });
+
+      document.addEventListener('click', (event) => {
+          if (!table.contains(event.target) && activeInput !== event.target) {
+              table.style.display = 'none';
+          }
       });
   }
 
-  // Toggle Symptoms Sections
-  const symptomButtons = [
-      document.getElementById('both-eyes-symptom-btn'),
-      document.getElementById('right-eye-symptom-btn'),
-      document.getElementById('left-eye-symptom-btn')
-  ];
-  const symptomSections = [
-      document.getElementById('both-eyes-section'),
-      document.getElementById('right-eye-section'),
-      document.getElementById('left-eye-section')
-  ];
-  toggleSection(symptomButtons, symptomSections, 'btn-primary-custom', 'btn-secondary-custom');
+  attachInputFieldListener(['arAxis', 'arAxis1'], 'arRefraction');
+  attachInputFieldListener(['ar1SPH', 'ar1CYL', 'ar1DV', 'ar1SPH1', 'ar1CYL1', 'ar1DV1'], 'raRefraction3');
 
-  // Toggle Surgical History Sections
-  const surgicalButtons = [
-      document.getElementById('both-eyes-surgical-btn'),
-      document.getElementById('right-eye-surgical-btn'),
-      document.getElementById('left-eye-surgical-btn')
-  ];
-  const surgicalSections = [
-      document.getElementById('both-eyes-surgical-section'),
-      document.getElementById('right-eye-surgical-section'),
-      document.getElementById('left-eye-surgical-section')
-  ];
-  toggleSection(surgicalButtons, surgicalSections, 'btn-primary-custom', 'btn-secondary-custom');
+  let activeTable = null;
 
+function openTable(input) {
+    // Close the previously open table
+    if (activeTable) {
+        activeTable.style.display = "none";
+    }
+    
+    // Get the table element
+    const table = document.getElementById("raRefraction");
+    
+    // Set the active input field
+    activeInput = input;
+    
+    // Position the table near the input field
+    const rect = input.getBoundingClientRect();
+    table.style.left = `${rect.left + window.scrollX}px`;
+    table.style.top = `${rect.bottom + window.scrollY}px`;
+    table.style.display = "table";
+    
+    // Set the active table
+    activeTable = table;
+}
 
-  
-</script> 
+function selectValue(td) {
+    if (activeInput) {
+        activeInput.value = td.textContent;
+    }
+    
+    // Hide the table after selection
+    if (activeTable) {
+        activeTable.style.display = "none";
+        activeTable = null;
+    }
+}
+
+// Close table if clicking outside
+document.addEventListener("click", function(event) {
+    if (activeTable && !activeTable.contains(event.target) && event.target.tagName !== "INPUT") {
+        activeTable.style.display = "none";
+        activeTable = null;
+    }
+});
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
