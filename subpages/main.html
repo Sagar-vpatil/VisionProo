@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>रविकल्प हॉस्पिटल</title>
   <!-- bootstrap 5 css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
   <!-- BOX ICONS CSS-->
@@ -172,133 +173,6 @@
     }
     
 
-    .page {
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    margin: auto;
-    box-shadow: 0 0 5px rgba(5, 0, 0, 0.1);
-    background: #fff;
-}
-
-/* Header */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid black;
-    padding-bottom: 10px;
-    flex-wrap: wrap;
-}
-
-.header .left,
-.header .right {
-    font-size: 14px;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 24px;
-    text-align: center;
-    flex: 1 1 100%;
-}
-
-/* Medicines Section */
-.medicines {
-    display: flex;
-    flex-wrap: wrap;
-    border-top: 2px solid black;
-    padding: 10px 0;
-}
-
-.medicines .left,
-.medicines .right {
-    padding: 10px;
-}
-
-.medicines .left {
-    width: 100%;
-    border-bottom: 2px solid black;
-}
-
-.medicines .right {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-@media (min-width: 768px) {
-    .medicines .left {
-        width: 30%;
-        border-right: 2px solid black;
-        border-bottom: none;
-    }
-    .medicines .right {
-        width: 70%;
-    }
-}
-
-/* Patient Details */
-.patient-details {
-    margin-top: 20px;
-}
-
-.patient-details h3 {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.patient-details p {
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-/* Complaints and History */
-.complaints {
-    font-size: 18px;
-    color: #333;
-}
-
-.medical-history, .surgical-history {
-    font-size: 14px;
-    margin-top: 10px;
-    padding: 5px 10px;
-}
-
-/* Diagnosis & Investigation Lists */
-.diagnosis-list, .investigation-list {
-    margin-top: 5px;
-}
-
-.diagnosis-list h3, .investigation-list h3 {
-    font-size: 18px;
-}
-
-.diagnosis-list ul, .investigation-list ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.diagnosis-list li, .investigation-list li {
-    font-size: 14px;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    margin-top: 40px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        text-align: center;
-    }
-    .header .left, .header .right {
-        text-align: center;
-    }
-}
 
   </style>
 
@@ -306,9 +180,10 @@
 <!-- Side-Nav -->
 <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
   <ul class="nav flex-column text-white w-90">
-    <a href="#" class="nav-link h3 text-white my-2">
-      रविकल्प हॉस्पिटल </br>
-    </a>
+    <a href="#" class="nav-link h3 text-white my-2" style="text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); font-weight: bold; display: inline-block; transform: perspective(500px) rotateX(10deg);">
+      रविकल्प <span style="color: #ff0000; text-shadow: 3px 3px 5px rgba(255, 0, 0, 0.5);">हॉस्पिटल</span>
+  </a>
+  
 <hr>
     <!-- Search Bar -->
     <!-- <li class="nav-item my-3 w-90">
@@ -379,12 +254,11 @@
       <!-- Bill Button -->
       
       <!-- Add Receptionist Button -->
-      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Billing</button>
+      <button class="btn btn-success" onclick="window.location.href='./print.html';" id="add-receptionist-btn">Print</button>
+     <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Billing</button>
       <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Case Record</button>
-      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Payment Slip</button>
-    
-      <!-- Add Receptionist Button -->
-      
+      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Payment Slip</button> 
+     
 
 
     </div>
@@ -403,8 +277,8 @@
     <div class="tab" data-target="rx">Rx</div>
     <div class="tab" data-target="advice">Advice</div>
     <div class="tab" data-target="img">img</div>
-    <div class="tab" data-target="Operative">Pre-Operative Workup </div>
-    <a class="tab" id="print-btn">Save and print </a>
+    <div class="tab" data-target="Operative">PreOperative  </div>
+    <div class="tab" id="print-btn">Save and print </div>
   </div>
 
   <!-- ######################### tebs end  ########################### -->
@@ -412,503 +286,28 @@
 
   <!-- ############################### summart start ####################### -->
   <div class="tab-content active" id="summary">
-    <div class="page">
-    <h3 style="text-align: center;">Patient Summary</h3>
-    <hr>
-        <div class="header">
-          <div class="left" style="margin-left: 70px;">
-              <p><strong>Name:</strong> <span>Mukesh</span></p>
-              <p><strong>Age:</strong> <span >22</span></p>
-          </div>
-          <div class="right" style="margin-right: 70px;">
-              <p><strong>Date:</strong> <span >01-01-2025</span></p>
-              <p><strong>Gender:</strong> <span >mail</span></p>
-          </div>
-          
-      </div>
-
-
-      <div class="patient-details" style="margin-left: 60px;">
-                        
-        <p class="complaints">
-            <span style="font-weight: bold; font-size: 17px;">Symptoms :</span> Retina Surgery (RE) 
-        </p>
-
-        <p class="complaints" >
-            <span style="font-weight: bold; font-size: 17px;"> Medical History:</span> Eye Drops(med)
-        </p>
-        <p class="complaints" >
-          <span style="font-weight: bold; font-size: 17px;">  Surgical History :</span> Eye Drops(med)
-      </p>
-</div>
-<hr>
-      <h5 style="margin-left: 60px;">Visual Acuity:</h5>
-<table style="margin-top: 0px; width:450px; margin-left: 200px;">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Right Eye</th>
-            <th>Left Eye</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Unaided</td>
-            <td>0</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Glasses</td>
-            <td>0</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Near Vision</td>
-            <td>1</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Pinhole Vision</td>
-            <td>1</td>
-            <td>0</td>
-        </tr>
-    </tbody>
-</table>
-
-
-<h5 style="margin-left: 60px;">Current Power Glasses:</h5>
-
-    <table style="width: 690px; margin-left: 20px;">
-        <thead>
-            <tr>
-                <th></th>
-                <th colspan="4">Right Eye</th>
-                <th colspan="4">Left Eye</th>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th></th>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>DV</td>
-                <td>+1.25</td>
-                <td>-0.50</td>
-                <td>90</td>
-                <td>6/6</td>
-                <td>+1.00</td>
-                <td>-0.75</td>
-                <td>80</td>
-                <td>6/9</td>
-            </tr>
-            <tr>
-                <td>NV</td>
-                <td>+2.00</td>
-                <td>-1.00</td>
-                <td>85</td>
-                <td>6/7.5</td>
-                <td>+1.75</td>
-                <td>-0.25</td>
-                <td>95</td>
-                <td>6/6</td>
-            </tr>
-        </tbody>
-    </table>
- 
-
-    <h5 style="margin-left: 60px;">Eye Examination:</h5>
-    <table class="table-container table-responsive" style="width: 560px; margin-left: 120px;">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Right Eye</th>
-                <th scope="col">Left Eye</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Eyelids & Adnexa</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Conjunctiva</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Sclera</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Cornea</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Anterior Chamber</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Iris</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Pupil</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Lens</td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Fundus</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-   
-
-    <h5 style="margin-left: 60px;">Refraction</h5>
-    <table style="width: 650px; margin-left: 100px">
-        <thead>
-            <tr>
-                <th rowspan="2"></th>
-                <th colspan="4">Right Eye</th>
-                <th colspan="4">Left Eye</th>
-            </tr>
-            <tr>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Distance</td>
-                <td>85</td>
-                <td>7</td>
-                <td>56</td>
-                <td>56</td>
-                <td>89</td>
-                <td>56</td>
-                <td>565</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>Near</td>
-                <td>8</td>
-                <td>5</td>
-                <td>5</td>
-                <td>9</td>
-                <td>96</td>
-                <td>5</td>
-                <td>23</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>IPD (mm)</td>
-                <td colspan="4"></td>
-                <td colspan="4"></td>
-            </tr>
-            <tr>
-                <td>Type of Glass</td>
-                <td colspan="4"></td>
-                <td colspan="4"></td>
-            </tr>
-            <tr>
-                <td>Remark</td>
-                <td colspan="4"></td>
-                <td colspan="4"></td>
-            </tr>
-        </tbody>
-    </table>
-    
-
-
-    <h5 style="margin-left: 60px;">Topography</h5>
-    <table border="1" style="width: 680px; margin-left:80px;">
-        <thead>
-            <tr>
-                <th></th>
-                <th colspan="2">Right Eye</th>
-                <th colspan="2">Left Eye</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>IOP</td>
-                <td style="width: 100px;"></td>
-                <td class="unit">mmHg</td>
-                <td></td>
-                <td class="unit" style="width: 50px;">mmHg</td>
-            </tr>
-            <tr>
-                <td>Pachymetry</td>
-                <td style="width: 100px;"></td>
-                <td class="unit">µm</td>
-                <td style="width: 100px;"></td>
-                <td class="unit">µm</td>
-            </tr>
-            <tr>
-                <td>Steepest K</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Flattest K</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Av.K</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Cly Power</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Degree</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>KSI/KCI</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Schirmer Test</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    
-
-
-    <h5 style="margin-left: 60px;">AR</h5>
-    <table style="width: 590px; margin-left: 150px;" border="1">
-        <thead>
-            <tr>
-                <th colspan="5">Right Eye</th>
-                <th colspan="5">Left Eye</th>
-            </tr>
-            <tr>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-                <th>DV</th>
-                <th>SPH</th>
-                <th>CYL</th>
-                <th>Axis</th>
-                <th>V/A</th>
-                <th>DV</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="height: 40px;">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th colspan="2">IPD</th>
-                <td colspan="8"></td>
-            </tr>
-        </tbody>
-    </table>
-    
-
-<hr>
-    <div class="patient-details" style="margin-left: 60px;">
-                        
-      <p class="complaints">
-          <span style="font-weight: bold; font-size: 17px;">Diagnosis :</span> Retina Surgery (RE) 
-      </p>
-
-      <p class="complaints" >
-          <span style="font-weight: bold; font-size: 17px;">Investigation:</span> Eye Drops(med)
-      </p>
-      <p class="complaints" >
-        <span style="font-weight: bold; font-size: 17px;">  Treatment :</span> Eye Drops(med)
-    </p>
-</div>
-
-<hr>
-
-<div class="patient-details">
-  <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
-
-  <p class="complaints show-treatment" style="margin-left: 60px;">
-      <span style="font-weight: bold; font-size: 17px;">Treatment :</span> Eye Drops (med)
-  </p>
-</div>
-<h5 style="margin-left: 60px;">Pre-Operative Procedure</h5>
-<div class="patient-details">
-  
-
-  <p class="complaints show-treatment" style="margin-left: 60px;">
-      <span style="font-weight: bold; font-size: 17px;">BP:</span> Eye Drops (med)
-  </p>
-  <p class="complaints show-treatment" style="margin-left: 60px;">
-    <span style="font-weight: bold; font-size: 17px;">P:</span> Eye Drops (med)
-</p>
-<p class="complaints show-treatment" style="margin-left: 60px;">
-  <span style="font-weight: bold; font-size: 17px;">SAC:</span> Eye Drops (med)
-</p>
-<p class="complaints show-treatment" style="margin-left: 60px;">
-  <span style="font-weight: bold; font-size: 17px;">NCT:</span> Eye Drops (med)
-</p>
-<H5 style="margin-left: 60px;">IOP/GAT:</H5>
-<table style="width: 570px; margin-left: 150px;">
-    <thead>
-        <tr>
-            <th colspan="2">Right Eye</th>
-            <th colspan="2">Left Eye</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="input-wrapper">
-                <span>Data</span>
-                <span>mmHg</span>
-            </td>
-            <td><span>00:00</span></td>
-            <td class="input-wrapper">
-                <span>Data</span>
-                <span>mmHg</span>
-            </td>
-            <td><span>00:00</span></td>
-        </tr>
-    </tbody>
-</table>
-<h5>A-Scan</h5>
-
-<table style="width: 580px; margin-left: 90px;">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Right Eye</th>
-            <th>Left Eye</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>K1</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>K2</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>LT</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>AL</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>ACD</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>L.Power</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-        <tr>
-            <td>A.Constant</td>
-            <td><span>Data</span></td>
-            <td><span>Data</span></td>
-        </tr>
-    </tbody>
-</table>
-<div class="patient-details">
-  <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
-
-  <p class="complaints show-treatment" style="margin-right: 120px;">
-      <span style="font-weight: bold; font-size: 17px;">Treatment :</span> Eye Drops (med)
-  </p>
-</div>
-
-</div>
-
-<h5>Medicines Prescribed:</h5>
-<table class="table-container table-responsive" border="1" style="width: 100%; border-collapse: collapse;">
-  <thead>
-      <tr>
-          <th scope="col">Medicine Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Dose</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Paracetamol</td>
-          <td>Tablet</td>
-          <td>500mg, Twice a day</td>
-      </tr>
-      
-  </tbody>
-</table>
-
-
-
-</div>
+    <h2 class="text-center  mb-4" style="color: #000;">Patient Visit History</h2>
+    <table class="table table-striped table-hover" style="width: 1200px;">
+      <thead class="table-" style="background-color: rgb(68, 120, 225);">
+          <tr>
+              <th style="color: #fff ;">Date</th>
+              <th  style="color: #fff ;">Symptoms</th>
+              <th  style="color: #fff ;">Action</th>
+          </tr>
+      </thead>
+      <tbody id="visitTable">
+          <tr>
+              <td>10-02-2025</td>
+              <td>Blurred Vision, Eye Pain</td>
+              <td><button class="btn btn-primary btn-sm"  onclick="window.location.href='./Summary.html';">View Summary</button></td>
+          </tr>
+          <tr>
+              <td>05-01-2025</td>
+              <td>Redness, Itching</td>
+              <td><button class="btn btn-primary btn-sm" onclick="openSummary('05-01-2025', 'Redness, Itching')">View Summary</button></td>
+          </tr>
+      </tbody>
+  </table>
   </div>
    
 
@@ -2435,7 +1834,7 @@ overflow-y: auto; width: 50%;">
     </table>
 
 
-    <div id="raRefraction3" class="options-table container-fluid" >
+    <div id="raRefraction3"  >
       <table border="1" cellspacing="0" cellpadding="5">
         <!-- Table Head -->
         <thead>
