@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Acknowledgment Slip</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #eef5f9;
+    }
+    .container {
+      max-width: 1000px;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #000;
+      margin: 20px auto;
+    }
+    .acknowledgment-slip {
+      max-width: 650px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #007bff;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+   
+    .details label {
+      font-weight: 600;
+      color: #333;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .status {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .doctor-signature {
+      margin-top: 30px;
+      text-align: right;
+    }
+    .doctor-signature p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Print-specific styles */
+    @media print {
+      body {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 100%;
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      .acknowledgment-slip {
+        box-shadow: none;
+        border: 2px solid #000;
+        margin: 0;
+        padding: 20px;
+      }
+      .btn-print {
+        display: none;
+      }
+      .print-value {
+        display: inline;
+      }
+      .input-field, .dropdown-field {
+        display: none;
+      }
+      .header h2 {
+        color: #000;
+      }
+      .doctor-signature {
+        margin-top: 50px;
+      }
+    }
+
+    /* A4 size styling */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    @media print {
+
+
+  .acknowledgment-slip {
+    box-shadow: none;
+    border: 2px solid #000;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }}
+
+  .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .logo img {
+            width: 170px;
+            height: auto;
+        }
+        .hospital-name {
+            color: red;
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Mangal', sans-serif;
+            margin-left: 20px;
+        }
+        .sub-heading {
+            font-size: 16px;
+            color: #333;
+            margin-top: 5px;
+        }
+        .doctor-signature {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .doctor-signature p {
+            margin: 0;
+            font-size: 14px;
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        <div class="logo">
+            <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+        </div>
+        <div class="hospital-name">
+            रवीकल्प हॉस्पिटल
+            <div class="sub-heading">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+        </div>
+    </div>
+    <hr style="border: 2px solid #000;">
+
+    <div class="acknowledgment-slip">
+      <div class="header">
+        <h2>Payment Acknowledgment Slip</h2>
+      </div>
+      <div class="details">
+        <p><strong>Patient Name:</strong> John Doe</p>
+        <p><strong>Patient ID:</strong> 123456</p>
+        <p><strong>Date:</strong> <span id="currentDate"></span></p>
+
+        <div class="input-group">
+          <label for="paymentAmount">Payment Amount (₹):</label>
+          <input type="number" id="paymentAmount" class="input-field" min="0" placeholder="Enter payment amount">
+          <span class="print-value" id="printPaymentAmount"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="paymentMode">Payment Mode:</label>
+          <select id="paymentMode" class="dropdown-field">
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Net Banking">Net Banking</option>
+            <option value="UPI">UPI</option>
+            <option value="Cash">Cash</option>
+          </select>
+          <span class="print-value" id="printPaymentMode"></span>
+        </div>
+        
+        <p><strong>Transaction ID:</strong> TXN123456789</p>
+        <p><strong>Status:</strong> <span class="text-success status">Success</span></p>
+      </div>
+
+      <div class="footer text-center">
+        <p>Thank you for choosing Ravikalp Hospital.</p>
+        <p><strong>Received by Ravikalp Hospital</strong></p>
+      </div>
+
+      <!-- Doctor's Signature Section -->
+      <div class="doctor-signature">
+        <p><strong>Dr. Alvin Rane:</strong> ___________________________</p>
+      </div>
+    </div>
+
+    <!-- Print Button -->
+    <div class="text-center mt-3">
+      <button class="btn btn-primary btn-print" onclick="updatePrintValues()">Print Slip</button>
+    </div>
+  </div>
+
+  <script>
+    // Set current date
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+
+    // Function to update print values and trigger print
+    function updatePrintValues() {
+      document.getElementById('printPaymentAmount').textContent = document.getElementById('paymentAmount').value;
+      document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
+      window.print();
+    }
+  </script>
+</body>
+</html>
