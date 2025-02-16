@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 // Import the required Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc} from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js'
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc,enableIndexedDbPersistence} from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,5 +19,19 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
+// Enable offline persistence
+enableIndexedDbPersistence(db)
+    .then(() => {
+        console.log("Offline persistence enabled!");
+    })
+    .catch((err) => {
+        if (err.code === "failed-precondition") {
+            console.error("Multiple tabs open, persistence can only be enabled in one tab.");
+        } else if (err.code === "unimplemented") {
+            console.error("Offline persistence is not supported by the browser.");
+        } else {
+            console.error("Error enabling offline persistence:", err);
+        }
+    });
 
 export { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc};

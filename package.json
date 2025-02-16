@@ -12,7 +12,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^33.3.1",
-    "firebase": "^11.2.0"
+    "electron": "^33.3.1"
+  },
+  "dependencies": {
+    "firebase": "^11.3.1",
+    "firebase-admin": "^13.0.2"
   }
 }
