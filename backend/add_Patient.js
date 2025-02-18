@@ -403,7 +403,7 @@ if (storedUser && storedUser.position === "Doctor") {
 // Add event listener for the home button
 homeBtn.addEventListener("click", async () => {
    // Redirect the user to main.html
-    window.location.href = "main.html";
+    window.location.href = "view_Appointments.html";
 });
 
 

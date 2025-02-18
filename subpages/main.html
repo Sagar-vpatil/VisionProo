@@ -254,10 +254,10 @@
       <!-- Bill Button -->
       
       <!-- Add Receptionist Button -->
-      <button class="btn btn-success" onclick="window.location.href='./print.html';" id="add-receptionist-btn">Print</button>
+     <button class="print1-btn" id="only-print-btn">Print</button>
      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Billing</button>
-      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Case Record</button>
-      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Payment Slip</button> 
+     <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Case Record</button>
+     <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Payment Slip</button> 
      
 
 
@@ -316,24 +316,24 @@
       <!-- First Row: BP and Pulse Rate -->
       <div class="row form-row">
           <div class="col-md-6 form-group">
-              <label for="BP-Result" class="form-label">BP =</label>
-              <input type="text" id="BP-Result" class="form-control" placeholder="Enter BP">
+              <label for="BPResult" class="form-label">BP =</label>
+              <input type="text" id="BPResult" class="form-control" placeholder="Enter BP">
           </div>
           <div class="col-md-6 form-group">
-              <label for="Pulse-Rate" class="form-label">P =</label>
-              <input type="text" id="Pulse-Rate" class="form-control" placeholder="Enter Pulse Rate">
+              <label for="PulseRate" class="form-label">P =</label>
+              <input type="text" id="PulseRate" class="form-control" placeholder="Enter Pulse Rate">
           </div>
       </div>
 
       <!-- Second Row: Sac and NCT -->
       <div class="row form-row">
           <div class="col-md-6 form-group">
-              <label for="SAC-Result" class="form-label">SAC =</label>
-              <input type="text" id="SAC-Result" class="form-control" placeholder="Enter Sac">
+              <label for="SACResult" class="form-label">SAC =</label>
+              <input type="text" id="SACResult" class="form-control" placeholder="Enter Sac">
           </div>
           <div class="col-md-6 form-group">
-              <label for="NCT-Result" class="form-label">NCT =</label>
-              <input type="text" id="NCT-Result" class="form-control" placeholder="Enter NCT">
+              <label for="NCTResult" class="form-label">NCT =</label>
+              <input type="text" id="NCTResult" class="form-control" placeholder="Enter NCT">
           </div>
       </div>
 
@@ -352,38 +352,38 @@
     <tbody>
       <tr>
         <td>K1</td>
-        <td><input type="text" name="right_k1" id="Right-K1"></td>
-        <td><input type="text" name="left_k1" id="Left-K1"></td>
+        <td><input type="text" name="right_k1" id="RightK1"></td>
+        <td><input type="text" name="left_k1" id="LeftK1"></td>
       </tr>
       <tr>
         <td>K2</td>
-        <td><input type="text" name="right_k2" id="Right-K2"></td>
-        <td><input type="text" name="left_k2" id="Left-K2"></td>
+        <td><input type="text" name="right_k2" id="RightK2"></td>
+        <td><input type="text" name="left_k2" id="LeftK2"></td>
       </tr>
       <tr>
         <td>LT</td>
-        <td><input type="text" name="right_lt" id="Right-LT"></td>
-        <td><input type="text" name="left_lt" id="Left-LT"></td>
+        <td><input type="text" name="right_lt" id="RightLT"></td>
+        <td><input type="text" name="left_lt" id="LeftLT"></td>
       </tr>
       <tr>
         <td>AL</td>
-        <td><input type="text" name="right_al" id="Right-AL"></td>
-        <td><input type="text" name="left_al" id="Left-AL"></td>
+        <td><input type="text" name="right_al" id="RightAL"></td>
+        <td><input type="text" name="left_al" id="LeftAL"></td>
       </tr>
       <tr>
         <td>ACD</td>
-        <td><input type="text" name="right_acd" id="Right-ACD"></td>
-        <td><input type="text" name="left_acd" id="Left-ACD"></td>
+        <td><input type="text" name="right_acd" id="RightACD"></td>
+        <td><input type="text" name="left_acd" id="LeftACD"></td>
       </tr>
       <tr>
         <td>L.Power</td>
-        <td><input type="text" name="right_lpower" id="Right-LPower"></td>
-        <td><input type="text" name="left_lpower" id="Left-LPower"></td>
+        <td><input type="text" name="right_lpower" id="RightLPower"></td>
+        <td><input type="text" name="left_lpower" id="LeftLPower"></td>
       </tr>
       <tr>
         <td>A.Constant</td>
-        <td><input type="text" name="right_a_constant" id="Right-AConstant"></td>
-        <td><input type="text" name="left_a_constant" id="Left-AConstant"></td>
+        <td><input type="text" name="right_a_constant" id="RightAConstant"></td>
+        <td><input type="text" name="left_a_constant" id="LeftAConstant"></td>
       </tr>
     </tbody>
   </table>
@@ -399,15 +399,15 @@
     <tbody>
       <tr>
         <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;" id="Right-mmHg">
+          <input type="text" placeholder="" style="width: 150px;" id="RightmmHg">
           <span>mmHg</span>
         </td>
-        <td><input type="text" value="" style="width: 150px;" id="Right-mmHg-Time"></td>
+        <td><input type="text" value="" style="width: 150px;" id="RightmmHgTime"></td>
         <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;" id="Left-mmHg">
+          <input type="text" placeholder="" style="width: 150px;" id="LeftmmHg">
           <span>mmHg</span>
         </td>
-        <td><input type="text" value="" style="width: 150px;" id="Left-mmHg-Time"></td>
+        <td><input type="text" value="" style="width: 150px;" id="LeftmmHgTime"></td>
       </tr>
     </tbody>
   </table>
@@ -764,8 +764,8 @@
           </tr>
           <tr>
             <td>Near Vision</td>
-            <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" id="Near-VisionR" readonly></td>
-            <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" id="Near-VisionL" readonly></td>
+            <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" id="NearVisionR" readonly></td>
+            <td><input type="text" onfocus="showOptions(event, 'myOptionsTable2')" id="NearVisionL" readonly></td>
           </tr>
           <tr>
             <td>Pinhole Vision</td>
@@ -866,25 +866,25 @@
             <tbody>
               <tr>
                 <td>DV</td>
-                <td><input type="text" id="DV-SPH" /></td>
-                <td><input type="text" id="DV-CYL" /></td>
-                <td><input type="text" id="DV-Axis" /></td>
-                <td><input type="text" id="DV-VA" /></td>
-                <td><input type="text" id="DV-SPH2" /></td>
-                <td><input type="text" id="DV-CYL2" /></td>
-                <td><input type="text" id="DV-Axis2" /></td>
-                <td><input type="text" id="DV-VA2" /></td>
+                <td><input type="text" id="DVSPH" /></td>
+                <td><input type="text" id="DVCYL" /></td>
+                <td><input type="text" id="DVAxis" /></td>
+                <td><input type="text" id="DVVA" /></td>
+                <td><input type="text" id="DVSPH2" /></td>
+                <td><input type="text" id="DVCYL2" /></td>
+                <td><input type="text" id="DVAxis2" /></td>
+                <td><input type="text" id="DVVA2" /></td>
               </tr>
               <tr>
                 <td>NV</td>
-                <td><input type="text" id="NV-SPH" /></td>
-                <td><input type="text" id="NV-CYL" /></td>
-                <td><input type="text" id="NV-Axis" /></td>
-                <td><input type="text" id="NV-VA" /></td>
-                <td><input type="text" id="NV-SPH2" /></td>
-                <td><input type="text" id="NV-CYL2" /></td>
-                <td><input type="text" id="NV-Axis2" /></td>
-                <td><input type="text" id="NV-VA2" /></td>
+                <td><input type="text" id="NVSPH" /></td>
+                <td><input type="text" id="NVCYL" /></td>
+                <td><input type="text" id="NVAxis" /></td>
+                <td><input type="text" id="NVVA" /></td>
+                <td><input type="text" id="NVSPH2" /></td>
+                <td><input type="text" id="NVCYL2" /></td>
+                <td><input type="text" id="NVAxis2" /></td>
+                <td><input type="text" id="NVVA2" /></td>
               </tr>
             </tbody>
           </table>
@@ -1272,40 +1272,40 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>Distance</td>
-            <td><input type="text" name="Distance-SPH" id="rSPH"></td>
-            <td><input type="text" name="Distance-CYL" id="rCYL"></td>
-            <td><input type="text" name="Distance-Axis" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" name="Distance-VA" id="rV/A"></td>
-            <td><input type="text" name="Distance-SPH2" id="lrSPH" style="width: 90px;"></td>
-            <td><input type="text" name="Distance-CYL2" id="lrCYL"></td>
-            <td><input type="text" name="Distance-Axis2" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" name="Distance-VA2" id="rV/A2"></td>
+            <td><input type="text" name="DistanceSPH" id="rSPH"></td>
+            <td><input type="text" name="DistanceCYL" id="rCYL"></td>
+            <td><input type="text" name="DistanceAxis" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="DistanceVA" id="rV/A"></td>
+            <td><input type="text" name="DistanceSPH2" id="lrSPH" style="width: 90px;"></td>
+            <td><input type="text" name="DistanceCYL2" id="lrCYL"></td>
+            <td><input type="text" name="DistanceAxis2" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="DistanceVA2" id="rV/A2"></td>
           </tr>
           <tr>
             <td>Near</td>
-            <td><input type="text" name="Near-SPH" id="rSPH1"></td>
-            <td><input type="text" name="Near-CYL" id="rCYL1"></td>
-            <td><input type="text" name="Near-Axis" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" name="Near-VA" id="rva2" ></td>
-            <td><input type=" text" name="Near-SPH2" id="lrSPH2" style="width: 90px; height: 40px;"></td>
-            <td><input type="text" name="Near-CYL2" id="lrCYL2"></td>
-            <td><input type="text" name="Near-Axis2" onfocus="showOptions(event, 'nRefraction')"></td>
-            <td><input type="text" name="Near-VA2" id="rva2"></td>
+            <td><input type="text" name="NearSPH" id="rSPH1"></td>
+            <td><input type="text" name="NearCYL" id="rCYL1"></td>
+            <td><input type="text" name="NearAxis" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="NearVA" id="rva2" ></td>
+            <td><input type=" text" name="NearSPH2" id="lrSPH2" style="width: 90px; height: 40px;"></td>
+            <td><input type="text" name="NearCYL2" id="lrCYL2"></td>
+            <td><input type="text" name="NearAxis2" onfocus="showOptions(event, 'nRefraction')"></td>
+            <td><input type="text" name="NearVA2" id="rva2"></td>
           </tr>
           <tr>
             <td>IPD (mm)</td>
-            <td colspan="4"><input type="text" id="RE-IPD"></td>
-            <td colspan="4"><input type="text" id="LE-IPD"></td>
+            <td colspan="4"><input type="text" id="REIPD" name="REIPD"></td>
+            <td colspan="4"><input type="text" id="LEIPD" name="LEIPD"></td>
           </tr>
           <tr>
             <td>Type of Glass</td>
-            <td colspan="4"><input type="text" id="RE-TypeOfGlass"></td>
-            <td colspan="4"><input type="text" id="LE-TypeOfGlass"></td>
+            <td colspan="4"><input type="text" id="RETypeOfGlass" name="RETypeOfGlass"></td>
+            <td colspan="4"><input type="text" id="LETypeOfGlass" name="LETypeOfGlass"></td>
           </tr>
           <tr>
             <td>Remark</td>
-            <td colspan="4"><input type="text" id="RE-Remark"></td>
-            <td colspan="4"><input type="text" id="LE-Remark"></td>
+            <td colspan="4"><input type="text" id="RERemark" name="RERemark"></td>
+            <td colspan="4"><input type="text" id="LERemark" name="LERemark"></td>
           </tr>
         </tbody>
       </table>
@@ -1609,65 +1609,65 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>IOP</td>
-            <td><input type="text" name="right_iop" id="Right-IOP"></td>
+            <td><input type="text" name="right_iop" id="RightIOP"></td>
             <td class="unit">mmHg</td>
-            <td><input type="text" name="left_iop" id="Left-IOP"></td>
+            <td><input type="text" name="left_iop" id="LeftIOP"></td>
             <td class="unit">mmHg</td>
           </tr>
           <tr>
             <td>Pachymetry</td>
-            <td><input type="text" name="right_pachymetry" id="Right-Pachymetry"></td>
+            <td><input type="text" name="right_pachymetry" id="RightPachymetry"></td>
             <td class="unit">µm</td>
-            <td><input type="text" name="left_pachymetry" id="Left-Pachymetry"></td>
+            <td><input type="text" name="left_pachymetry" id="LeftPachymetry"></td>
             <td class="unit">µm</td>
           </tr>
           <tr>
             <td>Steepest K</td>
-            <td><input type="text" name="right_steepest_k" id="Right-Steepest"></td>
+            <td><input type="text" name="right_steepest_k" id="RightSteepest"></td>
             <td></td>
-            <td><input type="text" name="left_steepest_k" id="Left-Steepest"></td>
+            <td><input type="text" name="left_steepest_k" id="LeftSteepest"></td>
             <td></td>
           </tr>
           <tr>
             <td>Flattest K</td>
-            <td><input type="text" name="right_flattest_k" id="Right-Flattest"></td>
+            <td><input type="text" name="right_flattest_k" id="RightFlattest"></td>
             <td></td>
-            <td><input type="text" name="left_flattest_k" id="Left-Flattest"></td>
+            <td><input type="text" name="left_flattest_k" id="LeftFlattest"></td>
             <td></td>
           </tr>
           <tr>
             <td>Av.K</td>
-            <td><input type="text" name="right_av_k" id="Right-Av"></td>
+            <td><input type="text" name="right_av_k" id="RightAv"></td>
             <td></td>
-            <td><input type="text" name="left_av_k" id="Left-Av"></td>
+            <td><input type="text" name="left_av_k" id="LeftAv"></td>
             <td></td>
           </tr>
           <tr>
             <td>Cly Power</td>
-            <td><input type="text" name="right_cly_power" id="Right-Cly-Power"></td>
+            <td><input type="text" name="right_cly_power" id="RightClyPower"></td>
             <td></td>
-            <td><input type="text" name="left_cly_power" id="Left-Cly-Power"></td>
+            <td><input type="text" name="left_cly_power" id="LeftClyPower"></td>
             <td></td>
           </tr>
           <tr>
             <td>Degree</td>
-            <td><input type="text" name="right_degree" id="Right-Degree"></td>
+            <td><input type="text" name="right_degree" id="RightDegree"></td>
             <td></td>
-            <td><input type="text" name="left_degree" id="Left-Degree"></td>
+            <td><input type="text" name="left_degree" id="LeftDegree"></td>
             <td></td>
           </tr>
           <tr>
             <td>KSI/KCI</td>
-            <td><input type="text" name="right_ksi_kci" id="Right-KSI-KCI"></td>
+            <td><input type="text" name="right_ksi_kci" id="RightKSIKCI"></td>
             <td></td>
-            <td><input type="text" name="left_ksi_kci" id="Left-KSI-KCI"></td>
+            <td><input type="text" name="left_ksi_kci" id="LeftKSIKCI"></td>
             <td></td>
           </tr>
           <tr>
             <td>Schirmer Test</td>
-            <td><input type="text" name="right_schirmer_test" id="Right-Schirmer-Test"></td>
+            <td><input type="text" name="right_schirmer_test" id="RightSchirmerTest"></td>
             <td></td>
-            <td><input type="text" name="left_schirmer_test" id="Left-Schirmer-Test"></td>
+            <td><input type="text" name="left_schirmer_test" id="LeftSchirmerTest"></td>
             <td></td>
           </tr>
         </tbody>
@@ -1754,20 +1754,20 @@ overflow-y: auto; width: 50%;">
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" id="ar1SPH" name="AR-SPH"></td>
-            <td><input type="text" id="ar1CYL" name="AR-CYL"></td>
-            <td><input type="text" id="arAxis" name="AR-Axis"></td>
-            <td><input type="text" id="arV/A" onclick="openTable(this)" name="AR-VA"></td>
-            <td><input type="text" id="ar1DV" name="AR-DV"></td>
-            <td><input type="text" id="ar1SPH1" name="AR-SPH2"></td>
-            <td><input type=" text"id="ar1CYL1" style="width: 90px;height: 40px;" name="AR-CYL2"></td>
-            <td><input type="text" id="arAxis1" name="AR-Axis2"></td>
-            <td><input type="text" id="arV/A1" onclick="openTable(this)" name="AR-VA2"></td>
-            <td><input type="text" id="ar1DV1" name="AR-DV2"></td>
+            <td><input type="text" id="ar1SPH" name="ARSPH"></td>
+            <td><input type="text" id="ar1CYL" name="ARCYL"></td>
+            <td><input type="text" id="arAxis" name="ARAxis"></td>
+            <td><input type="text" id="arV/A" onclick="openTable(this)" name="ARVA"></td>
+            <td><input type="text" id="ar1DV" name="ARDV"></td>
+            <td><input type="text" id="ar1SPH1" name="ARSPH2"></td>
+            <td><input type=" text"id="ar1CYL1" style="width: 90px;height: 40px;" name="ARCYL2"></td>
+            <td><input type="text" id="arAxis1" name="ARAxis2"></td>
+            <td><input type="text" id="arV/A1" onclick="openTable(this)" name="ARVA2"></td>
+            <td><input type="text" id="ar1DV1" name="ARDV2"></td>
           </tr>
           <tr>
             <th colspan="2">IPD (mm)</th>
-            <td colspan="8"><input type="text" placeholder="Enter IPD" id="AR-IPD"></td>
+            <td colspan="8"><input type="text" placeholder="Enter IPD" id="ARIPD" name="ARIPD"></td>
           </tr>
         </tbody>
       </table>
@@ -2286,6 +2286,14 @@ overflow-y: auto; width: 50%;">
 
 
 </div>
+<!-- Summary Alert (Initially Hidden) -->
+<div id="historyAlert" class="custom-alert" style="display: none;">
+  <span id="alertMessage" style="flex-grow: 1;">Patient History Opened for </span>
+  <button class="alert-btn" onclick="closeHistoryAlert()" id="closeHistory-btn" type="button">Close History</button>
+</div>
+
+
+
 </div>
 </div>
 
@@ -2401,11 +2409,17 @@ overflow-y: auto; width: 50%;">
 
           <input type="number" class="medicine-quantity" placeholder="Quantity" min="1">
 
-          <button type="button" onclick="this.parentNode.remove()">Remove</button>
+          <button type="button" class="remove-btn">Remove</button>
       `;
 
       // Append the new entry to the list
       medicineList.appendChild(entry);
+
+      // Add event listener to remove button
+      entry.querySelector(".remove-btn").addEventListener("click", function () {
+        entry.remove();
+      });
+      
   }
 </script>
 

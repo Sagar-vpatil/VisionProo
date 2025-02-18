@@ -8,6 +8,39 @@ import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, wh
 document.addEventListener("DOMContentLoaded", () => {
   // Load the patient history when the page is loaded
   loadPatientHistory(appointment.id);
+
+   // Remove the Local Storage variable openHistory_Status
+   localStorage.removeItem("openHistory");
+   // get Local Storage variable openHistory to Active or not
+    const openHistory = localStorage.getItem("openHistory_Status");
+    console.log(openHistory);
+    if (!openHistory || !openHistory === "Active") {
+      // Clear the selectedSymptoms from local storage
+      console.log("Clearing local storage");
+      localStorage.removeItem("selectedSymptoms");
+      localStorage.removeItem("selectedDiagnosis");
+      localStorage.removeItem("selectedMedicalHistory");
+      localStorage.removeItem("selectedSurgicalHistory");
+      localStorage.removeItem("selectedInvestigation");
+      localStorage.removeItem("selectedAdvices");
+      localStorage.removeItem("selectedMedicationTreatment");
+      localStorage.removeItem("selectedSurgicalTreatment");
+      localStorage.removeItem("tempDate");
+    }
+    else {
+      // Load the patient history when the page is loaded
+      loadPatientHistoryData();
+
+      const tempDate = localStorage.getItem("tempDate");
+      console.log(tempDate);
+
+      // show historyAlert
+      document.getElementById("historyAlert").style.display = "flex";
+
+      // Update the alert message
+      document.getElementById("alertMessage").textContent = `Patient History Opened of Date: ${tempDate}`;
+
+    }
 });
 
 
@@ -27,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return `${hours}:${minutes} ${amPm}`;
   }
 
-  document.getElementById("Right-mmHg-Time").addEventListener("focus", function () {
+  document.getElementById("RightmmHgTime").addEventListener("focus", function () {
     this.value = getCurrentTime();
   });
 
-  document.getElementById("Left-mmHg-Time").addEventListener("focus", function () {
+  document.getElementById("LeftmmHgTime").addEventListener("focus", function () {
     this.value = getCurrentTime();
   });
 
@@ -45,16 +78,32 @@ function getFormattedDate() {
   const yyyy = today.getFullYear();
   return `${dd}${mm}${yyyy}`;
 }
+
+
+document.getElementById("only-print-btn").addEventListener("click",async function () {
+  const setCondition = "onlyPrint";
+  savePatientHistory(setCondition);
+  
+  
+});
   
 document.getElementById("print-btn").addEventListener("click",async function () {
+  const setCondition = "saveAndPrint";
+  savePatientHistory(setCondition);
+  
+  
+});
+
+
+async function savePatientHistory(getCondition) {
   // Store Vision Table the dictionary name and value
   const visionTable = {
     UnaidedR : document.getElementById("UnaidedR").value,
     UnaidedL : document.getElementById("UnaidedL").value,
     GlassesR : document.getElementById("GlassesR").value,
     GlassesL : document.getElementById("GlassesL").value,
-    NearVisionR : document.getElementById("Near-VisionR").value,
-    NearVisionL : document.getElementById("Near-VisionL").value,
+    NearVisionR : document.getElementById("NearVisionR").value,
+    NearVisionL : document.getElementById("NearVisionL").value,
     PinholeR : document.getElementById("PinholeR").value,
     PinholeL : document.getElementById("PinholeL").value,
   }
@@ -88,22 +137,22 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
    // Store Current Power Glasses the dictionary name and value
    const currentPowerGlasses = {
-    DVSPH: document.getElementById("DV-SPH").value,
-    DVCYL: document.getElementById("DV-CYL").value,
-    DVAxis:document.getElementById("DV-Axis").value,
-    DVVA: document.getElementById("DV-VA").value,
-    DVSPH2: document.getElementById("DV-SPH2").value,
-    DVCYL2: document.getElementById("DV-CYL2").value,
-    DVAxis2: document.getElementById("DV-Axis2").value,
-    DVVA2:document.getElementById("DV-VA2").value,
-    NVSPH: document.getElementById("NV-SPH").value,
-    NVCYL: document.getElementById("NV-CYL").value,
-    NVAxis: document.getElementById("NV-Axis").value,
-    NVVA: document.getElementById("NV-VA").value,
-    NVSPH2: document.getElementById("NV-SPH2").value,
-    NVCYL2: document.getElementById("NV-CYL2").value,
-    NVAxis2: document.getElementById("NV-Axis2").value,
-    NVVA2: document.getElementById("NV-VA2").value,
+    DVSPH: document.getElementById("DVSPH").value,
+    DVCYL: document.getElementById("DVCYL").value,
+    DVAxis:document.getElementById("DVAxis").value,
+    DVVA: document.getElementById("DVVA").value,
+    DVSPH2: document.getElementById("DVSPH2").value,
+    DVCYL2: document.getElementById("DVCYL2").value,
+    DVAxis2: document.getElementById("DVAxis2").value,
+    DVVA2:document.getElementById("DVVA2").value,
+    NVSPH: document.getElementById("NVSPH").value,
+    NVCYL: document.getElementById("NVCYL").value,
+    NVAxis: document.getElementById("NVAxis").value,
+    NVVA: document.getElementById("NVVA").value,
+    NVSPH2: document.getElementById("NVSPH2").value,
+    NVCYL2: document.getElementById("NVCYL2").value,
+    NVAxis2: document.getElementById("NVAxis2").value,
+    NVVA2: document.getElementById("NVVA2").value,
   };
 
   console.log(currentPowerGlasses);
@@ -146,28 +195,28 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
   // Store Refraction Table the dictionary name and value
   const refractionTable = {
-    DistanceSPH : document.getElementsByName("Distance-SPH")[0].value,
-    DistanceCYL : document.getElementsByName("Distance-CYL")[0].value,
-    DistanceAxis : document.getElementsByName("Distance-Axis")[0].value,
-    DistanceVA : document.getElementsByName("Distance-VA")[0].value,
-    DistanceSPH2 : document.getElementsByName("Distance-SPH2")[0].value,
-    DistanceCYL2 : document.getElementsByName("Distance-CYL2")[0].value,
-    DistanceAxis2 : document.getElementsByName("Distance-Axis2")[0].value,
-    DistanceVA2 : document.getElementsByName("Distance-VA2")[0].value,
-    NearSPH : document.getElementsByName("Near-SPH")[0].value,
-    NearCYL : document.getElementsByName("Near-CYL")[0].value,
-    NearAxis : document.getElementsByName("Near-Axis")[0].value,
-    NearVA : document.getElementsByName("Near-VA")[0].value,
-    NearSPH2 : document.getElementsByName("Near-SPH2")[0].value,
-    NearCYL2 : document.getElementsByName("Near-CYL2")[0].value,
-    NearAxis2 : document.getElementsByName("Near-Axis2")[0].value,
-    NearVA2 : document.getElementsByName("Near-VA2")[0].value,
-    REIPD : document.getElementById("RE-IPD").value,
-    LEIPD : document.getElementById("LE-IPD").value,
-    RETypeOfGlass : document.getElementById("RE-TypeOfGlass").value,
-    LETypeOfGlass : document.getElementById("LE-TypeOfGlass").value,
-    RERemark : document.getElementById("RE-Remark").value,
-    LERemark : document.getElementById("LE-Remark").value,
+    DistanceSPH : document.getElementsByName("DistanceSPH")[0].value,
+    DistanceCYL : document.getElementsByName("DistanceCYL")[0].value,
+    DistanceAxis : document.getElementsByName("DistanceAxis")[0].value,
+    DistanceVA : document.getElementsByName("DistanceVA")[0].value,
+    DistanceSPH2 : document.getElementsByName("DistanceSPH2")[0].value,
+    DistanceCYL2 : document.getElementsByName("DistanceCYL2")[0].value,
+    DistanceAxis2 : document.getElementsByName("DistanceAxis2")[0].value,
+    DistanceVA2 : document.getElementsByName("DistanceVA2")[0].value,
+    NearSPH : document.getElementsByName("NearSPH")[0].value,
+    NearCYL : document.getElementsByName("NearCYL")[0].value,
+    NearAxis : document.getElementsByName("NearAxis")[0].value,
+    NearVA : document.getElementsByName("NearVA")[0].value,
+    NearSPH2 : document.getElementsByName("NearSPH2")[0].value,
+    NearCYL2 : document.getElementsByName("NearCYL2")[0].value,
+    NearAxis2 : document.getElementsByName("NearAxis2")[0].value,
+    NearVA2 : document.getElementsByName("NearVA2")[0].value,
+    REIPD : document.getElementById("REIPD").value,
+    LEIPD : document.getElementById("LEIPD").value,
+    RETypeOfGlass : document.getElementById("RETypeOfGlass").value,
+    LETypeOfGlass : document.getElementById("LETypeOfGlass").value,
+    RERemark : document.getElementById("RERemark").value,
+    LERemark : document.getElementById("LERemark").value,
   };
 
   console.log(refractionTable);
@@ -181,24 +230,24 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
    // Store Topography Table the dictionary name and value
    const topographyTable = {
-    RightIOP : document.getElementById("Right-IOP").value,
-    LeftIOP : document.getElementById("Left-IOP").value,
-    RightPachymetry : document.getElementById("Right-Pachymetry").value,
-    LeftPachymetry : document.getElementById("Left-Pachymetry").value,
-    RightSteepest : document.getElementById("Right-Steepest").value,
-    LeftSteepest : document.getElementById("Left-Steepest").value,
-    RightFlattest : document.getElementById("Right-Flattest").value,
-    LeftFlattest : document.getElementById("Left-Flattest").value,
-    RightAv : document.getElementById("Right-Av").value,
-    LeftAv : document.getElementById("Left-Av").value,
-    RightClyPower : document.getElementById("Right-Cly-Power").value,
-    LeftClyPower : document.getElementById("Left-Cly-Power").value,
-    RightDegree : document.getElementById("Right-Degree").value,
-    LeftDegree : document.getElementById("Left-Degree").value,
-    RightKSIKCI : document.getElementById("Right-KSI-KCI").value,
-    LeftKSIKCI : document.getElementById("Left-KSI-KCI").value,
-    RightSchirmerTest : document.getElementById("Right-Schirmer-Test").value,
-    LeftSchirmerTest : document.getElementById("Left-Schirmer-Test").value,
+    RightIOP : document.getElementById("RightIOP").value,
+    LeftIOP : document.getElementById("LeftIOP").value,
+    RightPachymetry : document.getElementById("RightPachymetry").value,
+    LeftPachymetry : document.getElementById("LeftPachymetry").value,
+    RightSteepest : document.getElementById("RightSteepest").value,
+    LeftSteepest : document.getElementById("LeftSteepest").value,
+    RightFlattest : document.getElementById("RightFlattest").value,
+    LeftFlattest : document.getElementById("LeftFlattest").value,
+    RightAv : document.getElementById("RightAv").value,
+    LeftAv : document.getElementById("LeftAv").value,
+    RightClyPower : document.getElementById("RightClyPower").value,
+    LeftClyPower : document.getElementById("LeftClyPower").value,
+    RightDegree : document.getElementById("RightDegree").value,
+    LeftDegree : document.getElementById("LeftDegree").value,
+    RightKSIKCI : document.getElementById("RightKSIKCI").value,
+    LeftKSIKCI : document.getElementById("LeftKSIKCI").value,
+    RightSchirmerTest : document.getElementById("RightSchirmerTest").value,
+    LeftSchirmerTest : document.getElementById("LeftSchirmerTest").value,
    }
 
     console.log(topographyTable);
@@ -212,17 +261,17 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
     // Store AR Table the dictionary name and value
     const arTable = {
-      ARSPH : document.getElementsByName("AR-SPH")[0].value,
-      ARCYL : document.getElementsByName("AR-CYL")[0].value,
-      ARAxis : document.getElementsByName("AR-Axis")[0].value,
-      ARVA : document.getElementsByName("AR-VA")[0].value,
-      ARDV : document.getElementsByName("AR-DV")[0].value,
-      ARSPH2 : document.getElementsByName("AR-SPH2")[0].value,
-      ARCYL2 : document.getElementsByName("AR-CYL2")[0].value,
-      ARAxis2 : document.getElementsByName("AR-Axis2")[0].value,
-      ARVA2 : document.getElementsByName("AR-VA2")[0].value,
-      ARDV2 : document.getElementsByName("AR-DV2")[0].value,
-      ARIPD : document.getElementById("AR-IPD").value,
+      ARSPH : document.getElementsByName("ARSPH")[0].value,
+      ARCYL : document.getElementsByName("ARCYL")[0].value,
+      ARAxis : document.getElementsByName("ARAxis")[0].value,
+      ARVA : document.getElementsByName("ARVA")[0].value,
+      ARDV : document.getElementsByName("ARDV")[0].value,
+      ARSPH2 : document.getElementsByName("ARSPH2")[0].value,
+      ARCYL2 : document.getElementsByName("ARCYL2")[0].value,
+      ARAxis2 : document.getElementsByName("ARAxis2")[0].value,
+      ARVA2 : document.getElementsByName("ARVA2")[0].value,
+      ARDV2 : document.getElementsByName("ARDV2")[0].value,
+      ARIPD : document.getElementById("ARIPD").value,
     };
 
     console.log(arTable);
@@ -272,10 +321,10 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
     // Store PreOperativeDetails the dictionary name and value
      const PreOperativeDetails = {
-      BPResult : document.getElementById("BP-Result").value,
-      PulseRate : document.getElementById("Pulse-Rate").value,
-      SACResult : document.getElementById("SAC-Result").value,
-      NCTResult : document.getElementById("NCT-Result").value,
+      BPResult : document.getElementById("BPResult").value,
+      PulseRate : document.getElementById("PulseRate").value,
+      SACResult : document.getElementById("SACResult").value,
+      NCTResult : document.getElementById("NCTResult").value,
      }
 
       console.log(PreOperativeDetails);
@@ -289,20 +338,20 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
     // Store A-Scan Table the dictionary name and value
     const aScanTable = {
-      RightK1 : document.getElementById("Right-K1").value,
-      LeftK1 : document.getElementById("Left-K1").value,
-      RightK2 : document.getElementById("Right-K2").value,
-      LeftK2 : document.getElementById("Left-K2").value,
-      RightLT : document.getElementById("Right-LT").value,
-      LeftLT : document.getElementById("Left-LT").value,
-      RightAL : document.getElementById("Right-AL").value,
-      LeftAL : document.getElementById("Left-AL").value,
-      RightACD : document.getElementById("Right-ACD").value,
-      LeftACD : document.getElementById("Left-ACD").value,
-      RightLPower : document.getElementById("Right-LPower").value,
-      LeftLPower : document.getElementById("Left-LPower").value,
-      RightAConstant : document.getElementById("Right-AConstant").value,
-      LeftAConstant : document.getElementById("Left-AConstant").value,
+      RightK1 : document.getElementById("RightK1").value,
+      LeftK1 : document.getElementById("LeftK1").value,
+      RightK2 : document.getElementById("RightK2").value,
+      LeftK2 : document.getElementById("LeftK2").value,
+      RightLT : document.getElementById("RightLT").value,
+      LeftLT : document.getElementById("LeftLT").value,
+      RightAL : document.getElementById("RightAL").value,
+      LeftAL : document.getElementById("LeftAL").value,
+      RightACD : document.getElementById("RightACD").value,
+      LeftACD : document.getElementById("LeftACD").value,
+      RightLPower : document.getElementById("RightLPower").value,
+      LeftLPower : document.getElementById("LeftLPower").value,
+      RightAConstant : document.getElementById("RightAConstant").value,
+      LeftAConstant : document.getElementById("LeftAConstant").value,
     }
 
     console.log(aScanTable);
@@ -315,10 +364,10 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
     // Store IOP/GAT Table the dictionary name and value
     const iopGatTable = {
-      RightmmHg : document.getElementById("Right-mmHg").value,
-      RightmmHgTime : document.getElementById("Right-mmHg-Time").value,
-      LeftmmHg : document.getElementById("Left-mmHg").value,
-      LeftmmHgTime : document.getElementById("Left-mmHg-Time").value,
+      RightmmHg : document.getElementById("RightmmHg").value,
+      RightmmHgTime : document.getElementById("RightmmHgTime").value,
+      LeftmmHg : document.getElementById("LeftmmHg").value,
+      LeftmmHgTime : document.getElementById("LeftmmHgTime").value,
     }
 
     console.log(iopGatTable);
@@ -328,8 +377,9 @@ document.getElementById("print-btn").addEventListener("click",async function () 
       "iopGatTable",
       JSON.stringify(iopGatTable)
     );
+    
 
-
+   if (getCondition === "saveAndPrint") {
     try {
       const todayDate = getFormattedDate();
       const documentId = `P${appointment.id}${todayDate}`;
@@ -438,23 +488,27 @@ document.getElementById("print-btn").addEventListener("click",async function () 
   } catch (error) {
       console.error("Error storing data:", error);
   }
+
+  // Remove the Local Storage variable openHistory_Status
+  localStorage.removeItem("openHistory_Status");
+}
   
 
 
   // Open print.html using href
-  // window.location.href = "print.html";
+  window.location.href = "print.html";
 
   // Open print.html using window.open
-   window.open("print.html", "_blank");
-  
-});
+  //  window.open("print.html", "_blank");
+}
 
 
 
-async function getPatientHistory() {
+async function getPatientHistory(date) {
   try {
-      const todayDate = getFormattedDate(); // Ensure you have this function
-      const documentId = `P${appointment.id}${todayDate}`;
+      
+      const getDate = date.split("/");
+      const documentId = `P${appointment.id}${getDate[0]}${getDate[1]}${getDate[2]}`;
       
       // Reference to the document
       const docRef = doc(db, "PatientsHistory", documentId);
@@ -479,11 +533,11 @@ async function getPatientHistory() {
           Object.entries(filteredData).forEach(([key, value]) => {
               localStorage.setItem(key, JSON.stringify(value));
           });
+          const symptoms = JSON.parse(localStorage.getItem("selectedSymptoms")) || [];
+          console.log("Symptoms:", symptoms); 
 
-          return filteredData;
       } else {
           console.log("No record found for this patient.");
-          return null;
       }
   } catch (error) {
       console.error("Error fetching patient history:", error);
@@ -517,6 +571,7 @@ async function loadPatientHistory(patientId) {
           const data = doc.data();
           const date = data.timestamp.toDate().toLocaleDateString();
           const symptoms = data.selectedSymptoms ? data.selectedSymptoms.join(", ") : "N/A";
+          const patientId = data.patientId;
 
           const row = `
               <tr>
@@ -524,14 +579,262 @@ async function loadPatientHistory(patientId) {
                   <td>${symptoms}</td>
                   <td>
                       <button class="btn btn-primary btn-sm" onclick="openSummary('${date}', '${symptoms}')">View Summary</button>
-                      <button class="btn btn-primary btn-sm">Get Summary</button>
+                      <button class="btn btn-primary btn-sm open-history" data-date="${date}">Open History</button>
                   </td>
               </tr>
           `;
 
           historyTable.innerHTML += row;
       });
+       // Attach event listeners AFTER elements are created
+       document.querySelectorAll(".open-history").forEach(button => {
+        button.addEventListener("click", function () {
+            const date = this.getAttribute("data-date");
+            openPatientHistory(date);
+        });
+    });
   } catch (error) {
       console.error("Error fetching patient history:", error);
+  }
+}
+
+async function openPatientHistory(date) {
+  const alertBox = document.getElementById("historyAlert");
+  const alertMessage = document.getElementById("alertMessage");
+
+  // Set Local Storage variable openHistory_Status to Active
+  localStorage.setItem("openHistory_Status", "Active");
+
+  // Get the patient history from Firestore
+  await getPatientHistory(date);
+  loadPatientHistoryData();
+
+  localStorage.setItem("tempDate", date);
+
+
+  // Update the alert message
+  alertMessage.textContent = `Patient History Opened of Date: ${date}`;
+
+  // Show the alert box
+  alertBox.style.display = "flex";
+}
+
+document.getElementById("closeHistory-btn").addEventListener("click",async function () {
+  // Hide the alert box
+  document.getElementById("historyAlert").style.display = "none";
+  // Remove the Local Storage variable openHistory_Status
+  localStorage.removeItem("openHistory_Status");
+  // reload the page
+  location.reload();
+});
+
+function loadPatientHistoryData() {
+  try {
+    // Retrieve selected symptoms from localStorage
+    const selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms")) || [];
+    const selectedMedicalHistory = JSON.parse(localStorage.getItem("selectedMedicalHistory")) || [];
+    const selectedSurgicalHistory = JSON.parse(localStorage.getItem("selectedSurgicalHistory")) || [];
+    const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+    const selectedInvestigation = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
+    const selectedAdvices = JSON.parse(localStorage.getItem("selectedAdvices")) || [];
+    const selectedMedicationTreatment = JSON.parse(localStorage.getItem("selectedMedicationTreatment")) || [];
+    const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+
+    const visionTable = JSON.parse(localStorage.getItem("visionTable")) || {};
+    const currentPowerGlasses = JSON.parse(localStorage.getItem("currentPowerGlasses")) || {};
+    const eyeExaminationTable = JSON.parse(localStorage.getItem("eyeExaminationTable")) || {};
+    const refractionTable = JSON.parse(localStorage.getItem("refractionTable")) || {};
+    const topographyTable = JSON.parse(localStorage.getItem("topographyTable")) || {};
+    const arTable = JSON.parse(localStorage.getItem("arTable")) || {};
+    const storedMedicines = JSON.parse(localStorage.getItem("medicines")) || [];
+    const PreOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
+    const aScanTable = JSON.parse(localStorage.getItem("aScanTable")) || {};
+    const iopGatTable = JSON.parse(localStorage.getItem("iopGatTable")) || {};
+
+
+
+    console.log("Selected Symptoms:", selectedSymptoms);
+
+
+    // If there are selected symptoms, update the UI
+    selectedSymptoms.forEach((symptom) => {
+      const symptomElement = Array.from(document.querySelectorAll(".symptoms"))
+        .find((item) => item.textContent.trim() === symptom);
+      
+      if (symptomElement) {
+        symptomElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected medical history, update the UI
+    selectedMedicalHistory.forEach((medicalHistory) => {
+      const medicalHistoryElement = Array.from(document.querySelectorAll(".medicalHistory"))
+        .find((item) => item.textContent.trim() === medicalHistory);
+      
+      if (medicalHistoryElement) {
+        medicalHistoryElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected surgical history, update the UI
+    selectedSurgicalHistory.forEach((surgicalHistory) => {
+      const surgicalHistoryElement = Array.from(document.querySelectorAll(".surgicalHistory"))
+        .find((item) => item.textContent.trim() === surgicalHistory);
+      
+      if (surgicalHistoryElement) {
+        surgicalHistoryElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected diagnosis, update the UI
+    selectedDiagnosis.forEach((diagnosis) => {
+      const diagnosisElement = Array.from(document.querySelectorAll(".diagnosis"))
+        .find((item) => item.textContent.trim() === diagnosis);
+      
+      if (diagnosisElement) {
+        diagnosisElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected investigation, update the UI
+    selectedInvestigation.forEach((investigation) => {
+      const investigationElement = Array.from(document.querySelectorAll(".investigation"))
+        .find((item) => item.textContent.trim() === investigation);
+      
+      if (investigationElement) {
+        investigationElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected advices, update the UI
+    selectedAdvices.forEach((advice) => {
+      const adviceElement = Array.from(document.querySelectorAll(".advice"))
+        .find((item) => item.textContent.trim() === advice);
+      
+      if (adviceElement) {
+        adviceElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected medication treatment, update the UI
+    selectedMedicationTreatment.forEach((medicationTreatment) => {
+      const medicationTreatmentElement = Array.from(document.querySelectorAll(".medication-treatment"))
+        .find((item) => item.textContent.trim() === medicationTreatment);
+      
+      if (medicationTreatmentElement) {
+        medicationTreatmentElement.classList.add("selected");
+      }
+    });
+
+    // If there are selected surgical treatment, update the UI
+    selectedSurgicalTreatment.forEach((surgicalTreatment) => {
+      const surgicalTreatmentElement = Array.from(document.querySelectorAll(".surgical-treatment"))
+        .find((item) => item.textContent.trim() === surgicalTreatment);
+      
+      if (surgicalTreatmentElement) {
+        surgicalTreatmentElement.classList.add("selected");
+      }
+    });
+
+    // Update the vision table
+    for (const key in visionTable) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = visionTable[key];
+      }
+    }
+
+    // Update the current power glasses table
+    for (const key in currentPowerGlasses) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = currentPowerGlasses[key];
+      }
+    }
+
+    // Update the eye examination table
+    for (const key in eyeExaminationTable) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = eyeExaminationTable[key];
+      }
+    }
+
+    // Update the refraction table
+    for (const key in refractionTable) {
+      const element = document.getElementsByName(key)[0];
+      if (element) {
+        element.value = refractionTable[key];
+      }
+    }
+
+    // Update the topography table
+    for (const key in topographyTable) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = topographyTable[key];
+      }
+    }
+
+    // Update the ar table
+    for (const key in arTable) {
+      const element = document.getElementsByName(key)[0];
+      if (element) {
+        element.value = arTable[key];
+      }
+    }
+
+    // Update the medicines 
+    console.log("Loaded Medicines:", storedMedicines);
+  
+    const medicineContainer = document.getElementById("medicine-list");
+  
+    storedMedicines.forEach((medicine) => {
+      const entry = document.createElement("div");
+      entry.classList.add("medicine-entry");
+  
+      entry.innerHTML = `
+        <select class="medicine-select">
+          <option value="${medicine.medicineSelect}" selected>${medicine.medicineSelect}</option>
+        </select>
+        <input type="text" class="medicine-dose" value="${medicine.medicineDose}" />
+        <input type="number" class="medicine-quantity" value="${medicine.medicineQuantity}" />
+         <button type="button" class="remove-btn">Remove</button>
+      `;
+  
+      medicineContainer.appendChild(entry);
+      // Add event listener to remove button
+      entry.querySelector(".remove-btn").addEventListener("click", function () {
+        entry.remove();
+      });
+    });
+
+    // Update the PreOperativeDetails table
+    for (const key in PreOperativeDetails) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = PreOperativeDetails[key];
+      }
+    }
+
+    // Update the aScan table
+    for (const key in aScanTable) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = aScanTable[key];
+      }
+    }
+
+    // Update the iopGat table
+    for (const key in iopGatTable) {
+      const element = document.getElementById(key);
+      if (element) {
+        element.value = iopGatTable[key];
+      }
+    }
+    
+
+  } catch (e) {
+    console.error("An error occurred while loading patient history data", e);
   }
 }

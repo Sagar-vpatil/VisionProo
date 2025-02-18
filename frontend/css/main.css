@@ -133,6 +133,20 @@
   #add-receptionist-btn:hover {
       background-color: #218838;
   }
+
+.print1-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.print1-btn:hover {
+    background-color: #218838;
+}
   
   
   
@@ -1160,6 +1174,88 @@ h2 {
   background-color: green;
   color: white;
   border-color: darkgreen;
+}
+
+/* ------------------------------- Opened Patient History Pop-Up -------------------------------- */
+
+ /* Alert Box Styling */
+ .custom-alert {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  max-width: 400px;  /* Increased max width */
+  width: auto;
+  min-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  white-space: normal;  /* Allows text wrapping */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+/* Responsive Font & Padding */
+@media (max-width: 1200px) {
+  .custom-alert {
+      max-width: 300px;
+      font-size: 13px;
+      padding: 10px 14px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-alert {
+      max-width: 280px;
+      font-size: 12px;
+      padding: 10px;
+  }
+}
+
+/* Button Styling */
+.alert-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  flex-shrink: 0;  /* Prevents button from shrinking */
+}
+
+.alert-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .custom-alert {
+      max-width: 90%;
+      right: 5%;
+      bottom: 10px;
+      font-size: 12px;
+      padding: 10px;
+      flex-direction: column;  /* Stack content on small screens */
+      align-items: flex-start;
+  }
+
+  .alert-btn {
+      width: 100%;  /* Full-width button for small screens */
+      text-align: center;
+      margin-top: 5px;
+  }
 }
 
 

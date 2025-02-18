@@ -7,18 +7,6 @@
    document.getElementById("appointmentId").textContent = appointment.id;
    document.getElementById("appointmentName").textContent = appointment.Name;
  } 
-// Dom event listener when the page is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  // Clear the selectedSymptoms from local storage
-  localStorage.removeItem("selectedSymptoms");
-  localStorage.removeItem("selectedDiagnosis");
-  localStorage.removeItem("selectedMedicalHistory");
-  localStorage.removeItem("selectedSurgicalHistory");
-  localStorage.removeItem("selectedInvestigation");
-  localStorage.removeItem("selectedAdvices");
-  localStorage.removeItem("selectedMedicationTreatment");
-  localStorage.removeItem("selectedSurgicalTreatment");
-});
 
 // Toggle selection for symptoms, medical history, and surgical history
 function toggleSymptoms(element) {
