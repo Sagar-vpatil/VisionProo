@@ -183,8 +183,8 @@
        
         <!-- Invoice Details -->
         <div class="invoice-details">
-            <p><span>Sr No -</span> 124545 &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Date:</span> 01 July 2022</p>
-            <p><span>Patient Name -</span> John Doe &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 300px;">Mobile No:</span> 1234567890</p>
+            <p><span>Patient ID -</span> <span id="patient-id"></span> &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Date:</span> <span id="currentDate"></span></p>
+            <p><span>Patient Name -</span> <span id="patient-name"></span> &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 300px;">Mobile No:</span> <span id="patient-mobile"></span></p>
         </div>
         <hr>
 
@@ -279,11 +279,22 @@
 
     <!-- Buttons for Adding Items and Printing -->
     <div class="buttons">
-        
+
+        <button onclick="window.location.href='./main.html';">🏠 Home</button>
         <button onclick="printInvoice()">🖨️ Print Invoice</button>
     </div>
 
     <script>
+       // Retrieve the appointment object from localStorage
+        const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+        // Update the HTML elements with appointment data
+        document.getElementById("patient-id").textContent = appointment.id || "N/A";
+        document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+        document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+
+        // Set current date with the format DD/MM/YYYY
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+
         let itemCounter = 14; // Start counting from the next item
 
         function addNewItem() {

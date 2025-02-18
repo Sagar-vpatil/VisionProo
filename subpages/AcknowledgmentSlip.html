@@ -153,8 +153,8 @@
         <h2>Payment Acknowledgment Slip</h2>
       </div>
       <div class="details">
-        <p><strong>Patient Name:</strong> John Doe</p>
-        <p><strong>Patient ID:</strong> 123456</p>
+        <p><strong>Patient Name:</strong> <span id="patient-name"></span></p>
+        <p><strong>Patient ID:</strong> <span id="patient-id"></span></p>
         <p><strong>Date:</strong> <span id="currentDate"></span></p>
 
         <div class="input-group">
@@ -192,6 +192,7 @@
 
     <!-- Print Button -->
     <div class="text-center mt-3">
+      <button class="btn btn-primary btn-print" onclick="window.location.href='./main.html';">Home</button>
       <button class="btn btn-primary btn-print" onclick="updatePrintValues()">Print Slip</button>
     </div>
   </div>
@@ -199,6 +200,11 @@
   <script>
     // Set current date
     document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+    // Retrieve the appointment object from localStorage
+    const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+     // Update the HTML elements with appointment data
+    document.getElementById("patient-id").textContent = appointment.id || "N/A";
+    document.getElementById("patient-name").textContent = appointment.Name || "N/A";
 
     // Function to update print values and trigger print
     function updatePrintValues() {

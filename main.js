@@ -57,17 +57,19 @@ function createMainWindow() {
         return result.response; // Index of the button clicked
     });
 
-    ipcMain.on('print-page', (event) => {
-        const win = BrowserWindow.getFocusedWindow();
-        if (win) {
-            win.webContents.print({
-                printBackground: true,
-                pageSize: 'A4',
-                // Add these 2 properties
-                enablePrintPreview: true,
-                disablePrintPreviewTimeout: 0
-              }, (success) => { /* ... */ });
+    ipcMain.on('print-page', async(event) => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) {
+        try {
+            const pdfPath = path.join(app.getPath('desktop'), 'output.pdf');
+            const data = await focusedWindow.webContents.printToPDF({});
+            fs.writeFileSync(pdfPath, data);
+            shell.openPath(pdfPath); // Open in the default PDF viewer
+        } catch (error) {
+            console.error('Print failed:', error);
+            dialog.showErrorBox('Print Error', `Failed to print: ${error.message}`);
         }
+    }
     });
     
     

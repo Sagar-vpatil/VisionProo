@@ -352,6 +352,8 @@ async function savePatientHistory(getCondition) {
       LeftLPower : document.getElementById("LeftLPower").value,
       RightAConstant : document.getElementById("RightAConstant").value,
       LeftAConstant : document.getElementById("LeftAConstant").value,
+      RightIOL : document.getElementById("RightIOL").value,
+      LeftIOL : document.getElementById("LeftIOL").value,
     }
 
     console.log(aScanTable);
