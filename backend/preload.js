@@ -8,5 +8,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     showSuccessBox: (title, content) => ipcRenderer.invoke('show-success-box', title, content),
     showMessageBox: (type, message, title, buttons) =>
         ipcRenderer.invoke("showMessageBox", type, message, title, buttons),
-    printPage: () => ipcRenderer.send('print-page'),
+    printPage: (patientId, date, docName) => ipcRenderer.send('print-page', patientId, date, docName),
+    getPatientPdfRecords: (patientId) => ipcRenderer.invoke('get-patient-pdf-records', patientId),
+    openPdf: (pdfPath) => ipcRenderer.send('open-pdf', pdfPath),
+    deletePdf: (pdfPath) => ipcRenderer.invoke("delete-pdf", pdfPath),
 });

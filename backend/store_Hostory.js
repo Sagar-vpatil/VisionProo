@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load the patient history when the page is loaded
   loadPatientHistory(appointment.id);
 
+  loadPatientPdfRecords("P"+appointment.id);
+
    // Remove the Local Storage variable openHistory_Status
    localStorage.removeItem("openHistory");
    // get Local Storage variable openHistory to Active or not
@@ -839,4 +841,90 @@ function loadPatientHistoryData() {
   } catch (e) {
     console.error("An error occurred while loading patient history data", e);
   }
+}
+
+
+async function loadPatientPdfRecords(patientId) {
+  const records = await window.electronAPI.getPatientPdfRecords(patientId);
+  const tableBody = document.getElementById("pdfHistoryTable");
+  tableBody.innerHTML = ""; // Clear old records
+
+  if (records.length === 0) {
+      tableBody.innerHTML = "<tr><td colspan='3'>No records found</td></tr>";
+      return;
+  }
+
+  // Group records by date
+  const groupedRecords = {};
+  records.forEach(record => {
+      if (!groupedRecords[record.date]) {
+          groupedRecords[record.date] = [];
+      }
+      groupedRecords[record.date].push(...record.pdfs);
+  });
+
+  // Create rows for each date
+  Object.keys(groupedRecords).forEach(date => {
+      const pdfs = groupedRecords[date];
+      let row = document.createElement("tr"); // Use 'let' to allow reassignment
+
+      // Create the date cell with rowspan
+      const dateCell = document.createElement("td");
+      dateCell.textContent = date;
+      dateCell.setAttribute("rowspan", pdfs.length);
+      row.appendChild(dateCell);
+
+      // Create cells for each PDF
+      pdfs.forEach((pdf, index) => {
+          if (index > 0) {
+              // For subsequent PDFs, create a new row
+              row = document.createElement("tr");
+          }
+
+          // PDF Name Cell
+          const pdfCell = document.createElement("td");
+          const pdfLink = document.createElement("a");
+          pdfLink.href = "#";
+          pdfLink.classList.add("pdf-link");
+          pdfLink.setAttribute("data-path", pdf.path);
+          pdfLink.textContent = pdf.name;
+          pdfCell.appendChild(pdfLink);
+          row.appendChild(pdfCell);
+
+          // Delete Button Cell
+          const deleteCell = document.createElement("td");
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Delete";
+          deleteButton.classList.add("btn", "btn-danger", "delete-button");
+          deleteButton.setAttribute("data-path", pdf.path);
+          deleteCell.appendChild(deleteButton);
+          row.appendChild(deleteCell);
+
+          tableBody.appendChild(row);
+      });
+  });
+
+  // Add event listeners to dynamically generated PDF links
+  document.querySelectorAll(".pdf-link").forEach(link => {
+      link.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent default anchor action
+          const pdfPath = event.target.getAttribute("data-path");
+          window.electronAPI.openPdf(pdfPath);
+      });
+  });
+
+  // Add event listeners to dynamically generated delete buttons
+  document.querySelectorAll(".delete-button").forEach(button => {
+      button.addEventListener("click", (event) => {
+          const pdfPath = event.target.getAttribute("data-path");
+          if (confirm("Are you sure you want to delete this PDF?")) {
+              window.electronAPI.deletePdf(pdfPath).then(() => {
+                  // Reload the records after deletion
+                  loadPatientPdfRecords(patientId);
+              }).catch(error => {
+                  console.error("Error deleting PDF:", error);
+              });
+          }
+      });
+  });
 }

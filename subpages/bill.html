@@ -340,8 +340,16 @@
         }
     
         function printInvoice() {
-            window.print();
-        }
+           // Print the acknowledgment slip
+            const patientId = "P"+appointment.id;
+            // Get todays date with dd-mm-yyyy format
+            const today = new Date();
+            const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+            const Docname = patientId+"_Bill" + "_" + date;
+            console.log(patientId,date,Docname);
+
+            window.electronAPI.printPage(patientId, date, Docname);
+                }
     </script>
     
 </body>

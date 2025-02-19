@@ -324,12 +324,23 @@
 
     <!-- Print Button -->
     <div class="text-center mt-4 no-print">
-        <button onclick="window.print()" class="btn btn-primary">Print</button>
+        <button onclick="printFunction()" class="btn btn-primary">Print</button>
         <button onclick="window.location.href='./main.html';" class="btn btn-primary">Home</button>
     </div>
 </div>
 
 <script>
+     function printFunction() {
+            const patientId = "P"+appointment.id;
+            // Get todays date with dd-mm-yyyy format
+            const today = new Date();
+            const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+            const Docname = patientId+"_DischargeCard" + "_" + date;
+
+            console.log(patientId,date,Docname);
+
+            window.electronAPI.printPage(patientId, date, Docname);
+        }
      // Retrieve the appointment object from localStorage
      const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
 

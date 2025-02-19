@@ -719,11 +719,22 @@
     </div>
 
      <!-- Print Button -->
-     <button class="print-btn" onclick="electronAPI.printPage()">Print</button>
+     <button class="print-btn" onclick="printFunction()">Print</button>
      <!-- Home Button -->
      <a href="../subpages/main.html" class="btn" style="background: #f44336;">Home</a>
 
      <script>
+        function printFunction() {
+            const patientId = "P"+appointment.id;
+            // Get todays date with dd-mm-yyyy format
+            const today = new Date();
+            const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+            const Docname = patientId+"_HistorySlip" + "_" + date;
+
+            console.log(patientId,date,Docname);
+
+            window.electronAPI.printPage(patientId, date, Docname);
+        }
 
         // Load the appointment details from localStorage
 

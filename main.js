@@ -57,19 +57,86 @@ function createMainWindow() {
         return result.response; // Index of the button clicked
     });
 
-    ipcMain.on('print-page', async(event) => {
+    ipcMain.on('print-page', async (event, patientId, date, docName) => {
         const focusedWindow = BrowserWindow.getFocusedWindow();
-    if (focusedWindow) {
-        try {
-            const pdfPath = path.join(app.getPath('desktop'), 'output.pdf');
-            const data = await focusedWindow.webContents.printToPDF({});
-            fs.writeFileSync(pdfPath, data);
-            shell.openPath(pdfPath); // Open in the default PDF viewer
-        } catch (error) {
-            console.error('Print failed:', error);
-            dialog.showErrorBox('Print Error', `Failed to print: ${error.message}`);
+        if (focusedWindow) {
+            try {
+                // Define base directory (VisionProo on Desktop)
+                const baseDir = path.join(app.getPath('desktop'), 'VisionProo');
+    
+                // Create the base folder if it doesn't exist
+                if (!fs.existsSync(baseDir)) {
+                    fs.mkdirSync(baseDir);
+                }
+    
+                // Create Patient ID folder
+                const patientDir = path.join(baseDir, patientId);
+                if (!fs.existsSync(patientDir)) {
+                    fs.mkdirSync(patientDir);
+                }
+    
+                // Create Date folder inside Patient ID folder
+                const dateDir = path.join(patientDir, date);
+                if (!fs.existsSync(dateDir)) {
+                    fs.mkdirSync(dateDir);
+                }
+    
+                // Define the PDF filename (Doctor Name included)
+                const pdfFilename = `${docName}.pdf`;
+                const pdfPath = path.join(dateDir, pdfFilename);
+    
+                // Generate PDF
+                const data = await focusedWindow.webContents.printToPDF({});
+                fs.writeFileSync(pdfPath, data);
+    
+                // Open the generated PDF in the default system viewer
+                shell.openPath(pdfPath);
+    
+                // dialog.showMessageBox({
+                //     type: 'info',
+                //     message: `PDF saved successfully at: ${pdfPath}`,
+                //     buttons: ['OK']
+                // });
+    
+            } catch (error) {
+                console.error('Print failed:', error);
+                dialog.showErrorBox('Print Error', `Failed to print: ${error.message}`);
+            }
         }
-    }
+    });
+
+        //  Get Patient PDF Records
+    ipcMain.handle('get-patient-pdf-records', async (_, patientId) => {
+        const visionProoPath = join(app.getPath('desktop'), 'VisionProo', patientId);
+
+        if (!fs.existsSync(visionProoPath)) {
+            return []; // No records found
+        }
+
+        const records = fs.readdirSync(visionProoPath)
+            .filter(file => fs.lstatSync(join(visionProoPath, file)).isDirectory()) // Only get folders (dates)
+            .map(dateFolder => ({
+                date: dateFolder,
+                pdfs: fs.readdirSync(join(visionProoPath, dateFolder))
+                    .filter(file => file.endsWith('.pdf')) // Only get PDF files
+                    .map(file => ({ name: file, path: join(visionProoPath, dateFolder, file) }))
+            }));
+
+        return records;
+    });
+        
+    ipcMain.on('open-pdf', (_, pdfPath) => {
+        shell.openPath(pdfPath);
+    });
+
+    ipcMain.handle("delete-pdf", async (event, pdfPath) => {
+        try {
+            await fs.promises.unlink(pdfPath); // Ensure this returns a promise
+            return { success: true };
+        } catch (error) {
+            console.error("Error deleting PDF:", error);
+            throw error;
+        }
     });
     
     

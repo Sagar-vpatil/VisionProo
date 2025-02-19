@@ -210,7 +210,16 @@
     function updatePrintValues() {
       document.getElementById('printPaymentAmount').textContent = document.getElementById('paymentAmount').value;
       document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
-      window.print();
+
+      // Print the acknowledgment slip
+      const patientId = "P"+appointment.id;
+      // Get todays date with dd-mm-yyyy format
+      const today = new Date();
+      const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+      const Docname = patientId+"_AckSlip" + "_" + date;
+      console.log(patientId,date,Docname);
+
+      window.electronAPI.printPage(patientId, date, Docname);
     }
   </script>
 </body>
