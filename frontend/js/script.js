@@ -26,7 +26,7 @@ sections[0].classList.add('active');
 
 // First block: Options for SPH, CYL, etc.
 const inputs = document.querySelectorAll(
-    "#DV-SPH, #DV-CYL, #NV-SPH, #NV-CYL, #NV-SPH2, #NV-CYL2, #DV-CYL2, #DV-SPH2"
+    "#DVSPH, #DVCYL, #NVSPH, #NVCYL, #NVSPH2, #NVCYL2, #DVCYL2, #DVSPH2"
   );
   const optionsTable = document.getElementById("optionsTable");
   let currentInput = null;
@@ -66,7 +66,7 @@ const inputs = document.querySelectorAll(
 
       // Second block: Axis Options
       const axisInputs = document.querySelectorAll(
-        "#NV-Axis, #NV-Axis2, #DV-Axis, #DV-Axis2"
+        "#NVAxis, #NVAxis2, #DVAxis, #DVAxis2"
       );
       const axisOptionsTable = document.getElementById("axisOptionsTable");
       let currentAxisInput = null;
@@ -101,7 +101,7 @@ const inputs = document.querySelectorAll(
       });
 
       // Third block: VA Options
-      const vaInputs = document.querySelectorAll("#DV-VA, #DV-VA2"); // Corrected input field IDs
+      const vaInputs = document.querySelectorAll("#DVVA, #DVVA2"); // Corrected input field IDs
       const VAoptionsTable = document.getElementById("NV-VATable"); // Table to show options
 
       let activeVaInputField = null;
@@ -136,7 +136,7 @@ const inputs = document.querySelectorAll(
       });
 
       // Fourth block: NVD Options (with correct IDs and positions)
-      const nvdInputs = document.querySelectorAll("#NV-VA, #NV-VA2"); // Corrected input field IDs
+      const nvdInputs = document.querySelectorAll("#NVVA, #NVVA2"); // Corrected input field IDs
       const NVDoptionsTable = document.getElementById("NVDVATable"); // Corrected table ID
       let activeNvdInputField = null;
 

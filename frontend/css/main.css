@@ -489,16 +489,20 @@
         box-sizing: border-box;
       }
 
+
+
+
+
  /* Styling for options table */
-.options-table {
+ .options-table {
   display: none;
   position: absolute;
   background-color: white;
   border: 1px solid #ccc;
   z-index: 1000;
-  max-height: 250px;
+  /* max-height: 400px; */
   overflow-y: auto; /* Allows vertical scrolling */
-  min-width: 150px;
+  min-width: 300pxpx;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -534,14 +538,15 @@
   font-weight: bold;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .options-table {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-  }
-}
+
+
+
+
+
+
+
+
+
 
 
 

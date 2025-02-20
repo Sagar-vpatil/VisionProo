@@ -136,6 +136,16 @@
             .table {
                 margin: 0 auto;
             }
+
+            .navbar .buttons button{
+                display: none;
+            }
+            .hr{
+                display: none;
+            }
+            .date-input{
+                display: none;
+            }
         }
 
         /* A4 size styling */
@@ -176,17 +186,93 @@
             margin: 0;
             font-size: 14px;
         }
+
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            th, td {
+                font-size: 12px;
+                padding: 8px;
+            }
+            input[type="number"] {
+                width: 80px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .section-title {
+                font-size: 14px;
+                padding: 8px;
+            }
+            th, td {
+                font-size: 10px;
+                padding: 5px;
+            }
+            input[type="number"] {
+                width: 70px;
+            }
+        }
+
+
+         /* New CSS for the top navbar image */
+         .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+      
+        }
+        .navbar img {
+            height: 50px; /* Adjust as needed */
+            margin-left: 20px; /* Space between logo and other elements */
+        }
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar .buttons button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+       
     </style>
 </head>
 <body>
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <!-- Logo and Hospital Name -->
+    <div style="display: flex; align-items: center;">
+       
+      
+    </div>
+       
+    </div>
 
+    <!-- Image on the Right Side -->
+    
+
+    <!-- Action Buttons -->
+    <div class="buttons" style="margin-bottom: 10px;">
+        <button onclick="window.location.href='./main.html';">🏠 Home</button>
+        <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
+    </div>
+</nav>
+
+<hr class="hr" style="color: #000;">
 <div class="container">
     <!-- Header Section -->
     <div class="header">
         <div class="logo">
             <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
         </div>
-        <div class="hospital-name">
+        <div class="hospital-name" style="margin-right: 70px;">
             रवीकल्प हॉस्पिटल
             <div class="sub-heading">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
         </div>
@@ -204,8 +290,8 @@
     <p><strong>Address:</strong> <span id="patient-address"></span></p>
     <p>
         <strong>DOB:</strong> <span id="patient-dob"></span>
-        <strong style="margin-left: 140px;">Date of Addmidion:</strong> 01-01-2025 
-        <strong style="margin-left:50px;">Date of Discharge:</strong> 01-02-2025
+        <strong style="margin-left: 140px;">Date of Addmidion:</strong> <input type="date" class="date-input" id="admissionDate">
+        <strong style="margin-left:50px;">Date of Discharge:</strong>  <input type="date" class="date-input" id="dischargeDate">
     </p>
     <p><strong>Diagnosis:</strong> <span class="show-diagnosis"></span> </p>
    
@@ -271,7 +357,7 @@
             </ol>
         </div>
     </div>
-    <hr style="border: 2px solid #000;">
+
     <!-- Eye Exam Section -->
     <h4 class="text-center mt-4" style="margin-top: 30px;" id="A-Scan-Heading">A-Scan Report</h4>
     <table class="table" style="width: 450px; margin: 0 auto;" id="A-Scan-Table">
@@ -323,10 +409,7 @@
     </div>
 
     <!-- Print Button -->
-    <div class="text-center mt-4 no-print">
-        <button onclick="printFunction()" class="btn btn-primary">Print</button>
-        <button onclick="window.location.href='./main.html';" class="btn btn-primary">Home</button>
-    </div>
+   
 </div>
 
 <script>

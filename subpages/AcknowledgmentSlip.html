@@ -81,6 +81,12 @@
       .doctor-signature {
         margin-top: 50px;
       }
+      .navbar .buttons button{
+                display: none;
+            }
+            .hr{
+                display: none;
+            }
     }
 
     /* A4 size styling */
@@ -95,7 +101,7 @@
     box-shadow: none;
     border: 2px solid #000;
     margin: auto;
-    padding: 20px;
+  
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,15 +139,65 @@
             margin: 0;
             font-size: 14px;
         }
+        
+        /* New CSS for the top navbar image */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+            height: 80px;
+      
+        }
+        .navbar img {
+            height: 50px; /* Adjust as needed */
+            margin-left: 20px; /* Space between logo and other elements */
+        }
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar .buttons button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+       
   </style>
 </head>
 <body>
+
+     <!-- Top Navigation Bar -->
+     <nav class="navbar">
+      <!-- Logo and Hospital Name -->
+      <div style="display: flex; align-items: center;">
+         
+        
+      </div>
+         
+      </div>
+
+      <!-- Image on the Right Side -->
+      
+
+      <!-- Action Buttons -->
+      <div class="buttons" style="margin-bottom: 10px;">
+          <button onclick="window.location.href='./main.html';">🏠 Home</button>
+          <button onclick="updatePrintValues()">🖨️ Print </button>
+      </div>
+  </nav>
+  <hr class="hr">
   <div class="container">
     <div class="header">
         <div class="logo">
             <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
         </div>
-        <div class="hospital-name">
+        <div class="hospital-name" style="margin-right: 70px;">
             रवीकल्प हॉस्पिटल
             <div class="sub-heading">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
         </div>
@@ -175,7 +231,7 @@
           <span class="print-value" id="printPaymentMode"></span>
         </div>
         
-        <p><strong>Transaction ID:</strong> TXN123456789</p>
+     
         <p><strong>Status:</strong> <span class="text-success status">Success</span></p>
       </div>
 
@@ -191,10 +247,7 @@
     </div>
 
     <!-- Print Button -->
-    <div class="text-center mt-3">
-      <button class="btn btn-primary btn-print" onclick="window.location.href='./main.html';">Home</button>
-      <button class="btn btn-primary btn-print" onclick="updatePrintValues()">Print Slip</button>
-    </div>
+    
   </div>
 
   <script>

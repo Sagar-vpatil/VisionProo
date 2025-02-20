@@ -158,11 +158,67 @@
                 display: block;
                 margin-bottom: 10px;
             }
-            
+            .navbar .buttons button{
+                display: none;
+            }
+            .hr{
+                display: none;
+            }
+           
         }
+
+        /* New CSS for the top navbar image */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+      
+        }
+        .navbar img {
+            height: 50px; /* Adjust as needed */
+            margin-left: 20px; /* Space between logo and other elements */
+        }
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar .buttons button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+       
     </style>
 </head>
 <body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <!-- Logo and Hospital Name -->
+        <div style="display: flex; align-items: center;">
+           
+          
+        </div>
+           
+        </div>
+
+        <!-- Image on the Right Side -->
+        
+
+        <!-- Action Buttons -->
+        <div class="buttons" style="margin-bottom: 10px;">
+            <button onclick="window.location.href='./main.html';">🏠 Home</button>
+            <button onclick="printInvoice()">🖨️ Print Invoice</button>
+        </div>
+    </nav>
+    <hr class="hr">
+
     <div class="invoice-container">
         <!-- Header Section -->
         <div class="header"  style="height:73px ;">
@@ -172,15 +228,9 @@
                     <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
                 </div>
                 <div class="hospital-name">रवीकल्प  हॉस्पिटल <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
-                
-             
             </div>
-            
         </div>
 
-        <!-- Subheading Below the Logo and Hospital Name -->
-
-       
         <!-- Invoice Details -->
         <div class="invoice-details">
             <p><span>Patient ID -</span> <span id="patient-id"></span> &nbsp;&nbsp;&nbsp;&nbsp; <span style="margin-left: 400px;">Date:</span> <span id="currentDate"></span></p>
@@ -189,82 +239,84 @@
         <hr>
 
         <!-- Invoice Table -->
-        <table id="invoiceTable" style="width: 630px; margin-left: 80px; border:4px;">
+        <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
             <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>PARTICULAR</th>
-                    <th>PRICE (₹)</th>
+                <tr style="border: 2px solid black; background-color: #f2f2f2;">
+                    <th style="border: 2px solid black; padding: 10px;">NO</th>
+                    <th style="border: 2px solid black; padding: 10px;">PARTICULAR</th>
+                    <th style="border: 2px solid black; padding: 10px;">PRICE (₹)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Consultation</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">1</td>
+                    <td style="border: 2px solid black; padding: 10px;">Consultation</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Follow Up</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">2</td>
+                    <td style="border: 2px solid black; padding: 10px;">Follow Up</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Stay Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">3</td>
+                    <td style="border: 2px solid black; padding: 10px;">Stay Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Nursing Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">4</td>
+                    <td style="border: 2px solid black; padding: 10px;">Nursing Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Surgeon Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">5</td>
+                    <td style="border: 2px solid black; padding: 10px;">Surgeon Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Anesthesia Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">6</td>
+                    <td style="border: 2px solid black; padding: 10px;">Anesthesia Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Operation Theatre Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">7</td>
+                    <td style="border: 2px solid black; padding: 10px;">Operation Theatre Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Visiting DR. Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">8</td>
+                    <td style="border: 2px solid black; padding: 10px;">Visiting DR. Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Pathology Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">9</td>
+                    <td style="border: 2px solid black; padding: 10px;">Pathology Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Visit Charge</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">10</td>
+                    <td style="border: 2px solid black; padding: 10px;">Visit Charge</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>11</td>
-                    <td>O.L. Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">11</td>
+                    <td style="border: 2px solid black; padding: 10px;">O.L. Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>12</td>
-                    <td>Healon Charges</td>
-                    <td><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">12</td>
+                    <td style="border: 2px solid black; padding: 10px;">Healon Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
-                <tr>
-                    <td>13</td>
-                    <td>Other Charges/Medical/A-scan</td>
-                    <td class="pr"style="width:70px;"><input type="number" value="" oninput="calculateTotal()"></td>
+                <tr style="border: 2px solid black;">
+                    <td style="border: 2px solid black; padding: 10px;">13</td>
+                    <td style="border: 2px solid black; padding: 10px;">Other Charges/Medical/A-scan</td>
+                    <td style="border: 2px solid black; padding: 10px; width: 70px;"><input type="number" value="" oninput="calculateTotal()"></td>
                 </tr>
             </tbody>
         </table>
+        
+        
 
         <!-- Total Amount -->
         <p class="total" style="margin-right: 100px;">TOTAL - ₹0</p>
@@ -278,12 +330,7 @@
     </div>
 
     <!-- Buttons for Adding Items and Printing -->
-    <div class="buttons">
-
-        <button onclick="window.location.href='./main.html';">🏠 Home</button>
-        <button onclick="printInvoice()">🖨️ Print Invoice</button>
-    </div>
-
+   
     <script>
        // Retrieve the appointment object from localStorage
         const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
