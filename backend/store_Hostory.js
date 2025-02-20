@@ -573,7 +573,11 @@ async function loadPatientHistory(patientId) {
 
       querySnapshot.forEach((doc) => {
           const data = doc.data();
-          const date = data.timestamp.toDate().toLocaleDateString();
+          const date = data.timestamp.toDate().toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          });
           const symptoms = data.selectedSymptoms ? data.selectedSymptoms.join(", ") : "N/A";
           const patientId = data.patientId;
 
@@ -608,6 +612,7 @@ async function openPatientHistory(date) {
 
   // Set Local Storage variable openHistory_Status to Active
   localStorage.setItem("openHistory_Status", "Active");
+  console.log(date);
 
   // Get the patient history from Firestore
   await getPatientHistory(date);
