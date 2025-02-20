@@ -920,16 +920,26 @@ async function loadPatientPdfRecords(patientId) {
 
   // Add event listeners to dynamically generated delete buttons
   document.querySelectorAll(".delete-button").forEach(button => {
-      button.addEventListener("click", (event) => {
+      button.addEventListener("click", async(event) => {
           const pdfPath = event.target.getAttribute("data-path");
-          if (confirm("Are you sure you want to delete this PDF?")) {
+          const response = await window.electronAPI.showMessageBox(
+            "warning",
+            "Are you sure you want to delete this PDF?",
+            "Delete PDF",
+            ["Yes", "No"]
+           );
+        
+          if (response === 1) {
+              return;
+          }
+          
               window.electronAPI.deletePdf(pdfPath).then(() => {
                   // Reload the records after deletion
                   loadPatientPdfRecords(patientId);
               }).catch(error => {
                   console.error("Error deleting PDF:", error);
               });
-          }
+          
       });
   });
 }

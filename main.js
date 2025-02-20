@@ -34,27 +34,55 @@ function createMainWindow() {
     
     // Handle IPC communication (Example)
     // Show Error dialog box
-    ipcMain.handle('show-error-box', (event, title, content) => {
-        dialog.showErrorBox(title, content);
+    ipcMain.handle('show-error-box', async (event, title, content) => {
+        const win = BrowserWindow.getFocusedWindow(); // Get the active window
+    
+        if (!win) {
+            console.error("No active window found for modal dialog.");
+            return; // Prevent errors if no window is focused
+        }
+    
+        await dialog.showMessageBox(win, { // Attach to the window to make it modal
+            type: 'error',
+            title: title,
+            message: content,
+            modal: true // Ensures the dialog is modal
+        });
     });
+    // Show Success dialog box    
 
-    // Show Success dialog box
-    ipcMain.handle('show-success-box', (event, title, content) => {
-    dialog.showMessageBox({
-        type: 'info',
-        title: title,
-        message: content
+    ipcMain.handle('show-success-box', async (event, title, content) => {
+        const win = BrowserWindow.getFocusedWindow(); // Get the active window
+    
+        if (!win) {
+            console.error("No active window found for modal dialog.");
+            return; // Prevent issues if no window is focused
+        }
+    
+        await dialog.showMessageBox(win, { // Attach the dialog to the window
+            type: 'info',
+            title: title,
+            message: content,
+            modal: true // Ensures the dialog is modal
+        });
     });
-});
-    // Show Info dialog box
-    ipcMain.handle("showMessageBox", async (_, type, message, title, buttons) => {
-        const result = await dialog.showMessageBox({
-            type: type, // e.g., "info", "warning", "error"
+    ipcMain.handle("showMessageBox", async (event, type, message, title, buttons) => {
+        const win = BrowserWindow.getFocusedWindow(); // Get the active window
+
+        if (!win) {
+            console.error("No active window found for modal dialog.");
+            return -1; // Prevent errors if no window is focused
+        }
+
+        const result = await dialog.showMessageBox(win, { // Attach to the main window
+            type: type,
             message: message,
             title: title,
-            buttons: buttons, // e.g., ["Yes", "No"]
+            buttons: buttons,
+            modal: true // Ensures it blocks interactions with the rest of the app
         });
-        return result.response; // Index of the button clicked
+
+        return result.response;
     });
 
     ipcMain.on('print-page', async (event, patientId, date, docName) => {
