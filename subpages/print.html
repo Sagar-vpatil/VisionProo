@@ -5,24 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            width: 210mm;
-            height: 297mm;
-            box-sizing: border-box;
+       /* New CSS for the top navbar image */
+       .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+      
         }
+        .navbar img {
+            height: 50px; /* Adjust as needed */
+            margin-left: 20px; /* Space between logo and other elements */
+        }
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar .buttons button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
+
         .page {
-            width: 210mm;
-            height: 197mm;
+            width: 90%;
+            max-width: 210mm;
+            min-height: 297mm;
             padding: 20mm;
-            margin: 0 auto;
+            margin: 20px auto;
             box-shadow: 0 0 5px rgba(5, 0, 0, 0.1);
             background: #fff;
+           
+            flex-direction: column;
             align-items: center;
-            margin-left: 230px;
         }
         .header {
             display: flex;
@@ -125,6 +147,21 @@
             font-size: 14px;
         }
         @media print {
+            .navbar .buttons button{
+                display: none;
+            }
+            .hr{
+                display: none;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+            }
             body {
                 margin: 0;
                 width: 210mm;
@@ -154,7 +191,7 @@
     }
     @page {
         size: A4;
-        margin: 0;
+        margin: 20px;
     }
 
         }
@@ -201,9 +238,39 @@
             color: #333;
             margin-top: 10px; /* Space between hospital name and subheading */
         }
+
+
+
+
+
+        
     </style>
 </head>
 <body>
+
+ <!-- Top Navigation Bar -->
+ <nav class="navbar">
+    <!-- Logo and Hospital Name -->
+    <div style="display: flex; align-items: center;">
+       
+      
+    </div>
+       
+    </div>
+
+    <!-- Image on the Right Side -->
+    
+
+    <!-- Action Buttons -->
+    <div class="buttons" style="margin-bottom: 10px;">
+        <button onclick="window.location.href='./main.html';">🏠 Home</button>
+        <button onclick="printFunction()">🖨️ Print </button>
+    </div>
+</nav>
+<hr class="hr">
+
+
+
     <div class="page">
         <div class="heade"  style="height:90px ; margin-bottom: 0px;">
             <!-- Logo and Hospital Name in One Line -->
@@ -471,110 +538,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="section5" class="section">
 
-                    <div class="patient-details">
-                        
-                            <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
-
-                            <p class="complaints show-treatment" style="margin-right: 120px;">
-                                <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
-                            </p>
-                        
-                    </div>
-                    <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure</h3>
-
-                    <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
-                        <thead>
-                          <tr>
-                            <th colspan="2">Right Eye</th>
-                            <th colspan="2">Left Eye</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="input-wrapper">
-                              <span id="RightmmHg">Data</span>
-                              <span>mmHg</span>
-                            </td>
-                            <td><span id="RightmmHgTime">00:00</span></td>
-                            <td class="input-wrapper">
-                              <span id="LeftmmHg">Data</span>
-                              <span>mmHg</span>
-                            </td>
-                            <td><span id="LeftmmHgTime">00:00</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <h3 id="A-Scan-Heading">A-Scan</h3>
-                      <table style="width: 280px; margin-left: 90px;" id="A-Scan-Table">
-                        <thead>
-                          <tr>
-                            <th></th>
-                            <th>Right Eye</th>
-                            <th>Left Eye</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>K1</td>
-                            <td id="RightK1"><span>Data</span></td>
-                            <td id="LeftK1"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>K2</td>
-                            <td id="RightK2"><span>Data</span></td>
-                            <td id="LeftK2"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>LT</td>
-                            <td id="RightLT"><span>Data</span></td>
-                            <td id="LeftLT"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>AL</td>
-                            <td id="RightAL"><span>Data</span></td>
-                            <td id="LeftAL"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>ACD</td>
-                            <td id="RightACD"><span>Data</span></td>
-                            <td id="LeftACD"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>L.Power</td>
-                            <td id="RightLPower"><span>Data</span></td>
-                            <td id="LeftLPower"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>A.Constant</td>
-                            <td id="RightAConstant"><span>Data</span></td>
-                            <td id="LeftAConstant"><span>Data</span></td>
-                          </tr>
-                          <tr>
-                            <td>IOL</td>
-                            <td id="RightIOL"><span>Data</span></td>
-                            <td id="LeftIOL"><span>Data</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="patient-details Pre-Operative-Details">
-                        
-                        <p class="complaints show-BP" style="margin-right: 120px;">
-          
-                        </p>
-
-                        <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
-                            
-                        </p>
-                        <p class="complaints show-SAC" style="margin-right: 120px;">
-                            
-                        </p>
-                        <p class="complaints show-NCT" style="margin-right: 120px;">
-                          
-                      </p>                                          
-                </div>
                 <h3 id="Topography-Heading">Topography</h3>
                 <table border="1" style="width: 280px; margin-left: 120px;" id="Topography-Table">
                   <thead>
@@ -691,6 +655,111 @@
                 </tbody>
               </table>
 
+                <div id="section5" class="section">
+
+                    <div class="patient-details">
+                        
+                            <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
+
+                            <p class="complaints show-treatment" style="margin-right: 120px;">
+                                <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
+                            </p>
+                        
+                    </div>
+                    <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure</h3>
+
+                    <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
+                        <thead>
+                          <tr>
+                            <th colspan="2">Right Eye</th>
+                            <th colspan="2">Left Eye</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="input-wrapper">
+                              <span id="RightmmHg">Data</span>
+                              <span>mmHg</span>
+                            </td>
+                            <td><span id="RightmmHgTime">00:00</span></td>
+                            <td class="input-wrapper">
+                              <span id="LeftmmHg">Data</span>
+                              <span>mmHg</span>
+                            </td>
+                            <td><span id="LeftmmHgTime">00:00</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <h3 id="A-Scan-Heading">A-Scan</h3>
+                      <table style="width: 280px; margin-left: 90px;" id="A-Scan-Table">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Right Eye</th>
+                            <th>Left Eye</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>K1</td>
+                            <td id="RightK1"><span>Data</span></td>
+                            <td id="LeftK1"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>K2</td>
+                            <td id="RightK2"><span>Data</span></td>
+                            <td id="LeftK2"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>LT</td>
+                            <td id="RightLT"><span>Data</span></td>
+                            <td id="LeftLT"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>AL</td>
+                            <td id="RightAL"><span>Data</span></td>
+                            <td id="LeftAL"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>ACD</td>
+                            <td id="RightACD"><span>Data</span></td>
+                            <td id="LeftACD"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>L.Power</td>
+                            <td id="RightLPower"><span>Data</span></td>
+                            <td id="LeftLPower"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>A.Constant</td>
+                            <td id="RightAConstant"><span>Data</span></td>
+                            <td id="LeftAConstant"><span>Data</span></td>
+                          </tr>
+                          <tr>
+                            <td>IOL</td>
+                            <td id="RightIOL"><span>Data</span></td>
+                            <td id="LeftIOL"><span>Data</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="patient-details Pre-Operative-Details">
+                        
+                        <p class="complaints show-BP" style="margin-right: 120px;">
+          
+                        </p>
+
+                        <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
+                            
+                        </p>
+                        <p class="complaints show-SAC" style="margin-right: 120px;">
+                            
+                        </p>
+                        <p class="complaints show-NCT" style="margin-right: 120px;">
+                          
+                      </p>                                          
+                </div>
+              
 
                     <h3 id="Medicines-Heading">Medicines Prescribed:</h3>
                     <table class="table-container table-responsive" id="Medicines-Table">
@@ -713,16 +782,14 @@
             
         </div>
 
-        <div class="footer">
-         
+        <div class="footer" style="color: black;">
+            <div class="signature" style="margin-right: 30px;">
+                <p>Dr. Alvin R Rane</p>
+            </div>
         </div>
     </div>
 
-     <!-- Print Button -->
-     <button class="print-btn" onclick="printFunction()">Print</button>
-     <!-- Home Button -->
-     <a href="../subpages/main.html" class="btn" style="background: #f44336;">Home</a>
-
+    
      <script>
         function printFunction() {
             const patientId = "P"+appointment.id;
