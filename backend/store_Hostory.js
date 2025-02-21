@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load the patient history when the page is loaded
   loadPatientHistory(appointment.id);
 
+
   loadPatientPdfRecords("P"+appointment.id);
 
    // Remove the Local Storage variable openHistory_Status
@@ -43,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("alertMessage").textContent = `Patient History Opened of Date: ${tempDate}`;
 
     }
+
+    loadPatientHistoryData();
 });
 
 
@@ -664,6 +667,20 @@ function loadPatientHistoryData() {
 
     console.log("Selected Symptoms:", selectedSymptoms);
 
+    // Loop through each stored symptom
+    selectedSymptoms.forEach((symptom) => {
+      const baseName = symptom.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the symptom already exists
+      const existingSymptom = Array.from(document.querySelectorAll(".symptoms"))
+          .find((item) => item.textContent.trim() === symptom);
+
+      if (!existingSymptom) {
+          // Simulate adding symptom via input
+          addOptionFromStorage(baseName,"symptoms");
+      }
+  });
+
 
     // If there are selected symptoms, update the UI
     selectedSymptoms.forEach((symptom) => {
@@ -675,6 +692,20 @@ function loadPatientHistoryData() {
       }
     });
 
+    // Loop through each stored medical history
+    selectedMedicalHistory.forEach((medicalHistory) => {
+      const baseName = medicalHistory.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the medical history already exists
+      const existingMedicalHistory = Array.from(document.querySelectorAll(".medicalHistory"))
+          .find((item) => item.textContent.trim() === medicalHistory);
+
+      if (!existingMedicalHistory) {
+          // Simulate adding medical history via input
+          addOptionFromStorage2(baseName,"medicalHistory");
+      }
+  });
+
     // If there are selected medical history, update the UI
     selectedMedicalHistory.forEach((medicalHistory) => {
       const medicalHistoryElement = Array.from(document.querySelectorAll(".medicalHistory"))
@@ -684,6 +715,20 @@ function loadPatientHistoryData() {
         medicalHistoryElement.classList.add("selected");
       }
     });
+
+    // Loop through each stored surgical history
+    selectedSurgicalHistory.forEach((surgicalHistory) => {
+      const baseName = surgicalHistory.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the surgical history already exists
+      const existingSurgicalHistory = Array.from(document.querySelectorAll(".surgicalHistory"))
+          .find((item) => item.textContent.trim() === surgicalHistory);
+
+      if (!existingSurgicalHistory) {
+          // Simulate adding surgical history via input
+          addOptionFromStorage(baseName,"surgicalHistory");
+      }
+  });
 
     // If there are selected surgical history, update the UI
     selectedSurgicalHistory.forEach((surgicalHistory) => {
@@ -695,6 +740,20 @@ function loadPatientHistoryData() {
       }
     });
 
+    // Loop through each stored diagnosis
+    selectedDiagnosis.forEach((diagnosis) => {
+      const baseName = diagnosis.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the diagnosis already exists
+      const existingDiagnosis = Array.from(document.querySelectorAll(".diagnosis"))
+          .find((item) => item.textContent.trim() === diagnosis);
+
+      if (!existingDiagnosis) {
+          // Simulate adding diagnosis via input
+          addOptionFromStorage(baseName,"diagnosis");
+      }
+  });
+
     // If there are selected diagnosis, update the UI
     selectedDiagnosis.forEach((diagnosis) => {
       const diagnosisElement = Array.from(document.querySelectorAll(".diagnosis"))
@@ -705,6 +764,20 @@ function loadPatientHistoryData() {
       }
     });
 
+    // Loop through each stored investigation
+    selectedInvestigation.forEach((investigation) => {
+      const baseName = investigation.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the investigation already exists
+      const existingInvestigation = Array.from(document.querySelectorAll(".investigation"))
+          .find((item) => item.textContent.trim() === investigation);
+
+      if (!existingInvestigation) {
+          // Simulate adding investigation via input
+          addOptionFromStorage2(baseName,"investigation");
+      }
+  });
+
     // If there are selected investigation, update the UI
     selectedInvestigation.forEach((investigation) => {
       const investigationElement = Array.from(document.querySelectorAll(".investigation"))
@@ -714,6 +787,20 @@ function loadPatientHistoryData() {
         investigationElement.classList.add("selected");
       }
     });
+
+    // Loop through each stored advice
+    selectedAdvices.forEach((advice) => {
+      const baseName = advice.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the advice already exists
+      const existingAdvice = Array.from(document.querySelectorAll(".advice"))
+          .find((item) => item.textContent.trim() === advice);
+
+      if (!existingAdvice) {
+          // Simulate adding advice via input
+          addOptionFromStorage2(baseName,"advice");
+      }
+  });
 
     // If there are selected advices, update the UI
     selectedAdvices.forEach((advice) => {

@@ -456,7 +456,7 @@
       <h2>Both Eyes Symptoms</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
-        <button type="button" class="btn">Add Option </button>
+        <button type="button" class="btn" onclick="addOption(this,'symptoms')">Add Option </button>
       </div>
       <div class="options-container active">
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (BE)</div>
@@ -505,7 +505,7 @@
       <h2>Left Eye Symptoms</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
-        <button type="button" class="btn">Add Option </button>
+        <button type="button" class="btn" onclick="addOption(this,'symptoms')">Add Option </button>
       </div>
       <!-- Content for Left Eye Symptoms -->
       <div class="options-container active ">
@@ -548,7 +548,7 @@
       <h2>Right Eye Symptoms</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Symptoms Option">
-        <button type="button" class="btn">Add Option </button>
+        <button type="button" class="btn" onclick="addOption(this,'symptoms')">Add Option </button>
       </div>
       <div class="options-container active ">
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (RE)</div>
@@ -594,7 +594,7 @@
       
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Medical History Option">
-    <button type="button" class="btn">Add Option </button>
+    <button type="button" class="btn" onclick="addOption2(this,'medicalHistory')">Add Option </button>
   </div>
       <div class="options-container" style="display: flex;">
         <div class="medicalHistory" onclick="toggleMedicalHistory(this)">Diabetes</div>
@@ -630,7 +630,7 @@
   <h2>Both Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
-    <button type="button" class="btn">Add Option </button>
+    <button type="button" class="btn" onclick="addOption(this,'surgicalHistory')">Add Option </button>
   </div>
       <div class="options-container active">
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(BE)</div>
@@ -644,7 +644,7 @@
   <h2>Right Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
-    <button type="button" class="btn">Add Option </button>
+    <button type="button" class="btn" onclick="addOption(this,'surgicalHistory')">Add Option </button>
   </div>
       <div class="options-container active">
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(RE)</div>
@@ -659,7 +659,7 @@
   <h2>Left Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
-    <button type="button" class="btn">Add Option </button>
+    <button type="button" class="btn" onclick="addOption(this,'surgicalHistory')">Add Option </button>
   </div>
       <div class="options-container active">
         <div class="surgicalHistory" onclick="toggleSurgicalHistory(this)">Cataract Surgery(LE)</div>
@@ -2044,7 +2044,7 @@ overflow-y: auto; width: 50%;">
       <h2>Both Eyes Diagnosis</h2>
        <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
-        <button type="button" class="btn">Add Option</button>
+        <button type="button" class="btn" onclick="addOption(this,'diagnosis')">Add Option</button>
     </div>
       <div id="diagnosis-options" class="options-container" style="display: flex;">
         <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia(BE)</div>
@@ -2085,7 +2085,7 @@ overflow-y: auto; width: 50%;">
       <h2>Right Eye Diagnosis</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
-        <button type="button" class="btn">Add Option</button>
+        <button type="button" class="btn" onclick="addOption(this,'diagnosis')">Add Option</button>
     </div>
       <div id="diagnosis-options" class="options-container" style="display: flex; flex-wrap: wrap;">
         <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia (RE)</div>
@@ -2125,7 +2125,7 @@ overflow-y: auto; width: 50%;">
       <h2>Left Eye Diagnosis</h2>
       <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Diagnosis Option">
-        <button type="button" class="btn">Add Option</button>
+        <button type="button" class="btn" onclick="addOption(this,'diagnosis')">Add Option</button>
     </div>
       <div id="diagnosis-options" class="options-container" style="display: flex; flex-wrap: wrap;">
         <div class="diagnosis" onclick="toggleDiagnosis(this)">Myopia (LE)</div>
@@ -2226,7 +2226,7 @@ overflow-y: auto; width: 50%;">
     <div class="section-title" style="font-size: 25px;">Investigation:</div>
     <div class="flex-container">
       <input type="text" class="input-field" placeholder="Enter New Investigation Option">
-      <button type="button" class="btn">Add Option </button>
+      <button type="button" class="btn" onclick="addOption2(this,'investigation')">Add Option </button>
     </div>
 
     <div class="tags-container" id="investigation-tags">
@@ -2273,7 +2273,7 @@ overflow-y: auto; width: 50%;">
     <div class="section-title" style="font-size: 25px;">Advice:</div>
     <div class="flex-container">
         <input type="text" class="input-field" placeholder="Enter New Advice Option">
-        <button type="button" class="btn">Add Option</button>
+        <button type="button" class="btn" onclick="addOption2(this,'advice')">Add Option</button>
     </div>
     <div class="tags-container" id="advice-tags">
       <div id="diagnosis-options" class="options-container" style="display: flex;">
