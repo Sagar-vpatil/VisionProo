@@ -281,7 +281,15 @@
 
     
     <div class="tab" id="print-btn">Save and print </div>
+  
   </div>
+
+  <div class="container">
+    <!-- Small Box in the Corner -->
+    
+
+   
+</div>
 
   <!-- ######################### tebs end  ########################### -->
 
@@ -500,7 +508,6 @@
       </div>
 
   </div>
-
   <div id="left" class="symptoms-content">
       <h2>Left Eye Symptoms</h2>
       <div class="flex-container">
@@ -589,7 +596,7 @@
 
 
 
-    <div id="medical-history-section" style="margin-top: 20px;">
+    <div id="medical-history-section" style="margin-top: 20px; ">
       <h3>Medical History</h3>
       
   <div class="flex-container">
@@ -610,6 +617,7 @@
         <div class="medicalHistory" onclick="toggleMedicalHistory(this)">pt is on antiplatelet</div>
         
       </div>
+      
     </div>
 
     <hr>
@@ -619,14 +627,14 @@
 
 
 <!-- Surgical History Tabs -->
-<div class="surgical-history-tabs">
+<div class="surgical-history-tabs" >
   <button id="both-surgery-btn" onclick="showSurgeryTab('both')">Both Eyes</button>
   <button id="right-surgery-btn" onclick="showSurgeryTab('right')">Right Eye</button>
   <button id="left-surgery-btn" onclick="showSurgeryTab('left')">Left Eye</button>
 </div>
 
 <!-- Surgical History Content -->
-<div id="both-surgery-content" class="surgical-history-content">
+<div id="both-surgery-content" class="surgical-history-content"style="margin-bottom: 7%;">
   <h2>Both Eye Surgical History</h2>
   <div class="flex-container">
     <input type="text" class="input-field" placeholder="Enter New Surgical History Option">
@@ -795,7 +803,7 @@
         </tbody>
       </table>
 
-      <table id="myOptionsTable" style="display: none; width: 15.2%;" class="options-table">
+      <table id="myOptionsTable" style="display: none; width: 14.2%;" class="options-table">
         <tr>
           <td>6/6</td>
           <td>6/6p</td>
@@ -829,7 +837,7 @@
       </table>
 
       <!-- Corrected the id here (removed the extra space) -->
-      <table id="myOptionsTable2" style="display: none; width: 11%" class="options-table">
+      <table id="myOptionsTable2" style="display: none; width: 10%" class="options-table">
         <tr>
           <td>N-5</td>
           <td>N-6</td>
@@ -1106,7 +1114,7 @@
 
 
 
-      <table id="NV-VATable" style="display: none; width: 15.2%" class="options-table">
+      <table id="NV-VATable" style="display: none; width: 14.2%;" class="options-table">
         <tr>
           <td>6/6</td>
           <td>6/6p</td>
@@ -1139,7 +1147,7 @@
         </tr>
       </table>
 
-      <table id="NVDVATable" style="display: none; width: 11%" class="options-table">
+      <table id="NVDVATable" style="display: none; width: 10%" class="options-table">
         <tr>
           <td>N-5</td>
           <td>N-6</td>
@@ -1380,7 +1388,7 @@ overflow-y: auto; width: 50%;">
       </table>
 
 
-      <table id="nRefraction1" style="display: none; width: 11%" class="options-table">
+      <table id="nRefraction1" style="display: none; width: 10%" class="options-table">
         <tr>
           <td>N-5</td>
           <td>N-6</td>
@@ -1401,7 +1409,7 @@ overflow-y: auto; width: 50%;">
 
 
 
-      <table id="nRefraction3" style="display: none; width: 15.2%" class="options-table">
+      <table id="nRefraction3" style="display: none; width: 14.2%;" class="options-table">
         <tr>
           <td>6/6</td>
           <td>6/6p</td>
@@ -1990,7 +1998,7 @@ overflow-y: auto; width: 50%;">
    
     <!-- optionsTable teble fast end -->
 
-    <table id="raRefraction" style="display: none; width: 218px" class="options-table">
+    <table id="raRefraction" style="display: none;width: 14.2%;" class="options-table">
       <tr>
         <td onclick="selectValue(this)">6/6</td>
         <td onclick="selectValue(this)">6/6p</td>
@@ -2315,13 +2323,36 @@ overflow-y: auto; width: 50%;">
   <button class="alert-btn" onclick="closeHistoryAlert()" id="closeHistory-btn" type="button">Close History</button>
 </div>
 
+<div style="position: fixed; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.4); 
+            color: white; padding: 20px; border-radius: 8px; width: 450px; text-align: center; 
+            display: flex; flex-direction: column; gap: 15px; backdrop-filter: blur(8px);">
+
+    <div style="display: flex; justify-content: space-between; gap: 10px;">
+        <button style="padding: 14px 20px; background: #2aa424; color: white; border: none; 
+                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
+                      min-width: 140px; height: 50px;">
+            View
+        </button>
+        <button style="padding: 14px 20px; background: #FF5733; color: white; border: none; 
+                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
+                      min-width: 140px; height: 50px;">
+            Reset
+        </button>
+        <button style="padding: 14px 20px; background: #007BFF; color: white; border: none; 
+                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
+                      min-width: 120px; height: 50px;">
+            Complete
+        </button>
+    </div>
+
+</div>
 
 
 </div>
 </div>
 
 
-
+ <!-- Three Buttons -->
 
 
 
