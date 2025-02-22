@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load the patient history when the page is loaded
   loadPatientHistory(appointment.id);
 
-
   loadPatientPdfRecords("P"+appointment.id);
 
    // Remove the Local Storage variable openHistory_Status
@@ -20,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!openHistory || !openHistory === "Active") {
       // Clear the selectedSymptoms from local storage
       console.log("Clearing local storage");
+      localStorage.removeItem("tempDate");
       localStorage.removeItem("selectedSymptoms");
       localStorage.removeItem("selectedDiagnosis");
       localStorage.removeItem("selectedMedicalHistory");
@@ -28,7 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.removeItem("selectedAdvices");
       localStorage.removeItem("selectedMedicationTreatment");
       localStorage.removeItem("selectedSurgicalTreatment");
-      localStorage.removeItem("tempDate");
+      localStorage.removeItem("visionTable");
+      localStorage.removeItem("currentPowerGlasses");
+      localStorage.removeItem("eyeExaminationTable");
+      localStorage.removeItem("refractionTable");
+      localStorage.removeItem("topographyTable");
+      localStorage.removeItem("arTable");
+      localStorage.removeItem("medicines");
+      localStorage.removeItem("PreOperativeDetails");
+      localStorage.removeItem("aScanTable");
+      localStorage.removeItem("iopGatTable");
+
     }
     else {
       // Load the patient history when the page is loaded
@@ -42,6 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Update the alert message
       document.getElementById("alertMessage").textContent = `Patient History Opened of Date: ${tempDate}`;
+
+      // show Summary-view-button 
+      document.getElementById("Summary-view-button").style.display = "block";
 
     }
 
@@ -589,7 +602,7 @@ async function loadPatientHistory(patientId) {
                   <td>${date}</td>
                   <td>${symptoms}</td>
                   <td>
-                      <button class="btn btn-primary btn-sm" onclick="openSummary('${date}', '${symptoms}')">View Summary</button>
+                      <button class="btn btn-primary btn-sm summary-view-button" onclick="window.location.href='./Summary.html';">View Summary</button>
                       <button class="btn btn-primary btn-sm open-history" data-date="${date}">Open History</button>
                   </td>
               </tr>
@@ -597,6 +610,16 @@ async function loadPatientHistory(patientId) {
 
           historyTable.innerHTML += row;
       });
+      // Get the openHistory status from localStorage
+      const openHistory = localStorage.getItem("openHistory_Status");
+      console.log(openHistory);
+
+      // If openHistory is not "Active", hide all summary-view-button elements
+      if (!openHistory || openHistory !== "Active") {
+          document.querySelectorAll(".summary-view-button").forEach(button => {
+              button.style.display = "none";
+          });
+      }
        // Attach event listeners AFTER elements are created
        document.querySelectorAll(".open-history").forEach(button => {
         button.addEventListener("click", function () {
@@ -629,6 +652,7 @@ async function openPatientHistory(date) {
 
   // Show the alert box
   alertBox.style.display = "flex";
+  location.reload();
 }
 
 document.getElementById("closeHistory-btn").addEventListener("click",async function () {
@@ -1030,3 +1054,4 @@ async function loadPatientPdfRecords(patientId) {
       });
   });
 }
+

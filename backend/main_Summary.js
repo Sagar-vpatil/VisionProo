@@ -180,7 +180,7 @@ function toggleSymptoms(element) {
     let inputValue = inputField.value.trim();
 
     if (inputValue === "") {
-        alert("Please enter a symptom name.");
+      window.electronAPI.showErrorBox("Error", "Please enter a new option name.");
         return;
     }
     console.log(className);
@@ -287,7 +287,7 @@ function addOption2(button, className) {
   let inputValue = inputField.value.trim();
 
   if (inputValue === "") {
-      alert("Please enter a symptom name.");
+    window.electronAPI.showErrorBox("Error", "Please enter a new option name.");
       return;
   }
   console.log(className);
