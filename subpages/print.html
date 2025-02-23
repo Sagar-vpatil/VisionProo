@@ -1388,12 +1388,33 @@
         iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
         iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
 
-
-
-
-
-        
-
+        const Saved_Status = localStorage.getItem("Saved_Status");
+        console.log(Saved_Status);
+        if(Saved_Status === "true" || Saved_Status){
+            console.log("Saved_Status is true");
+             // Clear the Local Storage variables
+        localStorage.removeItem("tempDate");
+        localStorage.removeItem("selectedSymptoms");
+        localStorage.removeItem("selectedDiagnosis");
+        localStorage.removeItem("selectedMedicalHistory");
+        localStorage.removeItem("selectedSurgicalHistory");
+        localStorage.removeItem("selectedInvestigation");
+        localStorage.removeItem("selectedAdvices");
+        localStorage.removeItem("selectedMedicationTreatment");
+        localStorage.removeItem("selectedSurgicalTreatment");
+        localStorage.removeItem("visionTable");
+        localStorage.removeItem("currentPowerGlasses");
+        localStorage.removeItem("eyeExaminationTable");
+        localStorage.removeItem("refractionTable");
+        localStorage.removeItem("topographyTable");
+        localStorage.removeItem("arTable");
+        localStorage.removeItem("medicines");
+        localStorage.removeItem("PreOperativeDetails");
+        localStorage.removeItem("aScanTable");
+        localStorage.removeItem("iopGatTable");
+        localStorage.removeItem("openHistory_Status");
+        localStorage.removeItem("Saved_Status");
+        }
      </script>
 </body>
 </html>

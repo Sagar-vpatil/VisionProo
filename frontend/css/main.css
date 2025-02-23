@@ -1213,7 +1213,7 @@ h2 {
 /* Responsive Font & Padding */
 @media (max-width: 1200px) {
   .custom-alert {
-      max-width: 300px;
+      max-width: 380px;
       font-size: 13px;
       padding: 10px 14px;
   }
@@ -1221,7 +1221,7 @@ h2 {
 
 @media (max-width: 992px) {
   .custom-alert {
-      max-width: 280px;
+      max-width: 360px;
       font-size: 12px;
       padding: 10px;
   }

@@ -198,7 +198,7 @@
   </a>
 
   <a href="./Patient_Detail.html" class="nav-link text-white w-80 text-left" style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
-    Update Patien Detail
+    Update Patient Details
       </a>
     
 </li>
@@ -249,6 +249,8 @@
      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Billing</button>
      <button class="btn btn-success" onclick="window.location.href='./Discharge_card.html';" id="add-receptionist-btn">Discharge Record</button>
      <button class="btn btn-success" onclick="window.location.href='./AcknowledgmentSlip.html';" id="add-receptionist-btn">Acknowledgement Slip</button> 
+     <button class="print1-btn"  id="reset-btn" style="background-color: #ee5034;" type="button">Reset</button> 
+     <button class="print1-btn"  id="close-appointment-btn" style="background-color: #ee3434;" type="button">Close Appointment</button> 
      
 
 
@@ -2311,32 +2313,10 @@ overflow-y: auto; width: 50%;">
 <!-- Summary Alert (Initially Hidden) -->
 <div id="historyAlert" class="custom-alert" style="display: none;">
   <span id="alertMessage" style="flex-grow: 1;">Patient History Opened for </span>
+  <button class="alert-btn" onclick="window.location.href='./Summary.html';" type="button">Summary👁️</button>
   <button class="alert-btn" onclick="closeHistoryAlert()" id="closeHistory-btn" type="button">Close History</button>
 </div>
 
-<div style="position: fixed; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.4); 
-            color: white; padding: 20px; border-radius: 8px; width: 450px; text-align: center; 
-            display: flex; flex-direction: column; gap: 15px; backdrop-filter: blur(8px);">
-
-    <div style="display: flex; justify-content: space-between; gap: 10px;">
-        <button style="padding: 14px 20px; background: #2aa424; color: white; border: none; 
-                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
-                      min-width: 140px; height: 50px;">
-            View
-        </button>
-        <button style="padding: 14px 20px; background: #FF5733; color: white; border: none; 
-                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
-                      min-width: 140px; height: 50px;">
-            Reset
-        </button>
-        <button style="padding: 14px 20px; background: #007BFF; color: white; border: none; 
-                      cursor: pointer; font-size: 18px; border-radius: 5px; flex: 1; 
-                      min-width: 120px; height: 50px;">
-            Complete
-        </button>
-    </div>
-
-</div>
 
 
 </div>
