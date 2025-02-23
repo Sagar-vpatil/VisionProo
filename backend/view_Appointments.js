@@ -112,6 +112,7 @@ async function deleteAppointment(appointmentId) {
         await updateDoc(appointmentRef, { AppointmentStatus: "Deactive" });
         console.log(`Appointment ${appointmentId} marked as Deactive.`);
         loadTodayAppointments(); // Refresh the list
+        fetchUpcomingAppointments(); // Update upcoming appointments
     } catch (error) {
         console.error("Error updating appointment status:", error);
         window.electronAPI.showErrorBox("Error", "Failed to delete appointment. Please try again.");
@@ -144,4 +145,44 @@ async function viewSummary(appointmentId) {
         window.electronAPI.showErrorBox("Error", "Failed to view appointment summary. Please try again.");
     }
 }
+
+
+
+
+
+// Function to fetch total patients
+async function fetchTotalPatients() {
+    try {
+        const patientsCollection = collection(db, "patients");
+        const patientsSnapshot = await getDocs(patientsCollection);
+        const totalPatients = patientsSnapshot.size; // Count documents
+
+        // Update the dashboard UI
+        document.getElementById("totalPatients").innerText = totalPatients;
+    } catch (error) {
+        console.error("Error fetching total patients:", error);
+    }
+}
+
+
+// Function to fetch upcoming appointments
+async function fetchUpcomingAppointments() {
+    try {
+        console.log("Fetching upcoming appointments...");
+        const patientsCollection = collection(db, "patients");
+        const q = query(patientsCollection, where("AppointmentStatus", "==", "Active"));
+        const appointmentsSnapshot = await getDocs(q);
+        const totalUpcomingAppointments = appointmentsSnapshot.size; // Count active appointments
+
+        // Update the dashboard UI
+        document.getElementById("upcomingAppointments").innerText = totalUpcomingAppointments;
+    } catch (error) {
+        console.error("Error fetching upcoming appointments:", error);
+    }
+}
+
+// Call the function when the dashboard loads
+document.addEventListener("DOMContentLoaded", fetchTotalPatients);
+// Call the function when the dashboard loads
+document.addEventListener("DOMContentLoaded", fetchUpcomingAppointments);
 
