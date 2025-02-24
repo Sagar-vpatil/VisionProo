@@ -13,7 +13,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
 
   console.log("Patient Details:", { name, birthDate, age, mobileNo, address });
 
-  if (!name || !birthDate || isNaN(age) || !mobileNo || !address || !gender) {
+  if (!name || isNaN(age) || !mobileNo || !address || !gender) {
       window.electronAPI.showErrorBox("Error", "Please fill in all the fields.");
       return;
   }
@@ -29,11 +29,11 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
       return;
   }
 
-  const birthDatePattern = /^\d{4}-\d{2}-\d{2}$/;
-  if (!birthDatePattern.test(birthDate)) {
-      window.electronAPI.showErrorBox("Error", "Please enter a valid date (YYYY-MM-DD).");
-      return;
-  }
+//   const birthDatePattern = /^\d{4}-\d{2}-\d{2}$/;
+//   if (!birthDatePattern.test(birthDate)) {
+//       window.electronAPI.showErrorBox("Error", "Please enter a valid date (YYYY-MM-DD).");
+//       return;
+//   }
 
   // Trigger confirmation dialog
   const response = await window.electronAPI.showMessageBox(

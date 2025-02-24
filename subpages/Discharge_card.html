@@ -241,7 +241,30 @@
             cursor: pointer;
             border-radius: 5px;
         }
-       
+
+        .date-input {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .print-date {
+            display: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Hide input fields and show formatted date when printing */
+        @media print {
+            .date-input {
+                display: none;
+            }
+            .print-date {
+                display: inline-block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -290,8 +313,13 @@
     <p><strong>Address:</strong> <span id="patient-address"></span></p>
     <p>
         <strong>DOB:</strong> <span id="patient-dob"></span>
-        <strong style="margin-left: 140px;">Date of Addmidion:</strong> <input type="date" class="date-input" id="admissionDate">
-        <strong style="margin-left:50px;">Date of Discharge:</strong>  <input type="date" class="date-input" id="dischargeDate">
+        <strong style="margin-left: 140px;">Date of Admission:</strong>
+    <input type="date" class="date-input" id="admissionDate" onchange="updatePrintDate('admissionDate', 'printAdmission')">
+    <span class="print-date" id="printAdmission"></span>
+
+    <strong style="margin-left: 30px;">Date of Discharge:</strong>
+    <input type="date" class="date-input" id="dischargeDate" onchange="updatePrintDate('dischargeDate', 'printDischarge')">
+    <span class="print-date" id="printDischarge"></span>
     </p>
     <p><strong>Diagnosis:</strong> <span class="show-diagnosis"></span> </p>
    
@@ -301,8 +329,8 @@
     </div>
    
     <div class="d-flex align-items-center" style="margin-top: 10px;">
-        <label for="surgery" class="form-label me-2"><strong>Surgery:</strong></label>
-        <input type="text" id="surgery" class="form-control" style="width: 600px;margin-left: 50px;">
+        <label for="surgery" class="form-label me-2"><strong>Surgery Name:</strong></label>
+        <input type="text" id="surgery" class="form-control" style="width: 600px;">
     </div>
 
     <hr style="border: 2px solid #000;">
@@ -402,6 +430,20 @@
     <h4 class="text-center mt-4">IOL STICKER</h4>
     <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
 
+    <h4 class="text-center mt-4">Post Operative Treatment </h4>
+  
+    <div class="d-flex align-items-center" style="margin-top: 20px;">
+        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
+        <input type="text" class="form-control" style="width: 200px;">
+    </div>
+    <div class="d-flex align-items-center" style="margin-top: 20px;">
+        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Homide Eye Drop :</strong></label>
+        <input type="text" class="form-control" style="width: 200px;">
+    </div>
+    <div class="d-flex align-items-center" style="margin-top: 20px;">
+        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
+        <input type="text" class="form-control" style="width: 200px;">
+    </div>
     <!-- Doctor's Signature Section -->
     <div class="doctor-signature">
         <p><strong>Dr. Alvin Rane :</strong> ___________________________</p>
@@ -521,6 +563,21 @@
     }
 
 </script>
+<script>
+    function updatePrintDate(inputId, spanId) {
+        let dateValue = document.getElementById(inputId).value;
+        if (dateValue) {
+            document.getElementById(spanId).textContent = formatDate(dateValue);
+        }
+    }
 
+    function formatDate(dateStr) {
+        let date = new Date(dateStr);
+        let day = date.getDate().toString().padStart(2, '0'); // Ensure 2 digits
+        let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Ensure 2 digits
+        let year = date.getFullYear();
+        return `${day}/${month}/${year}`; // Format: DD/MM/YYYY
+    }
+</script>
 </body>
 </html>

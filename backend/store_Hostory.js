@@ -1,48 +1,77 @@
  // This file contains the code to add a patient to the Firestore database.
-import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc} from "./firebaseConfig.js";
-
-
+import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc, deleteDoc} from "./firebaseConfig.js";
 
 
 // Dom event listener when the page is loaded
 document.addEventListener("DOMContentLoaded", () => {
   // Load the patient history when the page is loaded
   loadPatientHistory(appointment.id);
+  let tempAppointmentId = localStorage.getItem("tempAppointmentId");
+  if(!tempAppointmentId){
+    localStorage.setItem("tempAppointmentId",appointment.id);
+    tempAppointmentId = localStorage.getItem("tempAppointmentId");
+    clearHistoryFromLocalStorage();
+  }
+  if(tempAppointmentId != appointment.id){
+    console.log("Appointment Id Changed");  
+    clearHistoryFromLocalStorage();
+    localStorage.setItem("tempAppointmentId",appointment.id);
+    localStorage.removeItem("openHistory_Status");
+  }
+
 
   loadPatientPdfRecords("P"+appointment.id);
 
-   // Remove the Local Storage variable openHistory_Status
-   localStorage.removeItem("openHistory");
+  //  // Remove the Local Storage variable openHistory_Status
+  //  localStorage.removeItem("openHistory");
    // get Local Storage variable openHistory to Active or not
     const openHistory = localStorage.getItem("openHistory_Status");
     console.log(openHistory);
-    if (!openHistory || !openHistory === "Active") {
-      // Clear the selectedSymptoms from local storage
-      console.log("Clearing local storage");
-      localStorage.removeItem("tempDate");
-      localStorage.removeItem("selectedSymptoms");
-      localStorage.removeItem("selectedDiagnosis");
-      localStorage.removeItem("selectedMedicalHistory");
-      localStorage.removeItem("selectedSurgicalHistory");
-      localStorage.removeItem("selectedInvestigation");
-      localStorage.removeItem("selectedAdvices");
-      localStorage.removeItem("selectedMedicationTreatment");
-      localStorage.removeItem("selectedSurgicalTreatment");
-      localStorage.removeItem("visionTable");
-      localStorage.removeItem("currentPowerGlasses");
-      localStorage.removeItem("eyeExaminationTable");
-      localStorage.removeItem("refractionTable");
-      localStorage.removeItem("topographyTable");
-      localStorage.removeItem("arTable");
-      localStorage.removeItem("medicines");
-      localStorage.removeItem("PreOperativeDetails");
-      localStorage.removeItem("aScanTable");
-      localStorage.removeItem("iopGatTable");
+  //   if (!openHistory || !openHistory === "Active") {
+  //     // Clear the selectedSymptoms from local storage
+  //     console.log("Clearing local storage");
+  //     localStorage.removeItem("tempDate");
+  //     localStorage.removeItem("selectedSymptoms");
+  //     localStorage.removeItem("selectedDiagnosis");
+  //     localStorage.removeItem("selectedMedicalHistory");
+  //     localStorage.removeItem("selectedSurgicalHistory");
+  //     localStorage.removeItem("selectedInvestigation");
+  //     localStorage.removeItem("selectedAdvices");
+  //     localStorage.removeItem("selectedMedicationTreatment");
+  //     localStorage.removeItem("selectedSurgicalTreatment");
+  //     localStorage.removeItem("visionTable");
+  //     localStorage.removeItem("currentPowerGlasses");
+  //     localStorage.removeItem("eyeExaminationTable");
+  //     localStorage.removeItem("refractionTable");
+  //     localStorage.removeItem("topographyTable");
+  //     localStorage.removeItem("arTable");
+  //     localStorage.removeItem("medicines");
+  //     localStorage.removeItem("PreOperativeDetails");
+  //     localStorage.removeItem("aScanTable");
+  //     localStorage.removeItem("iopGatTable");
 
-    }
-    else {
+  //   }
+  //   else {
+  //     // Load the patient history when the page is loaded
+  //     loadPatientHistoryData();
+
+  //     const tempDate = localStorage.getItem("tempDate");
+  //     console.log(tempDate);
+
+  //     // show historyAlert
+  //     document.getElementById("historyAlert").style.display = "flex";
+
+  //     // Update the alert message
+  //     document.getElementById("alertMessage").textContent = `Patient History Opened of Date: ${tempDate}`;
+
+  //     // show Summary-view-button 
+  //     document.getElementById("Summary-view-button").style.display = "block";
+
+  //   }
+
+     if (openHistory || openHistory === "Active") {
       // Load the patient history when the page is loaded
-      loadPatientHistoryData();
+      // loadPatientHistoryData();
 
       const tempDate = localStorage.getItem("tempDate");
       console.log(tempDate);
@@ -52,9 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Update the alert message
       document.getElementById("alertMessage").textContent = `Patient History Opened of Date: ${tempDate}`;
-
-      // show Summary-view-button 
-      document.getElementById("Summary-view-button").style.display = "block";
 
     }
 
@@ -90,12 +116,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to format today's date as ddmmyyyy
 function getFormattedDate() {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
-  const yyyy = today.getFullYear();
-  return `${dd}${mm}${yyyy}`;
+    const tempDate = localStorage.getItem("tempDate");
+    return tempDate ? tempDate.replace(/\//g, '') : new Date().toLocaleDateString('en-GB').replace(/\//g, '');
 }
+  
+
+function getTodaysDate() {
+  return localStorage.getItem("tempDate") || new Date().toLocaleDateString('en-GB');
+}
+
 
 
 document.getElementById("only-print-btn").addEventListener("click",async function () {
@@ -107,6 +136,35 @@ document.getElementById("only-print-btn").addEventListener("click",async functio
   
 document.getElementById("print-btn").addEventListener("click",async function () {
   const setCondition = "saveAndPrint";
+  const tempDate = localStorage.getItem("tempDate");
+  console.log(tempDate);
+  if (tempDate) {
+        // Trigger confirmation dialog
+        const response = await window.electronAPI.showMessageBox(
+          "warning",
+          'Are you sure you want to save the patient history of "' + tempDate + '"? This will overwrite the existing data.',
+          "Confirm",
+          ["Yes", "No"]
+      );
+
+      if (response === 1) {
+          return;
+      }
+  }
+  else{
+    // Trigger confirmation dialog
+    const response = await window.electronAPI.showMessageBox(
+      "warning",
+      "Are you sure you want to save the patient history?",
+      "Confirm",
+      ["Yes", "No"]
+  );
+
+  if (response === 1) {
+      return;
+  }
+
+  }
   savePatientHistory(setCondition);
   
   
@@ -114,6 +172,7 @@ document.getElementById("print-btn").addEventListener("click",async function () 
 
 
 async function savePatientHistory(getCondition) {
+
   // Store Vision Table the dictionary name and value
   const visionTable = {
     UnaidedR : document.getElementById("UnaidedR").value,
@@ -403,6 +462,7 @@ async function savePatientHistory(getCondition) {
     try {
       const todayDate = getFormattedDate();
       const documentId = `P${appointment.id}${todayDate}`;
+      const historyDate = getTodaysDate();
       
       const selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms"));
       const selectedMedicalHistory = JSON.parse(localStorage.getItem("selectedMedicalHistory"));
@@ -420,6 +480,7 @@ async function savePatientHistory(getCondition) {
       // Prepare the data object by checking each table
       const dataToStore = {
         patientId: appointment.id, // Store patientId
+        historyDate: historyDate,
       };
   
       if (!Object.values(visionTable).every(value => value === "")) {
@@ -498,10 +559,11 @@ async function savePatientHistory(getCondition) {
 
   
       // Only save data if at least one table is not empty
-      if (Object.keys(dataToStore).length > 1) {
+      if (Object.keys(dataToStore).length > 2) {
           dataToStore.timestamp = new Date(); // Add timestamp
           await setDoc(docRef, dataToStore);
           console.log("Data successfully stored in Firestore!");
+          localStorage.setItem("Saved_Status", "true");
       } else {
           console.log("No valid data to store. Skipping Firestore save.");
       }
@@ -509,11 +571,7 @@ async function savePatientHistory(getCondition) {
       console.error("Error storing data:", error);
   }
 
-  // Remove the Local Storage variable openHistory_Status
-  localStorage.removeItem("openHistory_Status");
 }
-  
-
 
   // Open print.html using href
   window.location.href = "print.html";
@@ -589,11 +647,7 @@ async function loadPatientHistory(patientId) {
 
       querySnapshot.forEach((doc) => {
           const data = doc.data();
-          const date = data.timestamp.toDate().toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-          });
+          const date = data.historyDate;
           const symptoms = data.selectedSymptoms ? data.selectedSymptoms.join(", ") : "N/A";
           const patientId = data.patientId;
 
@@ -602,24 +656,18 @@ async function loadPatientHistory(patientId) {
                   <td>${date}</td>
                   <td>${symptoms}</td>
                   <td>
-                      <button class="btn btn-primary btn-sm summary-view-button" onclick="window.location.href='./Summary.html';">View Summary</button>
-                      <button class="btn btn-primary btn-sm open-history" data-date="${date}">Open History</button>
+                      <button class="btn btn-primary btn-sm open-history" data-date="${date}">Get History</button>
+                      <button class="btn btn-primary btn-sm delete-history" data-date="${date}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" fill="none" class="text-start text-danger" style="font-size: 30px;">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7 2C7 1.44772 7.44772 1 8 1H12C12.5523 1 13 1.44772 13 2H17C17.5523 2 18 2.44772 18 3C18 3.55228 17.5523 4 17 4H3C2.44772 4 2 3.55228 2 3C2 2.44772 2.44772 2 3 2H7ZM5 6C4.44772 6 4 6.44772 4 7V15C4 16.1046 4.89543 17 6 17H14C15.1046 17 16 16.1046 16 15V7C16 6.44772 15.5523 6 15 6H5ZM8 8C8.55228 8 9 8.44772 9 9V13C9 13.5523 8.55228 14 8 14C7.44772 14 7 13.5523 7 13V9C7 8.44772 7.44772 8 8 8ZM12 8C12.5523 8 13 8.44772 13 9V13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13V9C11 8.44772 11.4477 8 12 8Z" fill="currentColor"></path>
+                      </svg>
+                      </button>
                   </td>
               </tr>
           `;
 
           historyTable.innerHTML += row;
       });
-      // Get the openHistory status from localStorage
-      const openHistory = localStorage.getItem("openHistory_Status");
-      console.log(openHistory);
-
-      // If openHistory is not "Active", hide all summary-view-button elements
-      if (!openHistory || openHistory !== "Active") {
-          document.querySelectorAll(".summary-view-button").forEach(button => {
-              button.style.display = "none";
-          });
-      }
        // Attach event listeners AFTER elements are created
        document.querySelectorAll(".open-history").forEach(button => {
         button.addEventListener("click", function () {
@@ -627,8 +675,45 @@ async function loadPatientHistory(patientId) {
             openPatientHistory(date);
         });
     });
+      // Attach event listeners AFTER elements are created
+      document.querySelectorAll(".delete-history").forEach(button => {
+        button.addEventListener("click", function () {
+            const date = this.getAttribute("data-date");
+            deletePatientHistory(date);
+        }
+        );
+        });
   } catch (error) {
       console.error("Error fetching patient history:", error);
+  }
+}
+
+async function deletePatientHistory(date) {
+  try {
+
+     // Trigger confirmation dialog
+     const response = await window.electronAPI.showMessageBox(
+      "warning",
+      `Are you sure you want to delete the patient history of ${date}?`,
+      "Confirm",
+      ["Yes", "No"]
+    );
+
+    if (response === 1) {
+        return;
+    }
+      
+      const getDate = date.split("/");
+      const documentId = `P${appointment.id}${getDate[0]}${getDate[1]}${getDate[2]}`;
+      console.log(documentId);
+      const docRef = doc(db, "PatientsHistory", documentId);
+      // Delete the document
+      await deleteDoc(docRef);
+    
+      console.log("Document successfully deleted!");
+      location.reload();
+  } catch (error) {
+      console.error("Error deleting document:", error);
   }
 }
 
@@ -639,6 +724,7 @@ async function openPatientHistory(date) {
   // Set Local Storage variable openHistory_Status to Active
   localStorage.setItem("openHistory_Status", "Active");
   console.log(date);
+  clearHistoryFromLocalStorage();
 
   // Get the patient history from Firestore
   await getPatientHistory(date);
@@ -660,6 +746,7 @@ document.getElementById("closeHistory-btn").addEventListener("click",async funct
   document.getElementById("historyAlert").style.display = "none";
   // Remove the Local Storage variable openHistory_Status
   localStorage.removeItem("openHistory_Status");
+  clearHistoryFromLocalStorage();
   // reload the page
   location.reload();
 });
@@ -1053,5 +1140,80 @@ async function loadPatientPdfRecords(patientId) {
           
       });
   });
+}
+
+// Close Appointments Button
+document.getElementById("close-appointment-btn").addEventListener("click", async function () {
+   try {
+    console.log("Closing appointment:", appointment.id);
+       const appointmentId = appointment.id;
+          // Trigger confirmation dialog
+          const response = await window.electronAPI.showMessageBox(
+              "info",
+              "Are you sure you want to close this appointment?",
+              "Confirm",
+              ["Yes", "No"]
+          );
+  
+          if (response === 1) {
+              return;
+          }
+          const appointmentRef = doc(db, "patients", String(appointmentId));
+          await updateDoc(appointmentRef, { AppointmentStatus: "Deactive" });
+          console.log(`Appointment ${appointmentId} marked as Deactive.`);
+          // Go back to the Appointments page
+          window.location.href = "view_Appointments.html";
+      
+      } catch (error) {
+          console.error("Error updating appointment status:", error);
+          window.electronAPI.showErrorBox("Error", "Failed to delete appointment. Please try again.");
+      }
+}); 
+
+// Reset Button
+document.getElementById("reset-btn").addEventListener("click", async function () {
+  try {
+         // Trigger confirmation dialog
+         const response = await window.electronAPI.showMessageBox(
+             "info",
+             "Are you sure you want to reset all history?",
+             "Confirm",
+             ["Yes", "No"]
+         );
+ 
+         if (response === 1) {
+             return;
+         }
+          clearHistoryFromLocalStorage();
+          localStorage.removeItem("openHistory_Status");
+          // Reload the page
+          location.reload();
+     
+     } catch (error) {
+          window.electronAPI.showErrorBox("Error", "Failed to reset history. Please try again.");
+     }
+}); 
+
+function clearHistoryFromLocalStorage() {
+  // Clear the Local Storage variables
+  localStorage.removeItem("tempDate");
+  localStorage.removeItem("selectedSymptoms");
+  localStorage.removeItem("selectedDiagnosis");
+  localStorage.removeItem("selectedMedicalHistory");
+  localStorage.removeItem("selectedSurgicalHistory");
+  localStorage.removeItem("selectedInvestigation");
+  localStorage.removeItem("selectedAdvices");
+  localStorage.removeItem("selectedMedicationTreatment");
+  localStorage.removeItem("selectedSurgicalTreatment");
+  localStorage.removeItem("visionTable");
+  localStorage.removeItem("currentPowerGlasses");
+  localStorage.removeItem("eyeExaminationTable");
+  localStorage.removeItem("refractionTable");
+  localStorage.removeItem("topographyTable");
+  localStorage.removeItem("arTable");
+  localStorage.removeItem("medicines");
+  localStorage.removeItem("PreOperativeDetails");
+  localStorage.removeItem("aScanTable");
+  localStorage.removeItem("iopGatTable");
 }
 
