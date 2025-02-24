@@ -22,12 +22,17 @@ function createMainWindow() {
             contextIsolation: true, // Secure communication between renderer and main process
             // enableRemoteModule: false, // Disable remote module for security
             sandbox: true
+     
         },
         icon: join(__dirname, 'assets', 'logo', 'app-icon.png'), // App icon
     });
 
     mainWindow.loadFile(join(__dirname, 'frontend', 'index.html')); // Use organized structure
 
+    mainWindow.once("ready-to-show", () => {
+        mainWindow.show();
+        mainWindow.maximize();
+      });
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
