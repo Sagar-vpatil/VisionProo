@@ -233,7 +233,19 @@
       flex-wrap: wrap;
       border-bottom: 2px solid #ccc;
   }
-
+.siv{
+  padding: 10px 20px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      flex: 1;
+      text-align: center;
+      height: 50px; /* Set proper height for tabs */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
   .tab {
       padding: 10px 20px;
       cursor: pointer;

@@ -3,44 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Record & Operative Procedure</title>
+    <title>Discharge Summary - Professional Print Layout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background: #fff;
-            font-family: Arial, sans-serif;
-            padding: 20px;
+        /* Base Styling */
+        @page {
+            size: A4;
+            margin: 1.5mm;
         }
+
         .container {
-            max-width: 1000px;
+            max-width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
             background: #fff;
-            padding: 20px;
-            border: 1px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .header-banner img {
-            max-width: 1000px;
-            height: auto;
-            display: block;
+
+        /* Header Section */
+        .letterhead {
+            border-bottom: 2px solid #004a99;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
+
+        .hospital-logo {
+            width: 160px;
+            height: 110px;
+        }
+
+        .hospital-info {
+            text-align: right;
+        }
+
+        .hospital-name {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            color: red;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+
+        .hospital-address {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Patient Information */
+        .patient-info-card {
+            background: #f8f9fa;
+            border-left: 4px solid #004a99;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .patient-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .patient-table th, .patient-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .patient-table th {
+            color: #000;
+            text-align: left;
+        }
+
+        /* Clinical Sections */
         .section-title {
-            background: black;
-            color: white;
-            padding: 5px;
-            font-weight: bold;
-            text-align: center;
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #004a99;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin: 25px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 18px;
         }
-        .table th, .table td {
-            border: 1px solid black;
-            padding: 5px;
-            text-align: center;
-            font-size: 14px;
+
+        /* Print Optimization */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12pt;
+            }
+
+            .container {
+                padding: 15px;
+                min-height: auto;
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+            .patient-info-card {
+                background: none;
+                border-left: 3px solid #000;
+            }
+
+            .buttons {
+                display: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            input[type="date"] {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                border: none;
+                padding: 0;
+                background: transparent;
+                font-family: 'Georgia', serif;
+                font-size: 12pt;
+                color: #333;
+                width: auto;
+                line-height: 1.6;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+
+            input[type="date"]:before {
+                content: attr(value);
+            }
+
+            .print-checkbox {
+                display: inline-block;
+                margin-right: 5px;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+            }
+            .form-control {
+                border: 1px solid #000;
+                background: transparent;
+                -webkit-print-color-adjust: exact;
+            }
+
+            input[type="text"] {
+                border: none;
+                background: transparent;
+                width: 100%;
+            }
+
+            input[type="checkbox"] {
+                -webkit-appearance: checkbox;
+                appearance: checkbox;
+            }
+
+            .navbar .buttons button {
+                display: none;
+            }
         }
+
         .procedure-table {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 8px;
         }
+
         .procedure-box {
             flex: 1;
             min-width: 200px;
@@ -51,17 +191,29 @@
             font-size: 12px;
             line-height: 1.2;
             background: #f8f9fa;
+            height: 270px;
         }
+
         .procedure-box strong {
             font-size: 13px;
         }
+
         .procedure-box ol {
             padding-left: 15px;
         }
+
         .procedure-box li {
             font-size: 12px;
             margin-bottom: 3px;
         }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
+        }
+
         .iol-sticker {
             margin-top: 10px;
             border: 1px solid black;
@@ -71,167 +223,25 @@
             font-size: 14px;
         }
 
-        /* Print-specific styles */
-        @media print {
-            body {
-                margin: 0;
-                padding: 0;
-                background: #fff;
-            }
-            .container {
-                max-width: 100%;
-                border: none;
-                padding: 0;
-                margin: 0;
-            }
-            .procedure-table {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                gap: 8px;
-                margin-top: 0;
-            }
-            .procedure-box {
-                flex: 1;
-                min-width: 30%;
-                max-width: 30%;
-                margin: 0;
-                padding: 8px;
-                page-break-inside: avoid;
-            }
-            .table {
-                width: 100%;
-                margin-left: 0;
-            }
-            .iol-sticker {
-                width: 100%;
-                margin-left: 0;
-            }
-            .d-flex {
-                display: flex !important;
-            }
-            .form-control {
-                border: 1px solid #000;
-                background: transparent;
-                -webkit-print-color-adjust: exact;
-            }
-            input[type="text"] {
-                border: none;
-                background: transparent;
-                width: 100%;
-            }
-            input[type="checkbox"] {
-                -webkit-appearance: checkbox;
-                appearance: checkbox;
-            }
-            .no-print {
-                display: none;
-            }
-            h4, p, .procedure-box, .table, .iol-sticker {
-                margin-top: 0 !important;
-            }
-            .text-center {
-                text-align: center !important;
-            }
-            .table {
-                margin: 0 auto;
-            }
-
-            .navbar .buttons button{
-                display: none;
-            }
-            .hr{
-                display: none;
-            }
-            .date-input{
-                display: none;
-            }
-        }
-
-        /* A4 size styling */
-        @page {
-            size: A4;
-            margin: 0;
-            margin-top: 20px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .logo img {
-            width: 170px;
-            height: auto;
-        }
-        .hospital-name {
-            color: red;
-            font-size: 28px;
-            font-weight: bold;
-            font-family: 'Mangal', sans-serif;
-            margin-left: 20px;
-        }
-        .sub-heading {
-            font-size: 16px;
-            color: #333;
-            margin-top: 5px;
-        }
-        .doctor-signature {
-            margin-top: 30px;
-            text-align: right;
-        }
-        .doctor-signature p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-  /* Responsive styles */
-  @media screen and (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            th, td {
-                font-size: 12px;
-                padding: 8px;
-            }
-            input[type="number"] {
-                width: 80px;
-            }
-        }
-        @media screen and (max-width: 480px) {
-            .section-title {
-                font-size: 14px;
-                padding: 8px;
-            }
-            th, td {
-                font-size: 10px;
-                padding: 5px;
-            }
-            input[type="number"] {
-                width: 70px;
-            }
-        }
-
-
-         /* New CSS for the top navbar image */
-         .navbar {
+        /* Navbar Styling */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #f8f8f8;
             padding: 5px 10px;
-      
         }
+
         .navbar img {
-            height: 50px; /* Adjust as needed */
-            margin-left: 20px; /* Space between logo and other elements */
+            height: 50px;
+            margin-left: 20px;
         }
+
         .navbar .buttons {
             display: flex;
             gap: 10px;
         }
+
         .navbar .buttons button {
             padding: 8px 16px;
             font-size: 14px;
@@ -242,218 +252,208 @@
             border-radius: 5px;
         }
 
-        .date-input {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 20px;
-        }
 
-        .print-date {
-            display: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
 
-        /* Hide input fields and show formatted date when printing */
-        @media print {
-            .date-input {
-                display: none;
-            }
-            .print-date {
-                display: inline-block;
-            }
-        }
     </style>
 </head>
 <body>
-  <!-- Top Navigation Bar -->
-  <nav class="navbar">
-    <!-- Logo and Hospital Name -->
-    <div style="display: flex; align-items: center;">
-       
-      
-    </div>
-       
-    </div>
-
-    <!-- Image on the Right Side -->
+    <nav class="navbar">
+        <!-- Logo and Hospital Name -->
+        <div style="display: flex; align-items: center;">
+           
+          
+        </div>
+           
+        </div>
     
-
-    <!-- Action Buttons -->
-    <div class="buttons" style="margin-bottom: 10px;">
-        <button onclick="window.location.href='./main.html';">🏠 Home</button>
-        <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
-    </div>
-</nav>
-
-<hr class="hr" style="color: #000;">
-<div class="container">
-    <!-- Header Section -->
-    <div class="header">
-        <div class="logo">
-            <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
-        </div>
-        <div class="hospital-name" style="margin-right: 70px;">
-            रवीकल्प हॉस्पिटल
-            <div class="sub-heading">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
-        </div>
-    </div>
-    <hr style="border: 2px solid #000;">
-
-    <!-- Case Record Section -->
-    <h4 class="text-center">Discharge Summary</h4>
-    <p><strong>Patient ID:</strong> <span id="patient-id"></span></p>
-    <p>
-    <strong>Name:</strong> <span id="patient-name"></span> 
-    <strong style="margin-left: 200px;">Age:</strong> <span id="patient-age"></span> 
-    <strong style="margin-left:120px;">Gender:</strong> <span id="patient-gender"></span>
-    </p>
-    <p><strong>Address:</strong> <span id="patient-address"></span></p>
-    <p>
-        <strong>DOB:</strong> <span id="patient-dob"></span>
-        <strong style="margin-left: 140px;">Date of Admission:</strong>
-    <input type="date" class="date-input" id="admissionDate" onchange="updatePrintDate('admissionDate', 'printAdmission')">
-    <span class="print-date" id="printAdmission"></span>
-
-    <strong style="margin-left: 30px;">Date of Discharge:</strong>
-    <input type="date" class="date-input" id="dischargeDate" onchange="updatePrintDate('dischargeDate', 'printDischarge')">
-    <span class="print-date" id="printDischarge"></span>
-    </p>
-    <p><strong>Diagnosis:</strong> <span class="show-diagnosis"></span> </p>
-   
-    <div class="d-flex align-items-center">
-        <label for="surgeonName" class="form-label me-2"><strong>Surgeon Name:</strong></label>
-        <input type="text" id="surgeonName" class="form-control" style="width: 600px;">
-    </div>
-   
-    <div class="d-flex align-items-center" style="margin-top: 10px;">
-        <label for="surgery" class="form-label me-2"><strong>Surgery Name:</strong></label>
-        <input type="text" id="surgery" class="form-control" style="width: 600px;">
-    </div>
-
-    <hr style="border: 2px solid #000;">
-    <h4 class="text-center mt-4">OPERATIVE NOTES </h4>
+        <!-- Image on the Right Side -->
+        
     
-    <div class="procedure-table">
-        <div class="procedure-box">
-            <input type="checkbox"> <strong>Phaco</strong>
-            <ol>
-                <li>P & D With Betadin Solution.</li>
-                <li>Site Port with 15 Blade.</li>
-                <li>Incision clear corneal 2.2mm / 2.8mm.</li>
-                <li>Anterior capsule stain with Blue-dye.</li>
-                <li>Capsulorhexis done with cystotome.</li>
-                <li>Hydrodelineation & Hydrodissection done.</li>
-                <li>Phaco-Treaching & Aspiration with Phaco Probe.</li>
-                <li>Foldable IOL kept in Bag.</li>
-                <li>Wound Hydrated.</li>
-                <li>Eye Patched.</li>
-            </ol>
+        <!-- Action Buttons -->
+        <div class="buttons" style="margin-bottom: 10px;">
+            <button onclick="window.location.href='./main.html';">🏠 Home</button>
+            <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Letterhead -->
+        <div class="letterhead">
+            <div style="margin-left: 120px;">
+                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
+            </div>
+            <div class="hospital-info" style="margin-right: 23%;">
+                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
+                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+            </div>
         </div>
 
-        <div class="procedure-box">
-            <input type="checkbox"> <strong>SICS</strong>
-            <ol>
-                <li>P & D Dropping with Betadine.</li>
-                <li>Conjunctival Flap Done.</li>
-                <li>Tunnel with crescent Blade.</li>
-                <li>Site port with 15 No Blade.</li>
-                <li>Capsulorhexis with cystotome.</li>
-                <li>Main entry done with 3.2 Blade.</li>
-                <li>Hydrodissection done.</li>
-                <li>Nucleus delivery with vectis.</li>
-                <li>Cortex aspiration with symcoe cannula.</li>
-                <li>PCL kept in Bag.</li>
-                <li>Wound Hydrated.</li>
-                <li>Subconj inj. given.</li>
-                <li>Eye Patched.</li>
-            </ol>
+        <!-- Patient Information -->
+        <div class="patient-info-card">
+            <table class="table table-bordered patient-table">
+                <tbody>
+                    <tr>
+                        <th>Patient ID:</th>
+                        <td id="patient-id"></td>
+                        <th>Name:</th>
+                        <td id="patient-name">Pratham Ganesh Mistari</td>
+                    </tr>
+                    <tr>
+                        <th>Age:</th>
+                        <td id="patient-age">40 yrs</td>
+                        <th>Gender:</th>
+                        <td id="patient-gender">Male</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth:</th>
+                        <td id="patient-dob">N/A</td>
+                        <th>Admission Date:</th>
+                        <td>
+                            <input type="date" id="admission-input" oninput="updateDateField(this, 'admission-value')">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Discharge Date:</th>
+                        <td>
+                            <input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')">
+                        </td>
+                        <th>Surgeon Name:</th>
+                        <td><input type="text" class="form-control" style="width: 200px;"></td>
+                    </tr>
+                    <tr>
+                        <th>Surgery Name:</th>
+                        <td><input type="text" class="form-control" style="width: 200px;"></td>
+                        <th>Address:</th>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="procedure-box">
-            <input type="checkbox"> <strong>Pterygium</strong>
-            <ol>
-                <li>P & D Done.</li>
-                <li>Subconj inj. given.</li>
-                <li>Main Mass separated from cornea.</li>
-                <li>Pungium Excised.</li>
-                <li>Superiority graft Separates & Put on excised area.</li>
-                <li>Clint instilled.</li>
-                <li>Eye Patched.</li>
-            </ol>
+        <!-- Diagnosis Section -->
+        <h4 class="section-title">Diagnosis</h4>
+        <div class="d-flex flex-wrap gap-2 show-diagnosis">
+            <!-- Diagnosis will be dynamically populated here -->
         </div>
+
+        <!-- Operative Notes Section -->
+        <h4 class="section-title">OPERATIVE NOTES</h4>
+        <div class="procedure-table">
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="phaco-check"> <strong>Phaco</strong>
+                <ol>
+                    <li>P & D With Betadin Solution.</li>
+                    <li>Site Port with 15 Blade.</li>
+                    <li>Incision clear corneal 2.2mm / 2.8mm.</li>
+                    <li>Anterior capsule stain with Blue-dye.</li>
+                    <li>Capsulorhexis done with cystotome.</li>
+                    <li>Hydrodelineation & Hydrodissection done.</li>
+                    <li>Phaco-Treaching & Aspiration with Phaco Probe.</li>
+                    <li>Foldable IOL kept in Bag.</li>
+                    <li>Wound Hydrated.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="sics-check"> <strong>SICS</strong>
+                <ol>
+                    <li>P & D Dropping with Betadine.</li>
+                    <li>Conjunctival Flap Done.</li>
+                    <li>Tunnel with crescent Blade.</li>
+                    <li>Site port with 15 No Blade.</li>
+                    <li>Capsulorhexis with cystotome.</li>
+                    <li>Main entry done with 3.2 Blade.</li>
+                    <li>Hydrodissection done.</li>
+                    <li>Nucleus delivery with vectis.</li>
+                    <li>Cortex aspiration with symcoe cannula.</li>
+                    <li>PCL kept in Bag.</li>
+                    <li>Wound Hydrated.</li>
+                    <li>Subconj inj. given.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="pterygium-check"> <strong>Pterygium</strong>
+                <ol>
+                    <li>P & D Done.</li>
+                    <li>Subconj inj. given.</li>
+                    <li>Main Mass separated from cornea.</li>
+                    <li>Pungium Excised.</li>
+                    <li>Superiority graft Separates & Put on excised area.</li>
+                    <li>Clint instilled.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- A-Scan Table -->
+        <h4 class="section-title" id="A-Scan-Heading">A-Scan Report</h4>
+        <table class="table" style="width: 450px; margin: 0 auto;" id="A-Scan-Table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Right</th>
+                    <th>Left</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>K1</td>
+                    <td id="RightK1"></td>
+                    <td id="LeftK1"></td>
+                </tr>
+                <tr>
+                    <td>K2</td>
+                    <td id="RightK2"></td>
+                    <td id="LeftK2"></td>
+                </tr>
+                <tr>
+                    <td>AXL</td>
+                    <td id="RightAL"></td>
+                    <td id="LeftAL"></td>
+                </tr>
+                <tr>
+                    <td>IOL</td>
+                    <td id="RightIOL"></td>
+                    <td id="LeftIOL"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Investigation Section -->
+        <h4 class="section-title" id="investigation-title">Investigation</h4>
+        <p style="margin-top: 20px; text-align: center;" class="show-investigation">
+            <!-- Investigation will be dynamically populated here -->
+        </p>
+
+        <!-- IOL Sticker Section -->
+        <h4 class="section-title">IOL STICKER</h4>
+        <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
+
+        <!-- Post Operative Treatment Section -->
+        <h4 class="section-title">Post Operative Treatment</h4>
+        <div class="d-flex align-items-center" style="margin-top: 20px;">
+            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
+            <input type="text" class="form-control" style="width: 200px;">
+        </div>
+        <div class="d-flex align-items-center" style="margin-top: 20px;">
+            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Homide Eye Drop :</strong></label>
+            <input type="text" class="form-control" style="width: 200px;">
+        </div>
+        <div class="d-flex align-items-center" style="margin-top: 20px;">
+            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
+            <input type="text" class="form-control" style="width: 200px;">
+        </div>
+
+
+  <div class="footer" style="color: black;">
+            <div class="signature" style="margin-right: 30px;">
+                <p>Dr. Alvin R Rane</p>
+            </div>
+        </div>
+
+        
     </div>
-
-    <!-- Eye Exam Section -->
-    <h4 class="text-center mt-4" style="margin-top: 30px;" id="A-Scan-Heading">A-Scan Report</h4>
-    <table class="table" style="width: 450px; margin: 0 auto;" id="A-Scan-Table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Right</th>
-                <th>Left</th>
-        </thead>
-        <tbody>
-            <tr><td>K1</td>
-                <td id="RightK1"></td>
-                <td id="LeftK1"></td>
-            </tr>
-            <tr><td>K2</td>
-                <td id="RightK2"></td>
-                <td id="LeftK2"></td>
-            </tr>
-            <tr><td>AXL</td>
-                <td id="RightAL"></td>
-                <td id="LeftAL"></td>
-            </tr>
-            <tr><td>IOL</td>
-                <td id="RightIOL"></td>
-                <td id="LeftIOL"></td>
-            </tr>
-        </tbody>
-    </table>
- 
-
-    <!-- Investigation Section -->
-    <h4 class="text-center mt-4" id="investigation-title">Investigation</h4>
-    <p style="margin-top: 20px; text-align: center;" class="show-investigation">
-        <strong>CBC=HB :</strong> 12  
-        <strong style="margin-left: 80px;">BSL R :</strong> 92  
-        <strong style="margin-left:50px;">BSL  :</strong> 92 
-        <strong style="margin-left:50px;">BSL  :</strong> 92 
-    </p>
-  
-
-    <!-- IOL Sticker Section -->
-    <h4 class="text-center mt-4">IOL STICKER</h4>
-    <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
-
-    <h4 class="text-center mt-4">Post Operative Treatment </h4>
-  
-    <div class="d-flex align-items-center" style="margin-top: 20px;">
-        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
-        <input type="text" class="form-control" style="width: 200px;">
-    </div>
-    <div class="d-flex align-items-center" style="margin-top: 20px;">
-        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Homide Eye Drop :</strong></label>
-        <input type="text" class="form-control" style="width: 200px;">
-    </div>
-    <div class="d-flex align-items-center" style="margin-top: 20px;">
-        <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
-        <input type="text" class="form-control" style="width: 200px;">
-    </div>
-    <!-- Doctor's Signature Section -->
-    <div class="doctor-signature">
-        <p><strong>Dr. Alvin Rane :</strong> ___________________________</p>
-       
-    </div>
-
-    <!-- Print Button -->
-   
-</div>
-
 <script>
      function printFunction() {
             const patientId = "P"+appointment.id;

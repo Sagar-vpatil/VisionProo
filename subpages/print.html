@@ -191,7 +191,7 @@
     }
     @page {
         size: A4;
-        margin: 20px;
+
     }
 
         }
@@ -217,7 +217,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-        
+          
             padding: 15px;
             border-bottom: 3px solid #120d0d;
         }
@@ -241,6 +241,24 @@
 
 
 
+        @media print {
+    /* Hide unnecessary elements */
+    .navbar, .print-btn, .buttons, .hr {
+        display: none !important;
+    }
+
+    /* Ensure the body and page fit A4 size */
+    body, .page {
+        margin: 0;
+        padding: 0;
+       
+        box-shadow: none;
+    }}
+/* Define A4 page size and margins explicitly */
+@page {
+    size: A4;
+    margin: 4mm; /* Set a 10mm margin on all sides for the printable area */
+}
 
 
         
@@ -276,9 +294,10 @@
             <!-- Logo and Hospital Name in One Line -->
             <div style="display: flex; align-items: center; margin-left: 110px ;">
                 <div class="logo">
-                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" style="margin-bottom: 7%;">
                 </div>
-                <div class="hospital-name">रवीकल्प हॉस्पिटल <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
+                <div class="hospital-name" style="margin-bottom: 7%;">रविकल्प हॉस्पिटल
+                    <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
                 
              
             </div>
@@ -291,7 +310,7 @@
             </div>
             <div class="right">
                 <p><strong>Date:</strong> <span id="appointment-date"></span></p>
-                <p><strong>Gender:</strong> <span id="patient-gender"></span></p>
+                <p><strong>Gender:</strong> <span id="patient-gender" style="margin-left: 20px;"></span></p>
             </div>
             
         </div>
