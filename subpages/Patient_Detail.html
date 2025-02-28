@@ -81,87 +81,147 @@
     }
 
     /* Popup Styles */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      padding: 25px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px; /* Adjusted width */
+  height: auto;
+  max-height: 90vh; /* Adjusted height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
 
-    .popup.active {
-      display: block;
-    }
+.popup.active {
+  display: block;
+}
 
-    .popup .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #333;
-      transition: color 0.3s ease;
-    }
+.popup .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
 
-    .popup .close-btn:hover {
-      color: #007bff;
-    }
+.popup .close-btn:hover {
+  color: #007bff;
+}
 
-    .popup h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #007bff;
-    }
+.popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007bff;
+  font-size: 24px;
+}
 
-    .popup label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #555;
-    }
+.popup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
 
-    .popup input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      box-sizing: border-box;
-      transition: border-color 0.3s ease;
-    }
+.popup input,
+.popup select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
 
-    .popup input:focus {
-      border-color: #007bff;
-      outline: none;
-    }
+.popup input:focus,
+.popup select:focus {
+  border-color: #007bff;
+  outline: none;
+}
 
-    .popup input[readonly] {
-      background-color: #f9f9f9;
-      cursor: not-allowed;
-    }
+.popup input[readonly] {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
 
-    .popup button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      color: #fff;
-      background-color: #007bff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+.popup button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-    .popup button:hover {
-      background-color: #0056b3;
-    }
+.popup button:hover {
+  background-color: #0056b3;
+}
+
+/* Form Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .popup {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .popup h2 {
+    font-size: 20px;
+  }
+
+  .popup input,
+  .popup select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .popup button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr; /* Stack columns on small screens */
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
     /* Overlay Styles */
     .overlay {
@@ -178,6 +238,43 @@
     .overlay.active {
       display: block;
     }
+
+    /* Pagination Container */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px; /* Space between buttons and text */
+}
+
+/* Pagination Buttons */
+.pagination-btn {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.pagination-btn:disabled {
+    background-color: #cccccc; /* Gray background for disabled button */
+    cursor: not-allowed;
+}
+
+/* Pagination Text */
+.pagination-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+}
   </style>
 
 </head>
@@ -216,72 +313,115 @@
         <a class="btn border-0" id="menu-btn"><i class="bx bx-menu" style="background-color: #fff;"></i></a>
       </div>
     </nav>
-
+    
     <h1 style="margin-top: 20px;">Patient Details</h1>
-
+    <div class="col-md-6 col-xxl-8">
+      <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
+              class="form-label" style="margin-top: 10px;"><input
+                  class="form-control-sm form-control form-control-sm" type="search"
+                  aria-controls="dataTable" placeholder="Search for patient..."
+                  autofocus="" style="width: 200px; border-color: #333333; border-width: 1px; background-color: #f9f9f9;" id="search-patient"></label></div>
+  </div>
     <table style="width: 70%;">
         <thead>
-          <tr>
-            <th>Patient ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Mobile Number</th>
-            <th>Action</th>
-          </tr>
+            <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Mobile Number</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>John Doe</td>
-            <td>33</td>
-            <td>123 Main St, City</td>
-            <td>123-456-7890</td>
-            <td><button class="edit-btn" onclick="openPopup(this)">Edit</button></td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Jane Smith</td>
-            <td>38</td>
-            <td>456 Elm St, Town</td>
-            <td>987-654-3210</td>
-            <td><button class="edit-btn" onclick="openPopup(this)">Edit</button></td>
-          </tr>
+        <tbody id="patientsTableBody">
+            <!-- Patient rows will be loaded dynamically here -->
         </tbody>
-      </table>
+    </table>
+    <!-- Pagination Controls -->
+<!-- Pagination Controls -->
+<div class="pagination-container">
+    <button id="prevPageBtn" class="pagination-btn" disabled>⬅️ Previous</button>
+    <span id="currentPage" class="pagination-text">Page 1</span>
+    <button id="nextPageBtn" class="pagination-btn">Next ➡️</button>
+</div>
 
-    <!-- Popup -->
-    <div class="popup" id="popup" style="height: 640px;">
-      <span class="close-btn" onclick="closePopup()">&times;</span>
-      <h2>Edit Patient Details</h2>
-      <form id="patient-form">
-        <label for="patient-id">Patient ID</label>
-        <input type="text" id="patient-id" placeholder="Patient ID" readonly>
+<div class="popup" id="popup">
+    <span class="close-btn" id="close-btn">&times;</span>
+    <h2>Edit Patient Details</h2>
+    <form id="patient-form">
+      <div class="form-grid">
+        <div class="form-column">
+          <label for="patient-id">Patient ID</label>
+          <input type="text" id="patient-id" placeholder="Patient ID" readonly>
 
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Name">
+          <label for="dob-input-field">Date of Birth</label>
+          <input  type="date" id="dob-input-field" onchange="calculateAge()">
+  
+          <label for="age">Age</label>
+          <input type="number" id="age" placeholder="Age">
+        </div>
+  
+        <div class="form-column">
 
-        <label for="age">Age</label>
-        <input type="number" id="age" placeholder="Age">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Name">
+  
+          <label for="gender-select">Gender</label>
+          <select  id="gender-select">
+            <option value="" disabled selected>Select Gender 🔽</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+  
+          <label for="address">Address</label>
+          <input type="text" id="address" placeholder="Address">
+        </div>
+      </div>
+  
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" placeholder="Mobile Number" maxlength="10">
 
-        <label for="address">Address</label>
-        <input type="text" id="address" placeholder="Address">
-
-        <label for="mobile">Mobile Number</label>
-        <input type="tel" id="mobile" placeholder="Mobile Number">
-
-        <button type="button" onclick="updatePatient()">Update</button>
-      </form>
-    </div>
+  
+      <button type="button" id="update-btn">Update</button>
+    </form>
+  </div>
 
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
+
+
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="../frontend/js/script.js"></script>
-
   <script>
+    // Restrict the date picker to allow only previous dates
+    document.addEventListener("DOMContentLoaded", function () {
+        const dobInput = document.getElementById("dob-input-field");
+        
+        // Get today's date in the format YYYY-MM-DD
+        const today = new Date().toISOString().split("T")[0];
+        
+        // Set the max attribute to today's date
+        dobInput.setAttribute("max", today);
+    });
+     function calculateAge() {
+                var dobInput = document.getElementById('dob-input-field');
+                var ageInput = document.getElementById('age');
+                
+                var dob = new Date(dobInput.value);
+                var today = new Date();
+                
+                var age = today.getFullYear() - dob.getFullYear();
+                var month = today.getMonth() - dob.getMonth();
+                
+                // If the birthday hasn't occurred yet this year, subtract 1 from the age
+                if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                
+                // Set the calculated age in the age input field
+                ageInput.value = age;
+            }
     var menu_btn = document.querySelector("#menu-btn");
     var sidebar = document.querySelector("#sidebar");
     var container = document.querySelector(".my-container");
@@ -292,38 +432,19 @@
 
     let currentRow = null;
 
-    function openPopup(icon) {
-      currentRow = icon.closest('tr');
-      const cells = currentRow.querySelectorAll('td');
+    // function openPopup(icon) {
+    //   document.getElementById('popup').classList.add('active');
+    //   document.getElementById('overlay').classList.add('active');
+    // }
 
-      document.getElementById('patient-id').value = cells[0].textContent;
-      document.getElementById('name').value = cells[1].textContent;
-      document.getElementById('age').value = cells[2].textContent;
-      document.getElementById('address').value = cells[3].textContent;
-      document.getElementById('mobile').value = cells[4].textContent;
-
-      document.getElementById('popup').classList.add('active');
-      document.getElementById('overlay').classList.add('active');
-    }
-
-    function closePopup() {
+    document.getElementById('close-btn').addEventListener('click', () => {
       document.getElementById('popup').classList.remove('active');
       document.getElementById('overlay').classList.remove('active');
-    }
-
-    function updatePatient() {
-      if (!currentRow) return;
-
-      const cells = currentRow.querySelectorAll('td');
-
-      cells[1].textContent = document.getElementById('name').value;
-      cells[2].textContent = document.getElementById('age').value;
-      cells[3].textContent = document.getElementById('address').value;
-      cells[4].textContent = document.getElementById('mobile').value;
-
-      closePopup();
-    }
+    });
   </script>
+  <!-- Bootstrap JS -->
+  <script src="../frontend/js/script.js"></script>
+  <script type="module" src="../backend/edit_Patient.js"></script>
 </body>
 
 </html>

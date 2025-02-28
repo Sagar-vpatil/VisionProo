@@ -30,8 +30,8 @@ async function loadTodayAppointments() {
             row.innerHTML = `
                 <td>${appointment.id}</td>
                 <td>${appointment.Name}</td>
-                <td>${appointment.BirthDate}</td>
-                <td>${calculateAge(appointment.BirthDate)}</td>
+                <td>${appointment.BirthDate || "N/A"}</td>
+                <td>${calculateAge(appointment.BirthDate) || appointment.Age || "N/A"}</td>
                 <td>${appointment.Address}</td>
                 <td>${appointment.MobileNo}</td>
                 <td>
