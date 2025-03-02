@@ -268,10 +268,10 @@
     <div class="tab" data-target="diagnosis">Diagnosis</div>
     <div class="tab" data-target="treatment">Treatment</div>
     <div class="tab" data-target="investigation">Investigation</div>
-    <div class="tab" data-target="rx">Rx</div>
+    <!-- <div class="tab" data-target="rx">Rx</div> -->
     <div class="tab" data-target="advice">Advice</div>
     <div class="tab" data-target="img">img</div>
-    <div class="tab" data-target="Operative">PreOperative</div>
+    <!-- <div class="tab" data-target="Operative">PreOperative</div> -->
 
    
     <!-- Save and Print Button -->
@@ -323,120 +323,6 @@
  
 
 
-  <div class="tab-content " id="Operative">
-    
-<div id="preOperativeWorkup">
-  <h2>Pre-Operative Workup Investigations</h2>
-  
-  <!-- Form container -->
-  <form>
-      <!-- First Row: BP and Pulse Rate -->
-      <div class="row form-row">
-          <div class="col-md-6 form-group">
-              <label for="BPResult" class="form-label">BP =</label>
-              <input type="text" id="BPResult" class="form-control" placeholder="Enter BP">
-          </div>
-          <div class="col-md-6 form-group">
-              <label for="PulseRate" class="form-label">P =</label>
-              <input type="text" id="PulseRate" class="form-control" placeholder="Enter Pulse Rate">
-          </div>
-      </div>
-
-      <!-- Second Row: Sac and NCT -->
-      <div class="row form-row">
-          <div class="col-md-6 form-group">
-              <label for="SACResult" class="form-label">SAC =</label>
-              <input type="text" id="SACResult" class="form-control" placeholder="Enter Sac">
-          </div>
-          <div class="col-md-6 form-group">
-              <label for="NCTResult" class="form-label">NCT =</label>
-              <input type="text" id="NCTResult" class="form-control" placeholder="Enter NCT">
-          </div>
-      </div>
-
-    
-     
-  </form>
-  <h3>A-Scan</h3>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Right Eye</th>
-        <th>Left Eye</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>K1</td>
-        <td><input type="text" name="right_k1" id="RightK1"></td>
-        <td><input type="text" name="left_k1" id="LeftK1"></td>
-      </tr>
-      <tr>
-        <td>K2</td>
-        <td><input type="text" name="right_k2" id="RightK2"></td>
-        <td><input type="text" name="left_k2" id="LeftK2"></td>
-      </tr>
-      <tr>
-        <td>LT</td>
-        <td><input type="text" name="right_lt" id="RightLT"></td>
-        <td><input type="text" name="left_lt" id="LeftLT"></td>
-      </tr>
-      <tr>
-        <td>AL</td>
-        <td><input type="text" name="right_al" id="RightAL"></td>
-        <td><input type="text" name="left_al" id="LeftAL"></td>
-      </tr>
-      <tr>
-        <td>ACD</td>
-        <td><input type="text" name="right_acd" id="RightACD"></td>
-        <td><input type="text" name="left_acd" id="LeftACD"></td>
-      </tr>
-      <tr>
-        <td>L.Power</td>
-        <td><input type="text" name="right_lpower" id="RightLPower"></td>
-        <td><input type="text" name="left_lpower" id="LeftLPower"></td>
-      </tr>
-      <tr>
-        <td>A.Constant</td>
-        <td><input type="text" name="right_a_constant" id="RightAConstant"></td>
-        <td><input type="text" name="left_a_constant" id="LeftAConstant"></td>
-      </tr>
-      <tr>
-        <td>IOL</td>
-        <td><input type="text" name="right_iol" id="RightIOL"></td>
-        <td><input type="text" name="left_iol" id="LeftIOL"></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>IOP/GAT</h3>
-  <table style="width: 1000px;">
-    <thead>
-      <tr>
-        <th colspan="2">Right Eye</th>
-        <th colspan="2">Left Eye</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;" id="RightmmHg">
-          <span>mmHg</span>
-        </td>
-        <td><input type="text" value="" style="width: 150px;" id="RightmmHgTime"></td>
-        <td class="input-wrapper">
-          <input type="text" placeholder="" style="width: 150px;" id="LeftmmHg">
-          <span>mmHg</span>
-        </td>
-        <td><input type="text" value="" style="width: 150px;" id="LeftmmHgTime"></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-    
-  </div>
   <!-- ############################### summart end ####################### -->
 
 
@@ -474,9 +360,9 @@
           Itching (BE)
           </div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Watering (BE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (BE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night vision problem(BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Redness (BE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">DISCHARGE (BE)</div>
+        
         <div class="symptoms" onclick="toggleSymptoms(this)">f.b.sensation (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">DOV (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">dryness in eye (BE)
@@ -487,12 +373,12 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">blood spot in eye (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">
           dilated pupil (BE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">droping eyelid (BE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">drooping eyelid (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">chemosis (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Burning (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">swelling on lid (BE)
         </div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">night vision Problem (BE)</div>
+
         <div class="symptoms" onclick="toggleSymptoms(this)">pain around eyes (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">white ring around cornea (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">sudden loss of Vision (BE)
@@ -509,7 +395,7 @@
         <button type="button" class="btn" onclick="addOption(this,'symptoms')">Add Option </button>
       </div>
       <!-- Content for Left Eye Symptoms -->
-      <div class="options-container active ">
+      <div class="options-container active " >
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (LE)</div>
@@ -520,9 +406,9 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Irritation (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Itching (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Watering (LE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (LE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night vision problem(LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Redness (LE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">DISCHARGE (LE)</div>
+       
         <div class="symptoms" onclick="toggleSymptoms(this)">f.b.sensation (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">DOV (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Dryness in Eye (LE)</div>
@@ -534,7 +420,7 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Chemosis (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Burning (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (LE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (LE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night vision problem (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Pain Around Eyes (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">White Ring Around Cornea (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Sudden Loss of Vision (LE)</div>
@@ -562,9 +448,9 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Irritation (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Itching (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Watering (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night vision problem(RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Redness (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">DISCHARGE (RE)</div>
+       
         <div class="symptoms" onclick="toggleSymptoms(this)">f.b.sensation (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">DOV (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Dryness in Eye (RE)</div>
@@ -576,7 +462,7 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Chemosis (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Burning (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Night Vision Problem (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Night vision problem (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Pain Around Eyes (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">White Ring Around Cornea (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Sudden Loss of Vision (RE)</div>
@@ -747,14 +633,16 @@
     <!-- ##################### ophtal tabs start ############################################# -->
     <div class="tabs">
       <div class="ttab" data-section="section1">Visual Acuity</div>
-      <div class="ttab" data-section="section2">Current Power Glass</div>
-      <!-- <div class="ttab" data-section="section3">Pupillary Reaction</div> -->
-      <div class="ttab" data-section="section4">Examination</div>
-      <div class="ttab" data-section="section5">Refraction</div>
-      <!-- <div class="ttab" data-section="section6">IOP/GAT</div> -->
-      <div class="ttab" data-section="section7">Topography</div>
-      <!-- <div class="ttab" data-section="section8">A-Scan</div> -->
       <div class="ttab" data-section="section9">AR</div>
+      <div class="ttab" data-section="section2">Old Power Glass</div>
+      <!-- <div class="ttab" data-section="section3">Pupillary Reaction</div> -->
+      <div class="ttab" data-section="section5">Refraction</div>
+      <div class="ttab" data-section="section4">Examination</div>
+  
+      <!-- <div class="ttab" data-section="section6">IOP/GAT</div> -->
+      <!-- <div class="ttab" data-section="section7">Topography</div> -->
+      <!-- <div class="ttab" data-section="section8">A-Scan</div> -->
+    
     </div>
 
     <!-- ##################### ophtal tabs end ############################################# -->
@@ -861,7 +749,7 @@
       <!-- Step 3: Current Power Glasses -->
 
       <div class="form-step" id="step-3">
-        <h3>Current Power Glasses:</h3>
+        <h3>Old Power Glass :</h3>
         <div class="form-group">
           <h3 ></h3>
           <table id="Current-Power-Table" style="width: 50%; margin-left: 140px;">
@@ -1321,9 +1209,26 @@ overflow-y: auto; width: 50%;">
           </tr>
           <tr>
             <td>Type of Glass</td>
-            <td colspan="4"><input type="text" id="RETypeOfGlass" name="RETypeOfGlass"></td>
-            <td colspan="4"><input type="text" id="LETypeOfGlass" name="LETypeOfGlass"></td>
-          </tr>
+            <td colspan="4">
+                <select id="RETypeOfGlass" name="RETypeOfGlass" style="width: 100%; padding: 5px;">
+                    <option value="">Select</option>
+                    <option value="Tempered">Tempered</option>
+                    <option value="Laminated">Laminated</option>
+                    <option value="Frosted">Frosted</option>
+                    <option value="Tinted">Tinted</option>
+                </select>
+            </td>
+            <td colspan="4">
+                <select id="LETypeOfGlass" name="LETypeOfGlass" style="width: 100%; padding: 5px;">
+                    <option value="" style="width: 400px;">Select</option>
+                    <option value="Tempered">Tempered</option>
+                    <option value="Laminated">Laminated</option>
+                    <option value="Frosted">Frosted</option>
+                    <option value="Tinted">Tinted</option>
+                </select>
+            </td>
+        </tr>
+        
           <tr>
             <td>Remark</td>
             <td colspan="4"><input type="text" id="RERemark" name="RERemark"></td>
@@ -2175,22 +2080,136 @@ overflow-y: auto; width: 50%;">
 
 <!-- Treatment History Content -->
 <div id="medication-content" class="treatment-history-content">
-  <h2>Medication History</h2> 
-  <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
+  <h2>Medical Treatment</h2> 
+  <!-- <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
     <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Eye Drops</div>
     <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Eye Drops</div>
     <div class="medication-treatment" onclick="toggleMedicationTreatment(this)">Antibiotics</div>
-</div>
+</div> -->
+
+ <!-- Medicine list container -->
+ <div id="medicine-list"></div>
+
+ <button class="add-entry-btn" type="button" onclick="addMedicineEntry()">Add Medicine Entry</button>
+
 </div>
 
 <div id="surgical-content" class="treatment-history-content">
-  <h2>Surgical History</h2>
+  <h2>Surgical Treatment</h2>
   <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
     <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Cataract Surgery</div>
     <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Glaucoma Surgery</div>
     <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LASIK</div>
 </div>
+<div id="preOperativeWorkup">
+  <h2>Pre-Operative Workup Investigations</h2>
+  
+  <!-- Form container -->
+  <form>
+      <!-- First Row: BP and Pulse Rate -->
+      <div class="row form-row">
+          <div class="col-md-6 form-group">
+              <label for="BPResult" class="form-label">BP =</label>
+              <input type="text" id="BPResult" class="form-control" placeholder="Enter BP">
+          </div>
+          <div class="col-md-6 form-group">
+              <label for="PulseRate" class="form-label">P =</label>
+              <input type="text" id="PulseRate" class="form-control" placeholder="Enter Pulse Rate">
+          </div>
+      </div>
 
+      <!-- Second Row: Sac and NCT -->
+      <div class="row form-row">
+          <div class="col-md-6 form-group">
+              <label for="SACResult" class="form-label">SAC =</label>
+              <input type="text" id="SACResult" class="form-control" placeholder="Enter Sac">
+          </div>
+          <div class="col-md-6 form-group">
+              <label for="NCTResult" class="form-label">NCT =</label>
+              <input type="text" id="NCTResult" class="form-control" placeholder="Enter NCT">
+          </div>
+      </div>
+
+    
+     
+  </form>
+  <h3>A-Scan</h3>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Right Eye</th>
+        <th>Left Eye</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>K1</td>
+        <td><input type="text" name="right_k1" id="RightK1"></td>
+        <td><input type="text" name="left_k1" id="LeftK1"></td>
+      </tr>
+      <tr>
+        <td>K2</td>
+        <td><input type="text" name="right_k2" id="RightK2"></td>
+        <td><input type="text" name="left_k2" id="LeftK2"></td>
+      </tr>
+      <tr>
+        <td>LT</td>
+        <td><input type="text" name="right_lt" id="RightLT"></td>
+        <td><input type="text" name="left_lt" id="LeftLT"></td>
+      </tr>
+      <tr>
+        <td>AxL</td>
+        <td><input type="text" name="right_al" id="RightAL"></td>
+        <td><input type="text" name="left_al" id="LeftAL"></td>
+      </tr>
+      <tr>
+        <td>ACD</td>
+        <td><input type="text" name="right_acd" id="RightACD"></td>
+        <td><input type="text" name="left_acd" id="LeftACD"></td>
+      </tr>
+      <tr>
+        <td>L.Power</td>
+        <td><input type="text" name="right_lpower" id="RightLPower"></td>
+        <td><input type="text" name="left_lpower" id="LeftLPower"></td>
+      </tr>
+      <tr>
+        <td>A.Constant</td>
+        <td><input type="text" name="right_a_constant" id="RightAConstant"></td>
+        <td><input type="text" name="left_a_constant" id="LeftAConstant"></td>
+      </tr>
+      <tr>
+        <td>IOL</td>
+        <td><input type="text" name="right_iol" id="RightIOL"></td>
+        <td><input type="text" name="left_iol" id="LeftIOL"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>IOP/GAT</h3>
+  <table style="width: 1000px;">
+    <thead>
+      <tr>
+        <th colspan="2">Right Eye</th>
+        <th colspan="2">Left Eye</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="input-wrapper">
+          <input type="text" placeholder="" style="width: 150px;" id="RightmmHg">
+          <span>mmHg</span>
+        </td>
+        <td><input type="text" value="" style="width: 150px;" id="RightmmHgTime"></td>
+        <td class="input-wrapper">
+          <input type="text" placeholder="" style="width: 150px;" id="LeftmmHg">
+          <span>mmHg</span>
+        </td>
+        <td><input type="text" value="" style="width: 150px;" id="LeftmmHgTime"></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
 </div>
 
 <script>
@@ -2256,16 +2275,15 @@ overflow-y: auto; width: 50%;">
 
 
   <!-- ###################################### Rx start ################################ -->
-  <div class="tab-content" id="rx" style="height: 100vh;">
-    <h3>Rx</h3>
+  <!-- <div class="tab-content" id="rx" style="height: 100vh;">
+  
    
-
-    <!-- Medicine list container -->
+->
     <div id="medicine-list"></div>
 
     <button class="add-entry-btn" type="button" onclick="addMedicineEntry()">Add Medicine Entry</button>
 
-  </div>
+  </div> -->
 
   <!-- ###################################### Rx end ################################ -->
 

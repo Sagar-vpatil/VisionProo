@@ -6,10 +6,10 @@
     <title>Discharge Summary - Professional Print Layout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Base Styling */
-        @page {
+           /* Base Styling */
+           @page {
             size: A4;
-            margin: 2mm;
+            margin: 0;
         }
 
         .container {
@@ -55,13 +55,7 @@
         }
 
         /* Patient Information */
-        .patient-info-card {
-            background: #f8f9fa;
-            border-left: 4px solid #004a99;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-        }
+        
 
         .patient-table {
             width: 100%;
@@ -71,6 +65,8 @@
         .patient-table th, .patient-table td {
             padding: 10px;
             border: 1px solid #ddd;
+            text-align: center; /* Center-align text horizontally */
+            vertical-align: middle; /* Center-align text vertically */
         }
 
         .patient-table th {
@@ -106,7 +102,7 @@
 
             .patient-info-card {
                 background: none;
-                border-left: 3px solid #000;
+               
             }
 
             .buttons {
@@ -124,11 +120,13 @@
                 border: none;
                 padding: 0;
                 background: transparent;
-                font-family: 'Georgia', serif;
+                font-family: 'Helvetica Neue', sans-serif;
                 font-size: 12pt;
                 color: #333;
                 width: auto;
-                line-height: 1.6;
+           
+                font-size: 15px;
+                margin-left: 20px;
             }
 
             input[type="date"]::-webkit-calendar-picker-indicator {
@@ -251,8 +249,29 @@
             cursor: pointer;
             border-radius: 5px;
         }
+ /* Custom CSS for the table */
+ .table-container {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
 
+        .table-container th,
+        .table-container td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
 
+        .table-container th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table-container tbody tr:hover {
+            background-color: #f1f1f1;
+        }
 
     </style>
 </head>
@@ -289,7 +308,8 @@
         </div>
 
         <!-- Patient Information -->
-        <div class="patient-info-card">
+          <!-- Patient Information -->
+          <div class="patient-info-card">
             <table class="table table-bordered patient-table">
                 <tbody>
                     <tr>
@@ -318,11 +338,11 @@
                             <input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')">
                         </td>
                         <th>Surgeon Name:</th>
-                        <td><input type="text" class="form-control" style="width: 200px;"></td>
+                        <td>Dr. Alvin R Rane</td>
                     </tr>
                     <tr>
                         <th>Surgery Name:</th>
-                        <td><input type="text" class="form-control" style="width: 200px;"></td>
+                        <td></td>
                         <th>Address:</th>
                         <td>N/A</td>
                     </tr>
@@ -397,26 +417,53 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>K1</td>
-                    <td id="RightK1"></td>
-                    <td id="LeftK1"></td>
+                <tr style="height: 10px;"> 
+                    <td style="font-size: 12px;">K1</td>
+                    <td id="RightK1" style="font-size: 12px;"></td>
+                    <td id="LeftK1" style="font-size: 12px;"></td>
                 </tr>
-                <tr>
-                    <td>K2</td>
-                    <td id="RightK2"></td>
-                    <td id="LeftK2"></td>
+                <tr style="height: 15px;"> 
+                    <td style="font-size: 12px;">K2</td>
+                    <td id="RightK2" style="font-size: 12px;"></td>
+                    <td id="LeftK2" style="font-size: 12px;"></td>
                 </tr>
-                <tr>
-                    <td>AXL</td>
-                    <td id="RightAL"></td>
-                    <td id="LeftAL"></td>
+                <!-- <tr style="height: 15px;">
+                    <td style="font-size: 12px;">LT</td>
+                    <td style="font-size: 12px;">1</td>
+                    <td style="font-size: 12px;">1</td>
+                </tr> -->
+
+                
+                <tr style="height: 15px;"> 
+                    <td style="font-size: 12px;">AXL</td>
+                    <td id="RightAL" style="font-size: 12px;"></td>
+                    <td id="LeftAL" style="font-size: 12px;"></td>
                 </tr>
-                <tr>
-                    <td>IOL</td>
-                    <td id="RightIOL"></td>
-                    <td id="LeftIOL"></td>
+
+                <!-- <tr style="height: 15px;"> 
+                    <td style="font-size: 12px;">ACD</td>
+                    <td style="font-size: 12px;">1</td>
+                    <td style="font-size: 12px;">1</td>
+                </tr> -->
+
+                <!-- <tr style="height: 15px;">
+                    <td style="font-size: 12px;">L.Power</td>
+                    <td style="font-size: 12px;">1</td>
+                    <td style="font-size: 12px;">1</td>
+                </tr> -->
+
+                <!-- <tr style="height: 15px;"> 
+                    <td style="font-size: 12px;">A.Constant</td>
+                    <td style="font-size: 12px;"></td>
+                    <td style="font-size: 12px;"></td>
+                </tr> -->
+
+                <tr style="height: 15px;"> 
+                    <td style="font-size: 12px;">IOL</td>
+                    <td id="RightIOL" style="font-size: 12px;"></td>
+                    <td id="LeftIOL" style="font-size: 10px;"></td>
                 </tr>
+
             </tbody>
         </table>
 
@@ -432,7 +479,7 @@
 
         <!-- Post Operative Treatment Section -->
         <h4 class="section-title">Post Operative Treatment</h4>
-        <div class="d-flex align-items-center" style="margin-top: 20px;">
+        <!-- <div class="d-flex align-items-center" style="margin-top: 20px;">
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
         </div>
@@ -443,8 +490,25 @@
         <div class="d-flex align-items-center" style="margin-top: 20px;">
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
-        </div>
-
+        </div> -->
+        <table class="table-container table-responsive" style="width: 500px;">
+            <thead>
+                <tr>
+                    <th scope="col">Medicine Name</th>
+                  
+                    <th scope="col">Dose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample data inserted dynamically -->
+                <tr>
+                    <td>Paracetamol</td>
+              
+                    <td>0-0-1</td>
+                </tr>
+               
+            </tbody>
+        </table>
 
   <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">

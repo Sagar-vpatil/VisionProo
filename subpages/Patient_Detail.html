@@ -10,6 +10,9 @@
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
   <!-- BOX ICONS CSS-->
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../frontend/css/main.css" />
   <link rel="stylesheet" href="../assets/css/global.css">
@@ -275,6 +278,93 @@
     font-weight: bold;
     color: #333333;
 }
+
+
+
+
+
+ /* Container Styling */
+ .container {
+            max-width: 650px;
+            width: 100%;
+            padding: 25px;
+            border-radius: 12px;
+            background: none; /* No background */
+            box-shadow: none; /* No shadow */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Search Flexbox */
+        .search-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        /* Dropdown Styling */
+        .search-container .form-select {
+            flex: 1 1 180px;
+            border-radius: 30px;
+            border: 2px solid #6c63ff; /* Border added */
+            padding: 12px 18px;
+            font-size: 16px;
+            background: #f0f0f0; /* Light gray background */
+        }
+
+        .search-container .form-select:focus {
+            border-color: #4e46cc;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(78, 70, 204, 0.5);
+        }
+
+        /* Search Bar */
+        .search-container .input-group {
+            flex: 1 1 320px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .search-container .form-control {
+            border: 2px solid #6c63ff; /* Border added */
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 30px 0 0 30px;
+            background: #f0f0f0; /* Light gray background */
+        }
+
+        .search-container .form-control:focus {
+            border-color: #4e46cc;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(78, 70, 204, 0.5);
+        }
+
+        /* Search Button */
+        .search-container .input-group-text {
+            background: #6c63ff; /* Background color added */
+            border: 2px solid #6c63ff;
+            color: #fff;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0 30px 30px 0;
+        }
+
+        .search-container .input-group-text:hover {
+            background: #4e46cc;
+            border-color: #4e46cc;
+        }
+
+        .search-container .input-group-text i {
+            font-size: 20px;
+        }
   </style>
 
 </head>
@@ -315,12 +405,29 @@
     </nav>
     
     <h1 style="margin-top: 20px;">Patient Details</h1>
+    <div class="container" style="background-color: transparent;">
+
+
+      <!-- Flexbox Container -->
+      <div class="search-container">
+          <!-- Dropdown for Filter Option -->
+          <select class="form-select" >
+              <option value="id">Search by ID</option>
+              <option value="name">Search by Name</option>
+              <option value="mobile">Search by Mobile No</option>
+          </select>
+          <!-- Search Bar with Icon -->
+          <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for patient..." style="height: 55px;" id="search-patient">
+              <span class="input-group-text">
+                  <i class="bi bi-search"></i> <!-- Bootstrap Search Icon -->
+              </span>
+          </div>
+      </div>
+  </div>
     <div class="col-md-6 col-xxl-8">
       <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
-              class="form-label" style="margin-top: 10px;"><input
-                  class="form-control-sm form-control form-control-sm" type="search"
-                  aria-controls="dataTable" placeholder="Search for patient..."
-                  autofocus="" style="width: 200px; border-color: #333333; border-width: 1px; background-color: #f9f9f9;" id="search-patient"></label></div>
+              class="form-label" style="margin-top: 10px;"></label></div>
   </div>
     <table style="width: 70%;">
         <thead>

@@ -68,7 +68,8 @@
         table th, table td {
             border: 1px solid #ddd;
             padding: 10px;
-            text-align: left;
+            text-align: center; /* Center-align text horizontally */
+            vertical-align: middle; /* Center-align text vertically */
         }
         table th {
             background: #e0d6c9;
@@ -155,6 +156,7 @@
             .pr {
                 width: 70px;
             }
+            
             .invoice-container {
                 box-shadow: none;
                 border-radius: 0;
@@ -193,6 +195,30 @@
                 margin-top: 100px;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Center-align input text and rupee symbol */
+        input[type="text"] {
+            text-align: center; /* Center-align text */
+            font-family: Arial, sans-serif; /* Use a clean font */
+            font-size: 14px; /* Adjust font size */
+            padding: 5px; /* Add padding for better appearance */
+            width: 100%; /* Ensure input takes full width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+       
     </style>
 </head>
 <body>
@@ -223,7 +249,7 @@
         </div>
 
         <!-- Invoice Details -->
-        <div class="invoice-details">
+        <div class="invoice-details" style="margin-left: 50px;">
             <p><span>Patient ID -</span> <span id="patient-id"></span>      <span style="margin-left: 400px;">Date:</span> <span id="currentDate"></span></p>
             <p><span>Patient Name -</span> <span id="patient-name"></span>      <span style="margin-left: 350px;">Mobile No:</span> <span id="patient-mobile"></span></p>
         </div>
@@ -243,7 +269,7 @@
                     <td style="border: 2px solid black; padding: 10px;">1</td>
                     <td style="border: 2px solid black; padding: 10px;">Consultation</td>
                     <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)" style="width: 100px;">
                     </td>
                 </tr>
                 <tr style="border: 2px solid black;">
@@ -334,7 +360,7 @@
         </table>
 
         <!-- Total Amount -->
-        <p class="total">TOTAL  Amount - ₹0</p>
+        <p class="total" style="margin-left: px;">TOTAL  Amount - ₹0</p>
 
         <!-- Footer Section -->
         <div class="footer" style="color: black;">
@@ -358,8 +384,8 @@
             year: 'numeric'
         });
 
-        // Function to initialize input fields
-        function initializeInputFields() {
+       // Function to initialize input fields
+       function initializeInputFields() {
             const inputs = document.querySelectorAll('#invoiceTable tbody input[type="text"]');
             inputs.forEach(input => {
                 input.addEventListener('focus', () => {
@@ -399,7 +425,7 @@
                 const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
                 total += numValue;
             });
-            document.querySelector(".total").innerText = `Total  Amount - ₹${total.toLocaleString('en-IN')}`;
+            document.querySelector(".total").innerText = `Total Amount - ₹${total.toLocaleString('en-IN')}`;
         }
 
         // Updated printInvoice function

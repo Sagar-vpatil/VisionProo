@@ -74,7 +74,7 @@
             padding: 10px 0;
         }
         .medicines .left {
-            width: 30%;
+            width: 20%;
             padding-right: 10px;
             border-right: 2px solid black;
         }
@@ -136,7 +136,9 @@
         }
         th, td {
             padding: 2px;
-            text-align: left;
+         
+            text-align: center; /* Center-align text horizontally */
+            vertical-align: middle; /* Center-align text vertically */
         }
         th {
             color: #002D62;
@@ -310,7 +312,7 @@
             </div>
             <div class="right">
                 <p><strong>Date:</strong> <span id="appointment-date"></span></p>
-                <p><strong>Gender:</strong> <span id="patient-gender" style="margin-left: 20px;"></span></p>
+              <p style="margin-right: 20px;"> <strong> Gender:</strong  > <span id="patient-gender"></span></p>
             </div>
             
         </div>
@@ -324,7 +326,7 @@
                     <!-- </ul>
                   </div> -->
                   
-                <div class="investigation-list" style="margin-top: 160px;">
+                <div class="investigation-list" >
                     <h3>Investigation </h3>
                     <ul>
                         <!-- Investigation will be dynamically populated here  -->
@@ -385,9 +387,53 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <h3 id="AR-Heading">AR</h3>
+                <table style="width: 300px; margin-left: 120px;" border="1" id="AR-Table">
+                  <thead>
+                    <tr>
+                      <th colspan="5">Right Eye</th>
+                      <th colspan="5">Left Eye</th>
+                    </tr>
+                    <tr>
+                      <th>SPH</th>
+                      <th>CYL</th>
+                      <th>Axis</th>
+                      <th>V/A</th>
+                      <th>DV</th>
+                      <th>SPH</th>
+                      <th>CYL</th>
+                      <th>Axis</th>
+                      <th>V/A</th>
+                      <th>DV</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="height: 30px;">
+                      <td id="ARSPH"></td>
+                      <td id="ARCYL"></td>
+                      <td id="ARAxis"></td>
+                      <td id="ARVA"></td>
+                      <td id="ARDV"></td>
+                      <td id="ARSPH2"></td>
+                      <td id="ARCYL2"></td>
+                      <td id="ARAxis2"></td>
+                      <td id="ARVA2"></td>
+                      <td id="ARDV2"></td>
+                    </tr>
+                    <tr>
+                      <th colspan="2">IPD </th>
+                      <td colspan="8" id="ARIPD"></td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+
+
+
                 <div class="form-step" id="step-3">
                     <div class="form-group">
-                      <h3 id="Current-Power-Heading">Current Power Glasses:</h3>
+                      <h3 id="Current-Power-Heading">Old Power Glass</h3>
                       <div class="table-container" id="Current-Power-Section">
                         <table id="Current-Power-Table" style="width: 390px; margin-left: 90px;">
                           <thead>
@@ -498,8 +544,8 @@
                     </tbody>
                   </table>
                   
-                  <div id="section4" class="section">
-                    <h3 id="Eye-Examination-Heading">Eye Examination:</h3>
+                  <div id="section4" class="section" >
+                    <h3 id="Eye-Examination-Heading"style="margin-top: 55px;">Eye Examination:</h3>
                     <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" id="Eye-Examination-Table">
                         <thead>
                             <tr>
@@ -634,46 +680,7 @@
                   </tbody>
                 </table>
 
-              <h3 id="AR-Heading">AR</h3>
-              <table style="width: 300px; margin-left: 120px;" border="1" id="AR-Table">
-                <thead>
-                  <tr>
-                    <th colspan="5">Right Eye</th>
-                    <th colspan="5">Left Eye</th>
-                  </tr>
-                  <tr>
-                    <th>SPH</th>
-                    <th>CYL</th>
-                    <th>Axis</th>
-                    <th>V/A</th>
-                    <th>DV</th>
-                    <th>SPH</th>
-                    <th>CYL</th>
-                    <th>Axis</th>
-                    <th>V/A</th>
-                    <th>DV</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="height: 30px;">
-                    <td id="ARSPH"></td>
-                    <td id="ARCYL"></td>
-                    <td id="ARAxis"></td>
-                    <td id="ARVA"></td>
-                    <td id="ARDV"></td>
-                    <td id="ARSPH2"></td>
-                    <td id="ARCYL2"></td>
-                    <td id="ARAxis2"></td>
-                    <td id="ARVA2"></td>
-                    <td id="ARDV2"></td>
-                  </tr>
-                  <tr>
-                    <th colspan="2">IPD </th>
-                    <td colspan="8" id="ARIPD"></td>
-                  </tr>
-                </tbody>
-              </table>
-
+            
                 <div id="section5" class="section">
 
                     <div class="patient-details">
@@ -685,6 +692,28 @@
                             </p>
                         
                     </div>
+
+
+                    <h3 id="Medicines-Heading">Medical Treatment:</h3>
+                    <table class="table-container table-responsive" id="Medicines-Table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Medicine Name</th>
+                                <th scope="col" >Type</th>
+                                <th scope="col" >Dose</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody id="medicines-tbody">
+                            <!-- Medicines will be dynamically inserted here -->                            
+                       </tbody>
+                    </table>
+
+
+
+
+
+
                     <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure</h3>
 
                     <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
@@ -780,20 +809,7 @@
                 </div>
               
 
-                    <h3 id="Medicines-Heading">Medicines Prescribed:</h3>
-                    <table class="table-container table-responsive" id="Medicines-Table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Medicine Name</th>
-                                <th scope="col" >Type</th>
-                                <th scope="col" >Dose</th>
-                               
-                            </tr>
-                        </thead>
-                        <tbody id="medicines-tbody">
-                            <!-- Medicines will be dynamically inserted here -->                            
-                       </tbody>
-                    </table>
+                  
 
                 </div>
                 
