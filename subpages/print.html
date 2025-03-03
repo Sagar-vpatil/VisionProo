@@ -544,8 +544,8 @@
                     </tbody>
                   </table>
                   
-                  <div id="section4" class="section" >
-                    <h3 id="Eye-Examination-Heading"style="margin-top: 55px;">Eye Examination:</h3>
+                  <div id="section4" class="section"  style="margin-top: 10%;">
+                    <h3 id="Eye-Examination-Heading">Eye Examination:</h3>
                     <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" id="Eye-Examination-Table">
                         <thead>
                             <tr>
@@ -695,11 +695,11 @@
 
 
                     <h3 id="Medicines-Heading">Medical Treatment:</h3>
-                    <table class="table-container table-responsive" id="Medicines-Table">
+                    <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px;">
                         <thead>
                             <tr>
                                 <th scope="col">Medicine Name</th>
-                                <th scope="col" >Type</th>
+                               
                                 <th scope="col" >Dose</th>
                                
                             </tr>
@@ -1294,7 +1294,7 @@
                 row.innerHTML = `
                     <td>${medicine.medicineSelect || "-"}</td>
                     <td>${medicine.medicineDose || "-"}</td>
-                    <td>${medicine.medicineQuantity || "-"}</td>
+                   
                 `;
                 medicinesTbody.appendChild(row);
             });

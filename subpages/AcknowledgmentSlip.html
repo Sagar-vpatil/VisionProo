@@ -1,163 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Acknowledgment Slip</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #eef5f9;
-    }
-    .container {
-      max-width: 1000px;
-      background: #fff;
-      padding: 20px;
-      border: 1px solid #000;
-      margin: 20px auto;
-    }
-    .acknowledgment-slip {
-      max-width: 650px;
-      margin: 50px auto;
-      padding: 30px;
-      border-radius: 15px;
-      border: 2px solid #007bff;
-      background-color: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-   
-    .details label {
-      font-weight: 600;
-      color: #333;
-    }
-    .input-group {
-      margin-bottom: 15px;
-    }
-    .status {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .doctor-signature {
-      margin-top: 30px;
-      text-align: right;
-    }
-    .doctor-signature p {
-      margin: 0;
-      font-size: 14px;
-    }
-
-    /* Print-specific styles */
-    @media print {
-      body {
-        background-color: #fff;
-        margin: 0;
-        padding: 0;
-      }
-      .container {
-        max-width: 100%;
-        border: none;
-        padding: 0;
-        margin: 0;
-      }
-      .acknowledgment-slip {
-        box-shadow: none;
-        border: 2px solid #000;
-        margin: 0;
-        padding: 20px;
-      }
-      .btn-print {
-        display: none;
-      }
-      .print-value {
-        display: inline;
-      }
-      .input-field, .dropdown-field {
-        display: none;
-      }
-      .header h2 {
-        color: #000;
-      }
-      .doctor-signature {
-        margin-top: 50px;
-      }
-      .navbar .buttons button{
-                display: none;
-            }
-            .hr{
-                display: none;
-            }
-    }
-
-    /* A4 size styling */
-    @page {
-      size: A4;
-      margin: 0;
-    }
-    @media print {
-
-
-  .acknowledgment-slip {
-    box-shadow: none;
-    border: 2px solid #000;
-    margin: auto;
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }}
-
-  .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .logo img {
-            width: 170px;
-            height: auto;
-        }
-        .hospital-name {
-            color: red;
-            font-size: 28px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Provisional Slip</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+         /* Styling for Balance Due */
+         #balanceDue {
             font-weight: bold;
-            font-family: 'Mangal', sans-serif;
-            margin-left: 20px;
+            padding: 8px;
+            border: none;
+            outline: none;
+            background-color: transparent;
         }
-        .sub-heading {
-            font-size: 16px;
-            color: #333;
-            margin-top: 5px;
+        .paid {
+            color: green; /* Green when payment is complete */
         }
-        .doctor-signature {
-            margin-top: 30px;
-            text-align: right;
-        }
-        .doctor-signature p {
-            margin: 0;
-            font-size: 14px;
+        .due {
+            color: red; /* Red when balance is due */
         }
         
-        /* New CSS for the top navbar image */
-        .navbar {
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 210mm; /* A4 width */
+            min-height: auto; /* A4 height */
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0056b3;
+            margin-top: 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0056b3;
+        }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .details-table th,
+        .details-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+           
+            font-size: 16px;
+            text-align: center; vertical-align: middle;
+        }
+
+        .details-table th {
+            background-color: #f1f1f1;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .details-table td {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn-print {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn-print:hover {
+            background-color: #0056b3;
+        }
+
+        .rupee-input {
+            text-align: right;
+            font-size: 16px;
+            padding-left: 10px;
+        }
+
+        @media print {
+            
+
+            .container {
+                padding: 15px;
+                min-height: auto;
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+            .form-control {
+                border: 1px solid #000;
+                background: transparent;
+                -webkit-print-color-adjust: exact;
+            }
+
+            input[type="text"] {
+                border: none;
+                background: transparent;
+                width: 100%;
+            }
+
+            .btn-print {
+                display: none;
+            }
+
+            input, select {
+                display: none; /* Hide input and select elements during printing */
+            }
+
+            .print-visible {
+                display: inline-block !important; /* Show static values during printing */
+            }
+
+            .print-hidden {
+                display: none !important; /* Hide input and select elements during printing */
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+                margin-top: 100px;
+            }
+            input[type="date"] {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                border: none;
+                padding: 0;
+                background: transparent;
+                font-family: 'Georgia', serif;
+                font-size: 12pt;
+                color: #333;
+                width: auto;
+                line-height: 1.6;
+                text-align: center;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+
+            input[type="date"]:before {
+                content: attr(value);
+            }
+            .navbar .buttons button {
+                display: none;
+            }
+        }
+
+        /* Header Section */
+        .letterhead {
+            border-bottom: 2px solid #004a99;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hospital-logo {
+            width: 160px;
+            height: 110px;
+        }
+
+        .hospital-info {
+            text-align: right;
+        }
+
+        .hospital-name {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            color: red;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+
+        .hospital-address {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Input and Select Styling */
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        body, .page {
+        margin: 0;
+        padding: 0;
+       
+        box-shadow: none;
+    }
+/* Define A4 page size and margins explicitly */
+@page {
+    size: A4;
+    margin: 4mm; /* Set a 10mm margin on all sides for the printable area */
+}
+  /* Navbar Styling */
+  .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #f8f8f8;
             padding: 5px 10px;
-            height: 80px;
-      
         }
+
         .navbar img {
-            height: 50px; /* Adjust as needed */
-            margin-left: 20px; /* Space between logo and other elements */
+            height: 50px;
+            margin-left: 20px;
         }
+
         .navbar .buttons {
             display: flex;
             gap: 10px;
         }
+
         .navbar .buttons button {
             padding: 8px 16px;
             font-size: 14px;
@@ -167,113 +282,199 @@
             cursor: pointer;
             border-radius: 5px;
         }
-       
-  </style>
+
+    </style>
 </head>
 <body>
-
-     <!-- Top Navigation Bar -->
-     <nav class="navbar">
-      <!-- Logo and Hospital Name -->
-      <div style="display: flex; align-items: center;">
-         
-        
-      </div>
-         
-      </div>
-
-      <!-- Image on the Right Side -->
-      
-
-      <!-- Action Buttons -->
-      <div class="buttons" style="margin-bottom: 10px;">
-          <button onclick="window.location.href='./main.html';">🏠 Home</button>
-          <button onclick="updatePrintValues()">🖨️ Print </button>
-      </div>
-  </nav>
-  <hr class="hr">
-  <div class="container">
-    <div class="header">
-        <div class="logo">
-            <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo">
+  <nav class="navbar">
+    <div style="display: flex; align-items: center;">
+       
+    </div>
+    <div class="buttons" style="margin-bottom: 10px;">
+        <button onclick="window.location.href='./main.html';">🏠 Home</button>
+        <button onclick="updatePrintValues()">🖨️ Print</button>
+    </div>
+</nav>
+<div class="container">
+    <div class="provisional-slip">
+        <!-- Header -->
+        <div class="letterhead">
+            <div style="margin-left: 120px;">
+                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
+            </div>
+            <div class="hospital-info" style="margin-right: 23%;">
+                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
+                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+            </div>
         </div>
-        <div class="hospital-name" style="margin-right: 70px;">
-            रवीकल्प हॉस्पिटल
-            <div class="sub-heading">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+
+        <!-- Patient Details -->
+        <div class="patient-details">
+            <div class="section-title">Patient Information</div>
+            <table class="details-table">
+                <tr>
+                    <th>Date</th>
+                    <td id="currentDate"></td>
+                </tr>
+                <tr>
+                    <th>Patient ID</th>
+                    <td id="patient-id"></td>
+                </tr>
+                <tr>
+                    <th>Patient Name</th>
+                    <td id="patient-name"></td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td id="patient-age"></td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td id="patient-gender"></td>
+                </tr>
+                <tr>
+                    <th>Contact Number</th>
+                    <td id="patient-mobile"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="payment-details">
+            <div class="section-title">Payment Information</div>
+            <table class="details-table">
+                <tr>
+                    <th style="text-align: center; vertical-align: middle;">Total Charges</th>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <input type="text" id="totalCharges" placeholder="₹ 0" class="form-control rupee-input" 
+                        style="width: 200px; text-align: center; display: block; margin: auto;">
+                 
+                    </td>
+                </tr>
+                <tr>
+                    <th style="text-align: center; vertical-align: middle;">Amount Paid</th>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <input type="text" id="amountPaid" placeholder="₹ 0" class="form-control rupee-input" 
+                        style="width: 200px; text-align: center; display: block; margin: auto;">
+                 
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Balance Due</th>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <span id="balanceDue" style="display: inline-block; width: 100%;">₹ 0</span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Payment Mode</th>
+                    <td>
+                        <select id="paymentMode" class="form-control print-hidden" 
+        style="width: 200px; text-align: center; display: block; margin: auto;">
+       
+    <option value="Cash">Cash</option>
+    <option value="Credit Card">Credit Card</option>
+    <option value="UPI">UPI</option>
+    <option value="Insurance">Insurance</option>
+</select>
+
+                        <span class="print-visible" id="printPaymentMode" style="display: none; margin: 0 auto; text-align: center; ">Cash</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer" style="color: black;">
+            <div class="signature" style="margin-right: 30px;">
+                <p>Dr. Alvin R Rane</p>
+            </div>
         </div>
     </div>
-    <hr style="border: 2px solid #000;">
+</div>
 
-    <div class="acknowledgment-slip">
-      <div class="header">
-        <h2>Payment Acknowledgment Slip</h2>
-      </div>
-      <div class="details">
-        <p><strong>Patient Name:</strong> <span id="patient-name"></span></p>
-        <p><strong>Patient ID:</strong> <span id="patient-id"></span></p>
-        <p><strong>Date:</strong> <span id="currentDate"></span></p>
-
-        <div class="input-group">
-          <label for="paymentAmount">Payment Amount (₹):</label>
-          <input type="number" id="paymentAmount" class="input-field" min="0" placeholder="Enter payment amount">
-          <span class="print-value" id="printPaymentAmount"></span>
-        </div>
-
-        <div class="input-group">
-          <label for="paymentMode">Payment Mode:</label>
-          <select id="paymentMode" class="dropdown-field">
-            <option value="Credit Card">Credit Card</option>
-            <option value="Debit Card">Debit Card</option>
-            <option value="Net Banking">Net Banking</option>
-            <option value="UPI">UPI</option>
-            <option value="Cash">Cash</option>
-          </select>
-          <span class="print-value" id="printPaymentMode"></span>
-        </div>
-        
-     
-        <p><strong>Status:</strong> <span class="text-success status">Success</span></p>
-      </div>
-
-      <div class="footer text-center">
-        <p>Thank you for choosing Ravikalp Hospital.</p>
-        <p><strong>Received by Ravikalp Hospital</strong></p>
-      </div>
-
-      <!-- Doctor's Signature Section -->
-      <div class="doctor-signature">
-        <p><strong>Dr. Alvin Rane:</strong> ___________________________</p>
-      </div>
-    </div>
-
-    <!-- Print Button -->
-    
-  </div>
-
-  <script>
+<script>
     // Set current date
     document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+
     // Retrieve the appointment object from localStorage
     const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
-     // Update the HTML elements with appointment data
+
+    // Update the HTML elements with appointment data
     document.getElementById("patient-id").textContent = appointment.id || "N/A";
     document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+    document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
+    document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
+    document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
 
     // Function to update print values and trigger print
     function updatePrintValues() {
-      document.getElementById('printPaymentAmount').textContent = document.getElementById('paymentAmount').value;
-      document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
+        // Update payment mode for printing
+        document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
 
-      // Print the acknowledgment slip
-      const patientId = "P"+appointment.id;
-      // Get todays date with dd-mm-yyyy format
-      const today = new Date();
-      const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
-      const Docname = patientId+"_AckSlip" + "_" + date;
-      console.log(patientId,date,Docname);
+        // Print the acknowledgment slip
+        const patientId = "P" + appointment.id;
+        const today = new Date();
+        const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+        const docName = patientId + "_AckSlip" + "_" + date;
+        console.log(patientId, date, docName);
 
-      window.electronAPI.printPage(patientId, date, Docname);
+        // Check if Electron API is available
+        if (window.electronAPI) {
+            window.electronAPI.printPage(patientId, date, docName);
+        } else {
+            console.error("Electron API is not available.");
+            window.print(); // Fallback to browser print
+        }
     }
-  </script>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        document.getElementById('totalCharges').addEventListener('input', formatAndCalculate);
+        document.getElementById('amountPaid').addEventListener('input', formatAndCalculate);
+        document.getElementById('paymentMode').addEventListener('change', function () {
+            document.getElementById('printPaymentMode').textContent = this.value;
+        });
+
+        function formatAndCalculate(event) {
+            let input = event.target;
+            let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+            if (value === "") {
+                input.value = "₹ 0"; 
+                return;
+            }
+            input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
+
+            // Calculate Balance Due
+            let totalCharges = parseFloat(document.getElementById('totalCharges').value.replace(/[^\d]/g, '')) || 0;
+            let amountPaid = parseFloat(document.getElementById('amountPaid').value.replace(/[^\d]/g, '')) || 0;
+            let balanceDue = totalCharges - amountPaid;
+
+            let balanceDueField = document.getElementById('balanceDue');
+
+            if (balanceDue <= 0) {
+                balanceDueField.textContent = "Payment Complete"; // Show text instead of ₹ 0
+                balanceDueField.classList.remove("due");
+                balanceDueField.classList.add("paid"); // Green if fully paid
+            } else {
+                balanceDueField.textContent = "₹ " + balanceDue.toLocaleString("en-IN");
+                balanceDueField.classList.remove("paid");
+                balanceDueField.classList.add("due"); // Red if due remains
+            }
+        }
+  
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -149,6 +149,7 @@
                 content: "_______________";
                 display: block;
                 margin-bottom: 10px;
+                margin-top: 100px;
             }
             .form-control {
                 border: 1px solid #000;
@@ -273,6 +274,17 @@
             background-color: #f1f1f1;
         }
 
+
+
+
+
+           /* Print-specific styling */
+    @media print {
+        .print-investigation {
+            margin-top: 100%; /* Add top margin for printing */
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -342,9 +354,9 @@
                     </tr>
                     <tr>
                         <th>Surgery Name:</th>
-                        <td></td>
+                        <td >Cataract Surgery</td>
                         <th>Address:</th>
-                        <td>N/A</td>
+                        <td id="patient-address">N/A</td>
                     </tr>
                 </tbody>
             </table>
@@ -419,49 +431,49 @@
             <tbody>
                 <tr style="height: 10px;"> 
                     <td style="font-size: 12px;">K1</td>
-                    <td id="RightK1" style="font-size: 12px;"></td>
-                    <td id="LeftK1" style="font-size: 12px;"></td>
+                    <td id="RightK1" style="font-size: 11px;"></td>
+                    <td id="LeftK1" style="font-size: 11px;"></td>
                 </tr>
                 <tr style="height: 15px;"> 
                     <td style="font-size: 12px;">K2</td>
-                    <td id="RightK2" style="font-size: 12px;"></td>
-                    <td id="LeftK2" style="font-size: 12px;"></td>
+                    <td id="RightK2" style="font-size: 11px;"></td>
+                    <td id="LeftK2" style="font-size: 11px;"></td>
                 </tr>
-                <!-- <tr style="height: 15px;">
-                    <td style="font-size: 12px;">LT</td>
-                    <td style="font-size: 12px;">1</td>
-                    <td style="font-size: 12px;">1</td>
-                </tr> -->
+                <tr style="height: 15px;">
+                    <td style="font-size: 11px;" >LT</td>
+                    <td style="font-size: 11px;"id="RightLT"></td>
+                    <td style="font-size: 11px;"id="LeftLT"></td>
+                </tr> 
 
                 
                 <tr style="height: 15px;"> 
-                    <td style="font-size: 12px;">AXL</td>
-                    <td id="RightAL" style="font-size: 12px;"></td>
-                    <td id="LeftAL" style="font-size: 12px;"></td>
+                    <td style="font-size: 11px;">AXL</td>
+                    <td id="RightAL" style="font-size: 11px;"></td>
+                    <td id="LeftAL" style="font-size: 11px;"></td>
                 </tr>
 
-                <!-- <tr style="height: 15px;"> 
-                    <td style="font-size: 12px;">ACD</td>
-                    <td style="font-size: 12px;">1</td>
-                    <td style="font-size: 12px;">1</td>
-                </tr> -->
+                 <tr style="height: 15px;"> 
+                    <td style="font-size: 11px;">ACD</td>
+                    <td style="font-size: 11px;" id="RightACD"></td>
+                    <td style="font-size: 11px;" id="LeftACD"></td>
+                </tr> 
 
-                <!-- <tr style="height: 15px;">
-                    <td style="font-size: 12px;">L.Power</td>
-                    <td style="font-size: 12px;">1</td>
-                    <td style="font-size: 12px;">1</td>
-                </tr> -->
+                <tr style="height: 15px;">
+                    <td style="font-size: 11px;">L.Power</td>
+                    <td style="font-size: 11px;" id="RightLPower">1</td>
+                    <td style="font-size: 11px;" id="LeftLPower">1</td>
+                </tr>
 
-                <!-- <tr style="height: 15px;"> 
-                    <td style="font-size: 12px;">A.Constant</td>
-                    <td style="font-size: 12px;"></td>
-                    <td style="font-size: 12px;"></td>
-                </tr> -->
+                 <tr style="height: 15px;"> 
+                    <td style="font-size: 11px;" >A.Constant</td>
+                    <td style="font-size: 11px;" id="RightAConstant"></td>
+                    <td style="font-size: 11px;" id="LeftAConstant"></td>
+                </tr>
 
                 <tr style="height: 15px;"> 
-                    <td style="font-size: 12px;">IOL</td>
-                    <td id="RightIOL" style="font-size: 12px;"></td>
-                    <td id="LeftIOL" style="font-size: 10px;"></td>
+                    <td style="font-size: 11px;">IOL</td>
+                    <td id="RightIOL" style="font-size: 11px;"></td>
+                    <td id="LeftIOL" style="font-size: 11px;"></td>
                 </tr>
 
             </tbody>
@@ -478,7 +490,7 @@
         <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
 
         <!-- Post Operative Treatment Section -->
-        <h4 class="section-title">Post Operative Treatment</h4>
+        <h4 class="section-title " id="Medicines-Heading">Post Operative Treatment</h4>
         <!-- <div class="d-flex align-items-center" style="margin-top: 20px;">
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
@@ -491,23 +503,17 @@
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
         </div> -->
-        <table class="table-container table-responsive" style="width: 500px;">
+        <table class="table-container table-responsive" style="width: 500px;" id="Medicines-Table">
             <thead>
                 <tr>
                     <th scope="col">Medicine Name</th>
-                  
-                    <th scope="col">Dose</th>
+                    <th scope="col" >Dose</th>
+                    
                 </tr>
             </thead>
-            <tbody>
-                <!-- Sample data inserted dynamically -->
-                <tr>
-                    <td>Paracetamol</td>
-              
-                    <td>0-0-1</td>
-                </tr>
-               
-            </tbody>
+            <tbody id="medicines-tbody">
+                <!-- Medicines will be dynamically inserted here -->                            
+           </tbody>
         </table>
 
   <div class="footer" style="color: black;">
@@ -547,6 +553,9 @@
     document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
     document.getElementById("patient-dob").textContent = appointment.BirthDate || "N/A";
     document.getElementById("patient-dob").textContent = formatDate(appointment.BirthDate);
+    document.getElementById("patient-address").textContent = appointment. Address || "N/A";
+
+   
 
     // Retrieve selected diagnoses from localStorage
     const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
@@ -577,10 +586,14 @@
 
         // Define the mapping for each row and its respective keys in aScanTable
         const aScanRowMapping = [
-            { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
+        { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
             { rowIndex: 1, rightKey: "RightK2", leftKey: "LeftK2" },
-            { rowIndex: 2, rightKey: "RightAL", leftKey: "LeftAL" },
-            { rowIndex: 3, rightKey: "RightIOL", leftKey: "LeftIOL" }
+            { rowIndex: 2, rightKey: "RightLT", leftKey: "LeftLT" },
+            { rowIndex: 3, rightKey: "RightAL", leftKey: "LeftAL" },
+            { rowIndex: 4, rightKey: "RightACD", leftKey: "LeftACD" },
+            { rowIndex: 5, rightKey: "RightLPower", leftKey: "LeftLPower" },
+            { rowIndex: 6, rightKey: "RightAConstant", leftKey: "LeftAConstant" },
+            { rowIndex: 7, rightKey: "RightIOL", leftKey: "LeftIOL" }
         ];
 
         let visibleAScanRowCount = 0;
@@ -642,6 +655,50 @@
         let year = date.getFullYear();
         return `${day}/${month}/${year}`; // Format: DD/MM/YYYY
     }
+
+
+
+
+
+
+
+        // Load the medicines table from local storage
+        const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+
+        const medicinesTable = document.getElementById("Medicines-Table");
+        const medicinesTbody = medicinesTable.querySelector("tbody");
+        const medicinesHeading = document.getElementById("Medicines-Heading");
+
+        if (medicines.length === 0) {
+            // Hide the table if no medicines are selected
+            medicinesTable.style.display = "none";
+            medicinesHeading.style.display = "none";
+
+        } else {
+            // Show the table and update the content
+            medicinesTable.style.display = "table";
+
+            // Clear the existing table body
+            medicinesTbody.innerHTML = "";
+
+            // Add each medicine as a row in the table
+            medicines.forEach((medicine) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${medicine.medicineSelect || "-"}</td>
+                    <td>${medicine.medicineDose || "-"}</td>
+                  
+                `;
+                medicinesTbody.appendChild(row);
+            });
+        }
+
+
+    
 </script>
+
+
+
+
 </body>
 </html>

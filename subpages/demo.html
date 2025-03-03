@@ -286,7 +286,7 @@
         <!-- Action Buttons -->
         <div class="buttons" style="margin-bottom: 10px;">
             <button onclick="window.location.href='./main.html';">🏠 Home</button>
-            <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
+          <button onclick="updatePrintValues()">🖨️ Print </button>
         </div>
     </nav>
     <div class="container">
@@ -306,6 +306,10 @@
             <div class="patient-details">
                 <div class="section-title">Patient Information</div>
                 <table class="details-table">
+                  <tr>
+                    <th>Date</th>
+                    <td  id="currentDate"></td>
+                </tr>
                     <tr>
                         <th>Patient ID</th>
                         <td  id="patient-id"></td>
@@ -316,19 +320,19 @@
                     </tr>
                     <tr>
                         <th >Age</th>
-                        <td id="patient-age "></td>
+                        <td id="patient-age"></td>
                     </tr>
                     <tr>
                         <th >Gender</th>
-                        <td id="patient-age ">45 </td>
+                        <td id="patient-gender">45 </td>
                     </tr>
                     <tr>
                         <th>Contact Number</th>
-                        <td>+91 9876543210</td>
+                        <td id="patient-mobile">+91 9876543210</td>
                     </tr>
                 </table>
             </div>
-
+            
             <!-- Payment Details -->
             <div class="payment-details">
                 <div class="section-title">Payment Information</div>
