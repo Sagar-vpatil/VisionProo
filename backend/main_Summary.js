@@ -133,25 +133,25 @@ function toggleSymptoms(element) {
     }
   }
 
-  function toggleMedicationTreatment(element) {
-    try {
-      // Toggle the 'selected' class
-      element.classList.toggle("selected");
+  // function toggleMedicationTreatment(element) {
+  //   try {
+  //     // Toggle the 'selected' class
+  //     element.classList.toggle("selected");
   
-      // Get all items with the 'selected' class
-      const selectedItems = Array.from(
-        document.querySelectorAll(".medication-treatment.selected")
-      ).map((item) => item.textContent.trim());
+  //     // Get all items with the 'selected' class
+  //     const selectedItems = Array.from(
+  //       document.querySelectorAll(".medication-treatment.selected")
+  //     ).map((item) => item.textContent.trim());
   
-      // Save the selected items to local storage
-      localStorage.setItem("selectedMedicationTreatment", JSON.stringify(selectedItems));
+  //     // Save the selected items to local storage
+  //     localStorage.setItem("selectedMedicationTreatment", JSON.stringify(selectedItems));
   
-      // Log the updated array for debugging
-      console.log(selectedItems);
-    } catch (e) {
-      console.error("An error occurred:", e);
-    }
-  }
+  //     // Log the updated array for debugging
+  //     console.log(selectedItems);
+  //   } catch (e) {
+  //     console.error("An error occurred:", e);
+  //   }
+  // }
 
   function toggleSurgicalTreatment(element) {
     try {

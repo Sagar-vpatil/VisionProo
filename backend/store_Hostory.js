@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //     localStorage.removeItem("selectedSurgicalHistory");
   //     localStorage.removeItem("selectedInvestigation");
   //     localStorage.removeItem("selectedAdvices");
-  //     localStorage.removeItem("selectedMedicationTreatment");
   //     localStorage.removeItem("selectedSurgicalTreatment");
   //     localStorage.removeItem("visionTable");
   //     localStorage.removeItem("currentPowerGlasses");
@@ -373,14 +372,14 @@ async function savePatientHistory(getCondition) {
      const medicineSelect =
        entry.querySelector(".medicine-select").value;
      const medicineDose = entry.querySelector(".medicine-dose").value;
-     const medicineQuantity =
-       entry.querySelector(".medicine-quantity").value;
+    //  const medicineQuantity =
+    //    entry.querySelector(".medicine-quantity").value;
 
      // Store the medicine entry in a dictionary
      const medicine = {
        medicineSelect: medicineSelect,
        medicineDose: medicineDose,
-       medicineQuantity: medicineQuantity,
+      //  medicineQuantity: medicineQuantity,
      };
 
      // Push the medicine entry to the medicines array
@@ -470,7 +469,6 @@ async function savePatientHistory(getCondition) {
       const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis"));
       const selectedInvestigation = JSON.parse(localStorage.getItem("selectedInvestigation"));
       const selectedAdvices = JSON.parse(localStorage.getItem("selectedAdvices"));
-      const selectedMedicationTreatment = JSON.parse(localStorage.getItem("selectedMedicationTreatment"));
       const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment"));
 
   
@@ -545,10 +543,6 @@ async function savePatientHistory(getCondition) {
 
     if (selectedAdvices && selectedAdvices.length > 0) {
         dataToStore.selectedAdvices = selectedAdvices;
-    }
-
-    if (selectedMedicationTreatment && selectedMedicationTreatment.length > 0) {
-        dataToStore.selectedMedicationTreatment = selectedMedicationTreatment;
     }
 
     if (selectedSurgicalTreatment && selectedSurgicalTreatment.length > 0) {
@@ -760,7 +754,6 @@ function loadPatientHistoryData() {
     const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
     const selectedInvestigation = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
     const selectedAdvices = JSON.parse(localStorage.getItem("selectedAdvices")) || [];
-    const selectedMedicationTreatment = JSON.parse(localStorage.getItem("selectedMedicationTreatment")) || [];
     const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
 
     const visionTable = JSON.parse(localStorage.getItem("visionTable")) || {};
@@ -923,15 +916,6 @@ function loadPatientHistoryData() {
       }
     });
 
-    // If there are selected medication treatment, update the UI
-    selectedMedicationTreatment.forEach((medicationTreatment) => {
-      const medicationTreatmentElement = Array.from(document.querySelectorAll(".medication-treatment"))
-        .find((item) => item.textContent.trim() === medicationTreatment);
-      
-      if (medicationTreatmentElement) {
-        medicationTreatmentElement.classList.add("selected");
-      }
-    });
 
     // If there are selected surgical treatment, update the UI
     selectedSurgicalTreatment.forEach((surgicalTreatment) => {
@@ -1005,7 +989,7 @@ function loadPatientHistoryData() {
           <option value="${medicine.medicineSelect}" selected>${medicine.medicineSelect}</option>
         </select>
         <input type="text" class="medicine-dose" value="${medicine.medicineDose}" />
-        <input type="number" class="medicine-quantity" value="${medicine.medicineQuantity}" />
+        <!--<input type="number" class="medicine-quantity" value="${medicine.medicineQuantity}" />-->
          <button type="button" class="remove-btn">Remove</button>
       `;
   
@@ -1203,7 +1187,6 @@ function clearHistoryFromLocalStorage() {
   localStorage.removeItem("selectedSurgicalHistory");
   localStorage.removeItem("selectedInvestigation");
   localStorage.removeItem("selectedAdvices");
-  localStorage.removeItem("selectedMedicationTreatment");
   localStorage.removeItem("selectedSurgicalTreatment");
   localStorage.removeItem("visionTable");
   localStorage.removeItem("currentPowerGlasses");

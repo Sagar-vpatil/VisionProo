@@ -339,24 +339,26 @@
                     <tr>
                         <th>Date of Birth:</th>
                         <td id="patient-dob">N/A</td>
+                        <th>Address:</th>
+                        <td id="patient-address">N/A</td>
+                        
+                    </tr>
+                    <tr>
                         <th>Admission Date:</th>
                         <td>
                             <input type="date" id="admission-input" oninput="updateDateField(this, 'admission-value')">
                         </td>
-                    </tr>
-                    <tr>
                         <th>Discharge Date:</th>
                         <td>
                             <input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')">
                         </td>
-                        <th>Surgeon Name:</th>
-                        <td>Dr. Alvin R Rane</td>
+                
                     </tr>
                     <tr>
+                        <th>Surgeon Name:</th>
+                        <td>Dr. Alvin R Rane</td>
                         <th>Surgery Name:</th>
-                        <td >Cataract Surgery</td>
-                        <th>Address:</th>
-                        <td id="patient-address">N/A</td>
+                        <td class="show-SurgicalTreatment">Cataract Surgery</td>
                     </tr>
                 </tbody>
             </table>
@@ -554,6 +556,19 @@
     document.getElementById("patient-dob").textContent = appointment.BirthDate || "N/A";
     document.getElementById("patient-dob").textContent = formatDate(appointment.BirthDate);
     document.getElementById("patient-address").textContent = appointment. Address || "N/A";
+
+    // Retrieve selected SurgicalTreatment from localStorage
+    const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+
+    // Display selected SurgicalTreatment in the "SurgicalTreatment" section
+    // Get the SurgicalTreatment display section
+    const SurgicalTreatmentSection = document.querySelector(".show-SurgicalTreatment");
+    // Only update if there are SurgicalTreatment to show
+    if (selectedSurgicalTreatment.length > 0) {
+        SurgicalTreatmentSection.innerHTML = selectedSurgicalTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ');
+    } else {
+        SurgicalTreatmentSection.innerHTML = `N/A`;
+    }
 
    
 

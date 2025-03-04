@@ -789,8 +789,8 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Medicine Name</th>
-                    <th scope="col">Type</th>
                     <th scope="col">Dose</th>
+                    <!-- <th scope="col">Dose</th> -->
                 </tr>
             </thead>
             <tbody id="medicines-tbody">
@@ -1386,7 +1386,7 @@
                 row.innerHTML = `
                     <td>${medicine.medicineSelect || "-"}</td>
                     <td>${medicine.medicineDose || "-"}</td>
-                    <td>${medicine.medicineQuantity || "-"}</td>
+                    <!-- <td>${medicine.medicineQuantity || "-"}</td> -->           
                 `;
                 medicinesTbody.appendChild(row);
             });
