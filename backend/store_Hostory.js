@@ -456,6 +456,41 @@ async function savePatientHistory(getCondition) {
       JSON.stringify(iopGatTable)
     );
     
+    const fileInput = document.getElementById('imageUpload');
+    const file = fileInput.files[0];
+    if (file) {
+      console.log('File:', file);
+      const reader = new FileReader();
+        reader.onload = async function(e) {
+          console.log('Image data:', e.target.result);
+          const imageData = e.target.result;
+          const patient_Id = "P"+appointment.id;
+          const tempDateStr = getTodaysDate(); // Assuming it returns "DD/MM/YYYY"
+          console.log('Temp Date:', tempDateStr);
+
+          const [day, month, year] = tempDateStr.split("/").map(Number); // Extract DD, MM, YYYY
+          const today = new Date(year, month - 1, day); // Correctly construct Date object
+
+          // Format to "DD-MM-YYYY"
+          const img_date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
+          // const img_date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+          const img_name = `${patient_Id}_image_${img_date}`;
+          console.log('Image date:', img_date);
+          try {
+            const result = await window.electronAPI.saveImage(patient_Id, img_date, img_name, imageData);
+            if (result.success) {
+                console.log('Image saved successfully at:', result.path);
+            } else {
+                console.error('Failed to save image:', result.error);
+                window.electronAPI.showErrorBox("Error", "Failed to save image: " + result.error);
+            }
+        } catch (error) {
+            console.error('Error saving image:', error);
+            window.electronAPI.showErrorBox("Error", "Failed to save image: " + error.message);
+        }
+        };
+        reader.readAsDataURL(file);
+    }
 
    if (getCondition === "saveAndPrint") {
     try {

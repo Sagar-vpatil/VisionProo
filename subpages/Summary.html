@@ -816,12 +816,12 @@
 
 
 
-        <div class="card mb-3" >
-            <div class="card-header bg-success text-white">img</div>
+        <div class="card mb-3" id="Img-Section">
+            <div class="card-header bg-success text-white">Image</div>
             <div class="card-body">
                
                 <div class="image-container">
-                    <img src="../assets/images/Ravikalp Hospital  new logo.jpg" alt="Eye Image">
+                    <img src="" alt="Eye Image" style="display: none;">
                 </div>
               
             </div>
@@ -858,6 +858,38 @@
     
       </script>
       <script>
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const patientId = "P"+appointment.id; // Example Patient ID (Replace with dynamic value)
+            const tempDateStr = localStorage.getItem("tempDate");
+            const today = tempDateStr 
+                ? new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v))) 
+                : new Date();
+
+            const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); // Formats as DD-MM-YYYY
+            const imgName = `${patientId}_image_${imgDate}`;
+            console.log(imgName);
+
+            const imageElement = document.querySelector(".image-container img");
+
+            // Call Electron API to check if image exists
+            const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
+
+            if (response.exists) {
+                imageElement.src = `file://${response.path}`;
+                imageElement.style.display = "block"; // Show image
+
+                // Double-click event to open in default viewer
+                imageElement.addEventListener("dblclick", function () {
+                    window.electronAPI.openImage(response.path);
+                });
+            } else {
+                imageElement.style.display = "none"; // Hide if not found
+                // hide Img-Section
+                document.getElementById("Img-Section").style.display = "none";
+            }
+        });
+
          const appointment = JSON.parse(window.localStorage.getItem("appointment"));
         
          const historyDate = localStorage.getItem("tempDate");

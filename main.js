@@ -171,6 +171,58 @@ function createMainWindow() {
             throw error;
         }
     });
+
+     // Handler for saving images
+     ipcMain.handle('save-image', async (event, patientId, date, docName, imageData) => {
+        try {
+            const baseDir = path.join(app.getPath('desktop'), 'VisionProo');
+            if (!fs.existsSync(baseDir)) fs.mkdirSync(baseDir, { recursive: true });
+    
+            const patientDir = path.join(baseDir, patientId);
+            if (!fs.existsSync(patientDir)) fs.mkdirSync(patientDir);
+    
+            const dateDir = path.join(patientDir, date);
+            if (!fs.existsSync(dateDir)) fs.mkdirSync(dateDir);
+    
+            const imageFilename = `${docName}.png`;
+            const imagePath = path.join(dateDir, imageFilename);
+    
+            const base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+            fs.writeFileSync(imagePath, buffer);
+    
+            console.log('Image saved successfully at:', imagePath);
+            return { success: true, path: imagePath };
+        } catch (error) {
+            console.error('Save image failed:', error);
+            return { success: false, error: error.message };
+        }
+    });
+
+    ipcMain.handle("check-image-exists", async (event, patientId, date, docName) => {
+        try {
+            const baseDir = path.join(app.getPath("desktop"), "VisionProo");
+            const imagePath = path.join(baseDir, patientId, date, `${docName}.png`);
+    
+            if (fs.existsSync(imagePath)) {
+                return { exists: true, path: `${imagePath}` };
+            } else {
+                return { exists: false };
+            }
+        } catch (error) {
+            console.error("Error checking image:", error);
+            return { exists: false };
+        }
+    });
+
+    // Open image in default image viewer
+    ipcMain.on("open-image", (event, imagePath) => {
+        if (fs.existsSync(imagePath)) {
+            shell.openPath(imagePath);
+        } else {
+            console.error("Image not found:", imagePath);
+        }
+    });
     
     
 }

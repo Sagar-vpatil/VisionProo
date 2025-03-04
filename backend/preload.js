@@ -12,4 +12,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     getPatientPdfRecords: (patientId) => ipcRenderer.invoke('get-patient-pdf-records', patientId),
     openPdf: (pdfPath) => ipcRenderer.send('open-pdf', pdfPath),
     deletePdf: (pdfPath) => ipcRenderer.invoke("delete-pdf", pdfPath),
+    saveImage: (patientId, date, docName, imageData) => ipcRenderer.invoke('save-image', patientId, date, docName, imageData),
+    checkImageExists: (patientId, date, docName) => ipcRenderer.invoke('check-image-exists', patientId, date, docName),
+    openImage: (imagePath) => ipcRenderer.send('open-image', imagePath),
 });
