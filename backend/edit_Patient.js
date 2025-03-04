@@ -6,19 +6,29 @@ let lastVisible = null; // Stores the last document from the current page
 let firstVisible = null; // Stores the first document from the current page
 let currentPage = 1; // Current page number
 
-// Modify the loadPatients function to accept a searchTerm parameter
-async function loadPatients(orderById = true, searchTerm = "") {
+// Modify the loadPatients function to accept searchTerm and searchBy parameters
+async function loadPatients(orderById = true, searchTerm = "", searchBy = "id") {
     try {
         const patientsCollection = collection(db, "patients");
         let q;
 
         if (searchTerm) {
-            // If there's a search term, filter by id, Name, or MobileNo
-            q = query(
-                patientsCollection,
-                where("Name", ">=", searchTerm),
-                where("Name", "<=", searchTerm + "\uf8ff")
-            );
+            // If there's a search term, filter by the selected field (id, Name, or MobileNo)
+            if (searchBy === "id") {
+                // Search by ID (exact match)
+                q = query(patientsCollection, where("__name__", "==", searchTerm));
+            } else if (searchBy === "Name") {
+                // Search by Name (partial match)
+                q = query(
+                    patientsCollection,
+                    where("Name", ">=", searchTerm),
+                    where("Name", "<=", searchTerm + "\uf8ff")
+                );
+            } else if (searchBy === "MobileNo") {
+                // Search by MobileNo (exact match)
+                console.log(searchTerm);
+                q = query(patientsCollection, where("MobileNo", ">=", searchTerm), where("MobileNo", "<=", searchTerm + "\uf8ff"));
+            }
         } else if (lastVisible && orderById) {
             // If going to next page, start after the last visible document
             q = query(patientsCollection, orderBy("id"), startAfter(lastVisible), limit(pageSize));
@@ -56,7 +66,7 @@ async function loadPatients(orderById = true, searchTerm = "") {
                     <button class="edit-btn openPopup" data-set="${doc.id}, ${patient.Name}, ${patient.Age}, ${patient.Address}, ${patient.MobileNo}, ${patient.BirthDate}, ${patient.Gender}">
                         Edit
                     </button>
-                     <button class="edit-btn detlte-btn" style="margin-left: 20px; background-color: #f33333f6;" data-id="${doc.id}">
+                    <button class="edit-btn detlte-btn" style="margin-left: 20px; background-color: #f33333f6;" data-id="${doc.id}">
                         Delete
                     </button>
                 </td>
@@ -64,10 +74,11 @@ async function loadPatients(orderById = true, searchTerm = "") {
 
             tbody.appendChild(row);
         });
+
         // Attach event listeners to the openPopup buttons
         document.querySelectorAll(".openPopup").forEach((button) => {
             button.addEventListener("click", (event) => {
-                const [id, name, age, address, mobileNo, birthDate , gender] = event.target.dataset.set.split(",");
+                const [id, name, age, address, mobileNo, birthDate, gender] = event.target.dataset.set.split(",");
                 openPopup(id, name, age, address, mobileNo, birthDate, gender);
             });
         });
@@ -83,6 +94,10 @@ async function loadPatients(orderById = true, searchTerm = "") {
         document.getElementById("currentPage").innerText = `Page ${currentPage}`;
         document.getElementById("prevPageBtn").disabled = currentPage === 1;
         document.getElementById("nextPageBtn").disabled = querySnapshot.size < pageSize;
+        if(searchTerm) {
+            document.getElementById("prevPageBtn").disabled = true;
+            document.getElementById("nextPageBtn").disabled = true;
+        }
 
     } catch (error) {
         console.error("Error fetching patients:", error);
@@ -90,15 +105,26 @@ async function loadPatients(orderById = true, searchTerm = "") {
     }
 }
 
-
 // Add event listener to the search input field
 document.getElementById("search-patient").addEventListener("input", function () {
     const searchTerm = this.value.trim();
+    const searchBy = document.getElementById("select-by").value; // Get the selected search field
     currentPage = 1; // Reset to the first page when searching
     lastVisible = null; // Reset pagination state
     firstVisible = null; // Reset pagination state
-    loadPatients(true, searchTerm); // Load search results from page 1
+    loadPatients(true, searchTerm, searchBy); // Load search results from page 1
 });
+
+// Add event listener to the select dropdown to trigger search when the option changes
+document.getElementById("select-by").addEventListener("change", function () {
+    const searchTerm = document.getElementById("search-patient").value.trim();
+    const searchBy = this.value; // Get the selected search field
+    currentPage = 1; // Reset to the first page when searching
+    lastVisible = null; // Reset pagination state
+    firstVisible = null; // Reset pagination state
+    loadPatients(true, searchTerm, searchBy); // Load search results from page 1
+});
+
 
 document.getElementById("nextPageBtn").addEventListener("click", loadNextPage);
 document.getElementById("prevPageBtn").addEventListener("click", loadPreviousPage);

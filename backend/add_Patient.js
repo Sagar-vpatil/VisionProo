@@ -90,6 +90,7 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
 
 
 document.getElementById("search-box").addEventListener("input", async function () {
+    const searchBy = document.getElementById("search-by").value; 
     const searchValue = this.value.trim(); // Get the search value and trim whitespace
     console.log("Search value:", searchValue);
 
@@ -102,7 +103,7 @@ document.getElementById("search-box").addEventListener("input", async function (
     try {
         const patientsCollection = collection(db, "patients");
         const results = [];
-
+        if (searchBy === "Name") {
         // Search by Name
         const nameQuery = query(
             patientsCollection,
@@ -119,6 +120,7 @@ document.getElementById("search-box").addEventListener("input", async function (
                 mobileNo: data.MobileNo,
             });
         });
+        } else if (searchBy === "MobileNo") {
 
         // Search by MobileNo
         const mobileQuery = query(
@@ -138,6 +140,7 @@ document.getElementById("search-box").addEventListener("input", async function (
                 });
             }
         });
+      }else {
 
         // Search by ID (Document ID)
         const idDocRef = doc(patientsCollection, searchValue);
@@ -152,6 +155,7 @@ document.getElementById("search-box").addEventListener("input", async function (
                 });
             }
         }
+    }
 
         console.log("Patients:", results);
 
