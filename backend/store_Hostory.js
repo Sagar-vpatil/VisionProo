@@ -287,12 +287,12 @@ async function savePatientHistory(getCondition) {
     NearCYL2 : document.getElementsByName("NearCYL2")[0].value,
     NearAxis2 : document.getElementsByName("NearAxis2")[0].value,
     NearVA2 : document.getElementsByName("NearVA2")[0].value,
-    REIPD : document.getElementById("REIPD").value,
-    LEIPD : document.getElementById("LEIPD").value,
+    // REIPD : document.getElementById("REIPD").value,
+    // LEIPD : document.getElementById("LEIPD").value,
     RETypeOfGlass : document.getElementById("RETypeOfGlass").value,
     LETypeOfGlass : document.getElementById("LETypeOfGlass").value,
-    RERemark : document.getElementById("RERemark").value,
-    LERemark : document.getElementById("LERemark").value,
+    // RERemark : document.getElementById("RERemark").value,
+    // LERemark : document.getElementById("LERemark").value,
   };
 
   console.log(refractionTable);
