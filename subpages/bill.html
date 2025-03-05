@@ -68,7 +68,7 @@
         table th, table td {
             border: 1px solid #ddd;
             padding: 10px;
-            text-align: start; /* Center-align text horizontally */
+            text-align: center; /* Center-align text horizontally */
             vertical-align: middle; /* Center-align text vertically */
         }
         table th {
@@ -251,7 +251,7 @@
         <!-- Invoice Details -->
         <div class="invoice-details" style="margin-left: 50px;">
             <p><span>Patient ID -</span> <span id="patient-id"></span>      <span style="margin-left: 400px;">Date:</span> <span id="currentDate"></span></p>
-            <p><span>Patient Name -</span> <span id="patient-name"></span>      <span style="margin-left: 260px;">Mobile No:</span> <span id="patient-mobile"></span></p>
+            <p><span>Patient Name -</span> <span id="patient-name"></span>      <span style="margin-left: 290px;">Mobile No:</span> <span id="patient-mobile"></span></p>
         </div>
         <hr>
 
@@ -259,7 +259,7 @@
         <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
             <thead>
                 <tr style="border: 2px solid black; background-color: #f2f2f2;">
-                    <th style="border: 2px solid black; padding: 10px;">SR.NO</th>
+                    <th style="border: 2px solid black; padding: 10px;">NO</th>
                     <th style="border: 2px solid black; padding: 10px;">PARTICULAR</th>
                     <th style="border: 2px solid black; padding: 10px;">PRICE (₹)</th>
                 </tr>
@@ -337,7 +337,7 @@
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">11</td>
-                    <td style="border: 2px solid black; padding: 10px;">I.O.L. Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;">O.L. Charges</td>
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
@@ -356,18 +356,11 @@
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
                 </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                    <td style="border: 2px solid black; padding: 10px;" >TOTAL  Amount </td>
-                    <td style="border: 2px solid black; padding: 10px; width: 70px;"  class="total">
-                        ₹0
-                    </td>
-                </tr>
             </tbody>
         </table>
 
         <!-- Total Amount -->
-      
+        <p class="total" style="margin-left: px;">TOTAL  Amount - ₹0</p>
 
         <!-- Footer Section -->
         <div class="footer" style="color: black;">
@@ -432,7 +425,7 @@
                 const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
                 total += numValue;
             });
-            document.querySelector(".total").innerText = ` ₹${total.toLocaleString('en-IN')}`;
+            document.querySelector(".total").innerText = `Total Amount - ₹${total.toLocaleString('en-IN')}`;
         }
 
         // Updated printInvoice function
