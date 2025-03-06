@@ -826,11 +826,18 @@
 
     
      <script>
+        const tempDateStr = localStorage.getItem("tempDate");
         function printFunction() {
             const patientId = "P"+appointment.id;
-            // Get todays date with dd-mm-yyyy format
-            const today = new Date();
-            const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+            // Get today's date in dd-mm-yyyy format
+
+            let today;
+            if (tempDateStr) {
+                today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+            } else {
+                today = new Date(); // Ensure `today` is always a Date object
+            }
+            const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
             const Docname = patientId+"_HistorySlip" + "_" + date;
 
             console.log(patientId,date,Docname);
