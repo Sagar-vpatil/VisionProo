@@ -285,6 +285,10 @@
         }
     }
 
+
+
+    
+
     </style>
 </head>
 <body>
@@ -492,7 +496,7 @@
         <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
 
         <!-- Post Operative Treatment Section -->
-        <h4 class="section-title " id="Medicines-Heading">Post Operative Treatment</h4>
+      
         <!-- <div class="d-flex align-items-center" style="margin-top: 20px;">
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
@@ -505,6 +509,54 @@
             <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
             <input type="text" class="form-control" style="width: 200px;">
         </div> -->
+
+        <div class="patient-details Pre-Operative-Details" >
+                      
+        <h4 class="section-title " >Pre-Operative Workup Investigations</h4>  
+            <p class="complaints show-BP"  style="margin-right: 120px;">
+
+            </p>
+
+            <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
+                
+            </p>
+            <p class="complaints show-SAC" style="margin-right: 120px;">
+                
+            </p>
+            <p class="complaints show-NCT" style="margin-right: 120px;">
+              
+          </p>                                          
+    </div>
+    <table id="Pre-Operative-Table" style="width: 470px; margin-left: 90px; border-collapse: collapse; text-align: center; border: 1px solid #000;">
+        <h4 class="section-title "id="Pre-Operative-Heading" >IOP/GAT</h4>  
+        <thead>
+            <tr style="background-color: #f0f0f0; border: 1px solid #000;">
+                <th colspan="2" style="padding: 8px; border: 1px solid #000;">Right Eye</th>
+                <th colspan="2" style="padding: 8px; border: 1px solid #000;">Left Eye</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
+                    <span id="RightmmHg">Data</span>
+                    <span>mmHg</span>
+                </td>
+                <td style="padding: 5px; border: 1px solid #000;">
+                    <span id="RightmmHgTime">00:00</span>
+                </td>
+                <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
+                    <span id="LeftmmHg">Data</span>
+                    <span>mmHg</span>
+                </td>
+                <td style="padding: 5px; border: 1px solid #000;">
+                    <span id="LeftmmHgTime">00:00</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <h4 class="section-title " id="Medicines-Heading">Post Operative Treatment</h4>
         <table class="table-container table-responsive" style="width: 500px;" id="Medicines-Table">
             <thead>
                 <tr>
@@ -710,6 +762,101 @@
 
 
     
+
+
+     // Show or hide the entire table if all rows are hidden
+     aScanTableElement.style.display = visibleAScanRowCount > 0 ? "table" : "none";
+
+// Show or hide the heading based on whether the table is visible
+aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
+
+
+// Load PreOperativeDetails data from local storage
+const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
+
+// Define field mappings
+const fieldMappings = [
+    { key: "BPResult", className: "show-BP", label: "BP" },
+    { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
+    { key: "SACResult", className: "show-SAC", label: "SAC" },
+    { key: "NCTResult", className: "show-NCT", label: "NCT" }
+];
+
+let visibleCount = 0;
+
+// Iterate through each field and update the content
+fieldMappings.forEach(({ key, className, label }) => {
+    const element = document.querySelector(`.${className}`);
+
+    if (element) {
+        const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
+
+        if (value) {
+            element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
+            visibleCount++;
+        } else {
+            element.style.display = "none"; // Hide element if value is empty
+        }
+    }
+});
+
+// Hide the entire section if no details are available
+const patientDetailsSection = document.querySelector(".Pre-Operative-Details");
+if (visibleCount === 0 && patientDetailsSection) {
+    patientDetailsSection.style.display = "none";
+}
+
+
+
+
+
+
+
+
+
+
+
+        // Load IOP/GAT data from local storage like eye examination table
+        const iopGatTable = JSON.parse(localStorage.getItem("iopGatTable")) || {};
+
+        // Get table and heading elements
+        const iopGatTableElement = document.getElementById("Pre-Operative-Table");
+        const iopGatHeading = document.getElementById("Pre-Operative-Heading");
+
+        // Get all rows in the IOP/GAT table body
+        const iopGatRows = iopGatTableElement.querySelectorAll("tbody tr");
+
+        // Define row mappings
+        const iopGatRowMappings = [
+            { rowIndex: 0, rightKey: "RightmmHg", rightTimeKey: "RightmmHgTime", leftKey: "LeftmmHg", leftTimeKey: "LeftmmHgTime" }
+        ];
+
+        let visibleIopGatRowCount = 0;
+
+        // Iterate through each row mapping and update table cells
+
+        iopGatRowMappings.forEach(({ rowIndex, rightKey, rightTimeKey, leftKey, leftTimeKey }) => {
+            const rightValue = iopGatTable[rightKey] || "";
+            const rightTimeValue = iopGatTable[rightTimeKey] || "";
+            const leftValue = iopGatTable[leftKey] || "";
+            const leftTimeValue = iopGatTable[leftTimeKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                iopGatRows[rowIndex].style.display = "none";
+            } else {
+                iopGatRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                iopGatRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${rightTimeKey}`).textContent = rightTimeValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${leftTimeKey}`).textContent = leftTimeValue || "-";
+                visibleIopGatRowCount++;
+            }
+        });
+
+        // Show or hide the entire table based on row visibility
+        iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
+        iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
 </script>
 
 

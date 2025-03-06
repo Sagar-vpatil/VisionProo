@@ -1,9 +1,11 @@
 // This file contains the code to add a patient to the Firestore database.
 import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc} from "./firebaseConfig.js";
 
+
+const loaderOverlay = document.getElementById("loader-overlay");
 document.getElementById("add-patient-btn").addEventListener("click", async function () {
   console.log("Add Patient button clicked");
-
+ 
   const name = document.getElementById("name-input-field").value.trim();
   const birthDate = document.getElementById("dob-input-field").value.trim();
   const gender = document.getElementById("gender-select").value.trim();
@@ -46,9 +48,10 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
   if (response === 1) {
       return;
   }
-
-
+  loaderOverlay.style.display = "flex";
   try {
+
+ 
       const patientsCollection = collection(db, "patients");
       const q = query(patientsCollection, orderBy("id", "desc"), limit(1));
       const querySnapshot = await getDocs(q);
@@ -84,7 +87,12 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
   } catch (error) {
       console.error("Error adding patient:", error);
       window.electronAPI.showErrorBox("Error", "Failed to add patient.");
-  }
+      // Hide the loader overlay after data loads
+      loaderOverlay.style.display = "none";
+  }finally {
+    // Hide the loader overlay after data loads
+    loaderOverlay.style.display = "none";
+}
 });
 
 
@@ -167,6 +175,7 @@ document.getElementById("search-box").addEventListener("input", async function (
 });
 
 export async function openPatientDetails(patientId) {
+    loaderOverlay.style.display = "flex";
     try {
         // Fetch patient details from Firestore
         console.log("Opening patient details for ID:", patientId);
@@ -200,6 +209,11 @@ export async function openPatientDetails(patientId) {
         }
     } catch (error) {
         console.error("Error fetching patient details:", error);
+         // Hide the loader overlay after data loads
+         loaderOverlay.style.display = "none";
+    }finally {
+        // Hide the loader overlay after data loads
+        loaderOverlay.style.display = "none";
     }
 }
 
@@ -284,8 +298,10 @@ document.getElementById("add-appointment-btn").addEventListener("click", async (
         "Add Appointment",
         ["Yes", "No"]
     );
-
-    if (response === 0) { // "Yes" button clicked
+    
+    if (response === 0) {
+        loaderOverlay.style.display = "flex";
+         // "Yes" button clicked
         try {
             // Query Firestore to check if an appointment already exists for the patient
             // const q = query(collection(db, "TodayAppointments"), where("patientId", "==", patientId));
@@ -323,6 +339,8 @@ document.getElementById("add-appointment-btn").addEventListener("click", async (
                 const patientData = patientDoc.data();
                 if (patientData.AppointmentStatus === "Active") {
                     window.electronAPI.showErrorBox("Error", "An appointment already exists for this patient.");
+                    // Hide the loader overlay after data loads
+                    loaderOverlay.style.display = "none";
                     return;
                 }
             }
@@ -345,6 +363,11 @@ document.getElementById("add-appointment-btn").addEventListener("click", async (
         } catch (error) {
             console.error("Error adding appointment:", error);
             window.electronAPI.showErrorBox("Error", "Failed to add appointment.");
+            // Hide the loader overlay after data loads
+            loaderOverlay.style.display = "none";
+        }finally {
+            // Hide the loader overlay after data loads
+            loaderOverlay.style.display = "none";
         }
     } else {
         return;

@@ -805,8 +805,9 @@
           border: 1px solid #ccc;
           border-radius: 5px;
           background-color: #f9f9f9;
-          color: #333;
+          color: #050202;
           cursor: pointer;
+          font-weight: bold; /* Make the heading bold */
           transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 

@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log("DOM loaded");
   });
 
-
 async function loadTodayAppointments() {
+    const loaderOverlay = document.getElementById("loader-overlay");
     try {
+        loaderOverlay.style.display = "flex";
         // Reference to the patients collection where AppointmentStatus is "Active"
         const patientsCollection = collection(db, "patients");
         const q = query(patientsCollection, where("AppointmentStatus", "==", "Active"));
@@ -76,6 +77,11 @@ async function loadTodayAppointments() {
     } catch (error) {
         console.error("Error fetching appointments:", error);
         window.electronAPI.showErrorBox("Error", "Failed to load appointments. Please try again.");
+        // Hide the loader overlay after data loads
+        loaderOverlay.style.display = "none";
+    }finally {
+        // Hide the loader overlay after data loads
+        loaderOverlay.style.display = "none";
     }
 }
 

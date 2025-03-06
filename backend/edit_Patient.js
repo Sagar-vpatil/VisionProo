@@ -6,9 +6,11 @@ let lastVisible = null; // Stores the last document from the current page
 let firstVisible = null; // Stores the first document from the current page
 let currentPage = 1; // Current page number
 
+const loaderOverlay = document.getElementById("loader-overlay");
 // Modify the loadPatients function to accept searchTerm and searchBy parameters
 async function loadPatients(orderById = true, searchTerm = "", searchBy = "id") {
     try {
+        loaderOverlay.style.display = "flex";
         const patientsCollection = collection(db, "patients");
         let q;
 
@@ -102,6 +104,11 @@ async function loadPatients(orderById = true, searchTerm = "", searchBy = "id") 
     } catch (error) {
         console.error("Error fetching patients:", error);
         window.electronAPI.showErrorBox("Error", "Failed to load patients. Please try again.");
+         // Hide the loader overlay after data loads
+         loaderOverlay.style.display = "none";
+    }finally {
+        // Hide the loader overlay after data loads
+        loaderOverlay.style.display = "none";
     }
 }
 

@@ -22,6 +22,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Loader Css -->
+    <link rel="stylesheet" href="../frontend/css/loader.css">
 <style>
    
    /* Dashboard Container */
@@ -156,7 +158,6 @@
             min-width: 350px;
             max-width: 500px;
         }
-
     
 </style>
 
@@ -212,6 +213,10 @@
 
        
        
+      <a >
+        <button class="styled-button" onclick="refreshPage()">🔄 Refresh </button>
+      </a>
+      
  
       <a href="../subpages/add_Patient.html">
         <button class="styled-button">Add Patient</button>
@@ -287,13 +292,13 @@
                     <thead class="table__head">
                         <tr class="winner__table">
                             <th>Patient ID</th>
-                            <th><i class="fa fa-user" aria-hidden="true"></i> Name</th>
-                            <th><i class="fa fa-birthday-cake" aria-hidden="true"></i> Date of Birth</th>
-                            <th><i class="fa fa-calendar" aria-hidden="true"></i> Age</th>
-                            <th><i class="fa fa-map-marker" aria-hidden="true"></i> Address</th>
-                            <th><i class="fa fa-phone" aria-hidden="true"></i> Mobile Number</th>
-                            <th><i class="fa fa-info-circle" aria-hidden="true"></i> Patient Summary</th>
-                            <th><i class="fa fa-cogs" aria-hidden="true"></i> Action</th>
+                            <th> Name</th>
+                            <th>Date of Birth</th>
+                            <th> Age</th>
+                            <th>Address</th>
+                            <th> Mobile Number</th>
+                            <th> Patient Summary</th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -303,6 +308,12 @@
             </div>
         </div>
     </div>
+     <!-- Code For Loader -->
+    <div id="loader-overlay">
+        <div class="loader"></div>
+        <p style="color: black;">Loading, please wait...</p>
+    </div>
+    
 </div>
 
 
@@ -449,8 +460,33 @@
           }
       }
   });
-</script>
 
+
+
+
+
+
+
+
+
+
+
+  
+</script>
+<script>
+    function refreshPage() {
+        let refreshTime = new Date().toLocaleTimeString();
+        localStorage.setItem('lastRefreshTime', refreshTime);
+        location.reload();
+    }
+
+    window.onload = function () {
+        const lastRefreshTime = localStorage.getItem('lastRefreshTime');
+        if (lastRefreshTime) {
+            document.getElementById("refreshTime").innerText = "Last Refreshed: " + lastRefreshTime;
+        }
+    };
+</script>
  
 <script type="module" src="../backend/view_Appointments.js"></script>
 
