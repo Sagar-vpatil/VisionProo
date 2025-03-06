@@ -11,6 +11,8 @@ if (storedUser) {
     redirectUser(storedUser.position);
 }
 
+const loaderOverlay = document.getElementById("loader-overlay");
+
 // Login Form Submission
 const loginForm = document.getElementById("login-form");
 loginForm.addEventListener("submit", async (e) => {
@@ -21,6 +23,7 @@ loginForm.addEventListener("submit", async (e) => {
 
     console.log("Username:", username);
     console.log("Password:", password);
+    loaderOverlay.style.display = "flex";
 
     try {
         // Create a Firestore query
@@ -37,14 +40,21 @@ loginForm.addEventListener("submit", async (e) => {
             // Store user data in local storage
             localStorage.setItem("user", JSON.stringify(userData));
 
+            // Hide the loader overlay after data loads
+            loaderOverlay.style.display = "none";
+
             // Redirect user based on position
             redirectUser(userData.position);
         } else {
             window.electronAPI.showErrorBox("Error", "Invalid username or password. Please try again.");
+            // Hide the loader overlay after data loads
+            loaderOverlay.style.display = "none";
         }
     } catch (error) {
         console.error("Error during login:", error);
         window.electronAPI.showErrorBox("Error", "An error occurred during login. Please try again.");
+        // Hide the loader overlay after data loads
+        loaderOverlay.style.display = "none";
     }
 });
 
