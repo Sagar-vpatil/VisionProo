@@ -1226,11 +1226,11 @@ overflow-y: auto; width: 50%;">
             <td><input type="text" name="NearAxis2" onfocus="showOptions(event, 'nRefraction')" style="width: 70px;"></td>
             <td><input type="text" name="NearVA2" id="rva2" style="width: 70px;"></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td>IPD (mm)</td>
             <td colspan="4"><input type="text" id="REIPD" name="REIPD"></td>
             <td colspan="4"><input type="text" id="LEIPD" name="LEIPD"></td>
-          </tr>
+          </tr> -->
           <tr>
             <td>Type of Glass</td>
             <td colspan="4">
@@ -1253,11 +1253,11 @@ overflow-y: auto; width: 50%;">
             </td>
         </tr>
         
-          <tr>
+          <!-- <tr>
             <td>Remark</td>
             <td colspan="4"><input type="text" id="RERemark" name="RERemark"></td>
             <td colspan="4"><input type="text" id="LERemark" name="LERemark"></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
 
@@ -2342,15 +2342,15 @@ overflow-y: auto; width: 50%;">
           <p>Drag & drop an image or click below to upload</p>
           <label for="imageUpload">Choose Image</label>
           <input type="file" id="imageUpload" accept="image/*">
-          <button class="gradient-button">
-            ✖ Delete
-          </button>
       </div>
   
       <!-- Image preview will appear outside the upload box -->
-      <div id="imagePreview">
+      <div id="imagePreview" style="text-align: center;">
           <h3>Selected Image</h3>
           <img id="previewImg" src="" alt="Image Preview">
+          <button class="gradient-button" style="display: none; margin: auto; margin-top: 20px;" id="delete-image-btn" type="button">
+            ✖ Delete Image
+          </button>
       </div>
   </div>
 
@@ -2840,6 +2840,7 @@ document.addEventListener("click", function(event) {
   document.getElementById('imageUpload').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
+        console.log("file");
           const reader = new FileReader();
           reader.onload = function(e) {
               const previewImg = document.getElementById('previewImg');

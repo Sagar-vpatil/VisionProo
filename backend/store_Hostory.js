@@ -287,12 +287,12 @@ async function savePatientHistory(getCondition) {
     NearCYL2 : document.getElementsByName("NearCYL2")[0].value,
     NearAxis2 : document.getElementsByName("NearAxis2")[0].value,
     NearVA2 : document.getElementsByName("NearVA2")[0].value,
-    REIPD : document.getElementById("REIPD").value,
-    LEIPD : document.getElementById("LEIPD").value,
+    // REIPD : document.getElementById("REIPD").value,
+    // LEIPD : document.getElementById("LEIPD").value,
     RETypeOfGlass : document.getElementById("RETypeOfGlass").value,
     LETypeOfGlass : document.getElementById("LETypeOfGlass").value,
-    RERemark : document.getElementById("RERemark").value,
-    LERemark : document.getElementById("LERemark").value,
+    // RERemark : document.getElementById("RERemark").value,
+    // LERemark : document.getElementById("LERemark").value,
   };
 
   console.log(refractionTable);
@@ -456,6 +456,10 @@ async function savePatientHistory(getCondition) {
       JSON.stringify(iopGatTable)
     );
     
+    
+
+   if (getCondition === "saveAndPrint") {
+    // Save Eye Image
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
     if (file) {
@@ -491,8 +495,6 @@ async function savePatientHistory(getCondition) {
         };
         reader.readAsDataURL(file);
     }
-
-   if (getCondition === "saveAndPrint") {
     try {
       const todayDate = getFormattedDate();
       const documentId = `P${appointment.id}${todayDate}`;
@@ -616,6 +618,7 @@ async function getPatientHistory(date) {
       
       const getDate = date.split("/");
       const documentId = `P${appointment.id}${getDate[0]}${getDate[1]}${getDate[2]}`;
+      console.log("Document ID:", documentId);
       
       // Reference to the document
       const docRef = doc(db, "PatientsHistory", documentId);
@@ -755,19 +758,19 @@ async function openPatientHistory(date) {
   console.log(date);
   clearHistoryFromLocalStorage();
 
+  localStorage.setItem("tempDate", date);
+
   // Get the patient history from Firestore
   await getPatientHistory(date);
   loadPatientHistoryData();
-
-  localStorage.setItem("tempDate", date);
-
+    
 
   // Update the alert message
   alertMessage.textContent = `Patient History Opened of Date: ${date}`;
 
   // Show the alert box
   alertBox.style.display = "flex";
-  location.reload();
+  // location.reload();
 }
 
 document.getElementById("closeHistory-btn").addEventListener("click",async function () {
@@ -1058,6 +1061,13 @@ function loadPatientHistoryData() {
         element.value = iopGatTable[key];
       }
     }
+
+
+  const tempDateStr = localStorage.getItem("tempDate");
+  if (tempDateStr) {
+     // Show Eye Image if available
+     showEyeImage();
+  }
     
 
   } catch (e) {
@@ -1234,4 +1244,74 @@ function clearHistoryFromLocalStorage() {
   localStorage.removeItem("aScanTable");
   localStorage.removeItem("iopGatTable");
 }
+
+ // Show Eye Image function
+ async function showEyeImage() {
+  console.log("Show Eye Image");
+  const patientId = "P"+appointment.id; // Example Patient ID (Replace with dynamic value)
+  const tempDateStr = localStorage.getItem("tempDate");
+  if (!tempDateStr) {
+      console.log("No date found in localStorage");
+      return;
+  }
+  console.log(tempDateStr);
+  const today = tempDateStr 
+      ? new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v))) 
+      : new Date();
+
+  const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); // Formats as DD-MM-YYYY
+  const imgName = `${patientId}_image_${imgDate}`;
+  console.log(imgName);
+
+  const imageElement = document.querySelector("#imagePreview img");
+  const deleteButton = document.getElementById("delete-image-btn");
+
+
+  // Call Electron API to check if image exists
+  const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
+
+  if (response.exists) {
+      imageElement.src = `file://${response.path}`;
+      document.getElementById('imagePreview').style.display = 'block';
+      deleteButton.style.display = "block";
+      // imageElement.style.display = "block"; // Show image
+
+      // Double-click event to open in default viewer
+      imageElement.addEventListener("dblclick", function () {
+          window.electronAPI.openImage(response.path);
+      });
+
+      // Click event to delete image
+      deleteButton.addEventListener("click", async function () {
+      // Trigger confirmation dialog
+        const comfirmDelete = await window.electronAPI.showMessageBox(
+          "warning",
+          'Are you sure you want to delete this image?',
+          "Confirm",
+          ["Yes", "No"]
+      );
+
+      if (comfirmDelete === 1) return;
+      
+
+        const deleteResponse = await window.electronAPI.deleteImage(response.path);
+        if (deleteResponse.success) {
+            window.electronAPI.showSuccessBox("Success", "Image deleted successfully!");
+            // imageElement.style.display = "none";
+            deleteButton.style.display = "none";
+            document.getElementById('imagePreview').style.display = 'none';
+        } else {
+            console.log("Failed to delete image:", deleteResponse.error);
+            window.electronAPI.showErrorBox("Error", "Failed to delete image: " + deleteResponse.error);
+        }
+    });
+  } else {
+      document.getElementById('imagePreview').style.display = 'none';
+      // imageElement.style.display = "none"; // Hide if not found
+      // hide Img-Section
+      // document.getElementById("Img-Section").style.display = "none";
+      // deleteButton.style.display = "none";
+  }
+ }
+
 

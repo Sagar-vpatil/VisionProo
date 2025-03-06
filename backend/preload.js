@@ -15,4 +15,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     saveImage: (patientId, date, docName, imageData) => ipcRenderer.invoke('save-image', patientId, date, docName, imageData),
     checkImageExists: (patientId, date, docName) => ipcRenderer.invoke('check-image-exists', patientId, date, docName),
     openImage: (imagePath) => ipcRenderer.send('open-image', imagePath),
+    deleteImage: (imagePath) => ipcRenderer.invoke("delete-image", imagePath),
 });

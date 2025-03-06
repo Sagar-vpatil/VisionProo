@@ -224,6 +224,18 @@ function createMainWindow() {
         }
     });
     
+    // Delete image
+    ipcMain.handle("delete-image", async (event, imagePath) => {
+        try {
+            await fs.promises.unlink(imagePath); // Delete the file
+            console.log("Image deleted:", imagePath);
+            return { success: true };
+        } catch (error) {
+            console.error("Error deleting image:", error);
+            return { success: false, error: error.message };
+        }
+    });
+    
     
 }
 
