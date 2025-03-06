@@ -213,6 +213,10 @@
 
        
        
+      <a >
+        <button class="styled-button" onclick="refreshPage()">🔄 Refresh </button>
+      </a>
+      
  
       <a href="../subpages/add_Patient.html">
         <button class="styled-button">Add Patient</button>
@@ -288,13 +292,13 @@
                     <thead class="table__head">
                         <tr class="winner__table">
                             <th>Patient ID</th>
-                            <th><i class="fa fa-user" aria-hidden="true"></i> Name</th>
-                            <th><i class="fa fa-birthday-cake" aria-hidden="true"></i> Date of Birth</th>
-                            <th><i class="fa fa-calendar" aria-hidden="true"></i> Age</th>
-                            <th><i class="fa fa-map-marker" aria-hidden="true"></i> Address</th>
-                            <th><i class="fa fa-phone" aria-hidden="true"></i> Mobile Number</th>
-                            <th><i class="fa fa-info-circle" aria-hidden="true"></i> Patient Summary</th>
-                            <th><i class="fa fa-cogs" aria-hidden="true"></i> Action</th>
+                            <th> Name</th>
+                            <th>Date of Birth</th>
+                            <th> Age</th>
+                            <th>Address</th>
+                            <th> Mobile Number</th>
+                            <th> Patient Summary</th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -456,8 +460,33 @@
           }
       }
   });
-</script>
 
+
+
+
+
+
+
+
+
+
+
+  
+</script>
+<script>
+    function refreshPage() {
+        let refreshTime = new Date().toLocaleTimeString();
+        localStorage.setItem('lastRefreshTime', refreshTime);
+        location.reload();
+    }
+
+    window.onload = function () {
+        const lastRefreshTime = localStorage.getItem('lastRefreshTime');
+        if (lastRefreshTime) {
+            document.getElementById("refreshTime").innerText = "Last Refreshed: " + lastRefreshTime;
+        }
+    };
+</script>
  
 <script type="module" src="../backend/view_Appointments.js"></script>
 

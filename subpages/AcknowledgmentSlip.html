@@ -343,14 +343,14 @@
         <div class="payment-details">
             <div class="section-title">Payment Information</div>
             <table class="details-table">
-                <tr>
+                <!-- <tr>
                     <th style="text-align: center; vertical-align: middle;">Total Charges</th>
                     <td style="text-align: center; vertical-align: middle;">
                         <input type="text" id="totalCharges" placeholder="₹ 0" class="form-control rupee-input" 
                         style="width: 200px; text-align: center; display: block; margin: auto;">
                  
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th style="text-align: center; vertical-align: middle;">Amount Paid</th>
                     <td style="text-align: center; vertical-align: middle;">
@@ -360,12 +360,12 @@
                     </td>
                 </tr>
                 
-                <tr>
+                <!-- <tr>
                     <th>Balance Due</th>
                     <td style="text-align: center; vertical-align: middle;">
                         <span id="balanceDue" style="display: inline-block; width: 100%;">₹ 0</span>
                     </td>
-                </tr>
+                </tr> -->
                 
                 <tr>
                     <th>Payment Mode</th>
@@ -440,39 +440,52 @@
 
 
 
-        document.getElementById('totalCharges').addEventListener('input', formatAndCalculate);
-        document.getElementById('amountPaid').addEventListener('input', formatAndCalculate);
-        document.getElementById('paymentMode').addEventListener('change', function () {
-            document.getElementById('printPaymentMode').textContent = this.value;
-        });
+        // document.getElementById('totalCharges').addEventListener('input', formatAndCalculate);
+        // document.getElementById('amountPaid').addEventListener('input', formatAndCalculate);
+        // document.getElementById('paymentMode').addEventListener('change', function () {
+        //     document.getElementById('printPaymentMode').textContent = this.value;
+        // });
 
-        function formatAndCalculate(event) {
-            let input = event.target;
-            let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
-            if (value === "") {
-                input.value = "₹ 0"; 
-                return;
-            }
-            input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
+        // function formatAndCalculate(event) {
+        //     let input = event.target;
+        //     let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+        //     if (value === "") {
+        //         input.value = "₹ 0"; 
+        //         return;
+        //     }
+        //     input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
 
-            // Calculate Balance Due
-            let totalCharges = parseFloat(document.getElementById('totalCharges').value.replace(/[^\d]/g, '')) || 0;
-            let amountPaid = parseFloat(document.getElementById('amountPaid').value.replace(/[^\d]/g, '')) || 0;
-            let balanceDue = totalCharges - amountPaid;
+        //     // Calculate Balance Due
+        //     let totalCharges = parseFloat(document.getElementById('totalCharges').value.replace(/[^\d]/g, '')) || 0;
+        //     let amountPaid = parseFloat(document.getElementById('amountPaid').value.replace(/[^\d]/g, '')) || 0;
+        //     let balanceDue = totalCharges - amountPaid;
 
-            let balanceDueField = document.getElementById('balanceDue');
+        //     let balanceDueField = document.getElementById('balanceDue');
 
-            if (balanceDue <= 0) {
-                balanceDueField.textContent = "Payment Complete"; // Show text instead of ₹ 0
-                balanceDueField.classList.remove("due");
-                balanceDueField.classList.add("paid"); // Green if fully paid
-            } else {
-                balanceDueField.textContent = "₹ " + balanceDue.toLocaleString("en-IN");
-                balanceDueField.classList.remove("paid");
-                balanceDueField.classList.add("due"); // Red if due remains
-            }
-        }
+        //     if (balanceDue <= 0) {
+        //         balanceDueField.textContent = "Payment Complete"; // Show text instead of ₹ 0
+        //         balanceDueField.classList.remove("due");
+        //         balanceDueField.classList.add("paid"); // Green if fully paid
+        //     } else {
+        //         balanceDueField.textContent = "₹ " + balanceDue.toLocaleString("en-IN");
+        //         balanceDueField.classList.remove("paid");
+        //         balanceDueField.classList.add("due"); // Red if due remains
+        //     }
+        // }
   
+        document.getElementById('amountPaid').addEventListener('input', formatAmountPaid);
+
+function formatAmountPaid(event) {
+    let input = event.target;
+    let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+
+    if (value === "") {
+        input.value = "₹ 0"; // Display ₹ 0 if empty
+        return;
+    }
+    
+    input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
+}
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
