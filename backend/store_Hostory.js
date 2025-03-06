@@ -86,8 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPatientHistoryData();
 });
 
-
-
+// Loader Overlay Variable
+const loaderOverlay = document.getElementById("loader-overlay");
 
 
 
@@ -459,6 +459,7 @@ async function savePatientHistory(getCondition) {
     
 
    if (getCondition === "saveAndPrint") {
+    loaderOverlay.style.display = "flex";
     // Save Eye Image
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
@@ -491,6 +492,8 @@ async function savePatientHistory(getCondition) {
         } catch (error) {
             console.error('Error saving image:', error);
             window.electronAPI.showErrorBox("Error", "Failed to save image: " + error.message);
+          // Hide the loader overlay after data loads
+          loaderOverlay.style.display = "none";
         }
         };
         reader.readAsDataURL(file);
@@ -600,7 +603,13 @@ async function savePatientHistory(getCondition) {
       }
   } catch (error) {
       console.error("Error storing data:", error);
-  }
+      window.electronAPI.showErrorBox("Error", "Failed to store data: " + error.message);
+      // Hide the loader overlay after data loads
+      loaderOverlay.style.display = "none";
+  }finally {
+    // Hide the loader overlay after data loads
+    loaderOverlay.style.display = "none";
+}
 
 }
 
@@ -665,6 +674,7 @@ async function getPatientHistory(date) {
 
 async function loadPatientHistory(patientId) {
   try {
+      loaderOverlay.style.display = "flex";
       const patientHistoryRef = collection(db, "PatientsHistory"); // Reference to PatientsHistory collection
       const q = query(patientHistoryRef, where("patientId", "==", patientId));
       const querySnapshot = await getDocs(q);
@@ -717,7 +727,13 @@ async function loadPatientHistory(patientId) {
         });
   } catch (error) {
       console.error("Error fetching patient history:", error);
-  }
+      window.electronAPI.showErrorBox("Error", "Failed to load patient history: " + error);
+      // Hide the loader overlay after data loads
+      loaderOverlay.style.display = "none";
+  }finally {
+    // Hide the loader overlay after data loads
+    loaderOverlay.style.display = "none";
+}
 }
 
 async function deletePatientHistory(date) {
@@ -770,7 +786,7 @@ async function openPatientHistory(date) {
 
   // Show the alert box
   alertBox.style.display = "flex";
-  // location.reload();
+  location.reload();
 }
 
 document.getElementById("closeHistory-btn").addEventListener("click",async function () {
