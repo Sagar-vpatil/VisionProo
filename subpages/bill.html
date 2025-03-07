@@ -435,11 +435,17 @@
             inputs.forEach(input => {
                 input.parentElement.dataset.value = input.value; // Ensure latest value is set
             });
-
+            const tempDateStr = localStorage.getItem("tempDate");
             // Electron API printing
             const patientId = "P" + (appointment.id || "N/A");
-            const today = new Date();
-            const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+           // Get todays date with dd-mm-yyyy format
+           let today;
+            if (tempDateStr) {
+                today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+            } else {
+                today = new Date(); // Ensure `today` is always a Date object
+            }
+            const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
             const Docname = patientId + "_Bill_" + date;
             console.log(patientId, date, Docname);
 

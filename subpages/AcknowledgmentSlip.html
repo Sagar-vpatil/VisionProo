@@ -411,11 +411,17 @@
     function updatePrintValues() {
         // Update payment mode for printing
         document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
-
+         
         // Print the acknowledgment slip
         const patientId = "P" + appointment.id;
-        const today = new Date();
-        const date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
+        const tempDateStr = localStorage.getItem("tempDate");
+        let today;
+            if (tempDateStr) {
+                today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+            } else {
+                today = new Date(); // Ensure `today` is always a Date object
+            }
+        const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
         const docName = patientId + "_AckSlip" + "_" + date;
         console.log(patientId, date, docName);
 
