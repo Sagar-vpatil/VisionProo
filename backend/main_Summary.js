@@ -285,6 +285,7 @@ function addOptionFromStorage(baseName,className) {
 function addOption2(button, className) {
   const inputField = button.previousElementSibling;
   let inputValue = inputField.value.trim();
+  console.log(inputValue);
 
   if (inputValue === "") {
     window.electronAPI.showErrorBox("Error", "Please enter a new option name.");
@@ -308,6 +309,10 @@ function addOption2(button, className) {
       // Append advice to UI
       appendOption2(optionInput, "advice", inputValue,className);
   }
+  else if (className === "surgical-treatment") {
+    // Append surgicalTreatment to UI
+    appendOption2(optionInput, "surgical-content", inputValue,className);
+  }
 
   inputField.value = ""; // Clear input field after adding
 }
@@ -330,6 +335,9 @@ function appendOption2(symptomText, sectionId, baseName,className) {
     }
     else if (className === "advice") {
       toggleAdvices(this); // Calls your existing function
+    }
+    else if (className === "surgical-treatment") {
+      toggleSurgicalTreatment(this); // Calls your existing function
     }
   });
 
@@ -360,5 +368,8 @@ const optionInput = `${baseName}`;
   }
   else if (className === "advice") {
     appendOption2(optionInput, "advice", baseName,className);
+  }
+  else if (className === "surgical-treatment") {
+    appendOption2(optionInput, "surgical-content", baseName,className);
   }
 }

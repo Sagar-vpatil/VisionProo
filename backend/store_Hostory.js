@@ -971,6 +971,21 @@ function loadPatientHistoryData() {
     });
 
 
+    // Loop through each stored surgical treatment
+    selectedSurgicalTreatment.forEach((surgicalTreatment) => {
+      const baseName = surgicalTreatment.replace(/\s*\(BE\)|\s*\(LE\)|\s*\(RE\)/, ""); // Extract base name
+
+      // Check if the surgical treatment already exists
+      const existingSurgicalTreatment = Array.from(document.querySelectorAll(".surgical-treatment"))
+          .find((item) => item.textContent.trim() === surgicalTreatment);
+
+      if (!existingSurgicalTreatment) {
+          // Simulate adding surgical treatment via input
+          addOptionFromStorage2(baseName,"surgical-treatment");
+      }
+  });
+
+
     // If there are selected surgical treatment, update the UI
     selectedSurgicalTreatment.forEach((surgicalTreatment) => {
       const surgicalTreatmentElement = Array.from(document.querySelectorAll(".surgical-treatment"))
