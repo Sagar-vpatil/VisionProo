@@ -213,20 +213,62 @@
 
        
        
-      <a >
-        <button class="styled-button" onclick="refreshPage()">🔄 Refresh </button>
-      </a>
-      
- 
-      <a href="../subpages/add_Patient.html">
-        <button class="styled-button">Add Patient</button>
-      </a>
-      
-
-
-
-      <!-- Add Receptionist Button -->
-      <button class="btn-danger" id="exit">Logout</button>
+        <a>
+            <button onclick="refreshPage()" style="
+              background-color: #0056b3; 
+              color: white; 
+              font-size: 22px; 
+              border: none; 
+              border-radius: 50%; 
+              width: 55px; 
+              height: 55px; 
+              cursor: pointer; 
+              transition: all 0.3s ease-in-out; 
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+              display: flex; 
+              align-items: center; 
+              justify-content: center;
+            " 
+            onmouseover="this.style.backgroundColor='#003f8a'; this.style.transform='scale(1.15)';"
+            onmouseout="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1)';"
+            onmousedown="this.style.transform='scale(0.9)';"
+            onmouseup="this.style.transform='scale(1.1)';">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <a href="../subpages/add_Patient.html">
+                <button style="
+                  background-color: #28a745; 
+                  color: white; 
+                  font-size: 14px; 
+                  font-weight: bold; 
+                  padding: 8px 16px; 
+                  border: none; 
+                  border-radius: 6px; 
+                  cursor: pointer; 
+                  transition: all 0.3s ease-in-out; 
+                  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);"
+                  onmouseover="this.style.backgroundColor='#218838'; this.style.transform='scale(1.05)';"
+                  onmouseout="this.style.backgroundColor='#28a745'; this.style.transform='scale(1)';">
+                  Add Patient
+                </button>
+              </a>
+              
+              <button id="exit" style="
+                background-color: #dc3545; 
+                color: white; 
+                font-size: 14px; 
+                font-weight: bold; 
+                padding: 8px 16px; 
+                border: none; 
+                border-radius: 6px; 
+                cursor: pointer; 
+                transition: all 0.3s ease-in-out; 
+                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);"
+                onmouseover="this.style.backgroundColor='#c82333'; this.style.transform='scale(1.05)';"
+                onmouseout="this.style.backgroundColor='#dc3545'; this.style.transform='scale(1)';">
+                Logout
+              </button>
+              
 
 
     </div>
