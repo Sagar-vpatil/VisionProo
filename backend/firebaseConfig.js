@@ -7,14 +7,15 @@ import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDo
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBvDMINgvqK7g1q8acysO5gCeLw1nMfC74",
-  authDomain: "visionproo-project.firebaseapp.com",
-  projectId: "visionproo-project",
-  storageBucket: "visionproo-project.firebasestorage.app",
-  messagingSenderId: "364295190765",
-  appId: "1:364295190765:web:c7e12ba62bf022a2b3b4e4"
-};
-
+    apiKey: "AIzaSyD6RUMVTE0GpI6qEiHuI-uw4oDFIDDtItY",
+    authDomain: "eye-hospital-ee88e.firebaseapp.com",
+    projectId: "eye-hospital-ee88e",
+    storageBucket: "eye-hospital-ee88e.firebasestorage.app",
+    messagingSenderId: "173931536781",
+    appId: "1:173931536781:web:fbf50296e7b05d57235dc4",
+    measurementId: "G-GWM7MZ1FJC"
+  };
+  
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
