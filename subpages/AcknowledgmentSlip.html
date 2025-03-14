@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Provisional Slip</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <style>
-         /* Styling for Balance Due */
-         #balanceDue {
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans Devanagari', 'Mangal', 'Helvetica Neue', Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+        /* Styling for Balance Due */
+        #balanceDue {
             font-weight: bold;
             padding: 8px;
             border: none;
@@ -21,7 +28,7 @@
         .due {
             color: red; /* Red when balance is due */
         }
-        
+
         @page {
             size: A4;
             margin: 0;
@@ -73,9 +80,9 @@
         .details-table td {
             padding: 12px;
             border: 1px solid #ddd;
-           
             font-size: 16px;
-            text-align: center; vertical-align: middle;
+            text-align: center;
+            vertical-align: middle;
         }
 
         .details-table th {
@@ -122,8 +129,6 @@
         }
 
         @media print {
-            
-
             .container {
                 padding: 15px;
                 min-height: auto;
@@ -158,16 +163,19 @@
             .print-hidden {
                 display: none !important; /* Hide input and select elements during printing */
             }
+
             .signature {
                 text-align: right;
                 font-style: italic;
             }
+
             .signature::before {
                 content: "_______________";
                 display: block;
                 margin-bottom: 10px;
                 margin-top: 100px;
             }
+
             input[type="date"] {
                 appearance: none;
                 -webkit-appearance: none;
@@ -190,6 +198,7 @@
             input[type="date"]:before {
                 content: attr(value);
             }
+
             .navbar .buttons button {
                 display: none;
             }
@@ -244,18 +253,19 @@
         }
 
         body, .page {
-        margin: 0;
-        padding: 0;
-       
-        box-shadow: none;
-    }
-/* Define A4 page size and margins explicitly */
-@page {
-    size: A4;
-    margin: 4mm; /* Set a 10mm margin on all sides for the printable area */
-}
-  /* Navbar Styling */
-  .navbar {
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        /* Define A4 page size and margins explicitly */
+        @page {
+            size: A4;
+            margin: 4mm; /* Set a 10mm margin on all sides for the printable area */
+        }
+
+        /* Navbar Styling */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -283,217 +293,196 @@
             border-radius: 5px;
         }
 
+         /* Center the input field */
+         .center-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        #dateInput {
+            width: 120px; /* Set width */
+            text-align: center; /* Center text inside input */
+            padding: 8px; /* Add padding for better appearance */
+            font-size: 16px; /* Set font size */
+            border: 1px solid #ddd; /* Add border */
+            border-radius: 4px; /* Rounded corners */
+        }
     </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div style="display: flex; align-items: center;">
-       
-    </div>
-    <div class="buttons" style="margin-bottom: 10px;">
-        <button onclick="window.location.href='./main.html';">🏠 Home</button>
-        <button onclick="updatePrintValues()">🖨️ Print</button>
-    </div>
-</nav>
-<div class="container">
-    <div class="provisional-slip">
-        <!-- Header -->
-        <div class="letterhead">
-            <div style="margin-left: 120px;">
-                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
+    <nav class="navbar">
+        <div style="display: flex; align-items: center;"></div>
+        <div class="buttons" style="margin-bottom: 10px;">
+            <button onclick="window.location.href='./main.html';">🏠 Home</button>
+            <button onclick="updatePrintValues()">🖨️ Print</button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="provisional-slip">
+            <!-- Header -->
+            <div class="letterhead">
+                <div style="margin-left: 120px;">
+                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
+                </div>
+                <div class="hospital-info" style="margin-right: 23%;">
+                    <div class="hospital-name">रविकल्प हॉस्पिटल</div>
+                    <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+                </div>
             </div>
-            <div class="hospital-info" style="margin-right: 23%;">
-                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
-                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+
+            <!-- Patient Details -->
+            <div class="patient-details">
+                <div class="section-title">Patient Information</div>
+                <table class="details-table">
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()" class="form-control print-hidden" style="width: 120px; margin-left: 150px;">
+                            <span id="currentDate" class="print-visible" style="display: none;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Patient ID</th>
+                        <td id="patient-id"></td>
+                    </tr>
+                    <tr>
+                        <th>Patient Name</th>
+                        <td id="patient-name"></td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td id="patient-age"></td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td id="patient-gender"></td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number</th>
+                        <td id="patient-mobile"></td>
+                    </tr>
+                </table>
             </div>
-        </div>
 
-        <!-- Patient Details -->
-        <div class="patient-details">
-            <div class="section-title">Patient Information</div>
-            <table class="details-table">
-                <tr>
-                    <th>Date</th>
-                    <td id="currentDate"></td>
-                </tr>
-                <tr>
-                    <th>Patient ID</th>
-                    <td id="patient-id"></td>
-                </tr>
-                <tr>
-                    <th>Patient Name</th>
-                    <td id="patient-name"></td>
-                </tr>
-                <tr>
-                    <th>Age</th>
-                    <td id="patient-age"></td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td id="patient-gender"></td>
-                </tr>
-                <tr>
-                    <th>Contact Number</th>
-                    <td id="patient-mobile"></td>
-                </tr>
-            </table>
-        </div>
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <div class="section-title">Payment Information</div>
+                <table class="details-table">
+                    <tr>
+                        <th style="text-align: center; vertical-align: middle;">Amount Paid</th>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <input type="text" id="amountPaid" placeholder="₹ 0" class="form-control rupee-input" 
+                            style="width: 200px; text-align: center; display: block; margin: auto;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Payment Mode</th>
+                        <td>
+                            <select id="paymentMode" class="form-control print-hidden" 
+                                style="width: 200px; text-align: center; display: block; margin: auto;">
+                                <option value="Cash">Cash</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Insurance">Insurance</option>
+                            </select>
+                            <span class="print-visible" id="printPaymentMode" style="display: none; margin: 0 auto; text-align: center;">Cash</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-        <!-- Payment Details -->
-        <div class="payment-details">
-            <div class="section-title">Payment Information</div>
-            <table class="details-table">
-                <!-- <tr>
-                    <th style="text-align: center; vertical-align: middle;">Total Charges</th>
-                    <td style="text-align: center; vertical-align: middle;">
-                        <input type="text" id="totalCharges" placeholder="₹ 0" class="form-control rupee-input" 
-                        style="width: 200px; text-align: center; display: block; margin: auto;">
-                 
-                    </td>
-                </tr> -->
-                <tr>
-                    <th style="text-align: center; vertical-align: middle;">Amount Paid</th>
-                    <td style="text-align: center; vertical-align: middle;">
-                        <input type="text" id="amountPaid" placeholder="₹ 0" class="form-control rupee-input" 
-                        style="width: 200px; text-align: center; display: block; margin: auto;">
-                 
-                    </td>
-                </tr>
-                
-                <!-- <tr>
-                    <th>Balance Due</th>
-                    <td style="text-align: center; vertical-align: middle;">
-                        <span id="balanceDue" style="display: inline-block; width: 100%;">₹ 0</span>
-                    </td>
-                </tr> -->
-                
-                <tr>
-                    <th>Payment Mode</th>
-                    <td>
-                        <select id="paymentMode" class="form-control print-hidden" 
-        style="width: 200px; text-align: center; display: block; margin: auto;">
-       
-    <option value="Cash">Cash</option>
-    <option value="Credit Card">Credit Card</option>
-    <option value="UPI">UPI</option>
-    <option value="Insurance">Insurance</option>
-</select>
-
-                        <span class="print-visible" id="printPaymentMode" style="display: none; margin: 0 auto; text-align: center; ">Cash</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="footer" style="color: black;">
-            <div class="signature" style="margin-right: 30px;">
-                <p>Dr. Alvin R Rane</p>
+            <div class="footer" style="color: black;">
+                <div class="signature" style="margin-right: 30px;">
+                    <p>Dr. Alvin R Rane</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Set current date
-    document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
-
-    // Retrieve the appointment object from localStorage
-    const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
-
-    // Update the HTML elements with appointment data
-    document.getElementById("patient-id").textContent = appointment.id || "N/A";
+    <script>
+        // Retrieve the appointment object from localStorage
+        const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+        document.getElementById("patient-id").textContent = appointment.id || "N/A";
     document.getElementById("patient-name").textContent = appointment.Name || "N/A";
     document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
     document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
     document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
 
-    // Function to update print values and trigger print
-    function updatePrintValues() {
-        // Update payment mode for printing
-        document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
-         
-        // Print the acknowledgment slip
-        const patientId = "P" + appointment.id;
-        const tempDateStr = localStorage.getItem("tempDate");
-        let today;
+
+        // Set current date with the format DD/MM/YYYY
+        function setCurrentDate() {
+            const dateInput = document.getElementById('dateInput');
+            const currentDate = new Date().toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            dateInput.value = currentDate; // Set the input value
+            document.getElementById('currentDate').textContent = currentDate; // Set display value
+        }
+
+        // Function to update the date based on the input field
+        function updateDate() {
+            const dateInput = document.getElementById('dateInput');
+            const selectedDate = dateInput.value;
+
+            // Validate the date format (DD/MM/YYYY)
+            const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+            if (datePattern.test(selectedDate)) {
+                document.getElementById('currentDate').textContent = selectedDate; // Update display value
+            } else {
+                alert('Invalid date format. Please use DD/MM/YYYY.');
+                setCurrentDate(); // Reset to current date if invalid
+            }
+        }
+
+        // Set the current date on page load
+        setCurrentDate();
+
+        // Function to update print values and trigger print
+        function updatePrintValues() {
+            // Update payment mode for printing
+            document.getElementById('printPaymentMode').textContent = document.getElementById('paymentMode').value;
+
+            // Print the acknowledgment slip
+            const patientId = "P" + appointment.id;
+            const tempDateStr = localStorage.getItem("tempDate");
+            let today;
             if (tempDateStr) {
                 today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
             } else {
                 today = new Date(); // Ensure `today` is always a Date object
             }
-        const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
-        const docName = patientId + "_AckSlip" + "_" + date;
-        console.log(patientId, date, docName);
+            const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
+            const docName = patientId + "_AckSlip" + "_" + date;
+            console.log(patientId, date, docName);
 
-        // Check if Electron API is available
-        if (window.electronAPI) {
-            window.electronAPI.printPage(patientId, date, docName);
-        } else {
-            console.error("Electron API is not available.");
-            window.print(); // Fallback to browser print
+            // Check if Electron API is available
+            if (window.electronAPI) {
+                window.electronAPI.printPage(patientId, date, docName);
+            } else {
+                console.error("Electron API is not available.");
+                window.print(); // Fallback to browser print
+            }
         }
-    }
- 
 
-
-
-
-
-
-
-
-
-
-
-
-        // document.getElementById('totalCharges').addEventListener('input', formatAndCalculate);
-        // document.getElementById('amountPaid').addEventListener('input', formatAndCalculate);
-        // document.getElementById('paymentMode').addEventListener('change', function () {
-        //     document.getElementById('printPaymentMode').textContent = this.value;
-        // });
-
-        // function formatAndCalculate(event) {
-        //     let input = event.target;
-        //     let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
-        //     if (value === "") {
-        //         input.value = "₹ 0"; 
-        //         return;
-        //     }
-        //     input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
-
-        //     // Calculate Balance Due
-        //     let totalCharges = parseFloat(document.getElementById('totalCharges').value.replace(/[^\d]/g, '')) || 0;
-        //     let amountPaid = parseFloat(document.getElementById('amountPaid').value.replace(/[^\d]/g, '')) || 0;
-        //     let balanceDue = totalCharges - amountPaid;
-
-        //     let balanceDueField = document.getElementById('balanceDue');
-
-        //     if (balanceDue <= 0) {
-        //         balanceDueField.textContent = "Payment Complete"; // Show text instead of ₹ 0
-        //         balanceDueField.classList.remove("due");
-        //         balanceDueField.classList.add("paid"); // Green if fully paid
-        //     } else {
-        //         balanceDueField.textContent = "₹ " + balanceDue.toLocaleString("en-IN");
-        //         balanceDueField.classList.remove("paid");
-        //         balanceDueField.classList.add("due"); // Red if due remains
-        //     }
-        // }
-  
+        // Format amount paid input
         document.getElementById('amountPaid').addEventListener('input', formatAmountPaid);
 
-function formatAmountPaid(event) {
-    let input = event.target;
-    let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+        function formatAmountPaid(event) {
+            let input = event.target;
+            let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
 
-    if (value === "") {
-        input.value = "₹ 0"; // Display ₹ 0 if empty
-        return;
-    }
-    
-    input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
-}
+            if (value === "") {
+                input.value = "₹ 0"; // Display ₹ 0 if empty
+                return;
+            }
 
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

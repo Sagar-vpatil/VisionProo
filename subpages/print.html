@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription</title>
     <style>
+@media print {
+    /* Ensure the Eye Examination table does not split across pages */
+    .eye-examination-section {
+        page-break-inside: avoid; /* Prevent the table from splitting */
+    }
+
+    /* Ensure the Medicines Table does not split across pages */
+    .medicines-section {
+        page-break-inside: avoid; /* Prevent the table from splitting */
+        margin-bottom: 10px; /* Add some spacing after the section */
+    }
+
+    /* Selective coloring for Medicines Table header during printing */
+    #Medicines-Table thead th {
+        background-color: #e0e0e0; /* Light gray background for the header */
+        color: #000; /* Ensure text is black for readability */
+    }
+
+    /* Optional: Style for table rows for better readability */
+    #Medicines-Table tbody tr {
+        background-color: #f9f9f9; /* Very light gray for rows */
+    }
+
+    /* Adjust margins and padding for better printing */
+    .page {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+    }
+
+    /* Hide unnecessary elements */
+    .navbar, .print-btn, .buttons, .hr {
+        display: none !important;
+    }
+}
+
        /* New CSS for the top navbar image */
        .navbar {
             display: flex;
@@ -360,7 +397,7 @@
             </div>
             
             <div class="right">
-                <div class="patient-details">
+              
                     <p class="complaints show-symptoms" style="font-size: 16px; margin-top: 10px;"></p>
 
                    
@@ -371,7 +408,7 @@
                         <p class="complaints show-surgical-history" style="margin-right: 120px;">
                         </p>
                     
-                </div>
+                
 
                 <!-- Table Section -->
                 <h3 id="Visual-Acuity-Heading">Visual Acuity</h3>
@@ -563,8 +600,9 @@
                     </tbody>
                   </table>
                   
-                  <div id="section4" class="section" style="margin-top: 22%;" >
-                    <h3 id="Eye-Examination-Heading">Eye Examination </h3>
+                
+                  <div class="eye-examination-section">
+                    <h3 id="Eye-Examination-Heading">Eye Examination</h3>
                     <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" id="Eye-Examination-Table">
                         <thead>
                             <tr>
@@ -707,36 +745,47 @@
                             <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
 
                             <p class="complaints show-treatment" style="margin-right: 120px;">
-                                <span style="font-weight: bold; font-size: 17px;"> Treatment :</span> Eye Drops(med)
+                                <span style="font-weight: bold; font-size: 24px;"> Treatment :</span> Eye Drops(med)
                             </p>
                         
                     </div>
 
 
-                    <h3 id="Medicines-Heading">Medical Treatment </h3>
-                    <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px;">
-                        <thead>
-                            <tr>
-                                <th scope="col">Medicine Name</th>
-                               
-                                <th scope="col" >Dose</th>
-                               
-                            </tr>
-                        </thead>
-                        <tbody id="medicines-tbody">
-                            <!-- Medicines will be dynamically inserted here -->                            
-                       </tbody>
-                    </table>
+                    <div class="medicines-section">
+                        <h4 id="Medicines-Heading">Medical Treatment</h4>
+                        <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Medicine Name</th>
+                                    <th scope="col">Dose</th>
+                                </tr>
+                            </thead>
+                            <tbody id="medicines-tbody">
+                                <!-- Medicines will be dynamically inserted here -->
+                                <tr>
+                                    <td>Eye Drop A</td>
+                                    <td>1 drop twice daily</td>
+                                </tr>
+                                <tr>
+                                    <td>Tablet B</td>
+                                    <td>500mg once daily</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
 
 
 
 
 
-                    <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure </h3>
+                    
 
                     <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
+                        <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure </h3>
+                  
                         <thead>
+                           
                           <tr>
                             <th colspan="2">Right Eye</th>
                             <th colspan="2">Left Eye</th>
@@ -758,7 +807,7 @@
                         </tbody>
                       </table>
 
-                      <h3 id="A-Scan-Heading">A-Scan </h3>
+                      <h4 id="A-Scan-Heading">A-Scan </h4>
                       <table style="width: 280px; margin-left: 90px;" id="A-Scan-Table">
                         <thead>
                           <tr>

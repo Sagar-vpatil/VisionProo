@@ -382,7 +382,7 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (BE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Headache (BE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Headache </div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Floaters (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Pain in Eye (BE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (BE)
@@ -431,7 +431,7 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (LE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Headache (LE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Headache </div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Floaters (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Pain in Eye (LE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (LE)</div>
@@ -473,7 +473,7 @@
         <div class="symptoms" onclick="toggleSymptoms(this)">Blurry Vision (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Spot in Front of Eye (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Light Sensitivity (RE)</div>
-        <div class="symptoms" onclick="toggleSymptoms(this)">Headache (RE)</div>
+        <div class="symptoms" onclick="toggleSymptoms(this)">Headache</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Floaters (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Pain in Eye (RE)</div>
         <div class="symptoms" onclick="toggleSymptoms(this)">Swelling on Lid (RE)</div>
@@ -2154,11 +2154,11 @@ overflow-y: auto; width: 50%;">
       <div class="row form-row">
           <div class="col-md-6 form-group">
               <label for="BPResult" class="form-label">BP =</label>
-              <input type="text" id="BPResult" class="form-control" placeholder="Enter BP">
+              <input type="text" id="BPResult" class="form-control" placeholder="Enter BP" oninput="insertUnit(this)">
           </div>
           <div class="col-md-6 form-group">
               <label for="PulseRate" class="form-label">P =</label>
-              <input type="text" id="PulseRate" class="form-control" placeholder="Enter Pulse Rate">
+              <input type="text" id="PulseRate" class="form-control" placeholder="Enter Pulse Rate" oninput="insertPulseUnit(this)">
           </div>
       </div>
 
@@ -2168,7 +2168,7 @@ overflow-y: auto; width: 50%;">
               <label for="SACResult" class="form-label">SAC =</label>
               <input type="text" id="SACResult" class="form-control" placeholder="Enter Sac">
           </div>
-          <div class="col-md-6 form-group">
+          <div class="col-md-6 form-group" style="display: none;">
               <label for="NCTResult" class="form-label">NCT =</label>
               <input type="text" id="NCTResult" class="form-control" placeholder="Enter NCT">
           </div>
@@ -2212,7 +2212,7 @@ overflow-y: auto; width: 50%;">
         <td><input type="text" name="right_acd" id="RightACD"></td>
         <td><input type="text" name="left_acd" id="LeftACD"></td>
       </tr>
-      <tr>
+      <tr style="display: none;">
         <td>L.Power</td>
         <td><input type="text" name="right_lpower" id="RightLPower"></td>
         <td><input type="text" name="left_lpower" id="LeftLPower"></td>
@@ -2230,7 +2230,7 @@ overflow-y: auto; width: 50%;">
     </tbody>
   </table>
 
-  <h3>IOP/GAT</h3>
+  <h3>NCT</h3>
   <table style="width: 1000px;">
     <thead>
       <tr>
@@ -2899,6 +2899,37 @@ document.addEventListener("click", function(event) {
           reader.readAsDataURL(file);
       }
   });
+
+
+
+
+
+
+
+
+
+
+  function insertUnit(input) {
+        // Remove any non-numeric characters except numbers
+        let value = input.value.replace(/[^0-9]/g, '');
+
+        // If there's a value, append ' mmHg'
+        if (value) {
+            input.value = value + ' mmHg';
+        }
+    }
+
+
+
+    function insertPulseUnit(input) {
+        // Remove non-numeric characters except numbers
+        let value = input.value.replace(/[^0-9]/g, '');
+
+        // If there's a value, append ' /min'
+        if (value) {
+            input.value = value + ' /min';
+        }
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"

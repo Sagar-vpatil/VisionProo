@@ -6,12 +6,53 @@
     <title>Discharge Summary - Professional Print Layout</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+        /* Investigation Section Styling */
+.investigation-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.investigation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.investigation-item {
+    display: flex;
+    align-items: center;
+    gap: px;
+}
+
+.investigation-item span {
+    font-weight: bold;
+}
+
+.investigation-item input {
+    width: 100px; /* Adjust width as needed */
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
            /* Base Styling */
            @page {
             size: A4;
             margin: 0;
         }
-
+        .small-input {
+        width: 80px; /* Adjust width */
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+        margin: 0 5px;
+    }
         .container {
             max-width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
@@ -151,23 +192,7 @@
                 margin-bottom: 10px;
                 margin-top: 100px;
             }
-            .form-control {
-                border: 1px solid #000;
-                background: transparent;
-                -webkit-print-color-adjust: exact;
-            }
-
-            input[type="text"] {
-                border: none;
-                background: transparent;
-                width: 100%;
-            }
-
-            input[type="checkbox"] {
-                -webkit-appearance: checkbox;
-                appearance: checkbox;
-            }
-
+            
             .navbar .buttons button {
                 display: none;
             }
@@ -190,7 +215,7 @@
             font-size: 12px;
             line-height: 1.2;
             background: #f8f9fa;
-            height: 270px;
+            height: 280px;
         }
 
         .procedure-box strong {
@@ -285,9 +310,39 @@
         }
     }
 
-
-
+  /* Print-specific styles */
+@media print {
+    /* Style for text inputs */
+    input[type="text"] {
+        border: none !important;
+        background: transparent !important;
+        -webkit-appearance: none;
+        appearance: none;
+        box-shadow: none;
+        padding: 0;
+        position: relative; /* Added for positioning control */
+    }
     
+    /* Display the input value with left alignment */
+    input[type="text"]::after {
+        content: attr(value);
+        display: block;
+        text-align: start; /* Explicitly aligns text to the left */
+        position: absolute;
+        left: 0; /* Positions at the start */
+        width: 100%; /* Maintains full width */
+        color: black; /* Ensures text is visible */
+        font-family: inherit; /* Inherits the font from the input */
+        font-size: inherit; /* Inherits the font size from the input */
+    }
+    
+   
+    
+    /* Optional: Ensure labels or static text are visible */
+    label {
+        color: black !important;
+    }
+}
 
     </style>
 </head>
@@ -487,10 +542,11 @@
 
         <!-- Investigation Section -->
         <h4 class="section-title" id="investigation-title">Investigation</h4>
-        <p style="margin-top: 20px; text-align: center;" class="show-investigation">
-            <!-- Investigation will be dynamically populated here -->
-        </p>
-
+        <div class="investigation-container">
+            <div class="investigation-list">
+                <!-- Investigations will be dynamically populated here -->
+            </div>
+        </div>
         <!-- IOL Sticker Section -->
         <h4 class="section-title">IOL STICKER</h4>
         <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 150px;"></div>
@@ -528,7 +584,7 @@
           </p>                                          
     </div>
     <table id="Pre-Operative-Table" style="width: 470px; margin-left: 90px; border-collapse: collapse; text-align: center; border: 1px solid #000;">
-        <h4 class="section-title "id="Pre-Operative-Heading" >IOP/GAT</h4>  
+        <h4 class="section-title "id="Pre-Operative-Heading" >NCT</h4>  
         <thead>
             <tr style="background-color: #f0f0f0; border: 1px solid #000;">
                 <th colspan="2" style="padding: 8px; border: 1px solid #000;">Right Eye</th>
@@ -557,19 +613,39 @@
     
 
     <h4 class="section-title " id="Medicines-Heading">Post Operative Treatment</h4>
-        <table class="table-container table-responsive" style="width: 500px;" id="Medicines-Table">
-            <thead>
-                <tr>
-                    <th scope="col">Medicine Name</th>
-                    <th scope="col" >Dose</th>
-                    
-                </tr>
-            </thead>
-            <tbody id="medicines-tbody">
-                <!-- Medicines will be dynamically inserted here -->                            
-           </tbody>
-        </table>
-
+    <table class="table table-responsive table-bordered" id="Medicines-Table" style="width: 500px; margin: 0 auto; background-color: #f9f9f9;">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Medicine Name</th>
+                <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Dose</th>
+            </tr>
+        </thead>
+        <tbody id="medicines-tbody">
+            <!-- Medicines will be dynamically inserted here -->
+            <tr>
+                <td class="text-start" style="padding: 10px;">Aspirin</td>
+                <td class="text-start" style="padding: 10px;">500mg</td>
+            </tr>
+            <tr>
+                <td class="text-start" style="padding: 10px;">Paracetamol</td>
+                <td class="text-start" style="padding: 10px;">1000mg</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <style>
+        /* Custom CSS to match original border thickness and collapse */
+        .table-bordered th,
+        .table-bordered td {
+            border: 2px solid black !important;
+            border-collapse: collapse !important;
+        }
+    
+        /* Ensure table responsiveness and background */
+        #Medicines-Table {
+            background-color: #f9f9f9;
+        }
+    </style>
   <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">
                 <p>Dr. Alvin R Rane</p>
@@ -693,24 +769,34 @@
         // Show or hide the heading based on whether the table is visible
         aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
 
+// Retrieve selected investigations from localStorage
+const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
 
-    // Retrieve selected investigations from localStorage
-    const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
+// Get the investigation display container
+const investigationContainer = document.querySelector(".investigation-list");
 
-    // Get the investigation display section
-    const investigationSection = document.querySelector(".show-investigation");
+// Only update if there are investigations to show
+if (selectedInvestigations.length > 0) {
+    // Clear existing content
+    investigationContainer.innerHTML = "";
 
-    // Only update if there are investigations to show
-    if (selectedInvestigations.length > 0) {
-        // Format investigations correctly by adding ":" after each one
-        const formattedInvestigations = selectedInvestigations.map(item => `${item}:`).join(' <span style="font-weight: bold; color: black; margin-left: 60px;">|</span> ');
+    // Add each investigation with an input box
+    selectedInvestigations.forEach((investigation) => {
+        const investigationItem = document.createElement("div");
+        investigationItem.classList.add("investigation-item");
 
-        investigationSection.innerHTML = `<strong>${formattedInvestigations}</strong>`;
-    } else {
-        // Hide investigation section and title
-        document.getElementById("investigation-title").style.display = "none";
-        investigationSection.style.display = "none";
-    }
+        investigationItem.innerHTML = `
+            <span>${investigation}:</span>
+            <input type="text" class="small-input">|
+        `;
+
+        investigationContainer.appendChild(investigationItem);
+    });
+} else {
+    // Hide investigation section and title
+    document.getElementById("investigation-title").style.display = "none";
+    investigationContainer.style.display = "none";
+}
 
 </script>
 <script>
