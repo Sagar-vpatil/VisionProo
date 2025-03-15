@@ -433,7 +433,7 @@ body {
             if (datePattern.test(selectedDate)) {
                 document.getElementById('currentDate').textContent = selectedDate; // Update display value
             } else {
-                alert('Invalid date format. Please use DD/MM/YYYY.');
+                window.electronAPI.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
                 setCurrentDate(); // Reset to current date if invalid
             }
         }

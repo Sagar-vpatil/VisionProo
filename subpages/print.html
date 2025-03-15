@@ -320,6 +320,19 @@
 
 
         }
+
+     /* Code For Show BP, Puls Rate And SAC Section in One Line */   
+    .patient-details.Pre-Operative-Details {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: -10px; /* spacing between items */
+    }
+    .patient-details.Pre-Operative-Details p {
+      margin: 0;
+      white-space: nowrap; /* prevent text from wrapping */
+    }
     </style>
 </head>
 <body>
@@ -587,7 +600,7 @@
                         <td id="REIPD" colspan="4"></td>
                         <td id="LEIPD" colspan="4"></td>
                       </tr> -->
-                      <tr>
+                      <tr aria-rowspan="2">
                         <td>Type of Glass</td>
                         <td id="RETypeOfGlass" colspan="4"></td>
                         <td id="LETypeOfGlass" colspan="4"></td>
@@ -744,13 +757,10 @@
                         
                             <p class="complaints show-diagnosis" style="font-size: 16px; margin-top: 10px;"></p>
 
-                            <p class="complaints show-treatment" style="margin-right: 120px;">
-                                <span style="font-weight: bold; font-size: 24px;"> Treatment :</span> Eye Drops(med)
-                            </p>
                         
                     </div>
 
-
+                    <h3 id="Treatment-Heading">Treatment -</h3>
                     <div class="medicines-section">
                         <h4 id="Medicines-Heading">Medical Treatment</h4>
                         <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px;">
@@ -774,15 +784,40 @@
                         </table>
                     </div>
 
+                    <div class="patient-details">
+                        
 
-
-
-
-
+                        <p class="complaints show-treatment" style="margin-right: 120px;">
+                            <span style="font-weight: bold; font-size: 24px;"> Treatment :</span> Eye Drops(med)
+                        </p>
                     
+                   </div>
+
+
+
+
+
+
+                   <h4 id="Pre-Operative-Heading"> Pre-Operative Procedure </h4>
+                   <div class="patient-details Pre-Operative-Details">
+                        
+                    <p class="complaints show-BP" style="margin-right: 120px;">
+      
+                    </p>
+
+                    <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
+                        
+                    </p>
+                    <p class="complaints show-SAC" style="margin-right: 120px;">
+                        
+                    </p>
+                    <!-- <p class="complaints show-NCT" style="margin-right: 120px;">
+                      
+                  </p>                                           -->
+                  </div>
 
                     <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
-                        <h3 id="Pre-Operative-Heading"> Pre-Operative Procedure </h3>
+                        <h4 id="NCT-Heading"> NCT </h4>
                   
                         <thead>
                            
@@ -859,22 +894,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <div class="patient-details Pre-Operative-Details">
-                        
-                        <p class="complaints show-BP" style="margin-right: 120px;">
-          
-                        </p>
-
-                        <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
-                            
-                        </p>
-                        <p class="complaints show-SAC" style="margin-right: 120px;">
-                            
-                        </p>
-                        <p class="complaints show-NCT" style="margin-right: 120px;">
-                          
-                      </p>                                          
-                </div>
+                    
               
 
                   
@@ -1083,7 +1103,7 @@
         } else {
             treatmentSection.style.display = "block";
             
-            let content = `<span style="font-weight: bold; font-size: 18px; color: black;"> Treatment -</span><br>`;
+            let content = `<span style="font-weight: bold; font-size: 17px; color: black;"> Treatment Surgical :-</span>`;
 
             if (selectedMedicationTreatment.length > 0) {
                 content += `<span style="font-weight: bold; font-size: 17px;"> Medication :</span> 
@@ -1091,7 +1111,7 @@
             }
 
             if (selectedSurgicalTreatment.length > 0) {
-                content += `<span style="font-weight: bold; font-size: 17px;"> Surgical :</span> 
+                content += ` 
                             ${selectedSurgicalTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ')}`;
             }
 
@@ -1428,7 +1448,6 @@
             { key: "BPResult", className: "show-BP", label: "BP" },
             { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
             { key: "SACResult", className: "show-SAC", label: "SAC" },
-            { key: "NCTResult", className: "show-NCT", label: "NCT" }
         ];
 
         let visibleCount = 0;
@@ -1461,7 +1480,7 @@
 
         // Get table and heading elements
         const iopGatTableElement = document.getElementById("Pre-Operative-Table");
-        const iopGatHeading = document.getElementById("Pre-Operative-Heading");
+        const iopGatHeading = document.getElementById("NCT-Heading");
 
         // Get all rows in the IOP/GAT table body
         const iopGatRows = iopGatTableElement.querySelectorAll("tbody tr");
@@ -1497,6 +1516,17 @@
         // Show or hide the entire table based on row visibility
         iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
         iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
+
+
+        // Hide Pre-Operative-Heading if iopGatTable, preOperativeDetails and aScanTable are empty
+        if (visibleIopGatRowCount === 0 && visibleCount === 0 && visibleAScanRowCount === 0) {
+            document.getElementById("Pre-Operative-Heading").style.display = "none";
+        }
+
+        // Hide Treatment-Heading if Medicines-Table, selectedSurgicalTreatment, iopGatTable, preOperativeDetails and aScanTable are empty
+        if (medicines.length === 0 && selectedSurgicalTreatment.length === 0 && visibleIopGatRowCount === 0 && visibleCount === 0 && visibleAScanRowCount === 0) {
+            document.getElementById("Treatment-Heading").style.display = "none";
+        }
 
         const Saved_Status = localStorage.getItem("Saved_Status");
         console.log(Saved_Status);

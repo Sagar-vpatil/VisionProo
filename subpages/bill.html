@@ -435,7 +435,7 @@ function updateDate() {
     if (datePattern.test(selectedDate)) {
         document.getElementById('currentDate').dataset.value = selectedDate; // Update data-value for printing
     } else {
-        alert('Invalid date format. Please use DD/MM/YYYY.');
+        window.electronAPI.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
         setCurrentDate(); // Reset to current date if invalid
     }
 }
