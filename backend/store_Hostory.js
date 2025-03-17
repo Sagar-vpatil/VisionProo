@@ -399,7 +399,7 @@ async function savePatientHistory(getCondition) {
      const PreOperativeDetails = {
       BPResult : document.getElementById("BPResult").value,
       PulseRate : document.getElementById("PulseRate").value,
-      SACResult : document.getElementById("SACResultRE").value,
+      SACResultRE : document.getElementById("SACResultRE").value,
       SACResultLE : document.getElementById("SACResultLE").value,
      }
 

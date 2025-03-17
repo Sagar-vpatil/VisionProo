@@ -963,34 +963,51 @@ if (selectedInvestigations.length > 0) {
 aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
 
 
-// Load PreOperativeDetails data from local storage
-const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
+        // Load PreOperativeDetails data from local storage
+        const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
 
-// Define field mappings
-const fieldMappings = [
-    { key: "BPResult", className: "show-BP", label: "BP" },
-    { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
-    { key: "SACResult", className: "show-SAC", label: "SAC" },
-    { key: "NCTResult", className: "show-NCT", label: "NCT" }
-];
+        // Define field mappings
+        const fieldMappings = [
+            { key: "BPResult", className: "show-BP", label: "BP" },
+            { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
+        ];
 
-let visibleCount = 0;
+        let visibleCount = 0;
 
-// Iterate through each field and update the content
-fieldMappings.forEach(({ key, className, label }) => {
-    const element = document.querySelector(`.${className}`);
+        // Iterate through each field and update the content
+        fieldMappings.forEach(({ key, className, label }) => {
+            const element = document.querySelector(`.${className}`);
 
-    if (element) {
-        const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
+            if (element) {
+                const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
 
-        if (value) {
-            element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
-            visibleCount++;
-        } else {
-            element.style.display = "none"; // Hide element if value is empty
+                if (value) {
+                    element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
+                    visibleCount++;
+                } else {
+                    element.style.display = "none"; // Hide element if value is empty
+                }
+            }
+        });
+
+        if (!preOperativeDetails.SACResultRE && !preOperativeDetails.SACResultLE) {
+            document.querySelector(".show-SAC").style.display = "none";
         }
-    }
-});
+        else {
+            let sacContent = `<span style="font-weight: bold; font-size: 17px;">SAC :</span>`;
+            if (preOperativeDetails.SACResultRE) {
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">RE - </span>${preOperativeDetails.SACResultRE}`;
+            }
+            if (preOperativeDetails.SACResultLE) {
+                if (preOperativeDetails.SACResultRE) {
+                    sacContent += ` <span style="font-weight: bold; font-size: 17px;">|</span>`;
+                }
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">LE -</span> ${preOperativeDetails.SACResultLE}`;
+            }
+            document.querySelector(".show-SAC").innerHTML = sacContent;
+            visibleCount++;
+        }
+
 
 // Hide the entire section if no details are available
 const patientDetailsSection = document.querySelector(".Pre-Operative-Details");

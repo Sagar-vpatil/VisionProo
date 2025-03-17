@@ -673,7 +673,7 @@
                 <p class="show-BP"><strong>BP =</strong> <span class="highlight-red">Blurred Vision, Eye Pain</span></p>
                 <p class="show-SAC"><strong>SAC =</strong> <span class="highlight-red">Glaucoma</span></p>
                 <p class="show-Pulse-Rate"> <strong> P =</strong> <span class="highlight-red">Prescription Eye Drops</span></p>
-                <p class="show-NCT"><strong>NCT =</strong> <span class="highlight-red">Glaucoma</span></p>
+                <!-- <p class="show-NCT"><strong>NCT =</strong> <span class="highlight-red">Glaucoma</span></p> -->
             </div>
 
 
@@ -1203,8 +1203,6 @@
         const fieldMappings = [
             { key: "BPResult", className: "show-BP", label: "BP" },
             { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
-            { key: "SACResult", className: "show-SAC", label: "SAC" },
-            { key: "NCTResult", className: "show-NCT", label: "NCT" }
         ];
 
         let visibleCount = 0;
@@ -1217,13 +1215,32 @@
                 const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
 
                 if (value) {
-                    element.innerHTML = `<strong>${label} =</strong> <span class="highlight-red">${value}</span>`;
+                    element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
                     visibleCount++;
                 } else {
                     element.style.display = "none"; // Hide element if value is empty
                 }
             }
         });
+
+        if (!preOperativeDetails.SACResultRE && !preOperativeDetails.SACResultLE) {
+            document.querySelector(".show-SAC").style.display = "none";
+        }
+        else {
+            let sacContent = `<span style="font-weight: bold; font-size: 17px;">SAC :</span>`;
+            if (preOperativeDetails.SACResultRE) {
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">RE - </span>${preOperativeDetails.SACResultRE}`;
+            }
+            if (preOperativeDetails.SACResultLE) {
+                if (preOperativeDetails.SACResultRE) {
+                    sacContent += ` <span style="font-weight: bold; font-size: 17px;">|</span>`;
+                }
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">LE -</span> ${preOperativeDetails.SACResultLE}`;
+            }
+            document.querySelector(".show-SAC").innerHTML = sacContent;
+            visibleCount++;
+        }
+
 
         // Hide the entire section if no details are available
         const patientDetailsSection = document.querySelector(".Pre-Operative-detail-Section");

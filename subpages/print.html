@@ -808,12 +808,9 @@
                     <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
                         
                     </p>
-                    <p class="complaints show-SAC-RE" style="margin-right: 120px;">
+                    <p class="complaints show-SAC" style="margin-right: 120px;">
                         
-                    </p>
-                    <p class="complaints show-SAC-LE" style="margin-right: 120px;">
-                      
-                  </p>                                          
+                    </p>                                          
                   </div>
 
                     <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
@@ -1447,9 +1444,6 @@
         const fieldMappings = [
             { key: "BPResult", className: "show-BP", label: "BP" },
             { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
-            { key: "SACResult", className: "show-SAC-RE", label: "RE" },
-            { key: "SACResultLE", className: "show-SAC-LE", label: "LE" },
-
         ];
 
         let visibleCount = 0;
@@ -1469,6 +1463,24 @@
                 }
             }
         });
+
+        if (!preOperativeDetails.SACResultRE && !preOperativeDetails.SACResultLE) {
+            document.querySelector(".show-SAC").style.display = "none";
+        }
+        else {
+            let sacContent = `<span style="font-weight: bold; font-size: 17px;">SAC :</span>`;
+            if (preOperativeDetails.SACResultRE) {
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">RE - </span>${preOperativeDetails.SACResultRE}`;
+            }
+            if (preOperativeDetails.SACResultLE) {
+                if (preOperativeDetails.SACResultRE) {
+                    sacContent += ` <span style="font-weight: bold; font-size: 17px;">|</span>`;
+                }
+                sacContent += ` <span style="font-weight: bold; font-size: 15px;">LE -</span> ${preOperativeDetails.SACResultLE}`;
+            }
+            document.querySelector(".show-SAC").innerHTML = sacContent;
+            visibleCount++;
+        }
 
         // Hide the entire section if no details are available
         const patientDetailsSection = document.querySelector(".Pre-Operative-Details");
