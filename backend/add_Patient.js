@@ -50,46 +50,52 @@ document.getElementById("add-patient-btn").addEventListener("click", async funct
   }
   loaderOverlay.style.display = "flex";
   try {
+    const patientsCollection = collection(db, "patients");
+    const q = query(patientsCollection, orderBy("id", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
 
- 
-      const patientsCollection = collection(db, "patients");
-      const q = query(patientsCollection, orderBy("id", "desc"), limit(1));
-      const querySnapshot = await getDocs(q);
+    let newId = "A0001"; // Default ID if no documents exist
 
-      let newId = 1;
-      if (!querySnapshot.empty) {
-        console.log("Query Snapshot:");
-          const lastDoc = querySnapshot.docs[0];
-          newId = lastDoc.data().id + 1;
-      }
+    if (!querySnapshot.empty) {
+        const lastDoc = querySnapshot.docs[0];
+        const lastId = lastDoc.data().id; // Assuming the ID is stored as a string like "A0001"
 
-      const newDocRef = doc(db, "patients", newId.toString());
-      await setDoc(newDocRef, {
-          id: newId,
-          Name: name,
-          BirthDate: birthDate,
-          Gender: gender,
-          Age: age,
-          MobileNo: mobileNo,
-          Address: address,
-          AppointmentStatus: "Deactive",
-      });
+        // Extract the numeric part of the ID
+        const numericPart = parseInt(lastId.slice(1), 10); // Remove the "A" and convert to number
+        const nextNumericPart = numericPart + 1;
 
-      console.log("Patient added with ID:", newId);
-      window.electronAPI.showSuccessBox("Success", "The patient has been added successfully!");
-      // Clear the input fields
-      document.getElementById("name-input-field").value = "";
-      document.getElementById("dob-input-field").value = "";
-      document.getElementById("gender-select").value = "";
-      document.getElementById("age-input-field").value = "";
-      document.getElementById("mobile-input-field").value = "";
-      document.getElementById("address-input-field").value = "";
-  } catch (error) {
-      console.error("Error adding patient:", error);
-      window.electronAPI.showErrorBox("Error", "Failed to add patient.");
-      // Hide the loader overlay after data loads
-      loaderOverlay.style.display = "none";
-  }finally {
+        // Format the new ID with leading zeros
+        newId = `A${nextNumericPart.toString().padStart(4, '0')}`;
+    }
+
+    const newDocRef = doc(db, "patients", newId); // Use the formatted ID as the document ID
+    await setDoc(newDocRef, {
+        id: newId,
+        Name: name,
+        BirthDate: birthDate,
+        Gender: gender,
+        Age: age,
+        MobileNo: mobileNo,
+        Address: address,
+        AppointmentStatus: "Deactive",
+    });
+
+    console.log("Patient added with ID:", newId);
+    window.electronAPI.showSuccessBox("Success", "The patient has been added successfully with Patient ID: " + newId+ " !");
+
+    // Clear the input fields
+    document.getElementById("name-input-field").value = "";
+    document.getElementById("dob-input-field").value = "";
+    document.getElementById("gender-select").value = "";
+    document.getElementById("age-input-field").value = "";
+    document.getElementById("mobile-input-field").value = "";
+    document.getElementById("address-input-field").value = "";
+} catch (error) {
+    console.error("Error adding patient:", error);
+    window.electronAPI.showErrorBox("Error", "Failed to add patient.");
+    // Hide the loader overlay after data loads
+    loaderOverlay.style.display = "none";
+} finally {
     // Hide the loader overlay after data loads
     loaderOverlay.style.display = "none";
 }
@@ -151,21 +157,24 @@ document.getElementById("search-box").addEventListener("input", async function (
       }else {
 
         // Search by ID (Document ID)
-        const idDocRef = doc(patientsCollection, searchValue);
-        const idDocSnapshot = await getDoc(idDocRef);
-        if (idDocSnapshot.exists()) {
-            const data = idDocSnapshot.data();
-            if (!results.some(patient => patient.id === idDocSnapshot.id)) {
-                results.push({
-                    id: idDocSnapshot.id,
-                    name: data.Name,
-                    mobileNo: data.MobileNo,
-                });
-            }
-        }
+        const idDocRef = query(
+            patientsCollection,
+            where("id", ">=", searchValue),
+            where("id", "<", searchValue + "\uf8ff"),
+            limit(5)
+        )
+        const idSnapshot = await getDocs(idDocRef);
+        idSnapshot.forEach(doc => {
+            const data = doc.data();
+            results.push({
+                id: doc.id,
+                name: data.Name,
+                mobileNo: data.MobileNo,
+            });
+        });
     }
 
-        console.log("Patients:", results);
+        // console.log("Patients:", results);
 
         // Update the table with search results
         updatePatientTable(results);
