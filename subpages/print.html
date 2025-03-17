@@ -808,12 +808,12 @@
                     <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
                         
                     </p>
-                    <p class="complaints show-SAC" style="margin-right: 120px;">
+                    <p class="complaints show-SAC-RE" style="margin-right: 120px;">
                         
                     </p>
-                    <!-- <p class="complaints show-NCT" style="margin-right: 120px;">
+                    <p class="complaints show-SAC-LE" style="margin-right: 120px;">
                       
-                  </p>                                           -->
+                  </p>                                          
                   </div>
 
                     <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
@@ -1447,7 +1447,9 @@
         const fieldMappings = [
             { key: "BPResult", className: "show-BP", label: "BP" },
             { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
-            { key: "SACResult", className: "show-SAC", label: "SAC" },
+            { key: "SACResult", className: "show-SAC-RE", label: "RE" },
+            { key: "SACResultLE", className: "show-SAC-LE", label: "LE" },
+
         ];
 
         let visibleCount = 0;

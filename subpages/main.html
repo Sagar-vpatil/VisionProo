@@ -2141,9 +2141,15 @@ overflow-y: auto; width: 50%;">
     <button type="button" class="btn" onclick="addOption2(this,'surgical-treatment')" >Add Option </button>
   </div>
   <div id="treatment-options" class="options-container" style="display: flex; flex-wrap: wrap;">
-    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Cataract Surgery</div>
-    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">Glaucoma Surgery</div>
-    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LASIK</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">RE Cataract Surgery With IOL Under LA</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LE Cataract Surgery With IOL Under LA</div><br>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">RE Pterygium Exision With Autograft Under LA/Topical</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LE Pterygium Exision With Autograft Under LA/Topical</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">RE Cataract With Trabeculectomy Combined Surgery Under LA</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LE Cataract With Trabeculectomy Combined Surgery Under LA</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">RE Cataract Surgery With Pterygium Exision With Autograft Under LA</div>
+    <div class="surgical-treatment" onclick="toggleSurgicalTreatment(this)">LE Cataract Surgery With Pterygium Exision With Autograft Under LA</div>
+
 </div>
 <div id="preOperativeWorkup">
   <h2>Pre-Operative Workup Investigations</h2>
@@ -2164,13 +2170,27 @@ overflow-y: auto; width: 50%;">
 
       <!-- Second Row: Sac and NCT -->
       <div class="row form-row">
-          <div class="col-md-6 form-group">
-              <label for="SACResult" class="form-label">SAC =</label>
-              <input type="text" id="SACResult" class="form-control" placeholder="Enter Sac">
+          <div class="col-md-3 form-group">
+            <label for="SACResultRE" class="form-label">SAC = </label>
+
+              <label for="SACResultRE" class="form-label">RE:</label>
+              <select id="SACResultRE"  style="width: 40%;">
+                <option value="" style="width: 400px;">Select</option>
+                <option value="Patent">Patent</option>
+                <option value="PBCR">PBCR</option>
+                <option value="CBCR">CBCR</option>
+                <option value="Roplase">Roplase</option>
+            </select>
           </div>
-          <div class="col-md-6 form-group" style="display: none;">
-              <label for="NCTResult" class="form-label">NCT =</label>
-              <input type="text" id="NCTResult" class="form-control" placeholder="Enter NCT">
+          <div class="col-md-3 form-group" >
+              <label for="SACResultLE" class="form-label">LE:</label>
+              <select id="SACResultLE"  style="width: 40%;">
+                <option value="" style="width: 400px;">Select</option>
+                <option value="Patent">Patent</option>
+                <option value="PBCR">PBCR</option>
+                <option value="CBCR">CBCR</option>
+                <option value="Roplase">Roplase</option>
+            </select>
           </div>
       </div>
 
@@ -2305,11 +2325,13 @@ overflow-y: auto; width: 50%;">
       <div class="investigation" onclick="toggleInvestigation(this)">HBSAg</div>
       <div class="investigation" onclick="toggleInvestigation(this)">HIV</div>
       <div class="investigation" onclick="toggleInvestigation(this)">Urine (R)</div>
-      <div class="investigation" onclick="toggleInvestigation(this)">Mountox</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Hemoglobin</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">WBC</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Platelet</div>
       <div class="investigation" onclick="toggleInvestigation(this)">Uric Acid</div>
       <div class="investigation" onclick="toggleInvestigation(this)">Sr. Creat</div>
       <div class="investigation" onclick="toggleInvestigation(this)">Sr. Urea</div>
-      <div class="investigation" onclick="toggleInvestigation(this)">Virc Acid</div>
+      <div class="investigation" onclick="toggleInvestigation(this)">Uric Acid</div>
     </div>
    
    
@@ -2911,8 +2933,7 @@ document.addEventListener("click", function(event) {
 
   function insertUnit(input) {
         // Remove any non-numeric characters except numbers
-        let value = input.value.replace(/[^0-9]/g, '');
-
+        let value = input.value.replace(/[^0-9/]/g, '');
         // If there's a value, append ' mmHg'
         if (value) {
             input.value = value + ' mmHg';
