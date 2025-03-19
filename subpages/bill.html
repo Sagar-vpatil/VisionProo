@@ -245,6 +245,37 @@ body {
             color: #666;
         }
 
+
+
+        .invoice-details {
+            width: 650px;
+            
+           
+          
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            min-width: 150px; /* Fixed width for alignment */
+            text-align: right;
+        }
+
+        .value {
+            min-width: 200px;
+            padding-left: 10px;
+        }
+
+        #dateInput {
+            width: 150px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -275,11 +306,24 @@ body {
             </div>
         </div>
         <!-- Invoice Details -->
-        <div class="invoice-details" style="margin-left: 50px;">
-            <p><span>Patient ID -</span> <span id="patient-id"></span>      <span style="margin-left: 400px;">Date:</span>  <span id="currentDate" data-value="">
-                <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
-            </span></p>
-            <p><span>Patient Name -</span> <span id="patient-name"></span>      <span style="margin-left: 290px;">Mobile No:</span> <span id="patient-mobile"></span></p>
+        <div class="invoice-details">
+            <div class="row">
+                <span class="label">Patient ID:</span>
+                <span class="value" id="patient-id">123456</span>
+    
+                <span class="label">Date:</span>
+                <span id="currentDate" data-value="">
+                    <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
+                </span>
+            </div>
+    
+            <div class="row" style="margin-left: 20px;">
+                <span class="label">Patient Name:</span>
+                <span class="value" id="patient-name">John Doe</span>
+    
+                <span class="label" style="margin-left: 50px;">Mobile No:</span>
+                <span class="value" id="patient-mobile">+1234567890</span>
+            </div>
         </div>
         <hr>
 

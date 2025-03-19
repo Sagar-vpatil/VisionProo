@@ -5,7 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription</title>
     <style>
+       
 @media print {
+     /* Ensure the Visual Acuity table does not split */
+     #Visual-Acuity-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the AR table does not split */
+    #AR-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Current Power table does not split */
+    #Current-Power-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Refraction table does not split */
+    #Refraction-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Eye Examination table does not split */
+    #Eye-Examination-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Topography table does not split */
+    #Topography-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Pre-Operative table does not split */
+    #Pre-Operative-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the A-Scan table does not split */
+    #A-Scan-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Medicines table does not split */
+    #Medicines-Table {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Treatment section does not split */
+    #Treatment-Heading, #Medicines-Heading, #Pre-Operative-Heading, #NCT-Heading, #A-Scan-Heading , #Visual-Acuity-Heading, #AR-Heading, #Current-Power-Heading, #Refraction-Heading, #Eye-Examination-Heading, #Topography-Heading {
+        page-break-inside: avoid;
+    }
+
+    /* Ensure the Pre-Operative section does not split */
+    .Pre-Operative-Details {
+        page-break-inside: avoid;
+    }
+
+
     /* Ensure the Eye Examination table does not split across pages */
     .eye-examination-section {
         page-break-inside: avoid; /* Prevent the table from splitting */
@@ -87,16 +144,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid black;
+            border-bottom: 1px solid black;
             padding-bottom: 10px;
         }
         .header .left {
             text-align: left;
-            font-size: 14px;
+            font-size: 17px;
         }
         .header .right {
             text-align: right;
-            font-size: 14px;
+            font-size: 17px;
         }
         .header h1 {
             margin: 0;
@@ -333,6 +390,104 @@
       margin: 0;
       white-space: nowrap; /* prevent text from wrapping */
     }
+
+
+
+
+    @media print {
+    /* Existing print styles */
+    .eye-examination-section {
+        page-break-inside: avoid;
+    }
+
+    .medicines-section {
+        page-break-inside: avoid;
+        margin-bottom: 10px;
+    }
+
+    /* New styles for vertical lines */
+    .medicines .left {
+        border-right: 1px solid black !important;
+    }
+
+    .medicines .right {
+        border-left: 1px solid black !important;
+    }
+
+    /* Ensure tables and borders are visible */
+    table, th, td {
+        border: 1px solid black !important;
+    }
+
+    /* Hide unnecessary elements */
+    .navbar, .print-btn, .buttons, .hr {
+        display: none !important;
+    }
+
+    /* Ensure the body and page fit A4 size */
+    body, .page {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+    }
+
+    /* Ensure the header and footer are visible */
+    .footer {
+        display: block !important;
+    }
+
+    /* Ensure the signature is visible */
+    .signature {
+        text-align: right;
+        font-style: italic;
+    }
+
+    .signature::before {
+        content: "_______________";
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+       
+        /* Header Section */
+        .letterhead {
+            border-bottom: 2px solid #070a0d;
+          
+          
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hospital-logo {
+            width: 160px;
+            height: 110px;
+        }
+
+        .hospital-info {
+            text-align: right;
+        }
+
+        .hospital-name {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            color: red;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+
+        .hospital-address {
+            font-size: 18px;
+            color: #666;
+        }
+
     </style>
 </head>
 <body>
@@ -361,18 +516,14 @@
 
 
     <div class="page">
-        <div class="heade"  style="height:90px ; margin-bottom: 0px;">
-            <!-- Logo and Hospital Name in One Line -->
-            <div style="display: flex; align-items: center; margin-left: 110px ;">
-                <div class="logo">
-                    <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" style="margin-bottom: 7%;">
-                </div>
-                <div class="hospital-name" style="margin-bottom: 7%;">रविकल्प हॉस्पिटल
-                    <br><div class="sub-heading">EYE & GENERAL HOSPITAL<br> PHACO & LASER CENTER</div></div>
-                
-             
+        <div class="letterhead">
+            <div style="margin-left: 150px;">
+                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
             </div>
-            
+            <div class="hospital-info" style="margin-right: 24%;">
+                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
+                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+            </div>
         </div>
         <div class="header">
             <div class="left">
