@@ -2231,18 +2231,23 @@ overflow-y: auto; width: 50%;">
 
  <!-- Medicine list container -->
  <div class="container">
-  <h2>Medical Treatment</h2> 
- 
+  <h2>Medical Treatment</h2>
+
+  <!-- Search Bar -->
+  
+
+  <!-- Medicine List -->
   <div id="medicine-list"></div>
   <button class="add-entry-btn" type="button" onclick="addMedicineEntry()">Add Medicine Entry</button>
-</div>
 
-<div class="overlay" id="overlay"></div>
-<div class="input-modal" id="inputModal">
-  <input type="text" id="modalInput" placeholder="Enter new option">
-  <button class="save-btn" onclick="saveNewOption()">Save</button>
-  <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-</div>
+  <!-- Modal for Adding New Medicine/Dose -->
+  <div class="overlay" id="overlay"></div>
+  <div class="input-modal" id="inputModal">
+    <input type="text" id="modalInput" placeholder="Enter new option">
+    <button class="save-btn" onclick="saveNewOption()">Save</button>
+    <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+  </div>
+
 <div style="max-width: 1200px; margin: 0 auto; padding: 20px;" >
  
   <div style="display: flex; gap: 20px; flex-wrap: wrap;">
@@ -2748,173 +2753,190 @@ overflow-y: auto; width: 50%;">
 
 
 <script>
-  // Medicine list without timestamps
+  // Medicine list (sorted alphabetically)
   let medicines = [
-      "Hydrakem Efdrop",
-      "Resync Eyedrop",
-      "Gatiquin P Eldrop",
-      "Kaimorst Eyedrop",
-      "Gate P. Eye drop",
-      "Sotime",
-      "Admox LP Eye drop",
-      "Corosol XG Eld",
-      "Moxosft Eyedrop",
-      "Myatro Eld",
-      "Veldrop Eyedrop",
-      "Maha Flox LP Eld",
-      "Nepamax Eye drop",
-      "Addtear Eld",
-      "Ocupol Eye ointment",
-      "Flagel Eld",
-      "Azithral Eye Ointment",
-      "Netacin Eld",
-      "Ocupol Dx Eye oint",
-      "Trokid Eld",
-      "Homide Eye drop",
-      "Mofleren-D Eld",
-      "Tobastar Eye drop",
-      "Moxam-D Eld",
-      "Tab. Ciprobid 500",
-      "I-Dew Eld",
-      "Tab. Combiflam",
-      "Tab. Diamox 250",
-      "Tab. Genmox 625",
-      "K-Tear Eld",
-      "Albrim T Eld"
-  ];
+    "Hydrakem Efdrop",
+    "Resync Eyedrop",
+    "Gatiquin P Eldrop",
+    "Kaimorst Eyedrop",
+    "Gate P. Eye drop",
+    "Sotime",
+    "Admox LP Eye drop",
+    "Corosol XG Eld",
+    "Moxosft Eyedrop",
+    "Myatro Eld",
+    "Veldrop Eyedrop",
+    "Maha Flox LP Eld",
+    "Nepamax Eye drop",
+    "Addtear Eld",
+    "Ocupol Eye ointment",
+    "Flagel Eld",
+    "Azithral Eye Ointment",
+    "Netacin Eld",
+    "Ocupol Dx Eye oint",
+    "Trokid Eld",
+    "Homide Eye drop",
+    "Mofleren-D Eld",
+    "Tobastar Eye drop",
+    "Moxam-D Eld",
+    "Tab. Ciprobid 500",
+    "I-Dew Eld",
+    "Tab. Combiflam",
+    "Tab. Diamox 250",
+    "Tab. Genmox 625",
+    "K-Tear Eld",
+    "Albrim T Eld"
+  ].sort(); // Sort alphabetically
+
   let doses = [
-      "1-1-1",
-      "1-0-1",
-      "0-0-1",
-      "0-0-0-0",
-      "0-0-0",
-      "0-0",
-      "1-0-0",
-      "४ वेळा १-१ थेंब ",
-      "३ वेळा १-१ थेंब",
-      "२ वेळा सकाळ- ०- संध्या ",
-      "१ वेळा रात्री ५ दिवस ",
-      "सकाळी जेवणाअगोदर १ गोळी ",
-      "सकाळ - ०-  संध्या जेवणानंतर"
-
-
+    "1-1-1",
+    "1-0-1",
+    "0-0-1",
+    "0-0-0-0",
+    "0-0-0",
+    "0-0",
+    "1-0-0",
+    "४ वेळा १-१ थेंब ",
+    "३ वेळा १-१ थेंब",
+    "२ वेळा सकाळ- ०- संध्या ",
+    "१ वेळा रात्री ५ दिवस ",
+    "सकाळी जेवणाअगोदर १ गोळी ",
+    "सकाळ - ०-  संध्या जेवणानंतर"
   ];
+
   let currentSelect = null;
   let isMedicineModal = false;
 
-  function createMedicineOptions() {
-      return `
-          <option value="" disabled selected>Select Medicine</option>
-          ${medicines.map(med => `<option value="${med}">${med}</option>`).join('')}
-          <option value="add-new-medicine" class="add-option">+ Add New Medicine</option>
-      `;
+  // Function to create medicine options (filtered by search)
+  function createMedicineOptions(filter = "") {
+    const filteredMedicines = medicines.filter(med =>
+      med.toLowerCase().includes(filter.toLowerCase())
+    );
+    return `
+      <option value="" disabled selected>Select Medicine</option>
+      ${filteredMedicines.map(med => `<option value="${med}">${med}</option>`).join('')}
+      <option value="add-new-medicine" class="add-option">+ Add New Medicine</option>
+    `;
   }
 
+  // Function to create dose options
   function createDoseOptions() {
-      return `
-          <option value="" disabled selected>Select Dose</option>
-          ${doses.map(dose => `<option value="${dose}">${dose}</option>`).join('')}
-          <option value="add-new-dose" class="add-option">+ Add New Dose</option>
-      `;
+    return `
+      <option value="" disabled selected>Select Dose</option>
+      ${doses.map(dose => `<option value="${dose}">${dose}</option>`).join('')}
+      <option value="add-new-dose" class="add-option">+ Add New Dose</option>
+    `;
   }
 
+  // Function to add a new medicine entry
   function addMedicineEntry() {
-      const medicineList = document.getElementById("medicine-list");
-      // Show the medicine list when adding an entry
-      medicineList.style.display = "block";
-      
-      const entry = document.createElement("div");
-      entry.className = "medicine-entry";
+    const medicineList = document.getElementById("medicine-list");
+    medicineList.style.display = "block";
 
-      entry.innerHTML = `
-          <select class="medicine-select" onchange="handleSelectChange(this)">
-              ${createMedicineOptions()}
-          </select>
-          <select class="medicine-dose" onchange="handleSelectChange(this)">
-              ${createDoseOptions()}
-          </select>
-          <button type="button" class="remove-btn">Remove</button>
-      `;
+    const entry = document.createElement("div");
+    entry.className = "medicine-entry";
 
-      medicineList.appendChild(entry);
-      
-      entry.querySelector(".remove-btn").addEventListener("click", function () {
-          entry.remove();
-          // Hide the medicine list if no entries remain
-          if (medicineList.children.length === 0) {
-              medicineList.style.display = "none";
-          }
-      });
+    entry.innerHTML = `
+      <select class="medicine-select" onchange="handleSelectChange(this)">
+        ${createMedicineOptions()}
+      </select>
+      <select class="medicine-dose" onchange="handleSelectChange(this)">
+        ${createDoseOptions()}
+      </select>
+      <button type="button" class="remove-btn">Remove</button>
+    `;
+
+    medicineList.appendChild(entry);
+
+    entry.querySelector(".remove-btn").addEventListener("click", function () {
+      entry.remove();
+      if (medicineList.children.length === 0) {
+        medicineList.style.display = "none";
+      }
+    });
   }
 
+  // Function to handle select change (for adding new medicine/dose)
   function handleSelectChange(select) {
-      if (select.value === "add-new-medicine") {
-          isMedicineModal = true;
-          showModal("Enter new medicine name");
-          currentSelect = select;
-      } else if (select.value === "add-new-dose") {
-          isMedicineModal = false;
-          showModal("Enter new dose (e.g., 1-1-1)");
-          currentSelect = select;
-      }
+    if (select.value === "add-new-medicine") {
+      isMedicineModal = true;
+      showModal("Enter new medicine name");
+      currentSelect = select;
+    } else if (select.value === "add-new-dose") {
+      isMedicineModal = false;
+      showModal("Enter new dose (e.g., 1-1-1)");
+      currentSelect = select;
+    }
   }
 
+  // Function to show the modal
   function showModal(placeholder) {
-      const modal = document.getElementById("inputModal");
-      const overlay = document.getElementById("overlay");
-      const input = document.getElementById("modalInput");
-      input.placeholder = placeholder;
-      input.value = "";
-      modal.style.display = "block";
-      overlay.style.display = "block";
+    const modal = document.getElementById("inputModal");
+    const overlay = document.getElementById("overlay");
+    const input = document.getElementById("modalInput");
+    input.placeholder = placeholder;
+    input.value = "";
+    modal.style.display = "block";
+    overlay.style.display = "block";
   }
 
+  // Function to close the modal
   function closeModal() {
-      const modal = document.getElementById("inputModal");
-      const overlay = document.getElementById("overlay");
-      modal.style.display = "none";
-      overlay.style.display = "none";
-      if (currentSelect) {
-          currentSelect.value = ""; // Reset to default
-      }
+    const modal = document.getElementById("inputModal");
+    const overlay = document.getElementById("overlay");
+    modal.style.display = "none";
+    overlay.style.display = "none";
+    if (currentSelect) {
+      currentSelect.value = ""; // Reset to default
+    }
   }
 
+  // Function to save a new medicine/dose
   function saveNewOption() {
-      const input = document.getElementById("modalInput");
-      const newValue = input.value.trim();
-      
-      if (newValue) {
-          if (isMedicineModal && !medicines.includes(newValue)) {
-              medicines.push(newValue);
-              updateAllMedicineSelects();
-          } else if (!isMedicineModal && !doses.includes(newValue)) {
-              doses.push(newValue);
-              updateAllDoseSelects();
-          }
+    const input = document.getElementById("modalInput");
+    const newValue = input.value.trim();
+
+    if (newValue) {
+      if (isMedicineModal && !medicines.includes(newValue)) {
+        medicines.push(newValue);
+        medicines.sort(); // Keep the list sorted
+        updateAllMedicineSelects();
+      } else if (!isMedicineModal && !doses.includes(newValue)) {
+        doses.push(newValue);
+        updateAllDoseSelects();
       }
-      closeModal();
+    }
+    closeModal();
   }
 
+  // Function to update all medicine selects
   function updateAllMedicineSelects() {
-      const allMedicineSelects = document.querySelectorAll(".medicine-select");
-      allMedicineSelects.forEach(select => {
-          const currentValue = select.value;
-          select.innerHTML = createMedicineOptions();
-          select.value = currentValue === "add-new-medicine" ? "" : currentValue;
-      });
+    const allMedicineSelects = document.querySelectorAll(".medicine-select");
+    allMedicineSelects.forEach(select => {
+      const currentValue = select.value;
+      select.innerHTML = createMedicineOptions();
+      select.value = currentValue === "add-new-medicine" ? "" : currentValue;
+    });
   }
 
+  // Function to update all dose selects
   function updateAllDoseSelects() {
-      const allDoseSelects = document.querySelectorAll(".medicine-dose");
-      allDoseSelects.forEach(select => {
-          const currentValue = select.value;
-          select.innerHTML = createDoseOptions();
-          select.value = currentValue === "add-new-dose" ? "" : currentValue;
-      });
+    const allDoseSelects = document.querySelectorAll(".medicine-dose");
+    allDoseSelects.forEach(select => {
+      const currentValue = select.value;
+      select.innerHTML = createDoseOptions();
+      select.value = currentValue === "add-new-dose" ? "" : currentValue;
+    });
   }
 
-  // No initial entry by default
-  // Removed addMedicineEntry() from here
+  // Function to filter medicines based on search input
+  function filterMedicines() {
+    const searchInput = document.getElementById("searchMedicine").value;
+    const allMedicineSelects = document.querySelectorAll(".medicine-select");
+    allMedicineSelects.forEach(select => {
+      select.innerHTML = createMedicineOptions(searchInput);
+    });
+  }
 </script>
 
 <!-- bootstrap js -->

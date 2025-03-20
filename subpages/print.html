@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prescription</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
        
 @media print {
@@ -452,42 +454,64 @@
 }
 
 
+  /* Header Section */
+  .letterhead {
+        border-bottom: 2px solid #070a0d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative; /* Added for positioning doctor names */
+    }
 
+    .hospital-logo {
+        width: 160px;
+        height: 110px;
+    }
 
+    .hospital-info {
+        text-align: right;
+    }
 
+    .hospital-name {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        color: red;
+        font-size: 32px;
+        letter-spacing: 1.5px;
+    }
+
+    .hospital-address {
+        font-size: 18px;
+        color: #666;
        
-        /* Header Section */
-        .letterhead {
-            border-bottom: 2px solid #070a0d;
-          
-          
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    }
 
-        .hospital-logo {
-            width: 160px;
-            height: 110px;
-        }
+    /* Doctor's Name Styling */
+    .doctor-name-left,
+    .doctor-name-right {
+        position: absolute;
+        top: 0;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
 
-        .hospital-info {
-            text-align: right;
-        }
+    .doctor-name-left {
+        left: 0; /* Position on the left corner */
+    }
 
-        .hospital-name {
-            font-family: 'Helvetica Neue', sans-serif;
-            font-weight: 700;
-            color: red;
-            font-size: 32px;
-            letter-spacing: 1.5px;
-        }
+    .doctor-name-right {
+        right: 0; /* Position on the right corner */
+    }
 
-        .hospital-address {
-            font-size: 18px;
-            color: #666;
-        }
-
+    .hospital-address-details {
+        font-size: 17px;
+        color: #100f0f;
+        font-weight: bold;
+        line-height: 1.5;
+        margin: 1; /* Remove default margin */
+    }
     </style>
 </head>
 <body>
@@ -517,22 +541,46 @@
 
     <div class="page">
         <div class="letterhead">
+            <!-- Left Corner - Doctor's Name -->
+            <div class="doctor-name-left" style="margin-top: 70px;">
+                Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
+            </div>
+        
+            <!-- Hospital Logo and Info -->
             <div style="margin-left: 150px;">
                 <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
             </div>
-            <div class="hospital-info" style="margin-right: 24%;">
+            <div class="hospital-info" style="margin-right: 26%; margin-bottom: 10px;">
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
                 <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
+        
+            <!-- Right Corner - Doctor's Name -->
+            <div class="doctor-name-right" style="margin-top: 70px;">
+                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
+            </div>
+            
         </div>
+        
+<!-- Address Section -->
+<div class="address-section">
+    
+    <p class="hospital-address-details">
+        <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 25px; margin-left: 30px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+    </p>
+    <hr style="border: 1px solid #070a0d;">
+</div>
         <div class="header">
             <div class="left">
+                <p><strong>Patient ID:</strong> <span id="patient-id"></span></p>
                 <p><strong>Name:</strong> <span id="patient-name"></span></p>
                 <p><strong>Age:</strong> <span id="patient-age"></span></p>
             </div>
             <div class="right">
-                <p><strong>Date:</strong> <span id="appointment-date"></span></p>
-              <p style="margin-right: 20px;"> <strong> Gender:</strong  > <span id="patient-gender"></span></p>
+                <p style="margin-right: 43px;"><strong>Date:</strong> <span id="appointment-date"></span></p>
+                <p style="margin-left: 40px;"> <strong> Mobile No:
+                    </strong  > <span id="patient-mobile">454548583</span></p>
+              <p style="margin-right: 70px;"> <strong> Gender:</strong  > <span id="patient-gender"></span></p>
             </div>
             
         </div>
@@ -1089,8 +1137,10 @@
         // Populate the fields with the data
         if (appointment) {
             document.getElementById("patient-name").textContent = appointment.Name || "N/A";
-            document.getElementById("patient-age").textContent = appointment.Age || "N/A";
+            document.getElementById("patient-id").textContent = appointment.id || "N/A";
+            document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
             document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
+            document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
         }
 
         // Get today's date in the desired format (e.g., DD/MM/YYYY)

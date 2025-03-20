@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Invoice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
@@ -208,43 +209,9 @@ body {
                 content: "_______________";
                 display: block;
                 margin-bottom: 10px;
-                margin-top: 100px;
+                margin-top: 50px;
             }
         }
-
-       
-        /* Header Section */
-        .letterhead {
-            border-bottom: 2px solid #004a99;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .hospital-logo {
-            width: 160px;
-            height: 110px;
-        }
-
-        .hospital-info {
-            text-align: right;
-        }
-
-        .hospital-name {
-            font-family: 'Helvetica Neue', sans-serif;
-            font-weight: 700;
-            color: red;
-            font-size: 32px;
-            letter-spacing: 1.5px;
-        }
-
-        .hospital-address {
-            font-size: 18px;
-            color: #666;
-        }
-
 
 
         .invoice-details {
@@ -276,6 +243,60 @@ body {
             width: 150px;
             padding: 5px;
         }
+
+
+
+        
+  /* Header Section */
+  .letterhead {
+        border-bottom: 2px solid #070a0d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative; /* Added for positioning doctor names */
+    }
+
+    .hospital-logo {
+        width: 160px;
+        height: 110px;
+    }
+
+    .hospital-info {
+        text-align: right;
+    }
+
+    .hospital-name {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        color: red;
+        font-size: 32px;
+        letter-spacing: 1.5px;
+    }
+
+    .hospital-address {
+        font-size: 18px;
+        color: #666;
+       
+    }
+
+    /* Doctor's Name Styling */
+    .doctor-name-left,
+    .doctor-name-right {
+        position: absolute;
+        top: 0;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .doctor-name-left {
+        left: 0; /* Position on the left corner */
+    }
+
+    .doctor-name-right {
+        right: 0; /* Position on the right corner */
+    }
     </style>
 </head>
 <body>
@@ -297,13 +318,32 @@ body {
     <div class="invoice-container">
         <!-- Header Section -->
         <div class="letterhead">
-            <div style="margin-left: 150px;">
+            <!-- Left Corner - Doctor's Name -->
+            <div class="doctor-name-left" style="margin-top: 78px;">
+                Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
+            </div>
+        
+            <!-- Hospital Logo and Info -->
+            <div style="margin-left: 140px;">
                 <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
             </div>
-            <div class="hospital-info" style="margin-right: 24%;">
+            <div class="hospital-info" style="margin-right: 28%; margin-bottom: 10px;">
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
                 <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
+        
+            <!-- Right Corner - Doctor's Name -->
+            <div class="doctor-name-right" style="margin-top: 78px;">
+                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
+            </div>
+            
+        </div>
+        <div class="address-section" style="font-weight: bold;">
+    
+            <p class="hospital-address-details">
+                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 25px; margin-left: 30px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+            </p>
+            <hr style="border: 1px solid #070a0d;">
         </div>
         <!-- Invoice Details -->
         <div class="invoice-details">
@@ -325,7 +365,7 @@ body {
                 <span class="value" id="patient-mobile">+1234567890</span>
             </div>
         </div>
-        <hr>
+        <hr style="border: 1px solid #070a0d;">
 
         <!-- Invoice Table -->
         <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
