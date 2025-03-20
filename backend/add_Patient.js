@@ -118,21 +118,23 @@ document.getElementById("search-box").addEventListener("input", async function (
         const patientsCollection = collection(db, "patients");
         const results = [];
         if (searchBy === "Name") {
-        // Search by Name
-        const nameQuery = query(
-            patientsCollection,
-            where("Name", ">=", searchValue),
-            where("Name", "<", searchValue + "\uf8ff"),
-            limit(5)
-        );
+        // Fetch all patients (or a reasonable number of documents)
+        const nameQuery = query(patientsCollection, limit(5)); // Adjust the limit as needed
         const nameSnapshot = await getDocs(nameQuery);
-        nameSnapshot.forEach(doc => {
+
+        // Filter results in JavaScript
+        nameSnapshot.forEach((doc) => {
             const data = doc.data();
-            results.push({
-                id: doc.id,
-                name: data.Name,
-                mobileNo: data.MobileNo,
-            });
+            const name = data.Name || ""; // Ensure the Name field exists
+
+            // Case-insensitive comparison
+            if (name.toLowerCase().includes(searchValue.toLowerCase())) {
+                results.push({
+                    id: doc.id,
+                    name: data.Name,
+                    mobileNo: data.MobileNo,
+                });
+            }
         });
         } else if (searchBy === "MobileNo") {
 
