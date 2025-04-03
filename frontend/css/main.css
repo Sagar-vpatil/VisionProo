@@ -994,69 +994,41 @@ button:hover {
       margin-bottom: 10px;
   }
 }
-
-
-/* Flexbox container to align input and button */
-.flex-container {
+/* Centering the search container */
+.search-container {
   display: flex;
-  align-items: center;       /* Centers items vertically */
-  gap: 12px;                 /* Adds consistent space between input and button */
-  margin-top: 6px;
-  width: 100%;               /* Makes the container take full width */
-  max-width: 600px;          /* Restricts maximum width for larger screens */
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-}
-
-/* Input field styling */
-.input-field {
-  padding: 10px;
-  font-size: 16px;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;  /* Reduced width */
+  margin: 15px auto;
+  padding: 5px 10px; /* Reduced padding */
   border: 2px solid #ccc;
-  border-radius: 5px;
-  flex: 1;                   /* Allows input to grow and take available space */
-  max-width: calc(100% - 132px); /* Ensures input doesn't overflow (button width + gap) */
-  box-sizing: border-box;    /* Ensures padding is included in the width calculation */
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
 }
 
-/* Submit button styling */
-.submit-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
+/* Search icon styling */
+.search-icon {
+  font-size: 14px; /* Smaller icon */
+  margin-right: 8px;
+  color: #777;
+}
+
+/* Search input field styling */
+.search-input {
+  width: 100%;
+  padding: 6px; /* Reduced height */
+  font-size: 14px; /* Smaller font */
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 120px;              /* Fixed width for the button */
-  flex-shrink: 0;            /* Prevents the button from shrinking */
+  outline: none;
+  background: transparent;
 }
 
-/* Hover effect for submit button */
-.submit-btn:hover {
-  background-color: #0056b3;
-  height: 20px;
+/* Focus effect */
+.search-container:focus-within {
+  border-color: #007bff;
 }
-
-/* Responsive adjustments for small screens */
-@media (max-width: 600px) {
-  .flex-container {
-    flex-direction: column; /* Stacks input and button vertically */
-    gap: 10px;              /* Reduces gap for stacked layout */
-  }
-
-  .input-field {
-    width: 50%;           /* Makes the input take full width */
-    max-width: none;       /* Removes the width limit */
-  }
-
-  .submit-btn {
-    width: 100%;
-    height: 40px;           /* Makes the button take full width */
-  }
-}
-
 
 .upload-container {
   max-width: 500px;
@@ -1302,3 +1274,110 @@ h2 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+  /* Styling for options table */
+  .options {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    overflow-y: auto; /* Allows vertical scrolling */
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  /* Scrollbar Styling */
+  .options::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .options::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+
+  /* Table styling */
+  .options table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .options td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .options td:hover {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+
+  /* Media Query for 17-inch laptop screens (typically 1920x1080 or similar) */
+  @media screen and (max-width: 1920px) {
+    .options {
+      width: 19.2%;
+    }
+  }
+
+  /* Media Query for larger screens like 24-inch monitors */
+  @media screen and (min-width: 1921px) {
+    .options {
+      width: 18%;
+    }
+    
+    .options td {
+      padding: 12px; /* Slightly larger padding for bigger screens */
+      font-size: 1.05em; /* Slightly larger font size */
+    }
+  }
+
+
+
+
+  
+  /* Media Query for 17-inch laptop screens (typically 1920x1080 or similar) */
+  @media screen and (max-width: 1920px) {
+    #myOptionsTable2 ,#NVDVATable ,#nRefraction1 {
+      width: 10.2%;
+    }
+  }
+
+  /* Media Query for larger screens like 24-inch monitors */
+  @media screen and (min-width: 1921px) {
+    #myOptionsTable2,#NVDVATable ,#nRefraction1{
+      width: 9.7%;
+    }
+    
+    #myOptionsTable2 ,#NVDVATable ,#nRefraction1  td {
+      padding: 12px; /* Slightly larger padding for bigger screens */
+      font-size: 1.05em; /* Slightly larger font size */
+    }
+  }
+
+  /* Additional responsive adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    #myOptionsTable2,#NVDVATable ,#nRefraction1 {
+      width: 100%;
+    }
+    
+    #myOptionsTable2,#NVDVATable , #nRefraction1 td {
+      padding: 6px;
+      font-size: 0.9em;
+    }
+  }

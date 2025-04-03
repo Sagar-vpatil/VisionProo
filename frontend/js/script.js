@@ -588,3 +588,520 @@ document.getElementById('both-diagnosis-btn').click();
     function toggleSurgicalHistory(element) {
       element.classList.toggle('selected');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Filter symptoms for specific section SEARCH
+  function filterSymptoms(containerId, inputElement) {
+    const searchTerm = inputElement.value.toLowerCase();
+    const container = document.getElementById(containerId);
+    const options = container.querySelectorAll('.symptoms');
+    let hasResults = false;
+    
+    // Remove existing no-results message if any
+    const existingNoResults = container.querySelector('.no-results');
+    if (existingNoResults) {
+        existingNoResults.remove();
+    }
+    
+    options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            option.style.display = "block";
+            hasResults = true;
+        } else {
+            option.style.display = "none";
+        }
+    });
+    
+    // Show "no results" message if no matches found
+    if (!hasResults && searchTerm.length > 0) {
+        const message = document.createElement('div');
+        message.className = 'no-results';
+        message.textContent = 'No matching symptoms found';
+        container.appendChild(message);
+    }
+}
+
+// Toggle symptom selection
+function toggleSymptoms(element) {
+    element.classList.toggle('selected');
+    // Add your additional selection logic here
+}
+
+// Add new symptom option
+function addOption(button, section) {
+    const wrapper = button.parentElement;
+    const input = wrapper.querySelector('.add-input');
+    const symptomText = input.value.trim();
+    
+    if (symptomText) {
+        const containerId = section + 'Options';
+        const container = document.getElementById(containerId);
+        
+        const newOption = document.createElement('div');
+        newOption.className = 'symptoms';
+        newOption.textContent = symptomText + ' (' + section.toUpperCase() + ')';
+        newOption.onclick = function() { toggleSymptoms(this); };
+        
+        container.insertBefore(newOption, container.firstChild);
+        input.value = '';
+    }
+}
+
+// Focus first search input on page load
+document.querySelector('.search-input').focus();
+
+
+
+// Filter medical history as user types
+function filterMedicalHistory() {
+  const searchTerm = document.getElementById('medicalHistorySearch').value.toLowerCase();
+  const options = document.querySelectorAll('#medicalHistoryOptions .medicalHistory');
+  const container = document.getElementById('medicalHistoryOptions');
+  let hasVisibleItems = false;
+  
+  // First, remove any existing "no results" message
+  const existingMessage = container.querySelector('.no-results-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Filter options
+  options.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      option.style.display = "flex";
+      hasVisibleItems = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  
+  // Show message if no matches found and search term isn't empty
+  if (!hasVisibleItems && searchTerm.length > 0) {
+    const message = document.createElement('div');
+    message.className = 'no-results-message';
+    message.textContent = 'No matching medical history found';
+    message.style.width = '100%';
+    message.style.textAlign = 'center';
+    message.style.padding = '10px';
+    message.style.color = '#666';
+    container.appendChild(message);
+  }
+}
+
+// Toggle medical history selection (if needed)
+function toggleMedicalHistory(element) {
+  // Your existing toggle function
+  // This is kept as is without modifications
+}
+
+
+
+
+
+
+// Filter surgical history based on eye section
+function filterSurgicalHistory(eyeType) {
+  const searchTerm = document.getElementById(`surgical-history-${eyeType}-search`).value.toLowerCase();
+  const options = document.querySelectorAll(`#surgical-history-${eyeType}-options .surgicalHistory`);
+  const container = document.getElementById(`surgical-history-${eyeType}-options`);
+  let hasVisibleItems = false;
+  
+  // Remove any existing "no results" message
+  const existingMessage = container.querySelector('.no-results-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Filter options
+  options.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      option.style.display = "flex";
+      hasVisibleItems = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  
+  // Show message if no matches found and search term isn't empty
+  if (!hasVisibleItems && searchTerm.length > 0) {
+    const message = document.createElement('div');
+    message.className = 'no-results-message';
+    message.textContent = 'No matching surgical history found';
+    message.style.width = '100%';
+    message.style.textAlign = 'center';
+    message.style.padding = '10px';
+    message.style.color = '#666';
+    container.appendChild(message);
+  }
+}
+
+// Toggle surgical history selection
+function toggleSurgicalHistory(element) {
+  element.classList.toggle('selected');
+  if (element.classList.contains('selected')) {
+    element.style.backgroundColor = '#4CAF50';
+    element.style.color = 'white';
+  } else {
+    element.style.backgroundColor = '#f0f0f0';
+    element.style.color = 'inherit';
+  }
+}
+
+// Add new surgical history option
+function addSurgicalHistory(eyeType) {
+  const input = document.getElementById(`surgical-history-${eyeType}-new-input`);
+  const historyText = input.value.trim();
+  
+  if (historyText) {
+    const container = document.getElementById(`surgical-history-${eyeType}-options`);
+    
+    // Remove no-results message if it exists
+    const noResults = container.querySelector('.no-results-message');
+    if (noResults) {
+      noResults.remove();
+    }
+    
+    const newOption = document.createElement('div');
+    newOption.className = 'surgicalHistory';
+    newOption.textContent = historyText + (eyeType === 'both' ? '(BE)' : eyeType === 'right' ? '(RE)' : '(LE)');
+    newOption.onclick = function() { toggleSurgicalHistory(this); };
+    newOption.style.padding = '8px 15px';
+    newOption.style.backgroundColor = '#f0f0f0';
+    newOption.style.borderRadius = '20px';
+    newOption.style.cursor = 'pointer';
+    newOption.style.display = 'flex';
+    
+    container.appendChild(newOption);
+    input.value = '';
+  }
+}
+
+// Allow adding by pressing Enter key
+document.querySelectorAll('.add-input').forEach(input => {
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const eyeType = this.id.split('-')[2]; // Gets 'both', 'right', or 'left' from ID
+      addSurgicalHistory(eyeType);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+// Filter diagnosis based on eye section
+function filterDiagnosis(eyeType) {
+  const searchTerm = document.getElementById(`diagnosis-${eyeType}-search`).value.toLowerCase();
+  const options = document.querySelectorAll(`#diagnosis-${eyeType}-options .diagnosis`);
+  const container = document.getElementById(`diagnosis-${eyeType}-options`);
+  let hasVisibleItems = false;
+  
+  // Remove any existing "no results" message
+  const existingMessage = container.querySelector('.no-results-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Filter options
+  options.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      option.style.display = "flex";
+      hasVisibleItems = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  
+  // Show message if no matches found and search term isn't empty
+  if (!hasVisibleItems && searchTerm.length > 0) {
+    const message = document.createElement('div');
+    message.className = 'no-results-message';
+    message.textContent = 'No matching diagnosis found';
+    message.style.width = '100%';
+    message.style.textAlign = 'center';
+    message.style.padding = '10px';
+    message.style.color = '#666';
+    container.appendChild(message);
+  }
+}
+
+// Toggle diagnosis selection
+function toggleDiagnosis(element) {
+  element.classList.toggle('selected');
+  if (element.classList.contains('selected')) {
+    element.style.backgroundColor = '#4CAF50';
+    element.style.color = 'white';
+  } else {
+    element.style.backgroundColor = '#f0f0f0';
+    element.style.color = 'inherit';
+  }
+}
+
+// Add new diagnosis option
+function addDiagnosis(eyeType) {
+  const input = document.getElementById(`diagnosis-${eyeType}-new-input`);
+  const diagnosisText = input.value.trim();
+  
+  if (diagnosisText) {
+    const container = document.getElementById(`diagnosis-${eyeType}-options`);
+    
+    // Remove no-results message if it exists
+    const noResults = container.querySelector('.no-results-message');
+    if (noResults) {
+      noResults.remove();
+    }
+    
+    const newOption = document.createElement('div');
+    newOption.className = 'diagnosis';
+    newOption.textContent = diagnosisText + (eyeType === 'both' ? '(BE)' : eyeType === 'right' ? '(RE)' : '(LE)');
+    newOption.onclick = function() { toggleDiagnosis(this); };
+    newOption.style.padding = '8px 15px';
+    newOption.style.backgroundColor = '#f0f0f0';
+    newOption.style.borderRadius = '20px';
+    newOption.style.cursor = 'pointer';
+    newOption.style.display = 'flex';
+    newOption.style.margin = '5px';
+    
+    container.appendChild(newOption);
+    input.value = '';
+  }
+}
+
+// Allow adding by pressing Enter key
+document.querySelectorAll('.add-input').forEach(input => {
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const eyeType = this.id.split('-')[1]; // Gets 'both', 'right', or 'left' from ID
+      addDiagnosis(eyeType);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+// Filter investigations as user types
+function filterInvestigations() {
+  const searchTerm = document.getElementById('investigation-search').value.toLowerCase();
+  const options = document.querySelectorAll('#investigation-options .investigation');
+  const container = document.getElementById('investigation-options');
+  let hasVisibleItems = false;
+  
+  // Remove any existing "no results" message
+  const existingMessage = container.querySelector('.no-results-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Filter options
+  options.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      option.style.display = "flex";
+      hasVisibleItems = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  
+  // Show message if no matches found and search term isn't empty
+  if (!hasVisibleItems && searchTerm.length > 0) {
+    const message = document.createElement('div');
+    message.className = 'no-results-message';
+    message.textContent = 'No matching investigations found';
+    message.style.width = '100%';
+    message.style.textAlign = 'center';
+    message.style.padding = '10px';
+    message.style.color = '#666';
+    container.appendChild(message);
+  }
+}
+
+// Toggle investigation selection
+function toggleInvestigation(element) {
+  element.classList.toggle('selected');
+  if (element.classList.contains('selected')) {
+    element.style.backgroundColor = '#4CAF50';
+    element.style.color = 'white';
+    
+    // Add to tags container
+    const tag = document.createElement('div');
+    tag.className = 'investigation-tag';
+    tag.textContent = element.textContent;
+    tag.style.display = 'inline-block';
+    tag.style.margin = '5px';
+    tag.style.padding = '5px 10px';
+    tag.style.backgroundColor = '#4CAF50';
+    tag.style.color = 'white';
+    tag.style.borderRadius = '15px';
+    document.getElementById('investigation-tags').appendChild(tag);
+  } else {
+    element.style.backgroundColor = '#f0f0f0';
+    element.style.color = 'inherit';
+    
+    // Remove from tags container
+    const tags = document.querySelectorAll('.investigation-tag');
+    tags.forEach(tag => {
+      if (tag.textContent === element.textContent) {
+        tag.remove();
+      }
+    });
+  }
+}
+
+
+// Add new investigation option
+function addInvestigation() {
+  const input = document.getElementById('investigation-new-input');
+  const investigationText = input.value.trim();
+  
+  if (investigationText) {
+    const container = document.getElementById('investigation-options');
+    
+    // Remove no-results message if it exists
+    const noResults = container.querySelector('.no-results-message');
+    if (noResults) {
+      noResults.remove();
+    }
+    
+    const newOption = document.createElement('div');
+    newOption.className = 'investigation';
+    newOption.textContent = investigationText;
+    newOption.onclick = function() { toggleInvestigation(this); };
+    newOption.style.padding = '8px 15px';
+    newOption.style.backgroundColor = '#f0f0f0';
+    newOption.style.borderRadius = '20px';
+    newOption.style.cursor = 'pointer';
+    newOption.style.display = 'flex';
+    newOption.style.margin = '5px';
+    
+    container.appendChild(newOption);
+    input.value = '';
+  }
+}
+
+// Allow adding by pressing Enter key
+document.getElementById('investigation-new-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    addInvestigation();
+  }
+});
+
+
+
+
+
+
+// Filter surgical treatments as user types
+function filterSurgicalTreatments() {
+  const searchTerm = document.getElementById('surgical-treatment-search').value.toLowerCase();
+  const options = document.querySelectorAll('#surgical-treatment-options .surgical-treatment');
+  const container = document.getElementById('surgical-treatment-options');
+  let hasVisibleItems = false;
+  
+  // Remove any existing "no results" message
+  const existingMessage = container.querySelector('.no-results-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Filter options
+  options.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      option.style.display = "flex";
+      hasVisibleItems = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  
+  // Show message if no matches found and search term isn't empty
+  if (!hasVisibleItems && searchTerm.length > 0) {
+    const message = document.createElement('div');
+    message.className = 'no-results-message';
+    message.textContent = 'No matching surgical treatments found';
+    message.style.width = '100%';
+    message.style.textAlign = 'center';
+    message.style.padding = '10px';
+    message.style.color = '#666';
+    container.appendChild(message);
+  }
+}
+
+// Toggle surgical treatment selection
+function toggleSurgicalTreatment(element) {
+  element.classList.toggle('selected');
+  if (element.classList.contains('selected')) {
+    element.style.backgroundColor = '#4CAF50';
+    element.style.color = 'white';
+  } else {
+    element.style.backgroundColor = '#f0f0f0';
+    element.style.color = 'inherit';
+  }
+}
+
+// Add new surgical treatment option
+function addSurgicalTreatment() {
+  const input = document.getElementById('surgical-treatment-new-input');
+  const treatmentText = input.value.trim();
+  
+  if (treatmentText) {
+    const container = document.getElementById('surgical-treatment-options');
+    
+    // Remove no-results message if it exists
+    const noResults = container.querySelector('.no-results-message');
+    if (noResults) {
+      noResults.remove();
+    }
+    
+    const newOption = document.createElement('div');
+    newOption.className = 'surgical-treatment';
+    newOption.textContent = treatmentText;
+    newOption.onclick = function() { toggleSurgicalTreatment(this); };
+    newOption.style.padding = '8px 15px';
+    newOption.style.backgroundColor = '#f0f0f0';
+    newOption.style.borderRadius = '20px';
+    newOption.style.cursor = 'pointer';
+    newOption.style.display = 'flex';
+    newOption.style.margin = '5px';
+    
+    container.appendChild(newOption);
+    input.value = '';
+  }
+}
+
+// Allow adding by pressing Enter key
+document.getElementById('surgical-treatment-new-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    addSurgicalTreatment();
+  }
+});
