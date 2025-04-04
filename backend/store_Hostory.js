@@ -510,6 +510,8 @@ async function savePatientHistory(getCondition) {
       const selectedInvestigation = JSON.parse(localStorage.getItem("selectedInvestigation"));
       const selectedAdvices = JSON.parse(localStorage.getItem("selectedAdvices"));
       const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment"));
+      const preOperativeTemplate = JSON.parse(localStorage.getItem("preOperativeTemplate")) || {};
+      const postOperativeTemplate = JSON.parse(localStorage.getItem("postOperativeTemplate")) || {};
 
   
       // Reference to the document
@@ -543,6 +545,14 @@ async function savePatientHistory(getCondition) {
 
       if (!Object.values(arTable).every(value => value === "")) {
         dataToStore.arTable = arTable;
+      }
+
+      if (!Object.values(preOperativeTemplate).every(value => value === "")) {
+        dataToStore.preOperativeTemplate = preOperativeTemplate;
+      }
+
+      if (!Object.values(postOperativeTemplate).every(value => value === "")) {
+        dataToStore.postOperativeTemplate = postOperativeTemplate;
       }
 
       if (medicines.length > 0) {
@@ -1274,6 +1284,8 @@ function clearHistoryFromLocalStorage() {
   localStorage.removeItem("PreOperativeDetails");
   localStorage.removeItem("aScanTable");
   localStorage.removeItem("iopGatTable");
+  localStorage.removeItem("preOperativeTemplate");
+  localStorage.removeItem("postOperativeTemplate");
 }
 
  // Show Eye Image function
@@ -1346,3 +1358,77 @@ function clearHistoryFromLocalStorage() {
  }
 
 
+ document.addEventListener('DOMContentLoaded', () => {
+
+  const treatments = [
+      { 
+          selectAllId: 'select-all-1', 
+          checkboxClass: 'medicine-checkbox-1', 
+          storageKey: 'preOperativeTemplate' 
+      },
+      { 
+          selectAllId: 'select-all-2', 
+          checkboxClass: 'medicine-checkbox-2', 
+          storageKey: 'postOperativeTemplate' 
+      }
+  ];
+
+  treatments.forEach(({ selectAllId, checkboxClass, storageKey }) => {
+      const selectAllCheckbox = document.getElementById(selectAllId);
+      const medicineCheckboxes = document.querySelectorAll(`.${checkboxClass}`);
+
+      // Load existing data from localStorage if available
+      let template = JSON.parse(localStorage.getItem(storageKey)) || {};
+
+      // Initialize checkboxes based on localStorage
+      medicineCheckboxes.forEach((checkbox, index) => {
+          const medicineKey = `Medicine${index + 1}`;
+
+          if (template[medicineKey] === "true") {
+              checkbox.checked = true;
+          }
+
+          // Listen for changes on individual checkboxes
+          checkbox.addEventListener('change', () => {
+              if (checkbox.checked) {
+                  template[medicineKey] = "true";
+              } else {
+                  delete template[medicineKey];
+              }
+
+              updateLocalStorage();
+              updateSelectAllCheckbox();
+          });
+      });
+
+      // Listen for changes on the select-all checkbox
+      selectAllCheckbox.addEventListener('change', () => {
+          const allChecked = selectAllCheckbox.checked;
+
+          medicineCheckboxes.forEach((checkbox, index) => {
+              const medicineKey = `Medicine${index + 1}`;
+              checkbox.checked = allChecked;
+
+              if (allChecked) {
+                  template[medicineKey] = "true";
+              } else {
+                  delete template[medicineKey];
+              }
+          });
+
+          updateLocalStorage();
+      });
+
+      function updateLocalStorage() {
+          localStorage.setItem(storageKey, JSON.stringify(template));
+          console.log(`Current ${storageKey}:`, template);
+      }
+
+      function updateSelectAllCheckbox() {
+          const allChecked = Array.from(medicineCheckboxes).every(checkbox => checkbox.checked);
+          selectAllCheckbox.checked = allChecked;
+      }
+
+      updateSelectAllCheckbox();
+  });
+});

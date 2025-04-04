@@ -787,7 +787,7 @@
         </tbody>
     </table>
     
-    <table style="width: 60%; border-collapse: collapse; font-size: 14px; margin-left: 120px; margin-top: 20px; ">
+    <table style="width: 60%; border-collapse: collapse; font-size: 14px; margin-left: 120px; margin-top: 20px; " id="Post-Operative-Medicine-Template">
         <thead>
             <tr style="height: 25px; background-color: #fff;">
                 <th style="border: 1px solid #0f0808; padding: 5px;">Medicine</th>
@@ -796,37 +796,37 @@
             </tr>
         </thead>
         <tbody>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine1">
                 <td style="border: 1px solid #0a0707; padding: 5px;">Gatiquin P Eye Drop</td>
                 <td style="border: 1px solid #131212; padding: 5px;">(01)</td>
                 <td style="border: 1px solid #0a0909; padding: 5px;">८ वेळा २-२ तासाने एक-एक थेंब.</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine2">
                 <td style="border: 1px solid #0e0d0d; padding: 5px;">Homide Eye Drop</td>
                 <td style="border: 1px solid #080808; padding: 5px;">(01)</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">२ वेळा एक-एक थेंब</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine3">
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">Tobastar eye drop</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">दिवसातून ४ वेळा.</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine4">
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Ciprobid 500mg</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">(10)</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">सकाळ... संध्याकाळी.</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine5">
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Pantosec DSR</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">(05)</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine6">
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Eyeview</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">(30)</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
             </tr>
-            <tr style="height: 20px;">
+            <tr style="height: 20px;" id="Medicine7">
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">Nepa OD eye drop</td>
                 <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
                 <td style="border: 1px solid #141414; padding: 5px;">२ वेळा एक-एक थेंब</td>
@@ -1168,6 +1168,36 @@ if (visibleCount === 0 && patientDetailsSection) {
         // Show or hide the entire table based on row visibility
         iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
         iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
+
+
+        const postOperativeTemplate = JSON.parse(localStorage.getItem("postOperativeTemplate")) || {};
+        const post_Operative_Medicine_Table = document.getElementById("Post-Operative-Medicine-Template");
+        const postOperativeRows = post_Operative_Medicine_Table.querySelectorAll("tbody tr");
+
+        // Function to update the visibility of rows based on postOperativeTemplate
+        function updatePostOperativeTableVisibility() {
+            let isAnyRowVisible = false;
+
+            postOperativeRows.forEach(row => {
+                const medicineId = row.id; // Example: "Medicine1", "Medicine2", etc.
+
+                if (postOperativeTemplate[medicineId] === "true") {
+                    row.style.display = ""; // Show row
+                    isAnyRowVisible = true;
+                } else {
+                    row.style.display = "none"; // Hide row
+                }
+            });
+
+            // Hide entire table if no rows are visible or template is empty
+            if (!isAnyRowVisible || Object.keys(postOperativeTemplate).length === 0) {
+                post_Operative_Medicine_Table.style.display = "none";
+            } else {
+                post_Operative_Medicine_Table.style.display = ""; // Show table if any row is visible
+            }
+        }
+
+        updatePostOperativeTableVisibility();
 </script>
 
 

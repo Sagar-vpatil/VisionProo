@@ -984,7 +984,7 @@
                     </div>
 
 
-                    <table class="table-container table-responsive" style="width: 600px; margin-left: 40px;" >
+                    <table class="table-container table-responsive" style="width: 600px; margin-left: 40px;" id="Pre-Operative-Medicine-Template">
                         <thead>
                           <tr>
                           
@@ -994,19 +994,19 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          <tr id="Medicine1">
                             
                             <td>Tab.Diamox 250mg</td>
                             <td>(2)</td>
-                            <td>ऑपेरेशन च्या आदल्या दिवशी रात्री जेवणानंतर 1 गोळी आणि ऑपरेशन च्या दिवशी सकाळी 6.00वाजता येताना एक गोळी घेणे</td>
+                            <td>ऑपेरेशन च्या आदल्या दिवशी रात्री जेवणानंतर 1 गोळी आणि ऑपरेशन च्या दिवशी सकाळी 6.00 वाजता येताना एक गोळी घेणे</td>
                           </tr>
-                          <tr>
+                          <tr id="Medicine2">
                          
                             <td>Tropicacyl plus eye drop</td>
                             <td>(01)</td>
                             <td>(बाहुली मोठी करण्याचा ड्रॉप) ऑपेरेशन च्या दिवशी सकाळी 6.00 वाजल्यापासून ऑपेरेशन च्या डोळ्यात 3-4 वेळा 10-10 मिनिटांनी 2 -2 थेंब टाकणे...</td>
                           </tr>
-                          <tr>
+                          <tr id="Medicine3">
                           
                             <td>Kaiflur GT eye drop</td>
                             <td>(01)</td>
@@ -1777,6 +1777,36 @@
             document.getElementById("Treatment-Heading").style.display = "none";
         }
 
+
+        const preOperativeTemplate = JSON.parse(localStorage.getItem("preOperativeTemplate")) || {};
+        const pre_Operative_Medicine_Table = document.getElementById("Pre-Operative-Medicine-Template");
+        const preOperativeRows = pre_Operative_Medicine_Table.querySelectorAll("tbody tr");
+
+        // Function to update the visibility of rows based on preOperativeTemplate
+        function updateTableVisibility() {
+            let isAnyRowVisible = false;
+
+            preOperativeRows.forEach(row => {
+                const medicineId = row.id; // Example: "Medicine1", "Medicine2", etc.
+
+                if (preOperativeTemplate[medicineId] === "true") {
+                    row.style.display = ""; // Show row
+                    isAnyRowVisible = true;
+                } else {
+                    row.style.display = "none"; // Hide row
+                }
+            });
+
+            // Hide entire table if no rows are visible or template is empty
+            if (!isAnyRowVisible || Object.keys(preOperativeTemplate).length === 0) {
+                pre_Operative_Medicine_Table.style.display = "none";
+            } else {
+                pre_Operative_Medicine_Table.style.display = ""; // Show table if any row is visible
+            }
+        }
+
+       updateTableVisibility();
+
         const Saved_Status = localStorage.getItem("Saved_Status");
         console.log(Saved_Status);
         if(Saved_Status === "true" || Saved_Status){
@@ -1801,6 +1831,8 @@
         localStorage.removeItem("PreOperativeDetails");
         localStorage.removeItem("aScanTable");
         localStorage.removeItem("iopGatTable");
+        localStorage.removeItem("preOperativeTemplate");
+        localStorage.removeItem("postOperativeTemplate");
         localStorage.removeItem("openHistory_Status");
         localStorage.removeItem("Saved_Status");
         }

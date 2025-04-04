@@ -8,6 +8,8 @@
    document.getElementById("appointmentName").textContent = appointment.Name;
  } 
 
+
+
 // Toggle selection for symptoms, medical history, and surgical history
 function toggleSymptoms(element) {
     try {
