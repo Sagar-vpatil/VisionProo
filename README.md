@@ -1,30 +1,90 @@
-# VisionProo 👁️💻
+# 👁️💻 **VisionProo**  
+**An advanced Eye Hospital Management System for streamlined hospital operations.**
 
-**VisionProo** is an advanced, user-friendly Eye Hospital Management System designed to simplify and optimize hospital operations. Built using **Electron** and **Firebase**, this application is ideal for managing patient records, appointments, inventory, and staff workflows efficiently. 🏥✨
+---
 
-## Features 🚀
+## 📌 **Project Overview**  
 
-- **Patient Management** 👨‍⚕️👩‍⚕️
-  - Add, update, and view patient records.
-  - Maintain medical histories and prescriptions.
+**VisionProo** is a powerful and user-friendly desktop application designed to optimize workflows in eye hospitals. Developed using **Electron & Firebase**, this system helps manage patient records, doctor appointments, inventory, and staff activities efficiently—all in real time.  
 
-- **Doctor & Appointment Scheduling** 🩺📅
-  - Schedule and manage doctor appointments.
-  - Real-time updates with Firebase Firestore.
+The platform ensures better coordination, faster patient service, and enhanced medical recordkeeping, making it ideal for modern healthcare environments.
 
-- **Inventory Management** 📦✅
-  - Track and update hospital inventory.
-  - Set alerts for low stock items.
+---
 
-- **Authentication & Security** 🔒🔑
-  - Secure user login using Firebase Authentication.
-  - Role-based access control for staff and administrators.
+## 🛠️ **Tech Stack**
 
-- **Real-Time Notifications** 🔔⚡
-  - Notify patients about appointments.
-  - Inventory stock alerts and reminders.
+- **Frontend**:  
+  - [Electron](https://www.electronjs.org/) (HTML, CSS, JavaScript) - For cross-platform desktop development.  
+- **Backend**:  
+  - [Firebase Firestore](https://firebase.google.com/products/firestore) - Real-time database for structured data storage.  
+  - [Firebase Authentication](https://firebase.google.com/docs/auth) - For secure user login and role-based access.  
+- **Development Environment**:  
+  - Visual Studio Code  
 
-## Tech Stack 🛠️
+---
 
-- **Frontend**: Electron (HTML, CSS, JavaScript)
-- **Backend**: Firebase Firestore (NoSQL database)
+## ✨ **Features**
+
+### 🧑‍⚕️ **Hospital Side Features**
+- **Patient Management**:  
+  - Add, update, and view detailed patient records.  
+  - Maintain medical history, prescriptions, and eye examination results.
+
+- **Appointment Scheduling**:  
+  - Schedule and manage doctor appointments with calendar support.  
+  - Send real-time notifications and reminders.
+
+- **Inventory Management**:  
+  - Track medical and surgical inventory.  
+  - Set alerts for low stock and expiry dates.
+
+- **Role-Based Access Control**:  
+  - Secure login for Admin, Doctors, and Staff.  
+  - Permission management based on roles.
+
+- **Real-Time Notifications**:  
+  - Notify patients of upcoming appointments.  
+  - Alert admin/staff for critical inventory updates.
+
+---
+
+## 💬 **Screenshots**
+
+### 🖥️ VisionProo System
+<table>
+  <tr>
+    <td><img src="./assets/screenshots/VisionLogin.png" alt="Login Screen" width="250"></td>
+    <td><img src="./assets/screenshots/VisionDashboard.png" alt="Dashboard" width="250"></td>
+    <td><img src="./assets/screenshots/VisionAppointments.png" alt="Appointment Screen" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center">Login Screen</td>
+    <td align="center">Admin Dashboard</td>
+    <td align="center">Appointment Management</td>
+  </tr>
+</table>
+
+---
+
+## ⚙️ **Setup Instructions**
+
+### 1. **Clone the Repository**
+```bash
+git clone https://github.com/Sagar-vpatil/<visionproo-repo>.git
+```
+
+### 2. **Install Dependencies**
+```bash
+cd visionproo
+npm install
+```
+
+### 3. **Run the App**
+```bash
+npm start
+```
+
+### 4. **Firebase Configuration**
+- Add your Firebase config inside a `.env` file or directly in the config file (`firebase.js`).
+
+---
