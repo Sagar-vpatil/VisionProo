@@ -72,7 +72,7 @@ The platform ensures better coordination, faster patient service, and enhanced m
 
 ### 1. **Clone the Repository**
 ```bash
-git clone https://github.com/Sagar-vpatil/<visionproo-repo>.git
+git clone https://github.com/Sagar-vpatil/VisionProo.git
 ```
 
 ### 2. **Install Dependencies**
