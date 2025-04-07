@@ -53,7 +53,7 @@ The platform ensures better coordination, faster patient service, and enhanced m
 ### 🖥️ VisionProo System
 <table>
   <tr>
-    <td><img src="./assets/VisionLogin.png" alt="Login Screen" width="250"></td>
+    <td><img src="./assets/VisionLogin.png" alt="Login Screen" width="500"></td>
     <td><img src="./assets/VisionDashboard.png" alt="Dashboard" width="250"></td>
     <td><img src="./assets/VisionAppointments.png" alt="Appointment Screen" width="250"></td>
      <td><img src="./assets/VisionSummary.png" alt="Appointment Screen" width="250"></td>
