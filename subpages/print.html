@@ -983,7 +983,7 @@
                         </table>
                     </div>
 
-                    <h3>Pre-Operative Treatment</h3>
+                    <h3 id="Pre-Operative-Medicine-Heading">Pre-Operative Treatment</h3>
                     <table class="table-container table-responsive" style="width: 600px; margin-left: 40px;" id="Pre-Operative-Medicine-Template">
                         <thead>
                           <tr>
@@ -1781,6 +1781,7 @@
         const preOperativeTemplate = JSON.parse(localStorage.getItem("preOperativeTemplate")) || {};
         const pre_Operative_Medicine_Table = document.getElementById("Pre-Operative-Medicine-Template");
         const preOperativeRows = pre_Operative_Medicine_Table.querySelectorAll("tbody tr");
+        const preOperativeHeading = document.getElementById("Pre-Operative-Medicine-Heading");
 
         // Function to update the visibility of rows based on preOperativeTemplate
         function updateTableVisibility() {
@@ -1800,8 +1801,10 @@
             // Hide entire table if no rows are visible or template is empty
             if (!isAnyRowVisible || Object.keys(preOperativeTemplate).length === 0) {
                 pre_Operative_Medicine_Table.style.display = "none";
+                preOperativeHeading.style.display = "none"; // Hide heading if no rows are visible
             } else {
                 pre_Operative_Medicine_Table.style.display = ""; // Show table if any row is visible
+                preOperativeHeading.style.display = "block"; // Show heading if any row is visible
             }
         }
 

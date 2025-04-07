@@ -786,7 +786,7 @@
             </tr>
         </tbody>
     </table>
-    <h4 class="section-title ">Post Operative Treatment</h4>
+    <h4 class="section-title " id="Post-Operative-Medicine-Heading">Post Operative Treatment</h4>
     <table style="width: 80%; border-collapse: collapse; font-size: 14px; margin-left: 120px; margin-top: 20px; " id="Post-Operative-Medicine-Template">
         <thead>
             <tr style="height: 25px; background-color: #fff;">
@@ -1173,6 +1173,7 @@ if (visibleCount === 0 && patientDetailsSection) {
         const postOperativeTemplate = JSON.parse(localStorage.getItem("postOperativeTemplate")) || {};
         const post_Operative_Medicine_Table = document.getElementById("Post-Operative-Medicine-Template");
         const postOperativeRows = post_Operative_Medicine_Table.querySelectorAll("tbody tr");
+        const postOperativeHeading = document.getElementById("Post-Operative-Medicine-Heading");
 
         // Function to update the visibility of rows based on postOperativeTemplate
         function updatePostOperativeTableVisibility() {
@@ -1192,8 +1193,10 @@ if (visibleCount === 0 && patientDetailsSection) {
             // Hide entire table if no rows are visible or template is empty
             if (!isAnyRowVisible || Object.keys(postOperativeTemplate).length === 0) {
                 post_Operative_Medicine_Table.style.display = "none";
+                postOperativeHeading.style.display = "none"; // Hide heading if no rows are visible
             } else {
                 post_Operative_Medicine_Table.style.display = ""; // Show table if any row is visible
+                postOperativeHeading.style.display = ""; // Show heading if any row is visible
             }
         }
 
