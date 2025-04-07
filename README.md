@@ -56,11 +56,13 @@ The platform ensures better coordination, faster patient service, and enhanced m
     <td><img src="./assets/VisionLogin.png" alt="Login Screen" width="250"></td>
     <td><img src="./assets/VisionDashboard.png" alt="Dashboard" width="250"></td>
     <td><img src="./assets/VisionAppointments.png" alt="Appointment Screen" width="250"></td>
+     <td><img src="./assets/VisionSummary.png" alt="Appointment Screen" width="250"></td>
   </tr>
   <tr>
     <td align="center">Login Screen</td>
     <td align="center">Admin Dashboard</td>
     <td align="center">Appointment Management</td>
+    <td align="center">Appointment Summary</td>
   </tr>
 </table>
 
