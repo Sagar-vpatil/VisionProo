@@ -2965,190 +2965,232 @@ overflow-y: auto; width: 50%;">
 
 
 <script>
-  // Medicine list (sorted alphabetically)
-  let medicines = [
-    "Hydrakem Efdrop",
-    "Resync Eyedrop",
-    "Gatiquin P Eldrop",
-    "Kaimorst Eyedrop",
-    "Gate P. Eye drop",
-    "Sotime",
-    "Admox LP Eye drop",
-    "Corosol XG Eld",
-    "Moxosft Eyedrop",
-    "Myatro Eld",
-    "Veldrop Eyedrop",
-    "Maha Flox LP Eld",
-    "Nepamax Eye drop",
-    "Addtear Eld",
-    "Ocupol Eye ointment",
-    "Flagel Eld",
-    "Azithral Eye Ointment",
-    "Netacin Eld",
-    "Ocupol Dx Eye oint",
-    "Trokid Eld",
-    "Homide Eye drop",
-    "Mofleren-D Eld",
-    "Tobastar Eye drop",
-    "Moxam-D Eld",
-    "Tab. Ciprobid 500",
-    "I-Dew Eld",
-    "Tab. Combiflam",
-    "Tab. Diamox 250",
-    "Tab. Genmox 625",
-    "K-Tear Eld",
-    "Albrim T Eld"
-  ].sort(); // Sort alphabetically
+  let db;
+    const DB_NAME = "MedicalDB";
+    const STORE_NAME = "OptionsStore";
+    const originalMedicines = [
+      "Hydrakem Efdrop", "Resync Eyedrop", "Gatiquin P Eldrop", "Kaimorst Eyedrop",
+      "Gate P. Eye drop", "Sotime", "Admox LP Eye drop", "Corosol XG Eld",
+      "Moxosft Eyedrop", "Myatro Eld", "Veldrop Eyedrop", "Maha Flox LP Eld",
+      "Nepamax Eye drop", "Addtear Eld", "Ocupol Eye ointment", "Flagel Eld",
+      "Azithral Eye Ointment", "Netacin Eld", "Ocupol Dx Eye oint", "Trokid Eld",
+      "Homide Eye drop", "Mofleren-D Eld", "Tobastar Eye drop", "Moxam-D Eld",
+      "Tab. Ciprobid 500", "I-Dew Eld", "Tab. Combiflam", "Tab. Diamox 250",
+      "Tab. Genmox 625", "K-Tear Eld", "Albrim T Eld"
+    ];
 
-  let doses = [
-    "1-1-1",
-    "1-0-1",
-    "0-0-1",
-    "0-0-0-0",
-    "0-0-0",
-    "0-0",
-    "1-0-0",
-    "४ वेळा १-१ थेंब ",
-    "३ वेळा १-१ थेंब",
-    "२ वेळा सकाळ- ०- संध्या ",
-    "१ वेळा रात्री ५ दिवस ",
-    "सकाळी जेवणाअगोदर १ गोळी ",
-    "सकाळ - ०-  संध्या जेवणानंतर"
-  ];
 
-  let currentSelect = null;
-  let isMedicineModal = false;
+    const originalDoses = [
+      "1-1-1", "1-0-1", "0-0-1", "0-0-0-0", "0-0-0", "0-0", "1-0-0",
+      "४ वेळा १-१ थेंब ", "३ वेळा १-१ थेंब", "२ वेळा सकाळ- ०- संध्या ",
+      "१ वेळा रात्री ५ दिवस ", "सकाळी जेवणाअगोदर १ गोळी ",
+      "सकाळ - ०-  संध्या जेवणानंतर"
+    ];
 
-  // Function to create medicine options (filtered by search)
-  function createMedicineOptions(filter = "") {
-    const filteredMedicines = medicines.filter(med =>
-      med.toLowerCase().includes(filter.toLowerCase())
+
+    let medicines = [...originalMedicines].sort();
+    let doses = [...originalDoses];
+
+
+    let currentSelect = null;
+    let isMedicineModal = false;
+
+
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = (event) => {
+      db = event.target.result;
+      const store = db.createObjectStore(STORE_NAME, { keyPath: "type" });
+    };
+    request.onsuccess = (event) => {
+      db = event.target.result;
+      loadOptionsFromDB();
+    };
+    request.onerror = (event) => {
+      console.error("IndexedDB error:", event.target.error);
+    };
+
+
+    function createMedicineOptions() {
+      return `
+        <option disabled selected>Select Medicine</option>
+        ${medicines.map(m => `<option value="${m}">${m}</option>`).join("")}
+        <option value="add-new-medicine" class="add-option">+ Add New Medicine</option>
+      `;
+    }
+
+
+    function createDoseOptions() {
+      return `
+        <option disabled selected>Select Dose</option>
+        ${doses.map(d => `<option value="${d}">${d}</option>`).join("")}
+        <option value="add-new-dose" class="add-option">+ Add New Dose</option>
+      `;
+    }
+
+
+    function addMedicineEntry() {
+      const medicineList = document.getElementById("medicine-list");
+      medicineList.style.display = "block";
+
+
+      const entry = document.createElement("div");
+      entry.className = "medicine-entry";
+
+
+      entry.innerHTML = `
+        <select class="medicine-select" onchange="handleSelectChange(this)" oncontextmenu="showDeleteOption(event, this, 'medicines')">
+          ${createMedicineOptions()}
+        </select>
+        <select class="medicine-dose" onchange="handleSelectChange(this)" oncontextmenu="showDeleteOption(event, this, 'doses')">
+          ${createDoseOptions()}
+        </select>
+        <button onclick="this.parentElement.remove(); toggleListDisplay()">Remove</button>
+
+
+      `;
+
+
+      medicineList.appendChild(entry);
+    }
+
+
+    function toggleListDisplay() {
+      const medicineList = document.getElementById("medicine-list");
+      medicineList.style.display = medicineList.children.length ? "block" : "none";
+    }
+
+
+    function handleSelectChange(select) {
+      if (select.value === "add-new-medicine") {
+        isMedicineModal = true;
+        showModal("Enter new medicine name");
+        currentSelect = select;
+      } else if (select.value === "add-new-dose") {
+        isMedicineModal = false;
+        showModal("Enter new dose");
+        currentSelect = select;
+      }
+    }
+
+
+    function showModal(placeholder) {
+      document.getElementById("modalInput").placeholder = placeholder;
+      document.getElementById("modalInput").value = "";
+      document.getElementById("inputModal").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+
+
+    function closeModal() {
+      const input = document.getElementById("modalInput");
+      const newValue = input.value.trim();
+      document.getElementById("inputModal").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      if (currentSelect) currentSelect.value = "";
+      if (!newValue){
+        currentSelect.selectedIndex = 0;
+        return;
+      };
+    }
+
+
+    function saveNewOption() {
+      const input = document.getElementById("modalInput");
+      const newValue = input.value.trim();
+      if (!newValue) return closeModal() ;
+
+
+      if (isMedicineModal) {
+        if (!medicines.includes(newValue)) {
+          medicines.push(newValue);
+          medicines.sort();
+          saveToDB("medicines", medicines);
+          updateAllSelects("medicines");
+        }
+      } else {
+        if (!doses.includes(newValue)) {
+          doses.push(newValue);
+          saveToDB("doses", doses);
+          updateAllSelects("doses");
+        }
+      }
+      closeModal();
+      currentSelect.value = newValue;
+
+
+    }
+
+
+    function updateAllSelects(type) {
+      document.querySelectorAll(type === "medicines" ? ".medicine-select" : ".medicine-dose")
+        .forEach(select => {
+          const prev = select.value;
+          select.innerHTML = type === "medicines" ? createMedicineOptions() : createDoseOptions();
+          select.value = prev;
+        });
+    }
+
+
+    function saveToDB(type, list) {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      const store = tx.objectStore(STORE_NAME);
+      store.put({ type: type, values: list });
+    }
+
+
+    function loadOptionsFromDB() {
+      const tx = db.transaction(STORE_NAME, "readonly");
+      const store = tx.objectStore(STORE_NAME);
+
+
+      ["medicines", "doses"].forEach(type => {
+        const request = store.get(type);
+        request.onsuccess = () => {
+          const result = request.result;
+          if (result && Array.isArray(result.values)) {
+            if (type === "medicines") {
+              medicines = result.values;
+            } else {
+              doses = result.values;
+            }
+          }
+        };
+      });
+    }
+
+
+    async function showDeleteOption(event, selectEl, type) {
+      event.preventDefault();
+      const selectedText = selectEl.options[selectEl.selectedIndex]?.text;
+      if (!selectedText || (type === "medicines" && originalMedicines.includes(selectedText)) ||
+          (type === "doses" && originalDoses.includes(selectedText))) {
+        return;
+      }
+
+
+      const userConfirmation = await window.electronAPI.showMessageBox(
+      "warning",
+      `Are you want to delete "${selectedText}" from ${type}?`,
+      "Delete",
+      ["Yes", "No"]
     );
-    return `
-      <option value="" disabled selected>Select Medicine</option>
-      ${filteredMedicines.map(med => `<option value="${med}">${med}</option>`).join('')}
-      <option value="add-new-medicine" class="add-option">+ Add New Medicine</option>
-    `;
-  }
 
-  // Function to create dose options
-  function createDoseOptions() {
-    return `
-      <option value="" disabled selected>Select Dose</option>
-      ${doses.map(dose => `<option value="${dose}">${dose}</option>`).join('')}
-      <option value="add-new-dose" class="add-option">+ Add New Dose</option>
-    `;
-  }
 
-  // Function to add a new medicine entry
-  function addMedicineEntry() {
-    const medicineList = document.getElementById("medicine-list");
-    medicineList.style.display = "block";
+      if (userConfirmation !== 1) {
+        if (type === "medicines") {
+          medicines = medicines.filter(m => m !== selectedText);
+          saveToDB("medicines", medicines);
+        } else {
+          doses = doses.filter(d => d !== selectedText);
+          saveToDB("doses", doses);
+        }
+        updateAllSelects(type);
+        selectEl.selectedIndex = 0;
 
-    const entry = document.createElement("div");
-    entry.className = "medicine-entry";
 
-    entry.innerHTML = `
-      <select class="medicine-select" onchange="handleSelectChange(this)">
-        ${createMedicineOptions()}
-      </select>
-      <select class="medicine-dose" onchange="handleSelectChange(this)">
-        ${createDoseOptions()}
-      </select>
-      <button type="button" class="remove-btn">Remove</button>
-    `;
-
-    medicineList.appendChild(entry);
-
-    entry.querySelector(".remove-btn").addEventListener("click", function () {
-      entry.remove();
-      if (medicineList.children.length === 0) {
-        medicineList.style.display = "none";
-      }
-    });
-  }
-
-  // Function to handle select change (for adding new medicine/dose)
-  function handleSelectChange(select) {
-    if (select.value === "add-new-medicine") {
-      isMedicineModal = true;
-      showModal("Enter new medicine name");
-      currentSelect = select;
-    } else if (select.value === "add-new-dose") {
-      isMedicineModal = false;
-      showModal("Enter new dose (e.g., 1-1-1)");
-      currentSelect = select;
-    }
-  }
-
-  // Function to show the modal
-  function showModal(placeholder) {
-    const modal = document.getElementById("inputModal");
-    const overlay = document.getElementById("overlay");
-    const input = document.getElementById("modalInput");
-    input.placeholder = placeholder;
-    input.value = "";
-    modal.style.display = "block";
-    overlay.style.display = "block";
-  }
-
-  // Function to close the modal
-  function closeModal() {
-    const modal = document.getElementById("inputModal");
-    const overlay = document.getElementById("overlay");
-    modal.style.display = "none";
-    overlay.style.display = "none";
-    if (currentSelect) {
-      currentSelect.value = ""; // Reset to default
-    }
-  }
-
-  // Function to save a new medicine/dose
-  function saveNewOption() {
-    const input = document.getElementById("modalInput");
-    const newValue = input.value.trim();
-
-    if (newValue) {
-      if (isMedicineModal && !medicines.includes(newValue)) {
-        medicines.push(newValue);
-        medicines.sort(); // Keep the list sorted
-        updateAllMedicineSelects();
-      } else if (!isMedicineModal && !doses.includes(newValue)) {
-        doses.push(newValue);
-        updateAllDoseSelects();
       }
     }
-    closeModal();
-  }
 
-  // Function to update all medicine selects
-  function updateAllMedicineSelects() {
-    const allMedicineSelects = document.querySelectorAll(".medicine-select");
-    allMedicineSelects.forEach(select => {
-      const currentValue = select.value;
-      select.innerHTML = createMedicineOptions();
-      select.value = currentValue === "add-new-medicine" ? "" : currentValue;
-    });
-  }
-
-  // Function to update all dose selects
-  function updateAllDoseSelects() {
-    const allDoseSelects = document.querySelectorAll(".medicine-dose");
-    allDoseSelects.forEach(select => {
-      const currentValue = select.value;
-      select.innerHTML = createDoseOptions();
-      select.value = currentValue === "add-new-dose" ? "" : currentValue;
-    });
-  }
-
-  // Function to filter medicines based on search input
-  function filterMedicines() {
-    const searchInput = document.getElementById("searchMedicine").value;
-    const allMedicineSelects = document.querySelectorAll(".medicine-select");
-    allMedicineSelects.forEach(select => {
-      select.innerHTML = createMedicineOptions(searchInput);
-    });
-  }
 </script>
 
 <!-- bootstrap js -->
