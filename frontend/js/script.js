@@ -1105,3 +1105,11 @@ document.getElementById('surgical-treatment-new-input').addEventListener('keypre
     addSurgicalTreatment();
   }
 });
+
+
+
+
+
+
+
+

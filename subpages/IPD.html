@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discharge Summary - Professional Print Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+
+@media print {
+    /* Ensure the Eye Examination table does not split across pages */
+    .eye-examination-section {
+        page-break-inside: avoid; /* Prevent the table from splitting */
+    }
+
+    /* Ensure the Medicines Table does not split across pages */
+    .medicines-section {
+        page-break-inside: avoid; /* Prevent the table from splitting */
+        margin-bottom: 10px; /* Add some spacing after the section */
+    }
+
+    /* Selective coloring for Medicines Table header during printing */
+    #Medicines-Table thead th {
+        background-color: #e0e0e0; /* Light gray background for the header */
+        color: #000; /* Ensure text is black for readability */
+    }
+
+    /* Optional: Style for table rows for better readability */
+    #Medicines-Table tbody tr {
+        background-color: #f9f9f9; /* Very light gray for rows */
+    }
+
+    /* Adjust margins and padding for better printing */
+    .page {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+    }
+
+    /* Hide unnecessary elements */
+    .navbar, .print-btn, .buttons, .hr {
+        display: none !important;
+    }
+
+    /* Ensure headings and sections are styled properly */
+    .section-title {
+        font-size: 18pt; /* Larger font size for headings */
+        color: #004a99; /* Consistent color for headings */
+        border-bottom: 2px solid #004a99; /* Consistent border for headings */
+        padding-bottom: 8px;
+        margin-top: 25px; /* Add space above headings */
+        page-break-after: avoid; /* Prevent headings from being left alone */
+    }
+
+    /* Ensure tables and other elements don't break awkwardly */
+    table {
+        page-break-inside: auto; /* Allow tables to split across pages */
+    }
+
+    /* Ensure input fields are visible and styled in print */
+    input[type="text"],
+    input[type="date"] {
+        border: 1px solid #000; /* Add borders to inputs */
+        background: transparent; /* Remove background */
+        padding: 5px; /* Add padding for readability */
+        font-size: 12pt; /* Consistent font size */
+    }
+
+    /* Ensure checkboxes are visible in print */
+    .print-checkbox {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    /* Ensure signature section is visible and styled */
+    .signature {
+        text-align: right;
+        font-style: italic;
+        margin-top: 20px; /* Add space above signature */
+    }
+
+    .signature::before {
+        content: "_______________"; /* Add a line for signature */
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Ensure investigation items are visible and styled */
+    .investigation-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px; /* Add space between items */
+    }
+
+    .investigation-item span {
+        font-weight: bold; /* Bold labels for clarity */
+    }
+
+    .investigation-item input {
+        border: 1px solid #000; /* Add borders to inputs */
+        background: transparent; /* Remove background */
+        padding: 5px; /* Add padding for readability */
+        font-size: 12pt; /* Consistent font size */
+    }
+}
+
+
+        /* Investigation Section Styling */
+.investigation-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.investigation-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.investigation-item {
+    display: flex;
+    align-items: center;
+    gap: px;
+}
+
+.investigation-item span {
+    font-weight: bold;
+}
+
+.investigation-item input {
+    width: 100px; /* Adjust width as needed */
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+           /* Base Styling */
+           @page {
+            size: A4;
+            margin: 0;
+        }
+        .small-input {
+        width: 80px; /* Adjust width */
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+        margin: 0 5px;
+    }
+        .container {
+            max-width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        
+
+        .patient-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .patient-table th, .patient-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center; /* Center-align text horizontally */
+            vertical-align: middle; /* Center-align text vertically */
+        }
+
+        .patient-table th {
+            color: #000;
+            text-align: left;
+        }
+
+        /* Clinical Sections */
+        .section-title {
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #004a99;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+            margin: 25px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 18px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12pt;
+            }
+
+            .container {
+                padding: 15px;
+                min-height: auto;
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+            .patient-info-card {
+                background: none;
+               
+            }
+
+            .buttons {
+                display: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            input[type="date"] {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                border: none;
+                padding: 0;
+                background: transparent;
+                font-family: 'Helvetica Neue', sans-serif;
+                font-size: 12pt;
+                color: #333;
+                width: auto;
+           
+                font-size: 15px;
+                margin-left: 20px;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+
+            input[type="date"]:before {
+                content: attr(value);
+            }
+
+            .print-checkbox {
+                display: inline-block;
+                margin-right: 5px;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+            }
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+                margin-top: 30px;
+            }
+            
+            .navbar .buttons button {
+                display: none;
+            }
+        }
+
+        .procedure-table {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .procedure-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+            line-height: 1.2;
+            background: #f8f9fa;
+            height: 280px;
+        }
+
+        .procedure-box strong {
+            font-size: 13px;
+        }
+
+        .procedure-box ol {
+            padding-left: 15px;
+        }
+
+        .procedure-box li {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .iol-sticker {
+            margin-top: 10px;
+            border: 1px solid black;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 5px 10px;
+        }
+
+        .navbar img {
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .navbar .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar .buttons button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background: #d32f2f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+ /* Custom CSS for the table */
+ .table-container {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        .table-container th,
+        .table-container td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table-container th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table-container tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+
+
+
+
+           /* Print-specific styling */
+    @media print {
+        .print-investigation {
+            margin-top: 100%; /* Add top margin for printing */
+        }
+    }
+
+  /* Print-specific styles */
+@media print {
+    /* Style for text inputs */
+    input[type="text"] {
+        border: none !important;
+        background: transparent !important;
+        -webkit-appearance: none;
+        appearance: none;
+        box-shadow: none;
+        padding: 0;
+        position: relative; /* Added for positioning control */
+    }
+    
+    /* Display the input value with left alignment */
+    input[type="text"]::after {
+        content: attr(value);
+        display: block;
+        text-align: start; /* Explicitly aligns text to the left */
+        position: absolute;
+        left: 0; /* Positions at the start */
+        width: 100%; /* Maintains full width */
+        color: black; /* Ensures text is visible */
+        font-family: inherit; /* Inherits the font from the input */
+        font-size: inherit; /* Inherits the font size from the input */
+    }
+    
+    .hospital-logo {
+        width: 160px;
+        height: 110px;
+        margin-left: 20px;
+    }
+    
+    /* Optional: Ensure labels or static text are visible */
+    label {
+        color: black !important;
+    }
+}
+
+
+
+
+
+
+
+  /* Header Section */
+  .letterhead {
+        border-bottom: 2px solid #070a0d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative; /* Added for positioning doctor names */
+        
+    }
+
+    .hospital-logo {
+        width: 160px;
+        height: 110px;
+    }
+
+    .hospital-info {
+        text-align: right;
+    }
+
+    .hospital-name {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-weight: 700;
+        color: red;
+        font-size: 32px;
+        letter-spacing: 1.5px;
+    }
+
+    .hospital-address {
+        font-size: 18px;
+        color: #666;
+       
+    }
+
+    /* Doctor's Name Styling */
+    .doctor-name-left,
+    .doctor-name-right {
+        position: absolute;
+        top: 0;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .doctor-name-left {
+        left: 0; /* Position on the left corner */
+    }
+
+    .doctor-name-right {
+        right: 0; /* Position on the right corner */
+    }
+    .hospital-address-details {
+      
+        margin: 2; /* Remove default margin */
+    }
+
+
+
+
+
+
+
+
+
+
+    .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header-left {
+    font-weight: bold;
+    border: 1px solid #000;
+    padding: 2px 6px;
+    display: inline-block;
+}
+
+.title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px auto;
+    border: 2px solid black;
+    display: inline-block;
+    padding: 5px 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info {
+    margin-bottom: 20px;
+}
+
+.info label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.info span {
+    display: inline-block;
+    min-width: 70px;
+}
+
+.info input {
+    border: none;
+    border-bottom: 1px dotted #000;
+    outline: none;
+    font-size: 14px;
+    padding: 2px 4px;
+    width: 250px;
+}
+
+.dates label {
+    margin-right: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dates input {
+    padding: 4px;
+    font-size: 14px;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Logo and Hospital Name -->
+        <div style="display: flex; align-items: center;">
+           
+          
+        </div>
+           
+        </div>
+    
+        <!-- Image on the Right Side -->
+        
+    
+        <!-- Action Buttons -->
+        <div class="buttons" style="margin-bottom: 10px;">
+            <button onclick="window.location.href='./main.html';">🏠 Home</button>
+            <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Letterhead -->
+        <div class="letterhead">
+            <!-- Left Corner - Doctor's Name -->
+            <div class="doctor-name-left" style="margin-top: 70px;">
+                Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
+            </div>
+        
+            <!-- Hospital Logo and Info -->
+            <div style="margin-left: 125px;">
+                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
+            </div>
+            <div class="hospital-info" style="margin-right: 192px; margin-bottom: 10px; margin-top: 10px;">
+                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
+                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+            </div>
+        
+            <!-- Right Corner - Doctor's Name -->
+            <div class="doctor-name-right" style="margin-top: 70px;">
+                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
+            </div>
+            
+        </div>
+        <div class="address-section">
+    
+            <p class="hospital-address-details" style="margin-top: 5px;" >
+                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 20px; margin-left: 25px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+            </p>
+            <hr style="border: 1px solid #070a0d;">
+        </div>
+
+        <!-- Patient Information -->
+          <!-- Patient Information -->
+          <div class="header">
+            <div class="header-left">Fit/STAND BY ANAESIESIA</div>
+            <div class="header-right">Patient ID. :<span>1223</span> </div>
+        </div>
+    
+        <div class="title">
+            CASE RECORD
+        </div>
+        
+        <div class="info">
+            <label><span>Name :</span> <input type="text" style="width: 400px;"> &nbsp;&nbsp; <span>Age/Sex :</span> <input type="text" style="width: 120px;"></label>
+            <label><span>Address :</span> <input type="text" style="width: 650px;"></label>
+            <label><span>Phone No. :</span> <input type="text"></label>
+        </div>
+    
+        <div class="dates">
+            <label>D.O.A. <input type="date"></label>
+            <label>D.O.S. <input type="date"></label>
+            <label>D.O.D. <input type="date"></label>
+        </div>
+
+
+
+
+        <h4 class="section-title" >Eye Exam</h4>
+
+        <table class="eye-exam-table" style="width: 350px; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; margin: 0 auto 15px auto;">
+            <tr>
+                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 150px;"></th>
+                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Right</th>
+                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Left</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Conjunctiva</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Cornea</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Pupil</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Lens</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Fundus</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Vision</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Tension</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Sac</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+            </tr>
+        </table>
+
+
+<!-- Systemic Exam Section - Single Row -->
+<div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+              font-size: 18px; margin: 0;">
+      Systemic Exam
+  </h4>
+  <div style="display: flex; align-items: center; gap: 15px;">
+      <span style="font-size: 14px;"><b>P:</b> <input type="text" style="width: 80px; "></span>
+      <span style="font-size: 14px;"><b>BP:</b> <input type="text" style="width: 80px; ;"></span>
+      <span style="font-size: 14px;"><b>Rs:</b> <input type="text" style="width: 80px; "></span>
+      <span style="font-size: 14px;"><b>CVS:</b> <input type="text" style="width: 80px; "></span>
+  </div>
+</div>
+
+
+<!-- Investigations Section - Single Row -->
+<div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;">
+    <h4 style=" color: #004a99; padding: 5px 10px; 
+              font-size: 18px; margin: 0;">
+        Investigations
+    </h4>
+    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+        <span style="font-size: 14px;">
+            <b>HB:</b> <input type="text" style="width: 50px;  border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+        <span style="font-size: 14px;">
+            <b>WBC:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+        <span style="font-size: 14px;">
+            <b>BSL:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+        <span style="font-size: 14px;">
+            <b>HIV:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+        <span style="font-size: 14px;">
+            <b>HBSAG:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+    </div>
+</div>
+
+
+
+
+<!-- Medical H/O Section - Single Row -->
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+              font-size: 18px; margin: 0;">
+      Medical H/O:
+  </h4>
+  <span style=" font-size: 15px;">
+      DM / HT / IHD / Asthma / Skin Infection / Koch's
+  </span>
+</div>
+
+<!-- Surgical H/O Section - Single Row -->
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+              font-size: 18px; margin: 0;">
+      Surgical H/O:
+  </h4>
+  <span style=" font-size: 15px;">
+      Appendectomy (2015) / Cataract Surgery (BE, 2020)
+  </span>
+</div>
+
+
+
+
+
+
+     <!-- Diagnosis Section - Single Line -->
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 20px;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+              font-size: 18px; margin: 0;">
+      Diagnosis:
+  </h4>
+  <span style="font-size: 16px;">
+      Immature Senile Cataract(BE) / Immature Senile Cataract(BE)
+  </span>
+</div>
+
+
+<!-- Advice Surgery Section - Single Row -->
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+  font-size: 18px; margin: 0;">
+      Advice Surgery:
+  </h4>
+  <span style=" font-size: 15px;">
+      Phacoemulsification with IOL (BE) / YAG Laser Capsulotomy
+  </span>
+</div>
+
+
+<h4 class="section-title" id="A-Scan-Heading"  style=" color: #004a99; padding: 5px 10px; 
+  font-size: 18px; margin: 0;">A-Scan Report</h4>
+<table class="table" style="width: 380px; margin: 0 auto; font-size: 10px; border-collapse: collapse;" id="A-Scan-Table">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #000; padding: 3px; background-color: #f0f0f0;"></th>
+            <th style="border: 1px solid #000; padding: 3px; background-color: #f0f0f0;">Right</th>
+            <th style="border: 1px solid #000; padding: 3px; background-color: #f0f0f0;">Left</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">K1</td>
+            <td id="RightK1" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftK1" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">K2</td>
+            <td id="RightK2" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftK2" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">LT</td>
+            <td id="RightLT" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftLT" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">AXL</td>
+            <td id="RightAL" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftAL" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">ACD</td>
+            <td id="RightACD" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftACD" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">L.Power</td>
+            <td id="RightLPower" style="border: 1px solid #000; padding: 2px;">1</td>
+            <td id="LeftLPower" style="border: 1px solid #000; padding: 2px;">1</td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">A.Constant</td>
+            <td id="RightAConstant" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftAConstant" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+        <tr style="height: 12px;">
+            <td style="border: 1px solid #000; padding: 2px;">IOL</td>
+            <td id="RightIOL" style="border: 1px solid #000; padding: 2px;"></td>
+            <td id="LeftIOL" style="border: 1px solid #000; padding: 2px;"></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<div class="title">
+  OPERATIVE NOTES
+</div>
+
+
+<div style="display: flex; align-items: center; gap: 10px; margin: 5px 0;">
+
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+  font-size: 18px; margin: 0;">
+Eye =
+</h4>
+
+
+  
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="eye_re" style="width: 14px; height: 14px;">
+      <span>RE</span>
+  </label>
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="eye_le" style="width: 14px; height: 14px;">
+      <span>LE</span>
+  </label>
+</div>
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 5px 0;">
+  <h4 style=" color: #004a99; padding: 5px 10px; 
+  font-size: 18px; margin: 0;">
+Eye Type of Surgery:
+</h4>
+
+  
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_sics" style="width: 14px; height: 14px;">
+      <span>SICS</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_phaco" style="width: 14px; height: 14px;">
+      <span>Phaco</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_pterigium" style="width: 14px; height: 14px;">
+      <span>Pterigium</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_chalazion" style="width: 14px; height: 14px;">
+      <span>Chalazion</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_dcr_dct" style="width: 14px; height: 14px;">
+      <span>DCR/DCT</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_phaco_trab" style="width: 14px; height: 14px;">
+      <span>Phaco C Trab</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_lid_tear" style="width: 14px; height: 14px;">
+      <span>Lid Tear</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 3px;">
+      <input type="checkbox" name="surgery_other" style="width: 14px; height: 14px;">
+      <span>Other</span>
+  </label>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; margin: 5px 0; flex-wrap: wrap;">
+  <h4 style="color: #004a99; padding: 5px 10px; font-size: 18px; margin: 0;">
+    Name of Surgeon:
+  </h4>
+
+  <span style="font-size: 14px;">Dr. Alvin Rane /</span>
+
+  <input type="text" name="surgeon_other" placeholder="Other..." 
+         style="flex: 1; min-width: 250px; border: none; border-bottom: 1px solid #000; outline: none; font-size: 14px;">
+</div>
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 5px 0;">
+
+
+  <h4 style="color: #004a99; padding: 5px 10px; font-size: 18px; margin: 0;">
+    Anaesthesia:
+  </h4>
+ 
+  <label style="display: flex; align-items: center; gap: 5px;">
+      <input type="checkbox" name="anaesthesia_local" style="width: 14px; height: 14px;">
+      <span>Local</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 5px;">
+      <input type="checkbox" name="anaesthesia_topical" style="width: 14px; height: 14px;">
+      <span>Topical</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 5px;">
+      <input type="checkbox" name="anaesthesia_subtenon" style="width: 14px; height: 14px;">
+      <span>Subtenon</span>
+  </label>
+
+  <label style="display: flex; align-items: center; gap: 5px;">
+      <input type="checkbox" name="anaesthesia_ga" style="width: 14px; height: 14px;">
+      <span>GA</span>
+  </label>
+</div>
+
+
+ <!-- IOL Sticker Section -->
+ 
+ <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 150px;">ANAESTHESIA NOTES</div>
+
+        <!-- Operative Notes Section -->
+        <h4 class="section-title">OPERATIVE NOTES</h4>
+        <div class="procedure-table">
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="phaco-check"> <strong>Phaco</strong>
+                <ol>
+                    <li>P & D With Betadin Solution.</li>
+                    <li>Site Port with 15 Blade.</li>
+                    <li>Incision clear corneal 2.2mm / 2.8mm.</li>
+                    <li>Anterior capsule stain with Blue-dye.</li>
+                    <li>Capsulorhexis done with cystotome.</li>
+                    <li>Hydrodelineation & Hydrodissection done.</li>
+                    <li>Phaco-Treaching & Aspiration with Phaco Probe.</li>
+                    <li>Foldable IOL kept in Bag.</li>
+                    <li>Wound Hydrated.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="sics-check"> <strong>SICS</strong>
+                <ol>
+                    <li>P & D Dropping with Betadine.</li>
+                    <li>Conjunctival Flap Done.</li>
+                    <li>Tunnel with crescent Blade.</li>
+                    <li>Site port with 15 No Blade.</li>
+                    <li>Capsulorhexis with cystotome.</li>
+                    <li>Main entry done with 3.2 Blade.</li>
+                    <li>Hydrodissection done.</li>
+                    <li>Nucleus delivery with vectis.</li>
+                    <li>Cortex aspiration with symcoe cannula.</li>
+                    <li>PCL kept in Bag.</li>
+                    <li>Wound Hydrated.</li>
+                    <li>Subconj inj. given.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+            <div class="procedure-box">
+                <input type="checkbox" class="print-checkbox" id="pterygium-check"> <strong>Pterygium</strong>
+                <ol>
+                    <li>P & D Done.</li>
+                    <li>Subconj inj. given.</li>
+                    <li>Main Mass separated from cornea.</li>
+                    <li>Pungium Excised.</li>
+                    <li>Superiority graft Separates & Put on excised area.</li>
+                    <li>Clint instilled.</li>
+                    <li>Eye Patched.</li>
+                </ol>
+            </div>
+        </div>
+
+       
+       
+        <!-- IOL Sticker Section -->
+        
+        <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 130px; margin-top: 10px;">IOL STICKER</div>
+
+
+
+
+         
+ <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 150px;  margin-top: 20px;">Complication & Remark</div>
+
+ <div class="footer" style="color: black;">
+  <div class="signature" style="margin-right: 30px;">
+      <p>Dr. Alvin R Rane</p>
+  </div>
+</div>
+    
+
+
+    
+<script>
+  function printFunction() {
+      window.print();
+  }
+</script>
+
+
+
+</body>
+</html>

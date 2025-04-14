@@ -435,6 +435,7 @@
       <!-- Add Receptionist Button -->
      <button class="print1-btn" id="only-print-btn">Print</button>
      <button class="btn btn-success" onclick="window.location.href='./bill.html';" id="add-receptionist-btn">Billing</button>
+     <button class="btn btn-success" onclick="window.location.href='./IPD.html';" id="add-receptionist-btn">IPD</button>
      <button class="btn btn-success" onclick="window.location.href='./Discharge_card.html';" id="add-receptionist-btn">Discharge Record</button>
      <button class="btn btn-success" onclick="window.location.href='./AcknowledgmentSlip.html';" id="add-receptionist-btn">Acknowledgement Slip</button> 
      <button class="print1-btn"  id="reset-btn" style="background-color: #ee5034;" type="button">Reset</button> 
@@ -1358,7 +1359,7 @@
 
     <!-- 
     ############################################ eye Examination start #################################### -->
-    <div id="section4" class="section">
+    <div id="section4" class="section" style="margin-bottom: 12%;">
       <h3>Eye Examination:</h3>
       <table class="table-container table-responsive" style=" height: 200px;
 overflow-y: auto; width: 50%;">
@@ -1372,54 +1373,217 @@ overflow-y: auto; width: 50%;">
         <tbody>
           <tr>
             <td>Eyelids & Adnexa</td>
-            <td><input type="text" class="form-control" id="EyelidsR"></td>
-            <td><input type="text" class="form-control" id="EyelidsL"></td>
+            <td><input type="text" class="form-control eyelids-input" id="EyelidsR"></td>
+            <td><input type="text" class="form-control eyelids-input" id="EyelidsL"></td>
           </tr>
           
           <tr>
             <td>Conjunctiva</td>
-            <td><input type="text" class="form-control" id="ConjunctivaR"></td>
-            <td><input type="text" class="form-control" id="ConjunctivaL"></td>
+            <td><input type="text" class="form-control conjunctiva-input" id="ConjunctivaR"></td>
+            <td><input type="text" class="form-control conjunctiva-input" id="ConjunctivaL"></td>
           </tr>
           <tr>
             <td>Sclera</td>
-            <td><input type="text" class="form-control" id="ScleraR"></td>
-            <td><input type="text" class="form-control" id="ScleraL"></td>
+            <td><input type="text" class="form-control sclera-input" id="ScleraR"></td>
+            <td><input type="text" class="form-control sclera-input" id="ScleraL"></td>
           </tr>
           <tr>
-            <td>Cornea</td>
-            <td><input type="text" class="form-control" id="CorneaR"></td>
-            <td><input type="text" class="form-control" id="CorneaL"></td>
-          </tr>
-          <tr>
-            <td>Anterior Chamber</td>
-            <td><input type="text" class="form-control" id="AnteriorR"></td>
-            <td><input type="text" class="form-control" id="AnteriorL"></td>
-          </tr>
-          <tr>
-            <td>Iris</td>
-            <td><input type="text" class="form-control" id="IrisR"></td>
-            <td><input type="text" class="form-control" id="IrisL"></td>
-          </tr>
-          <tr>
-            <td>Pupil</td>
-            <td><input type="text" class="form-control" id="PupilR"></td>
-            <td><input type="text" class="form-control" id="PupilL"></td>
-          </tr>
-          <tr>
-            <td>Lens</td>
-            <td><input type="text" class="form-control" id="LensR"></td>
-            <td><input type="text" class="form-control" id="LensL"></td>
-          </tr>
-          
-          <tr>
-             <td>Fundus</td>
-            <td><input type="text" class="form-control" id="FundusR"></td>
-            <td><input type="text" class="form-control" id="FundusL"></td>
-          </tr>
-
+            <tr>
+              <td>Cornea</td>
+              <td><input type="text" class="form-control cornea-input" id="CorneaR"></td>
+              <td><input type="text" class="form-control cornea-input" id="CorneaL"></td>
+            </tr>
+            <tr>
+              <td>Lens</td>
+              <td><input type="text" class="form-control lens-input" id="LensR"></td>
+              <td><input type="text" class="form-control lens-input" id="LensL"></td>
+            </tr>
+            <tr>
+              <td>Anterior Chamber</td>
+              <td><input type="text" class="form-control anterior-input" id="AnteriorR"></td>
+              <td><input type="text" class="form-control anterior-input" id="AnteriorL"></td>
+            </tr>
+            
+            <tr> 
+              <td>Iris</td>
+              <td><input type="text" class="form-control iris-input" id="IrisR"></td>
+              <td><input type="text" class="form-control iris-input" id="IrisL"></td>
+            </tr>
+            <tr>
+              <td>Pupil</td>
+              <td><input type="text" class="form-control pupil-input" id="PupilR"></td>
+              <td><input type="text" class="form-control pupil-input" id="PupilL"></td>
+            </tr>
+            
+           
+            
+            <tr>
+              <td>Fundus</td>
+              <td><input type="text" class="form-control fundus-input" id="FundusR"></td>
+              <td><input type="text" class="form-control fundus-input" id="FundusL"></td>
+            </tr>
+            
         </tbody>
       </table>
+
+
+
+
+
+
+
+  <!-- Options table -->
+  <div class="optionss" id="eyelidsOptions">
+    <table>
+      <tr>
+        <td data-value="Normal">Normal</td>
+        <td data-value="Blepharitis">Blepharitis</td>
+        <td data-value="Stye ">Stye</td>
+      </tr>
+      <tr>
+        
+        <td data-value="Swelling on lid">Swelling on lid</td>
+        <td data-value="Entropion">Entropion</td>
+        <td data-value="Entropion">Chalazion</td>
+      </tr>
+      
+      
+    </table>
+  </div>
+
+
+  
+  <!-- Conjunctiva Options -->
+  <div class="optionss" id="conjunctivaOptions">
+    <table>
+      <tr>
+        <td data-value="Conjution">Conjution</td>
+        <td data-value="FB">FB</td>
+        <td data-value="Cilliary Conjution">Cilliary Conjution</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <!-- Sclera Options -->
+  <div class="optionss" id="scleraOptions">
+    <table>
+      <tr>
+        <td data-value="Blackish">Blackish</td>
+      
+        <td data-value="Normal">Normal</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div class="optionss" id="anteriorOptions">
+    <table>
+      <tr>
+        <td data-value="Cells+">Cells+</td>
+        <td data-value="Deep">Deep</td>
+        <td data-value="Shallow">Shallow</td>
+      </tr>
+    </table>
+  </div>
+  
+
+
+  <!-- Cornea Options -->
+  <div class="optionss" id="corneaOptions">
+    <table>
+      <tr>
+        <td data-value="Freign Body">Freign Body</td>
+        <td data-value="Poor">Poor</td>
+        <td data-value="Bsk +">Bsk +</td>
+      </tr>
+      <tr>
+        <td data-value="Arcus">Arcus</td>
+        <td data-value="Dm Folds">Dm Folds</td>
+        <td data-value="Epidefect">Epidefect</td>
+      </tr>
+      <tr>
+        <td data-value="Clear">Clear</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <!-- Iris Options -->
+<div class="optionss" id="irisOptions">
+  <table>
+    <tr>
+      <td data-value="Normal">Normal</td>
+      <td data-value="Normal">Normal</td>
+    
+    </tr>
+  </table>
+</div>
+
+
+<!-- Pupil Options -->
+<div class="optionss" id="pupilOptions">
+  <table>
+    <tr>
+      <td data-value="Dilated">Dilated</td>
+      <td data-value="NSRL">NSRL</td>
+      <td data-value="RAPD">RAPD</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Lens Options -->
+<div class="optionss" id="lensOptions">
+  <table>
+    <tr>
+      <td data-value="Clear">Clear</td>
+      <td data-value="NSⅠ">NSⅠ</td>
+      <td data-value="NSⅡ">NSⅡ</td>
+    </tr>
+    <tr>
+      <td data-value="NSⅢ">NSⅢ</td>
+      <td data-value="Erly Cat .Ehanges">Erly Cat .Ehanges</td>
+      <td data-value="Imsc">Imsc</td>
+    </tr>
+    <tr>
+      <td data-value="Pctn">Pctn</td>
+      <td data-value="Swllaxated">Swllaxated</td>
+      <td data-value="Phacodonesis">Phacodonesis</td>
+    </tr>
+    <tr>
+      <td data-value="PSC">PSC</td>
+      <td data-value="PPC">PPC</td>
+      <td data-value="Brown Cat">Brown Cat</td>
+    </tr>
+    <tr>
+      <td data-value="Mat Cat">Mat Cat</td>
+      <td data-value="H.mat cat">H.mat cat</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+
+<!-- Fundus Options -->
+<div class="optionss" id="fundusOptions">
+  <table>
+    <tr>
+      <td data-value="WNL">WNL</td>
+      <td data-value="Tessalation">Tessalation</td>
+      <td data-value="Myopic Degeneration">Myopic Degeneration</td>
+    </tr>
+    <tr>
+      <td data-value="PPA">PPA</td>
+      <td data-value="CDR">CDR</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+      
     </div>
 
 
@@ -3575,8 +3739,55 @@ document.addEventListener("click", function(event) {
         }
     }
 </script>
+<script>
+  function setupOptions(inputClass, optionsId) {
+    const inputs = document.querySelectorAll('.' + inputClass);
+    const optionsPanel = document.getElementById(optionsId);
+    let focusedInput = null;
 
- 
+    inputs.forEach(input => {
+      input.addEventListener('focus', function () {
+        focusedInput = this;
+        const rect = this.getBoundingClientRect();
+        optionsPanel.style.top = `${rect.bottom + window.scrollY}px`;
+        optionsPanel.style.left = `${rect.left + window.scrollX}px`;
+        optionsPanel.style.display = 'block';
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!optionsPanel.contains(e.target) && !Array.from(inputs).includes(e.target)) {
+        optionsPanel.style.display = 'none';
+      }
+    });
+
+    optionsPanel.querySelectorAll('td').forEach(cell => {
+      cell.addEventListener('click', function () {
+        if (focusedInput) {
+          focusedInput.value = this.dataset.value;
+          optionsPanel.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Setup all sections
+  setupOptions('eyelids-input', 'eyelidsOptions');
+  setupOptions('conjunctiva-input', 'conjunctivaOptions');
+  setupOptions('sclera-input', 'scleraOptions');
+  setupOptions('cornea-input', 'corneaOptions');
+  setupOptions('anterior-input', 'anteriorOptions');
+  setupOptions('iris-input', 'irisOptions');
+  setupOptions('pupil-input', 'pupilOptions');
+  setupOptions('lens-input', 'lensOptions');
+  setupOptions('fundus-input', 'fundusOptions');
+
+
+
+
+</script>
+
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

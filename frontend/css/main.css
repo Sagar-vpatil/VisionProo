@@ -1381,3 +1381,88 @@ h2 {
       font-size: 0.9em;
     }
   }
+
+
+
+
+  
+
+
+
+
+  .optionss {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: 300px;
+    min-width: 480px;
+    max-width: 100vw;
+    width: auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .optionss::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .optionss::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+  }
+
+  .optionss table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .optionss td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .optionss td:hover {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 1366px) {
+    .optionss {
+      width: 25%;
+    }
+  }
+
+  @media screen and (min-width: 1367px) and (max-width: 1920px) {
+    .optionss {
+      width: 19.2%;
+    }
+  }
+
+  @media screen and (min-width: 1921px) {
+    .optionss {
+      width: 18%;
+    }
+
+    .optionss td {
+      padding: 12px;
+      font-size: 1.05em;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .optionss {
+      width: 90%;
+      left: 5% !important;
+    }
+  }
