@@ -605,7 +605,7 @@
           <!-- Patient Information -->
           <div class="header">
             <div class="header-left">Fit/STAND BY ANAESIESIA</div>
-            <div class="header-right">Patient ID. :<span>1223</span> </div>
+            <div class="header-right">Patient ID. : <span id="patient-id"></span> </div>
         </div>
     
         <div class="title">
@@ -613,9 +613,9 @@
         </div>
         
         <div class="info">
-            <label><span>Name :</span> <input type="text" style="width: 400px;"> &nbsp;&nbsp; <span>Age/Sex :</span> <input type="text" style="width: 120px;"></label>
-            <label><span>Address :</span> <input type="text" style="width: 650px;"></label>
-            <label><span>Phone No. :</span> <input type="text"></label>
+            <label><span>Name :</span> <input type="text" style="width: 400px;" id="patient-name"> &nbsp;&nbsp; <span>Age/Sex :</span> <input type="text" style="width: 120px;" id="patient-age-gender"></label>
+            <label><span>Address :</span> <input type="text" style="width: 650px;" id="patient-address"></label>
+            <label><span>Phone No. :</span> <input type="text" id="patient-mobile"></label>
         </div>
     
         <div class="dates">
@@ -627,53 +627,60 @@
 
 
 
-        <h4 class="section-title" >Eye Exam</h4>
+        <h4 class="section-title" id="Eye-Examination-Heading">Eye Exam</h4>
 
-        <table class="eye-exam-table" style="width: 350px; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; margin: 0 auto 15px auto;">
+        <table class="eye-exam-table" style="width: 350px; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; margin: 0 auto 15px auto;" id="Eye-Examination-Table">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 150px;"></th>
+                    <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Right</th>
+                    <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Left</th>
+                </tr>
+            </thead>
             <tr>
-                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 150px;"></th>
-                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Right</th>
-                <th style="border: 1px solid #000; padding: 4px; font-size: 12px; background-color: #f0f0f0; width: 100px;">Left</th>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Eyelids & Adnexa</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="EyelidsR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="EyelidsL"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #000; padding: 4px; height: 22px;">Conjunctiva</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="ConjunctivaR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="ConjunctivaL"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Sclera</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="ScleraR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="ScleraL"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #000; padding: 4px; height: 22px;">Cornea</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="CorneaR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="CorneaL"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Anterior Chamber</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="AnteriorR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="AnteriorL"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Iris</td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="IrisR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="IrisL"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #000; padding: 4px; height: 22px;">Pupil</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="PupilR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="PupilL"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #000; padding: 4px; height: 22px;">Lens</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="LensR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="LensL"></td>
             </tr>
             <tr>
                 <td style="border: 1px solid #000; padding: 4px; height: 22px;">Fundus</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Vision</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Tension</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px;">Sac</td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
-                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="FundusR"></td>
+                <td style="border: 1px solid #000; padding: 4px; height: 22px; text-align: center;" id="FundusL"></td>
             </tr>
         </table>
 
@@ -685,8 +692,8 @@
       Systemic Exam
   </h4>
   <div style="display: flex; align-items: center; gap: 15px;">
-      <span style="font-size: 14px;"><b>P:</b> <input type="text" style="width: 80px; "></span>
-      <span style="font-size: 14px;"><b>BP:</b> <input type="text" style="width: 80px; ;"></span>
+      <span style="font-size: 14px;"><b>P:</b> <input type="text" style="width: 80px; " id="show-Pulse-Rate"></span>
+      <span style="font-size: 14px;"><b>BP:</b> <input type="text" style="width: 80px; ;" id="show-BP"></span>
       <span style="font-size: 14px;"><b>Rs:</b> <input type="text" style="width: 80px; "></span>
       <span style="font-size: 14px;"><b>CVS:</b> <input type="text" style="width: 80px; "></span>
   </div>
@@ -694,27 +701,13 @@
 
 
 <!-- Investigations Section - Single Row -->
-<div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;">
+<div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;" id="investigation-title">
     <h4 style=" color: #004a99; padding: 5px 10px; 
-              font-size: 18px; margin: 0;">
+              font-size: 18px; margin: 0;" >
         Investigations
     </h4>
-    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-        <span style="font-size: 14px;">
-            <b>HB:</b> <input type="text" style="width: 50px;  border-top: none; border-left: none; border-right: none; padding: 2px;">
-        </span>
-        <span style="font-size: 14px;">
-            <b>WBC:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
-        </span>
-        <span style="font-size: 14px;">
-            <b>BSL:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
-        </span>
-        <span style="font-size: 14px;">
-            <b>HIV:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
-        </span>
-        <span style="font-size: 14px;">
-            <b>HBSAG:</b> <input type="text" style="width: 50px; border-bottom: 1px solid #000; border-top: none; border-left: none; border-right: none; padding: 2px;">
-        </span>
+    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;" class="investigation-list">
+            <!-- Investigations will be dynamically populated here -->
     </div>
 </div>
 
@@ -722,24 +715,24 @@
 
 
 <!-- Medical H/O Section - Single Row -->
-<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;">
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;" id="medical-history-section">
   <h4 style=" color: #004a99; padding: 5px 10px; 
               font-size: 18px; margin: 0;">
       Medical H/O:
   </h4>
-  <span style=" font-size: 15px;">
-      DM / HT / IHD / Asthma / Skin Infection / Koch's
+  <span style=" font-size: 15px;" class="show-medical-history">
+    <!-- Medical history will be dynamically populated here -->
   </span>
 </div>
 
 <!-- Surgical H/O Section - Single Row -->
-<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;">
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 10px;" id="surgical-history-section">
   <h4 style=" color: #004a99; padding: 5px 10px; 
               font-size: 18px; margin: 0;">
       Surgical H/O:
   </h4>
-  <span style=" font-size: 15px;">
-      Appendectomy (2015) / Cataract Surgery (BE, 2020)
+  <span style=" font-size: 15px;" class="show-surgical-history" >
+    <!-- Surgical history will be dynamically populated here -->
   </span>
 </div>
 
@@ -749,25 +742,25 @@
 
 
      <!-- Diagnosis Section - Single Line -->
-<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 20px;">
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 20px;" id="diagnosis-section">
   <h4 style=" color: #004a99; padding: 5px 10px; 
               font-size: 18px; margin: 0;">
       Diagnosis:
   </h4>
-  <span style="font-size: 16px;">
-      Immature Senile Cataract(BE) / Immature Senile Cataract(BE)
+  <span style="font-size: 16px;" class="show-diagnosis">
+    <!-- Diagnosis will be dynamically populated here -->
   </span>
 </div>
 
 
 <!-- Advice Surgery Section - Single Row -->
-<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;">
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 15px;" id="advice-surgery-section">
   <h4 style=" color: #004a99; padding: 5px 10px; 
   font-size: 18px; margin: 0;">
       Advice Surgery:
   </h4>
-  <span style=" font-size: 15px;">
-      Phacoemulsification with IOL (BE) / YAG Laser Capsulotomy
+  <span style=" font-size: 15px;" class="show-advice-surgery">
+    <!-- Advice surgery will be dynamically populated here -->
   </span>
 </div>
 
@@ -1021,9 +1014,236 @@ Eye Type of Surgery:
 
     
 <script>
+  const tempDateStr = localStorage.getItem("tempDate");
   function printFunction() {
-      window.print();
+    const patientId = "P"+appointment.id;
+            // Get todays date with dd-mm-yyyy format
+            let today;
+            if (tempDateStr) {
+                today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+            } else {
+                today = new Date(); // Ensure `today` is always a Date object
+            }
+            const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
+            const Docname = patientId+"_IPD" + "_" + date;
+
+            console.log(patientId,date,Docname);
+
+            window.electronAPI.printPage(patientId, date, Docname);
   }
+
+    // Retrieve the appointment object from localStorage
+    const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+    // Update the HTML elements with appointment data
+    document.getElementById("patient-id").textContent = appointment.id || "N/A";
+    document.getElementById("patient-name").value = appointment.Name || "N/A";
+    document.getElementById("patient-age-gender").value = 
+    appointment.Age ? (appointment.Age + " yrs / " + (appointment.Gender || "N/A")) : "N/A";
+    document.getElementById("patient-address").value = appointment.Address || "N/A";
+    document.getElementById("patient-mobile").value = appointment.MobileNo || "N/A";
+
+    // Load the eye examination table from local storage
+    const eyeExaminationTable = JSON.parse(localStorage.getItem("eyeExaminationTable")) || {};
+    console.log(eyeExaminationTable); // Debugging line to check the loaded data
+
+    // Get table and heading elements
+    const eyeTable = document.getElementById("Eye-Examination-Table");
+    const eyeHeading = document.getElementById("Eye-Examination-Heading");
+    const eyeRows = eyeTable.querySelectorAll("tbody tr");
+
+    // Define the mapping for each row and its respective keys in eyeExaminationTable
+    const eyeRowMapping = [
+        { rowIndex: 0, rightKey: "EyelidsR", leftKey: "EyelidsL" },
+        { rowIndex: 1, rightKey: "ConjunctivaR", leftKey: "ConjunctivaL" },
+        { rowIndex: 2, rightKey: "ScleraR", leftKey: "ScleraL" },
+        { rowIndex: 3, rightKey: "CorneaR", leftKey: "CorneaL" },
+        { rowIndex: 4, rightKey: "AnteriorR", leftKey: "AnteriorL" },
+        { rowIndex: 5, rightKey: "IrisR", leftKey: "IrisL" },
+        { rowIndex: 6, rightKey: "PupilR", leftKey: "PupilL" },
+        { rowIndex: 7, rightKey: "LensR", leftKey: "LensL" },
+        { rowIndex: 8, rightKey: "FundusR", leftKey: "FundusL" }
+    ];
+
+    let visibleEyeRowCount = 0;
+
+    eyeRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+        const rightValue = eyeExaminationTable[rightKey] || "";
+        const leftValue = eyeExaminationTable[leftKey] || "";
+
+        // Hide the row if both values are empty
+        if (rightValue === "" && leftValue === "") {
+            eyeRows[rowIndex].style.display = "none";
+        } else {
+            eyeRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+            eyeRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "N/A";
+            eyeRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "N/A";
+            visibleEyeRowCount++;
+        }
+    });
+
+    // Show or hide the entire table if all rows are hidden
+    eyeTable.style.display = visibleEyeRowCount > 0 ? "table" : "none";
+
+    // Show or hide the heading based on whether the table is visible
+    eyeHeading.style.display = visibleEyeRowCount > 0 ? "block" : "none";
+
+
+    // Load PreOperativeDetails data from local storage
+    const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
+    console.log(preOperativeDetails); // Debugging line to check the loaded data
+    // Display Bp and Pulse Rate in the respective input fields
+    document.getElementById("show-BP").value = preOperativeDetails.BPResult|| "";
+    document.getElementById("show-Pulse-Rate").value = preOperativeDetails.PulseRate || "";
+
+
+    // Retrieve selected investigations from localStorage
+    const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
+
+    // Get the investigation display container
+    const investigationContainer = document.querySelector(".investigation-list");
+
+    // Only update if there are investigations to show
+    if (selectedInvestigations.length > 0) {
+        // Clear existing content
+        investigationContainer.innerHTML = "";
+
+        // Add each investigation with an input box
+        selectedInvestigations.forEach((investigation) => {
+            const investigationItem = document.createElement("div");
+            investigationItem.classList.add("investigation-item");
+
+            investigationItem.innerHTML = `
+                <span style="font-size: 14px;">
+            ${investigation}: <input type="text" style="width: 50px;  border-top: none; border-left: none; border-right: none; padding: 2px;">
+        </span>
+            `;
+
+            investigationContainer.appendChild(investigationItem);
+        });
+    } else {
+        // Hide investigation section and title
+        document.getElementById("investigation-title").style.display = "none";
+        investigationContainer.style.display = "none";
+    }
+
+    // Load the selected medicalHistory from local storage
+    const selectedMedicalHistory = JSON.parse(localStorage.getItem("selectedMedicalHistory")) || [];
+    const medicalHistorySection = document.querySelector(".show-medical-history");
+    const medicalHistoryTitle = document.getElementById("medical-history-section");
+
+       if (selectedMedicalHistory.length === 0) {
+          // Hide the medical history section if no history is selected
+          medicalHistorySection.style.display = "none";
+          medicalHistoryTitle.style.display = "none"; // Hide the title as well
+        } else {
+          // Show the medical history section and update the content
+          medicalHistorySection.style.display = "block";
+            medicalHistoryTitle.style.display = "flex"; // Show the title
+          medicalHistorySection.innerHTML = `
+              ${selectedMedicalHistory.join(' <span style="font-weight: bold; color: black;">/</span> ')}
+          `;
+        }
+
+    // Load the selected surgicalHistory from local storage
+    const selectedSurgicalHistory = JSON.parse(localStorage.getItem("selectedSurgicalHistory")) || [];
+    const surgicalHistorySection = document.querySelector(".show-surgical-history");
+    const surgicalHistoryTitle = document.getElementById("surgical-history-section");
+    // Check if there are any selected surgical histories
+    if (selectedSurgicalHistory.length === 0) {
+        // Hide the surgical history section if no history is selected
+        surgicalHistorySection.style.display = "none";
+        surgicalHistoryTitle.style.display = "none"; // Hide the title as well
+    } else {
+        // Show the surgical history section and update the content
+        surgicalHistorySection.style.display = "block";
+        surgicalHistoryTitle.style.display = "flex"; // Show the title
+        surgicalHistorySection.innerHTML = `
+            ${selectedSurgicalHistory.join(' <span style="font-weight: bold; color: black;">/</span> ')}
+        `;
+    }
+
+    // Load the selected diagnosis from local storage
+    const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+    const diagnosisSection = document.querySelector(".show-diagnosis");
+    const diagnosisTitle = document.getElementById("diagnosis-section");
+    // Check if there are any selected diagnosis
+    if (selectedDiagnosis.length === 0) {
+        // Hide the diagnosis section if no diagnosis is selected
+        diagnosisSection.style.display = "none";
+        diagnosisTitle.style.display = "none"; // Hide the title as well
+    } else {
+        // Show the diagnosis section and update the content
+        diagnosisSection.style.display = "block";
+        diagnosisTitle.style.display = "flex"; // Show the title
+        diagnosisSection.innerHTML = `
+            ${selectedDiagnosis.join(' <span style="font-weight: bold; color: black;">/</span> ')}
+        `;
+    }
+
+    // Load the selected advice surgery from local storage
+    const selectedAdviceSurgery = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+    const adviceSurgerySection = document.querySelector(".show-advice-surgery");
+    const adviceSurgeryTitle = document.getElementById("advice-surgery-section");
+    // Check if there are any selected advice surgeries
+    if (selectedAdviceSurgery.length === 0) {
+        // Hide the advice surgery section if no advice is selected
+        adviceSurgerySection.style.display = "none";
+        adviceSurgeryTitle.style.display = "none"; // Hide the title as well
+    } else {
+        // Show the advice surgery section and update the content
+        adviceSurgerySection.style.display = "block";
+        adviceSurgeryTitle.style.display = "flex"; // Show the title
+        adviceSurgerySection.innerHTML = `
+            ${selectedAdviceSurgery.join(' <span style="font-weight: bold; color: black;">/</span> ')}
+        `;
+    }
+
+    // Load the A-Scan table from local storage 
+    const aScanTable = JSON.parse(localStorage.getItem("aScanTable")) || {};
+        
+        // Get table and heading elements
+        const aScanTableElement = document.getElementById("A-Scan-Table");
+        const aScanHeading = document.getElementById("A-Scan-Heading");
+        const aScanRows = aScanTableElement.querySelectorAll("tbody tr");
+
+        // Define the mapping for each row and its respective keys in aScanTable
+        const aScanRowMapping = [
+        { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
+            { rowIndex: 1, rightKey: "RightK2", leftKey: "LeftK2" },
+            { rowIndex: 2, rightKey: "RightLT", leftKey: "LeftLT" },
+            { rowIndex: 3, rightKey: "RightAL", leftKey: "LeftAL" },
+            { rowIndex: 4, rightKey: "RightACD", leftKey: "LeftACD" },
+            { rowIndex: 5, rightKey: "RightLPower", leftKey: "LeftLPower" },
+            { rowIndex: 6, rightKey: "RightAConstant", leftKey: "LeftAConstant" },
+            { rowIndex: 7, rightKey: "RightIOL", leftKey: "LeftIOL" }
+        ];
+
+        let visibleAScanRowCount = 0;
+
+        aScanRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
+            const rightValue = aScanTable[rightKey] || "";
+            const leftValue = aScanTable[leftKey] || "";
+
+            // Hide the row if both values are empty
+            if (rightValue === "" && leftValue === "") {
+                aScanRows[rowIndex].style.display = "none";
+            } else {
+                aScanRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                aScanRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
+                aScanRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
+                visibleAScanRowCount++;
+            }
+        });
+
+
+        // Show or hide the entire table if all rows are hidden
+        aScanTableElement.style.display = visibleAScanRowCount > 0 ? "table" : "none";
+
+        // Show or hide the heading based on whether the table is visible
+        aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
+
+    
+
 </script>
 
 
