@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
 
+    
+      
+
 @media print {
     /* Ensure the Eye Examination table does not split across pages */
     .eye-examination-section {
@@ -514,6 +517,45 @@
     transform: translateX(-50%);
 }
 
+@media print {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        font-size: 10pt;
+    }
+
+    .header-left {
+        font-weight: bold;
+        border: 1px solid #000;
+        padding: 2px 6px;
+        display: inline-block;
+        font-size: 10pt;
+    }
+
+    .header-right {
+        font-size: 10pt;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 12pt;
+        font-weight: bold;
+        border: 1px solid #000;
+        display: inline-block;
+        padding: 4px 10px;
+        margin: 10px 0;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
 .info {
     margin-bottom: 20px;
 }
@@ -547,6 +589,334 @@
     padding: 4px;
     font-size: 14px;
 }
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 12pt;
+        color: #000;
+    }
+
+    .info input {
+        border: none !important;
+        border-bottom: 1px solid #000 !important;
+        background: transparent;
+        color: #000;
+        outline: none;
+        font-size: 12pt;
+        width: auto;
+        padding: 2px 4px;
+    }
+
+    .info span {
+        display: inline-block;
+        min-width: 70px;
+        font-weight: bold;
+    }
+
+    .info label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .info {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* --- PRINT STYLE --- */
+@media print {
+    .dates {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .dates label {
+        display: flex;
+        align-items: center;
+        border: 1px solid #000;
+        padding: 6px 10px;
+        height: 40px;
+        min-width: 160px;
+        font-size: 12pt;
+        font-weight: bold;
+        box-sizing: border-box;
+        gap: 10px;
+    }
+
+    .dates input[type="date"] {
+        border: none;
+        background: transparent;
+        font-size: 12pt;
+        color: #000;
+        width: 100px;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+
+@media print {
+    /* General Reset for Print */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    h4 {
+        color:#004a99!important;
+        font-size: 13pt !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* --- Systemic Exam --- */
+    #systemic-exam-section,
+    #investigation-title,
+    #medical-history-section,
+    #surgical-history-section,
+    #diagnosis-section,
+    #advice-surgery-section {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: 4px 0 !important;
+        flex-wrap: wrap;
+    }
+
+    #systemic-exam-section input,
+    .investigation-list input {
+        width: 70px !important;
+        font-size: 12pt !important;
+        border: none;
+        border-bottom: 1px dotted #000;
+        background: transparent;
+        outline: none;
+    }
+
+    #systemic-exam-section span,
+    .investigation-list span,
+    .show-medical-history,
+    .show-surgical-history,
+    .show-diagnosis,
+    .show-advice-surgery {
+        font-size: 10pt !important;
+    }
+
+    .investigation-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    /* Prevent line breaks between title and content */
+    #medical-history-section,
+    #surgical-history-section,
+    #diagnosis-section,
+    #advice-surgery-section {
+        page-break-inside: avoid;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+
+
+
+@media print {
+    /* Table Adjustments for Print */
+    .eye-exam-table {
+        width: 50% !important;  /* Reduce table width for small print */
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 7pt !important;  /* Smaller font size for print */
+        margin: 0 auto 15px auto;
+    }
+
+    .eye-exam-table th,
+    .eye-exam-table td {
+        border: 1px solid #000 !important;
+        padding: 3px !important;  /* Reduce padding */
+        text-align: center !important;
+    }
+
+    /* Header Styling */
+    .eye-exam-table th {
+        background-color: #f0f0f0 !important;
+        font-size: 8pt !important;  /* Smaller font size for headings */
+    }
+
+    /* Rows Styling */
+    .eye-exam-table td {
+        height: 18px !important; /* Smaller row height */
+        font-size: 7pt !important; /* Smaller text for rows */
+    }
+
+    /* Section Heading for Eye Exam - Aligned to the Left */
+    #Eye-Examination-Heading, #OPERATIVE{
+        color: #004a99 !important; /* Blue heading */
+        font-size: 10pt !important;  /* Smaller heading font size */
+        text-align: left !important;  /* Align the heading to the left */
+        margin: 10px 0 !important;
+        font-weight: bold;
+    }
+
+    /* Hide anything not needed for print */
+    .no-print {
+        display: none !important;
+    }
+}
+
+
+
+@media print {
+    /* Table Adjustments for Print */
+    #A-Scan-Table {
+        width: 50% !important;  /* Reduce table width for small print */
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 7pt !important;  /* Smaller font size for print */
+        margin: 0 auto 15px auto;
+    }
+
+    #A-Scan-Table th,
+    #A-Scan-Table td {
+        border: 1px solid #000 !important;
+        padding: 3px !important;  /* Reduce padding */
+        text-align: center !important;
+    }
+
+    /* Header Styling */
+    #A-Scan-Table th {
+        background-color: #f0f0f0 !important;
+        font-size: 8pt !important;  /* Smaller font size for headings */
+    }
+
+    /* Rows Styling */
+    #A-Scan-Table td {
+        height: 18px !important; /* Smaller row height */
+        font-size: 7pt !important; /* Smaller text for rows */
+    }
+
+    /* Section Heading for A-Scan Report - Aligned to the Left */
+    #A-Scan-Heading {
+        color: #004a99 !important; /* Blue heading */
+        font-size: 10pt !important;  /* Smaller heading font size */
+        text-align: left !important;  /* Align the heading to the left */
+        margin: 10px 0 !important;
+        font-weight: bold;
+    }
+
+    /* Hide anything not needed for print */
+    .no-print {
+        display: none !important;
+    }
+}
+
+
+
+
+
+@media print {
+    /* Hide all checkboxes */
+    input[type="checkbox"] {
+        display: none;
+    }
+    
+    /* Hide all checkbox labels by default */
+    input[type="checkbox"] + * {
+        display: none;
+    }
+    
+    /* Show only the labels of checked checkboxes */
+    input[type="checkbox"]:checked + * {
+        display: inline;
+    }
+    
+    /* Add visual indication (checkmark) for checked options in print */
+    input[type="checkbox"]:checked + *:before {
+        content: "✓ ";
+    }
+    
+    /* Hide the "Other" input field if empty */
+    input[name="surgeon_other"]:not([value]) {
+        display: none;
+    }
+    
+    /* Show the "Other" input field value if not empty */
+    input[name="surgeon_other"][value]:after {
+        content: attr(value);
+        display: inline;
+    }
+    
+    /* Hide the original input field */
+    input[name="surgeon_other"] {
+        display: none;
+    }
+    
+    /* Specific styling for checked items */
+    input[type="checkbox"]:checked + * {
+        display: inline !important;
+        margin-right: 5px;
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media print {
+    /* General Reset for Print */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Prevent page breaks inside these elements */
+    .page-section,
+    h4.section-title,
+    #systemic-exam-section,
+    #investigation-title,
+    #medical-history-section,
+    #surgical-history-section,
+    #diagnosis-section,
+    #advice-surgery-section,
+    #A-Scan-Heading,
+    #A-Scan-Table,
+    #Eye-Examination-Heading,
+    #Eye-Examination-Table,
+    .procedure-table,
+    .procedure-box,
+    .iol-sticker {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    }
+
 
     </style>
 </head>
@@ -627,7 +997,7 @@
 
 
 
-        <h4 class="section-title" id="Eye-Examination-Heading">Eye Exam</h4>
+        <h4 class="section-title" id="Eye-Examination-Heading">Eye Examination</h4>
 
         <table class="eye-exam-table" style="width: 350px; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; margin: 0 auto 15px auto;" id="Eye-Examination-Table">
             <thead>
@@ -689,7 +1059,7 @@
 <div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;">
   <h4 style=" color: #004a99; padding: 5px 10px; 
               font-size: 18px; margin: 0;">
-      Systemic Exam
+      Systemic Exam:
   </h4>
   <div style="display: flex; align-items: center; gap: 15px;">
       <span style="font-size: 14px;"><b>P:</b> <input type="text" style="width: 80px; " id="show-Pulse-Rate"></span>
@@ -704,7 +1074,7 @@
 <div style="display: flex; align-items: center; gap: 10px; margin: 15px 0;" id="investigation-title">
     <h4 style=" color: #004a99; padding: 5px 10px; 
               font-size: 18px; margin: 0;" >
-        Investigations
+        Investigations:
     </h4>
     <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;" class="investigation-list">
             <!-- Investigations will be dynamically populated here -->
@@ -943,7 +1313,7 @@ Eye Type of Surgery:
  <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 150px;">ANAESTHESIA NOTES</div>
 
         <!-- Operative Notes Section -->
-        <h4 class="section-title">OPERATIVE NOTES</h4>
+        <h4 class="section-title" id="OPERATIVE">OPERATIVE NOTES</h4>
         <div class="procedure-table">
             <div class="procedure-box">
                 <input type="checkbox" class="print-checkbox" id="phaco-check"> <strong>Phaco</strong>
