@@ -195,12 +195,13 @@ function openDatabase() {
 }
 
 
-function saveOption(baseName, className) {
+async function saveOption(baseName, className) {
   openDatabase().then((db) => {
     const tx = db.transaction(storeName, "readwrite");
     const store = tx.objectStore(storeName);
     store.put({ className, baseName });
   });
+  await backupMedicalOptionsDB(); // Call the backup function after saving
 }
 
 
@@ -217,12 +218,13 @@ function getAllOptions() {
 }
 
 
-function deleteOption(baseName, className) {
+async function deleteOption(baseName, className) {
   openDatabase().then((db) => {
     const tx = db.transaction(storeName, "readwrite");
     const store = tx.objectStore(storeName);
     store.delete([className, baseName]);
   });
+  await backupMedicalOptionsDB(); // Call the backup function after deleting
 }
 
 
@@ -452,3 +454,111 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+async function backupMedicalOptionsDB() {
+  const dbName = "medicalOptionsDB";
+  const request = indexedDB.open(dbName);
+
+  request.onsuccess = async function(event) {
+    const db = event.target.result;
+    const backupData = {};
+    const transaction = db.transaction(db.objectStoreNames, "readonly");
+
+    transaction.oncomplete = async function() {
+      const backupJson = JSON.stringify(backupData, null, 2);
+
+   // Send JSON + dbName to main process to save it
+  const result = await window.electronAPI.saveIndexDbBackup(backupJson, dbName);
+
+
+      if (result.success) {
+        console.log(`Backup saved successfully at: ${result.path}`);
+      } else {
+        console.error(`Failed to save backup: ${result.error}`);
+      }
+    };
+
+    for (const storeName of db.objectStoreNames) {
+      const store = transaction.objectStore(storeName);
+      const allRecords = store.getAll();
+      allRecords.onsuccess = function(event) {
+        backupData[storeName] = event.target.result;
+      };
+    }
+  };
+
+  request.onerror = function(event) {
+    console.error("Error opening IndexedDB:", event.target.error);
+  };
+}
+
+
+document.addEventListener('keydown', async function (event) {
+  if (event.ctrlKey && event.shiftKey && event.key === 'R') {
+    event.preventDefault(); // prevent browser reload
+
+    // Optional: Confirm from user before restoring
+    const shouldRestore =  await window.electronAPI.showMessageBox(
+      "info",
+      "Do you want to restore IndexDb the backup?",
+      "Restore Backup",
+      ["Yes", "No"]
+     );
+    if (shouldRestore === 1) return; // User clicked "No"
+
+    const restoredData = await window.electronAPI.restoreIndexDbBackup(); // Get backup JSON
+    if (restoredData) {
+      const { dbName, backupJson } = restoredData;
+      console.log(`Restoring ${dbName}...`);  
+      await restoreMedicalDB(dbName, backupJson); // Your function to put back into IndexedDB
+      window.electronAPI.showSuccessBox("Success", "Backup restored successfully ✅");
+      location.reload(); // Reload page to reflect updated data (optional)
+    } else {
+      window.electronAPI.showErrorBox("Error", "No backup found or failed to restore ❌");
+    }
+  }
+});
+
+
+async function restoreMedicalDB(dbName, restoredData) {
+  const request = indexedDB.open(dbName, 1);
+
+  request.onsuccess = function(event) {
+    const db = event.target.result;
+
+    let storeName = '';
+    if (dbName === 'MedicalDB') {
+      storeName = 'OptionsStore';
+    } else if (dbName === 'medicalOptionsDB') {
+      storeName = 'optionsStore';
+    } else {
+      console.error('Unknown database:', dbName);
+      return;
+    }
+
+    const transaction = db.transaction(storeName, 'readwrite');
+    const store = transaction.objectStore(storeName);
+    const allRecords = store.getAll();
+    allRecords.onsuccess = function(event) {
+      const existingRecords = event.target.result;
+      const existingKeys = new Set(existingRecords.map(record => record.baseName)); // Assuming baseName is unique
+
+      for (const record of restoredData[storeName]) {
+        if (!existingKeys.has(record.baseName)) {
+          store.add(record);
+        }
+      }
+    };
+    transaction.oncomplete = function() {
+      console.log('Restoration complete!');
+    };
+    transaction.onerror = function(event) {
+      console.error('Transaction error:', event.target.error);
+    };
+}
+
+    request.onerror = function(event) {
+      console.error('Error opening IndexedDB:', event.target.error);
+    };
+  }

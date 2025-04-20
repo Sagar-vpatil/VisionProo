@@ -235,6 +235,61 @@ function createMainWindow() {
             return { success: false, error: error.message };
         }
     });
+
+
+    ipcMain.handle('save-indexdb-backup', async (event, backupJson, dbName) => {
+        try {
+          const desktopPath = app.getPath('desktop');
+          const visionProoPath = path.join(desktopPath, 'VisionProo', 'IndexDb');
+      
+          // Create folder if not exists
+          if (!fs.existsSync(visionProoPath)) {
+            fs.mkdirSync(visionProoPath, { recursive: true });
+          }
+      
+          const fileName = `${dbName}_backup_${new Date().toISOString().slice(0,10)}.json`;
+          const filePath = path.join(visionProoPath, fileName);
+      
+          fs.writeFileSync(filePath, backupJson);
+      
+          return { success: true, path: filePath };
+        } catch (error) {
+          console.error('Error saving backup:', error);
+          return { success: false, error: error.message };
+        }
+      });
+      
+      
+    // Restore backup JSON file
+ipcMain.handle('restore-indexdb-backup', async () => {
+    try {
+      // Open file picker to select backup JSON
+      const { canceled, filePaths } = await dialog.showOpenDialog({
+        title: 'Select Backup File',
+        defaultPath: app.getPath('desktop'),
+        buttonLabel: 'Restore',
+        filters: [{ name: 'JSON Files', extensions: ['json'] }],
+        properties: ['openFile']
+      });
+  
+      if (canceled || filePaths.length === 0) {
+        return null; // User cancelled
+      }
+  
+      const filePath = filePaths[0];
+      const backupJson = fs.readFileSync(filePath, 'utf-8');
+  
+      // Extract dbName from filename
+      const fileName = path.basename(filePath); // Example: MedicalDB_backup_2025-04-20.json
+      const dbName = fileName.split('_backup_')[0]; // "MedicalDB" or "medicalOptionsDB"
+  
+      return { dbName, backupJson: JSON.parse(backupJson) }; // Return both dbName and backupJson
+    } catch (error) {
+      console.error('Failed to restore backup:', error);
+      return null;
+    }
+  });
+  
     
     
 }

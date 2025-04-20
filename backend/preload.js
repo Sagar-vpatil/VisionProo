@@ -17,6 +17,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     openImage: (imagePath) => ipcRenderer.send('open-image', imagePath),
     deleteImage: (imagePath) => ipcRenderer.invoke("delete-image", imagePath),
     checkInternet: () => navigator.onLine,
+    saveIndexDbBackup: (backupJson, dbName) => ipcRenderer.invoke('save-indexdb-backup', backupJson, dbName),
+    restoreIndexDbBackup: () => ipcRenderer.invoke('restore-indexdb-backup'),
 });
 
 // Inject the popup dynamically
