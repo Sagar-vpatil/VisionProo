@@ -282,90 +282,99 @@
 }
 
 
-/* Container Styling */
-.container {
-            max-width: 600px;
-            width: 100%;
-            padding: 10px;
-            
-        }
 
-        h2 {
-            text-align: center;
-            color: #0d6efd;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
 
-        /* Search Box */
-        .search-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
 
-        /* Dropdown Styling */
-        .form-select {
-            flex: 1 1 200px;
-            border: 2px solid #0d6efd;
-            padding: 10px;
-            font-size: 16px;
-            background: #e9f2ff;
-            color: #333;
-        }
 
-        .form-select:focus {
-            border-color: #0a58ca;
-            background: #fff;
-            box-shadow: none;
-        }
 
-        /* Search Input */
-        .input-group {
-            flex: 1 1 300px;
-        }
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 540px;
+    margin: 20px auto;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
 
-        .form-control {
-            border: 2px solid #0d6efd;
-            padding: 10px;
-            font-size: 16px;
-            background: #e9f2ff;
-            color: #333;
-            border-radius: 0;
-        }
+  .search-container .form-select {
+    flex: 0 0 200px;
+    height: 55px;
+    border: 2px solid #0d6efd;
+    padding: 10px 15px;
+    font-size: 16px;
+    background: #e9f2ff;
+    color: #333;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
 
-        .form-control:focus {
-            border-color: #0a58ca;
-            background: #fff;
-            box-shadow: none;
-        }
+  .search-container .form-select:focus {
+    border-color: #0a58ca;
+    background: #fff;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
 
-        /* Search Button */
-        .input-group-text {
-            background: #0d6efd;
-            border: 2px solid #0d6efd;
-            color: #fff;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 0;
-        }
+ .input-group {
+    height: 55px;
+    width: 300px; /* Set default to 150px */
+  }
 
-        .input-group-text:hover {
-            background: #0a58ca;
-            border-color: #0a58ca;
-        }
+  .search-container .form-control {
+    height: 100%;
+    border: 2px solid #0d6efd;
+    border-right: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    background: #e9f2ff;
+    color: #333;
+    border-radius: 8px 0 0 8px;
+    transition: all 0.3s ease;
+  }
 
-        .input-group-text i {
-            font-size: 20px;
-        }
+  .search-container .form-control:focus {
+    border-color: #0a58ca;
+    background: #fff;
+    box-shadow: none;
+  }
 
-        /* Responsive Adjustments */
-        @media (max-width: 576px) {
-            .search-container {
-                flex-direction: column;
-            }
-        }
+  .search-container .input-group-text {
+    height: 100%;
+    background: #0d6efd;
+    border: 2px solid #0d6efd;
+    color: #fff;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-container .input-group-text:hover {
+    background: #0a58ca;
+    border-color: #0a58ca;
+  }
+
+  .search-container .input-group-text i {
+    font-size: 20px;
+  }
+
+  /* Responsive - full width on smaller screens */
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+      height: auto;
+      gap: 10px;
+    }
+
+    .search-container .form-select,
+    .search-container .input-group {
+      width: 100%;
+    }
+  }
   </style>
 
 </head>
@@ -411,26 +420,27 @@
     </nav>
     
     <h1 style="margin-top: 20px;">Patient Details</h1>
-    <div class="container" style="background-color: transparent;">
 
 
       <!-- Flexbox Container -->
-      <div class="search-container" style="height: 50px;">
-          <!-- Dropdown for Filter Option -->
-          <select class="form-select" id="select-by">
-              <option value="id">Search by ID </option>
-              <option value="Name">Search by Name</option>
-              <option value="MobileNo">Search by Mobile No</option>
-          </select>
-          <!-- Search Bar with Icon -->
-          <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for patient..." style="height: 55px;" id="search-patient">
-              <span class="input-group-text">
-                  <i class="bi bi-search"></i> <!-- Bootstrap Search Icon -->
-              </span>
-          </div>
-      </div>
+   <!-- Search Filter + Input -->
+<div class="search-container">
+  <!-- Dropdown -->
+  <select class="form-select" id="select-by">
+    <option value="id">Search by ID</option>
+    <option value="Name">Search by Name</option>
+    <option value="MobileNo">Search by Mobile No</option>
+  </select>
+
+  <!-- Input + Icon -->
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search for patient..." id="search-patient">
+    <span class="input-group-text">
+      <i class="bi bi-search"></i>
+    </span>
   </div>
+</div>
+  
     <div class="col-md-6 col-xxl-8" style="display: none;">
       <div class="text-md-end dataTables_filter" id="dataTable_filter"><label
               class="form-label" style="margin-top: 10px;"></label></div>

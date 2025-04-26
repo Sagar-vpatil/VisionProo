@@ -6,14 +6,13 @@
     <title>Hospital Invoice</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap');
-
-body {
-    font-family: 'Noto Sans Devanagari', 'Mangal', 'Helvetica Neue', Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-}
+        body {
+            font-family: 'Noto Sans Devanagari', 'Mangal', 'Helvetica Neue', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
         .invoice-container {
             max-width: 800px;
             margin: auto;
@@ -49,10 +48,6 @@ body {
         .date-container {
             margin-bottom: 20px;
         }
-        input[type="date"] {
-            padding: 5px;
-            font-size: 16px;
-        }
         input[type="text"] {
             padding: 5px;
             font-size: 16px;
@@ -71,9 +66,7 @@ body {
         }
         .invoice-details {
             margin: 20px 0;
-        }
-        .invoice-details span {
-            font-weight: bold;
+            width: 650px;
         }
         table {
             width: 100%;
@@ -89,6 +82,12 @@ body {
         }
         table th {
             background: #e0d6c9;
+            text-align: center;
+        }
+        /* Set width for PRICE (₹) column */
+        #invoiceTable th:nth-child(3),
+        #invoiceTable td:nth-child(3) {
+            width: 150px;
             text-align: center;
         }
         .total {
@@ -127,7 +126,7 @@ body {
             background: #b71c1c;
         }
         .rupee-input {
-            width: 80px;
+            width: 120px;
             padding: 5px;
             padding-left: 20px;
             border: 1px solid #ddd;
@@ -159,6 +158,97 @@ body {
             cursor: pointer;
             border-radius: 5px;
         }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+        }
+        .label {
+            font-weight: bold;
+            min-width: 150px;
+            text-align: right;
+        }
+        .value {
+            min-width: 200px;
+            padding-left: 10px;
+        }
+        #dateInput {
+            width: 150px;
+            padding: 5px;
+        }
+        .letterhead {
+            border-bottom: 2px solid #070a0d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        .hospital-logo {
+            width: 160px;
+            height: 110px;
+        }
+        .hospital-info {
+            text-align: right;
+        }
+        .hospital-name {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            color: red;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+        .hospital-address {
+            font-size: 18px;
+            color: #666;
+        }
+        .doctor-name-left,
+        .doctor-name-right {
+            position: absolute;
+            top: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        .doctor-name-left {
+            left: 0;
+        }
+        .doctor-name-right {
+            right: 0;
+        }
+        .add-row-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .add-row-btn:hover {
+            background-color: #45a049;
+        }
+        .delete-row-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+        .delete-row-btn:hover {
+            background-color: #d32f2f;
+        }
         @media print {
             body {
                 margin: 0;
@@ -176,26 +266,30 @@ body {
                 max-width: 100%;
                 padding: 10px;
             }
-            .buttons, .navbar, .hr {
+            .buttons, .navbar, .hr, .add-row-btn, .delete-row-btn {
                 display: none;
             }
-            /* Hide input boxes and show their values as plain text */
-            .rupee-input, #dateInput {
+            .rupee-input, #dateInput, #invoiceTable input[type="text"] {
                 display: none;
             }
-            td {
-                position: relative;
+            #invoiceTable td:nth-child(2)::after,
+            #invoiceTable td:nth-child(3)::after {
+                content: attr(data-value);
+                position: static;
+                font-size: 16px;
+                color: #000;
             }
-            td::after {
-                content: attr(data-value); /* Display the input value */
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                right: 10px;
+            #invoiceTable td:nth-child(3)::after {
                 font-size: 18px;
+                font-weight: normal; /* Unbold for other PRICE (₹) */
+            }
+            #invoiceTable .total::after {
+                content: attr(data-value);
+                font-size: 18px;
+                font-weight: bold; /* Bold for Total Amount PRICE (₹) */
             }
             #currentDate::after {
-                content: attr(data-value); /* Display the date value */
+                content: attr(data-value);
                 font-size: 14px;
                 margin-left: 10px;
             }
@@ -211,119 +305,34 @@ body {
                 margin-bottom: 10px;
                 margin-top: 50px;
             }
+            /* Hide the ACTION column (4th column) in print view */
+            #invoiceTable th:nth-child(4),
+            #invoiceTable td:nth-child(4) {
+                display: none;
+            }
+            /* Ensure PRICE (₹) column width in print view */
+            #invoiceTable th:nth-child(3),
+            #invoiceTable td:nth-child(3) {
+                width: 150px;
+                text-align: center;
+            }
         }
-
-
-        .invoice-details {
-            width: 650px;
-            
-           
-          
-        }
-
-        .row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 0;
-        }
-
-        .label {
-            font-weight: bold;
-            min-width: 150px; /* Fixed width for alignment */
-            text-align: right;
-        }
-
-        .value {
-            min-width: 200px;
-            padding-left: 10px;
-        }
-
-        #dateInput {
-            width: 150px;
-            padding: 5px;
-        }
-
-
-
-        
-  /* Header Section */
-  .letterhead {
-        border-bottom: 2px solid #070a0d;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative; /* Added for positioning doctor names */
-    }
-
-    .hospital-logo {
-        width: 160px;
-        height: 110px;
-    }
-
-    .hospital-info {
-        text-align: right;
-    }
-
-    .hospital-name {
-        font-family: 'Helvetica Neue', sans-serif;
-        font-weight: 700;
-        color: red;
-        font-size: 32px;
-        letter-spacing: 1.5px;
-    }
-
-    .hospital-address {
-        font-size: 18px;
-        color: #666;
-       
-    }
-
-    /* Doctor's Name Styling */
-    .doctor-name-left,
-    .doctor-name-right {
-        position: absolute;
-        top: 0;
-        font-family: 'Helvetica Neue', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-    }
-
-    .doctor-name-left {
-        left: 0; /* Position on the left corner */
-    }
-
-    .doctor-name-right {
-        right: 0; /* Position on the right corner */
-    }
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
     <nav class="navbar" style="height: 50px;">
-        <div style="display: flex; align-items: center;">
-         
-        
-        </div>
-           
-        </div>
+        <div style="display: flex; align-items: center;"></div>
         <div class="buttons" style="margin-bottom: 10px;">
             <button onclick="window.location.href='./main.html';">🏠 Home</button>
             <button onclick="printInvoice()">🖨️ Print Invoice</button>
         </div>
     </nav>
     <hr class="hr">
-
     <div class="invoice-container">
-        <!-- Header Section -->
         <div class="letterhead">
-            <!-- Left Corner - Doctor's Name -->
             <div class="doctor-name-left" style="margin-top: 78px;">
                 Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
             </div>
-        
-            <!-- Hospital Logo and Info -->
             <div style="margin-left: 140px;">
                 <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
             </div>
@@ -331,58 +340,50 @@ body {
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
                 <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
-        
-            <!-- Right Corner - Doctor's Name -->
             <div class="doctor-name-right" style="margin-top: 78px;">
-                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
+                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
             </div>
-            
         </div>
         <div class="address-section" style="font-weight: bold;">
-    
             <p class="hospital-address-details">
                 <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 25px; margin-left: 30px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
             </p>
             <hr style="border: 1px solid #070a0d;">
         </div>
-        <!-- Invoice Details -->
         <div class="invoice-details">
             <div class="row">
                 <span class="label">Patient ID:</span>
                 <span class="value" id="patient-id">123456</span>
-    
                 <span class="label">Date:</span>
                 <span id="currentDate" data-value="">
                     <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
                 </span>
             </div>
-    
             <div class="row" style="margin-left: 20px;">
                 <span class="label">Patient Name:</span>
                 <span class="value" id="patient-name">John Doe</span>
-    
                 <span class="label" style="margin-left: 50px;">Mobile No:</span>
                 <span class="value" id="patient-mobile">+1234567890</span>
             </div>
         </div>
         <hr style="border: 1px solid #070a0d;">
-
-        <!-- Invoice Table -->
         <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
             <thead>
                 <tr style="border: 2px solid black; background-color: #f2f2f2;">
                     <th style="border: 2px solid black; padding: 10px;">NO</th>
                     <th style="border: 2px solid black; padding: 10px;">PARTICULAR</th>
                     <th style="border: 2px solid black; padding: 10px;">PRICE (₹)</th>
+                    <th style="border: 2px solid black; padding: 10px;">ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">1</td>
                     <td style="border: 2px solid black; padding: 10px;">Consultation</td>
-                    <td style="border: 2px solid black; padding: 10px; text-align: center;" >
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)" style="width: 100px;">
+                    <td style="border: 2px solid black; padding: 10px; text-align: center;">
+                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">2</td>
@@ -390,6 +391,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">3</td>
@@ -397,6 +399,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">4</td>
@@ -404,6 +407,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">5</td>
@@ -411,6 +415,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">6</td>
@@ -418,6 +423,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">7</td>
@@ -425,6 +431,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">8</td>
@@ -432,6 +439,7 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">9</td>
@@ -439,13 +447,15 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">10</td>
-                    <td style="border: 2px solid black; padding: 10px;">Visit Charge</td>
+                    <td style="border: 2px solid black; padding: 10px;">Visit Charges</td>
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">11</td>
@@ -453,92 +463,206 @@ body {
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;">12</td>
-                    <td style="border: 2px solid black; padding: 10px;">Healon Charges</td>
+                    <td style="border: 2px solid black; padding: 10px;">Other Charges/Medical/A-scan</td>
                     <td style="border: 2px solid black; padding: 10px;">
                         <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
                     </td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">13</td>
-                    <td style="border: 2px solid black; padding: 10px;">Other Charges/Medical/A-scan</td>
-                    <td style="border: 2px solid black; padding: 10px; width: 70px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                </tr>
-
                 <tr style="border: 2px solid black;">
                     <td style="border: 2px solid black; padding: 10px;"></td>
-                    <td style="border: 2px solid black; padding: 10px;">Total  Amount</td>
-                    <td style="border: 2px solid black; padding: 10px; width: 70px; text-align: center;"  class="total">
-                        
-                    </td>
+                    <td style="border: 2px solid black; padding: 10px;">Total Amount</td>
+                    <td style="border: 2px solid black; padding: 10px; text-align: center;" class="total"></td>
+                    <td style="border: 2px solid black; padding: 10px;"></td>
                 </tr>
             </tbody>
         </table>
-
-        <!-- Total Amount -->
-     
-
-        <!-- Footer Section -->
+        <button class="add-row-btn" onclick="addNewRow()">+ Add New Item</button>
         <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 90px;">
                 <p>Dr. Alvin R Rane</p>
             </div>
         </div>
     </div>
-
     <script>
-       // Retrieve the appointment object from localStorage
-const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
-document.getElementById("patient-id").textContent = appointment.id || "N/A";
-document.getElementById("patient-name").textContent = appointment.Name || "N/A";
-document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+        // Retrieve the appointment object from localStorage
+        const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+        document.getElementById("patient-id").textContent = appointment.id || "N/A";
+        document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+        document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
 
-// Set current date with the format DD/MM/YYYY
-function setCurrentDate() {
-    const dateInput = document.getElementById('dateInput');
-    const currentDate = new Date().toLocaleDateString('en-IN', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-    dateInput.value = currentDate; // Set the input value
-    document.getElementById('currentDate').dataset.value = currentDate; // Set data-value for printing
-}
+        // Set current date with the format DD/MM/YYYY
+        function setCurrentDate() {
+            const dateInput = document.getElementById('dateInput');
+            const currentDate = new Date().toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            dateInput.value = currentDate;
+            document.getElementById('currentDate').dataset.value = currentDate;
+        }
 
-// Function to update the date based on the input field
-function updateDate() {
-    const dateInput = document.getElementById('dateInput');
-    const selectedDate = dateInput.value;
+        // Function to update the date based on the input field
+        function updateDate() {
+            const dateInput = document.getElementById('dateInput');
+            const selectedDate = dateInput.value;
+            const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+            if (datePattern.test(selectedDate)) {
+                document.getElementById('currentDate').dataset.value = selectedDate;
+            } else {
+                window.electronAPI?.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
+                setCurrentDate();
+            }
+        }
 
-    // Validate the date format (DD/MM/YYYY)
-    const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (datePattern.test(selectedDate)) {
-        document.getElementById('currentDate').dataset.value = selectedDate; // Update data-value for printing
-    } else {
-        window.electronAPI.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
-        setCurrentDate(); // Reset to current date if invalid
-    }
-}
+        // Set the current date on page load
+        setCurrentDate();
 
-// Set the current date on page load
-setCurrentDate();
+        // Function to add a new row to the invoice table
+        function addNewRow() {
+            const table = document.getElementById('invoiceTable');
+            const tbody = table.querySelector('tbody');
+            const rows = tbody.querySelectorAll('tr');
+            const lastRow = rows[rows.length - 2]; // Row before the total row
+            const newRowNum = parseInt(lastRow.cells[0].textContent) + 1;
+
+            // Get all existing item descriptions
+            const existingItems = Array.from(tbody.querySelectorAll('tr td:nth-child(2) input, tr td:nth-child(2)'))
+                .map(td => td.querySelector('input')?.value || td.textContent)
+                .filter(item => item && item !== 'Total Amount');
+
+            // Create new row
+            const newRow = document.createElement('tr');
+            newRow.style.border = '2px solid black';
+
+            // Cell 1: Row number
+            const cell1 = document.createElement('td');
+            cell1.style.border = '2px solid black';
+            cell1.style.padding = '10px';
+            cell1.textContent = newRowNum;
+
+            // Cell 2: Item description
+            const cell2 = document.createElement('td');
+            cell2.style.border = '2px solid black';
+            cell2.style.padding = '10px';
+            const itemInput = document.createElement('input');
+            itemInput.type = 'text';
+            itemInput.style.width = '100%';
+            itemInput.style.border = '1px solid #ddd';
+            itemInput.style.padding = '5px';
+            itemInput.placeholder = 'Enter item description';
+            itemInput.onblur = function() {
+                const value = itemInput.value.trim();
+                if (value && existingItems.includes(value)) {
+                    window.electronAPI?.showErrorBox("Error", "This item already exists in the invoice.");
+                    itemInput.value = '';
+                    cell2.dataset.value = '';
+                } else {
+                    cell2.dataset.value = value || '';
+                }
+            };
+            cell2.appendChild(itemInput);
+
+            // Cell 3: Price
+            const cell3 = document.createElement('td');
+            cell3.style.border = '2px solid black';
+            cell3.style.padding = '10px';
+            cell3.style.textAlign = 'center';
+            const priceInput = document.createElement('input');
+            priceInput.type = 'text';
+            priceInput.className = 'rupee-input';
+            priceInput.value = '₹ 0';
+            priceInput.oninput = function() { calculateTotal(this); };
+            cell3.appendChild(priceInput);
+
+            // Cell 4: Delete button
+            const cell4 = document.createElement('td');
+            cell4.style.border = '2px solid black';
+            cell4.style.padding = '10px';
+            cell4.style.textAlign = 'center';
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-row-btn';
+            deleteBtn.innerHTML = 'Delete';
+            deleteBtn.onclick = function() { deleteRow(this); };
+            cell4.appendChild(deleteBtn);
+
+            // Append cells to the new row
+            newRow.appendChild(cell1);
+            newRow.appendChild(cell2);
+            newRow.appendChild(cell3);
+            newRow.appendChild(cell4);
+
+            // Insert the new row before the total row
+            tbody.insertBefore(newRow, rows[rows.length - 1]);
+
+            // Initialize the new input fields
+            initializeInputFields();
+        }
+
+        // Function to delete a row
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+
+            // Re-number the rows
+            const table = document.getElementById('invoiceTable');
+            const rows = table.querySelectorAll('tbody tr');
+            for (let i = 0; i < rows.length - 1; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+
+            // Recalculate the total
+            calculateTotal();
+        }
+
+        // Function to initialize input fields
+        function initializeInputFields() {
+            const inputs = document.querySelectorAll('#invoiceTable tbody input[type="text"]');
+            inputs.forEach(input => {
+                if (input.classList.contains('rupee-input')) {
+                    input.addEventListener('focus', () => {
+                        if (input.value === '₹ 0') {
+                            input.value = '₹ ';
+                        }
+                    });
+                    input.addEventListener('blur', () => {
+                        if (input.value === '₹ ' || input.value === '₹') {
+                            input.value = '₹ 0';
+                        }
+                        input.parentElement.dataset.value = input.value;
+                    });
+                    input.addEventListener('input', () => {
+                        input.parentElement.dataset.value = input.value;
+                    });
+                    input.parentElement.dataset.value = input.value;
+                } else {
+                    input.addEventListener('blur', () => {
+                        input.parentElement.dataset.value = input.value;
+                    });
+                    input.parentElement.dataset.value = input.value;
+                }
+            });
+        }
+
         // Function to calculate total and format input
         function calculateTotal(input) {
-            let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
-            if (value === '') {
-                input.value = '₹ '; // Keep rupee symbol if cleared
-            } else {
-                input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
+            if (input) {
+                let value = input.value.replace(/[^\d]/g, '');
+                if (value === '') {
+                    input.value = '₹ ';
+                } else {
+                    input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
+                }
+                input.parentElement.dataset.value = input.value;
             }
-            input.parentElement.dataset.value = input.value; // Update data-value for printing
 
-            // Calculate total
             let total = 0;
-            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text']");
+            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text'].rupee-input");
             inputs.forEach(inp => {
                 const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
                 total += numValue;
@@ -546,95 +670,36 @@ setCurrentDate();
             document.querySelector(".total").innerText = `₹ ${total.toLocaleString('en-IN')}`;
         }
 
-        // Function to print the invoice
-        function printInvoice() {
-            // Update all data-value attributes before printing
-            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text']");
-            inputs.forEach(input => {
-                input.parentElement.dataset.value = input.value; // Ensure latest value is set
-            });
-
-            // Print logic
-            window.print();
-        }
-
-
-       // Function to initialize input fields
-       function initializeInputFields() {
-            const inputs = document.querySelectorAll('#invoiceTable tbody input[type="text"]');
-            inputs.forEach(input => {
-                input.addEventListener('focus', () => {
-                    if (input.value === '₹ 0') {
-                        input.value = '₹ '; // Keep rupee symbol, remove 0
-                    }
-                });
-
-                input.addEventListener('blur', () => {
-                    if (input.value === '₹ ' || input.value === '₹') {
-                        input.value = '₹ 0'; // Restore ₹ 0 if empty
-                    }
-                });
-
-                // Set initial data-value attribute for printing
-                input.addEventListener('input', () => {
-                    input.parentElement.dataset.value = input.value; // Update data-value on input
-                });
-                input.parentElement.dataset.value = input.value; // Set initial value
-            });
-        }
-
-        // Function to calculate total and format input
-        function calculateTotal(input) {
-            let value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
-            if (value === '') {
-                input.value = '₹ '; // Keep rupee symbol if cleared
-            } else {
-                input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
-            }
-            input.parentElement.dataset.value = input.value; // Update data-value for printing
-
-            // Calculate total
-            let total = 0;
-            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text']");
-            inputs.forEach(inp => {
-                const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
-                total += numValue;
-            });
-            document.querySelector(".total").innerText = `  ₹${total.toLocaleString('en-IN')}`;
-        }
-
         // Updated printInvoice function
         function printInvoice() {
-            // Update all data-value attributes before printing
             const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text']");
             inputs.forEach(input => {
-                input.parentElement.dataset.value = input.value; // Ensure latest value is set
+                const td = input.closest('td');
+                if (td) {
+                    td.dataset.value = input.value;
+                }
             });
+
             const tempDateStr = localStorage.getItem("tempDate");
-            // Electron API printing
             const patientId = "P" + (appointment.id || "N/A");
-           // Get todays date with dd-mm-yyyy format
-           let today;
+            let today;
             if (tempDateStr) {
                 today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
             } else {
-                today = new Date(); // Ensure `today` is always a Date object
+                today = new Date();
             }
             const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
             const Docname = patientId + "_Bill_" + date;
-            console.log(patientId, date, Docname);
 
-            // If using Electron API, ensure it handles the print logic
             if (window.electronAPI && window.electronAPI.printPage) {
                 window.electronAPI.printPage(patientId, date, Docname);
             } else {
-                // Fallback to browser print if Electron API is not available
                 let printContents = document.querySelector('.invoice-container').innerHTML;
                 let originalContents = document.body.innerHTML;
                 document.body.innerHTML = printContents;
                 window.print();
                 document.body.innerHTML = originalContents;
-                location.reload(); // Reload to restore original content
+                location.reload();
             }
         }
 
