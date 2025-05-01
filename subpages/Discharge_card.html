@@ -478,7 +478,98 @@
         margin: 2; /* Remove default margin */
     }
 
+
+
+
+    /* Ensure the Medicines table does not split */
+    #A-Scan-Table {
+        page-break-inside: avoid;
+    }
+    @media print {
+    /* Reset margins and padding */
+    body, .patient-details, .Pre-Operative-Details {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Flex container adjustments */
+    .Pre-Operative-Details > div {
+        gap: 5px 30px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* Complaint items styling */
+    .complaints {
+        min-width: 100px !important;
+        margin: 0 !important;
+        padding: 2px !important;
+        font-size: 12pt !important;
+    }
+
+    /* Table container styling - CENTERS ONLY THE TABLE */
+    #Pre-Operative-Table {
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important; /* This centers only the table */
+        border: 1pt solid #000 !important;
+        page-break-inside: avoid;
+    }
+
+    /* Heading styling - remains left-aligned */
+    #Pre-Operative-Heading {
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important; /* Explicitly left-align heading */
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Table cell adjustments */
+    #Pre-Operative-Table th,
+    #Pre-Operative-Table td {
+        padding: 3pt !important;
+        border: 1pt solid #000 !important;
+        font-size: 12pt !important;
+    }
+
+    #Pre-Operative-Table th {
+        background-color: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+
+@media print {
+ 
+
+
+  
+    /* BP section - keeps 90px left margin in print */
+    .complaints.show-BP {
+        min-width: 120px !important;
+        margin-left: 90px !important; /* Specific left margin for BP */
+        padding: 2px !important;
+        font-size: 10pt !important;
+    }
+
+
+    #Pre-Operative-Table th,
+    #Pre-Operative-Table td {
+        padding: 3pt !important;
+        border: 1pt solid #000 !important;
+    }
+
+    #Pre-Operative-Table th {
+        background-color: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
     </style>
+
+
+
 </head>
 <body>
     <nav class="navbar">
@@ -531,6 +622,12 @@
             <hr style="border: 1px solid #070a0d;">
         </div>
 
+
+
+        <!-- Add this right after the address-section div and before the patient-info-card -->
+<div style="text-align: center; margin: 20px 0;">
+    <h2 style="font-size: 24px;  color: #004a99; text-decoration: underline;">DISCHARGE SUMMARY</h2>
+</div>
         <!-- Patient Information -->
           <!-- Patient Information -->
           <div class="patient-info-card" >
@@ -632,6 +729,17 @@
             </div>
         </div>
 
+
+        <!-- Investigation Section -->
+        <h4 class="section-title" id="investigation-title">Investigation</h4>
+        <div class="investigation-container">
+            <div class="investigation-list">
+                <!-- Investigations will be dynamically populated here -->
+            </div>
+        </div>
+
+
+        
         <!-- A-Scan Table -->
         <h4 class="section-title" id="A-Scan-Heading">A-Scan Report</h4>
         <table class="table" style="width: 450px; margin: 0 auto;" id="A-Scan-Table">
@@ -692,14 +800,6 @@
 
             </tbody>
         </table>
-
-        <!-- Investigation Section -->
-        <h4 class="section-title" id="investigation-title">Investigation</h4>
-        <div class="investigation-container">
-            <div class="investigation-list">
-                <!-- Investigations will be dynamically populated here -->
-            </div>
-        </div>
         <!-- IOL Sticker Section -->
         <h4 class="section-title">IOL STICKER</h4>
         <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 110px;"></div>
@@ -719,25 +819,19 @@
             <input type="text" class="form-control" style="width: 200px;">
         </div> -->
 
-        <div class="patient-details Pre-Operative-Details" >
-                      
-        <h4 class="section-title " >Pre-Operative Workup Investigations</h4>  
-            <p class="complaints show-BP"  style="margin-right: 120px;">
-
-            </p>
-
-            <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
-                
-            </p>
-            <p class="complaints show-SAC" style="margin-right: 120px;">
-                
-            </p>
-            <p class="complaints show-NCT" style="margin-right: 120px;">
-              
-          </p>                                          
-    </div>
-    <table id="Pre-Operative-Table" style="width: 470px; margin-left: 120px; border-collapse: collapse; text-align: center; border: 1px solid #000;">
-        <h4 class="section-title "id="Pre-Operative-Heading" >NCT</h4>  
+        <div class="patient-details Pre-Operative-Details">
+            <h4 class="section-title">Pre-Operative Workup Investigations</h4>  
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 90px;">
+                <p class="complaints show-BP" style="min-width: 120px;"></p>
+                <p class="complaints show-Pulse-Rate" style="min-width: 120px;"></p>
+                <p class="complaints show-SAC" style="min-width: 120px;"></p>
+                <p class="complaints show-NCT"></p>
+                <p class="complaints show-additional"></p>
+            </div>                                          
+        </div>
+        
+    <table id="Pre-Operative-Table" style="width: 470px; margin-left: 120px; border-collapse: collapse; text-align: center; border: 1px solid #000 ; margin-top: 0px;">
+        <h4 class="section-title " id="Pre-Operative-Heading" >NCT</h4>  
         <thead>
             <tr style="background-color: #f0f0f0; border: 1px solid #000;">
                 <th colspan="2" style="padding: 8px; border: 1px solid #000;">Right Eye</th>
@@ -847,6 +941,9 @@
         #Medicines-Table {
             background-color: #f9f9f9;
         }
+
+
+        
     </style>
   <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">
