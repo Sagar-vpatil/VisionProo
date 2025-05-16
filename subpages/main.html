@@ -3530,8 +3530,29 @@ attachInputFieldListener('lrCYL2');
 // Handle table cell click to set the value in the active input field
 nRefraction2Table.addEventListener('click', (event) => {
   if (event.target.tagName === 'TD' && event.target.textContent.trim() !== '') {
-    if (currentInputField) {
+   if (currentInputField) {
+      const selectedValue = parseFloat(event.target.textContent);
+
+      // Default assignment
       currentInputField.value = event.target.textContent;
+
+      // Right Eye NearSPH Addition
+      if (currentInputField.id === 'rSPH1') {
+        const distanceSPH = parseFloat(document.getElementById('rSPH').value);
+        if (!isNaN(distanceSPH) && !isNaN(selectedValue)) {
+          const result = distanceSPH + selectedValue;
+          currentInputField.value = (result >= 0 ? '+' : '') + result.toFixed(2);
+        }
+      }
+
+      // Left Eye NearSPH Addition
+      if (currentInputField.id === 'lrSPH2') {
+        const distanceSPH = parseFloat(document.getElementById('lrSPH').value);
+        if (!isNaN(distanceSPH) && !isNaN(selectedValue)) {
+          const result = distanceSPH + selectedValue;
+          currentInputField.value = (result >= 0 ? '+' : '') + result.toFixed(2);
+        }
+      }
     }
     nRefraction2Table.style.display = 'none'; // Hide the table after selection
   }
