@@ -247,7 +247,7 @@ function createMainWindow() {
             fs.mkdirSync(visionProoPath, { recursive: true });
           }
       
-          const fileName = `${dbName}_backup_${new Date().toISOString().slice(0,10)}.json`;
+          const fileName = `${dbName}_backup_new.json`;
           const filePath = path.join(visionProoPath, fileName);
       
           fs.writeFileSync(filePath, backupJson);

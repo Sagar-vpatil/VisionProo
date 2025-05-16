@@ -1154,6 +1154,7 @@
     
      <script>
         const tempDateStr = localStorage.getItem("tempDate");
+        console.log("tempDateStr", tempDateStr);
         function printFunction() {
             const patientId = "P"+appointment.id;
             // Get today's date in dd-mm-yyyy format
@@ -1189,9 +1190,16 @@
         // Get today's date in the desired format (e.g., DD/MM/YYYY)
         const today = new Date();
         const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
-
-        // Populate the date field
-        document.getElementById("appointment-date").textContent = formattedDate;
+        
+        if (tempDateStr) {
+            const tempDate = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+            const formattedTempDate = `${tempDate.getDate().toString().padStart(2, '0')}/${(tempDate.getMonth() + 1).toString().padStart(2, '0')}/${tempDate.getFullYear()}`;
+            document.getElementById("appointment-date").textContent = formattedTempDate;
+        }
+        else {
+            // If tempDateStr is not available, use today's date
+            document.getElementById("appointment-date").textContent = formattedDate;
+        }
 
        // Load the selected symptoms from local storage
        const selectedSymptoms = JSON.parse(localStorage.getItem("selectedSymptoms")) || [];
