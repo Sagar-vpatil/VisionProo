@@ -281,12 +281,12 @@
             }
             #invoiceTable td:nth-child(3)::after {
                 font-size: 18px;
-                font-weight: normal; /* Unbold for other PRICE (₹) */
+                font-weight: normal;
             }
             #invoiceTable .total::after {
                 content: attr(data-value);
                 font-size: 18px;
-                font-weight: bold; /* Bold for Total Amount PRICE (₹) */
+                font-weight: bold;
             }
             #currentDate::after {
                 content: attr(data-value);
@@ -316,7 +316,67 @@
                 width: 150px;
                 text-align: center;
             }
+            /* Hide rows where PRICE (₹) is ₹ 0 or empty */
+            #invoiceTable tr td:nth-child(3)[data-value="₹ 0"],
+            #invoiceTable tr td:nth-child(3)[data-value="₹ "],
+            #invoiceTable tr td:nth-child(3)[data-value="₹"] {
+                display: none;
+            }
+            #invoiceTable tr:has(td:nth-child(3)[data-value="₹ 0"]),
+            #invoiceTable tr:has(td:nth-child(3)[data-value="₹ "]),
+            #invoiceTable tr:has(td:nth-child(3)[data-value="₹"]) {
+                display: none;
+            }
+            /* Ensure the total row is always visible */
+            #invoiceTable tr:last-child {
+                display: table-row !important;
+            }
+
+            @media print {
+    /* Hide the actual input elements */
+    .rupee-input, #dateInput, #invoiceTable input[type="text"] {
+        display: none !important;
+    }
+    
+    /* Show only the data-value content */
+    #invoiceTable td:nth-child(3)::after {
+        content: attr(data-value);
+        font-size: 16px;
+    }
+    
+    /* Special handling for total amount to prevent duplication */
+    .total::after {
+        content: attr(data-value) !important;
+        display: inline !important;
+    }
+    
+    /* Remove any duplicate content */
+    .total {
+        visibility: visible !important;
+    }
+    .total span, .total div {
+        display: none !important;
+    }
+}
         }
+
+        @media print {
+    .total {
+        visibility: hidden;
+        position: relative;
+    }
+    .total::after {
+        content: attr(data-value);
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+        
     </style>
 </head>
 <body>
@@ -368,119 +428,119 @@
         </div>
         <hr style="border: 1px solid #070a0d;">
         <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
-            <thead>
-                <tr style="border: 2px solid black; background-color: #f2f2f2;">
-                    <th style="border: 2px solid black; padding: 10px;">NO</th>
-                    <th style="border: 2px solid black; padding: 10px;">PARTICULAR</th>
-                    <th style="border: 2px solid black; padding: 10px;">PRICE (₹)</th>
-                    <th style="border: 2px solid black; padding: 10px;">ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">1</td>
-                    <td style="border: 2px solid black; padding: 10px;">Consultation</td>
-                    <td style="border: 2px solid black; padding: 10px; text-align: center;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">2</td>
-                    <td style="border: 2px solid black; padding: 10px;">Follow Up</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">3</td>
-                    <td style="border: 2px solid black; padding: 10px;">Stay Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">4</td>
-                    <td style="border: 2px solid black; padding: 10px;">Nursing Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">5</td>
-                    <td style="border: 2px solid black; padding: 10px;">Surgeon Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">6</td>
-                    <td style="border: 2px solid black; padding: 10px;">Anesthesia Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">7</td>
-                    <td style="border: 2px solid black; padding: 10px;">Operation Theatre Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">8</td>
-                    <td style="border: 2px solid black; padding: 10px;">Visiting DR. Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">9</td>
-                    <td style="border: 2px solid black; padding: 10px;">Pathology Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">10</td>
-                    <td style="border: 2px solid black; padding: 10px;">Visit Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">11</td>
-                    <td style="border: 2px solid black; padding: 10px;">I.O.L. Charges</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;">12</td>
-                    <td style="border: 2px solid black; padding: 10px;">Other Charges/Medical/A-scan</td>
-                    <td style="border: 2px solid black; padding: 10px;">
-                        <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
-                    </td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-                <tr style="border: 2px solid black;">
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                    <td style="border: 2px solid black; padding: 10px;">Total Amount</td>
-                    <td style="border: 2px solid black; padding: 10px; text-align: center;" class="total"></td>
-                    <td style="border: 2px solid black; padding: 10px;"></td>
-                </tr>
-            </tbody>
-        </table>
+    <thead>
+        <tr style="border: 2px solid black; background-color: #f2f2f2;">
+            <th style="border: 2px solid black; padding: 10px;">NO</th>
+            <th style="border: 2px solid black; padding: 10px;">PARTICULAR</th>
+            <th style="border: 2px solid black; padding: 10px;">PRICE (₹)</th>
+            <th style="border: 2px solid black; padding: 10px;">ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="1">1</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Consultation">Consultation</td>
+            <td style="border: 2px solid black; padding: 10px; text-align: center;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="2">2</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Follow Up">Follow Up</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="3">3</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Stay Charges">Stay Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="4">4</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Nursing Charges">Nursing Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="5">5</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Surgeon Charges">Surgeon Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="6">6</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Anesthesia Charges">Anesthesia Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="7">7</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Operation Theatre Charges">Operation Theatre Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="8">8</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Visiting DR. Charges">Visiting DR. Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="9">9</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Pathology Charges">Pathology Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="10">10</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Visit Charges">Visit Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="11">11</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="I.O.L. Charges">I.O.L. Charges</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;" data-value="12">12</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="Other Charges/Medical/A-scan">Other Charges/Medical/A-scan</td>
+            <td style="border: 2px solid black; padding: 10px;" data-value="₹ 0">
+                <input type="text" class="rupee-input" value="₹ 0" oninput="calculateTotal(this)">
+            </td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+        <tr style="border: 2px solid black;">
+            <td style="border: 2px solid black; padding: 10px;"></td>
+            <td style="border: 2px solid black; padding: 10px;">Total Amount</td>
+            <td style="border: 2px solid black; padding: 10px; text-align: center;" class="total" data-value="₹ 0"></td>
+            <td style="border: 2px solid black; padding: 10px;"></td>
+        </tr>
+    </tbody>
+</table>
         <button class="add-row-btn" onclick="addNewRow()">+ Add New Item</button>
         <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 90px;">
@@ -488,223 +548,279 @@
             </div>
         </div>
     </div>
-    <script>
-        // Retrieve the appointment object from localStorage
-        const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
-        document.getElementById("patient-id").textContent = appointment.id || "N/A";
-        document.getElementById("patient-name").textContent = appointment.Name || "N/A";
-        document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+  <script>
+  // Retrieve the appointment object from localStorage
+const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
+document.getElementById("patient-id").textContent = appointment.id || "N/A";
+document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
 
-        // Set current date with the format DD/MM/YYYY
-        function setCurrentDate() {
-            const dateInput = document.getElementById('dateInput');
-            const currentDate = new Date().toLocaleDateString('en-IN', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-            dateInput.value = currentDate;
-            document.getElementById('currentDate').dataset.value = currentDate;
-        }
+// Set current date with the format DD/MM/YYYY
+function setCurrentDate() {
+    const dateInput = document.getElementById('dateInput');
+    const currentDate = new Date().toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+    dateInput.value = currentDate;
+    document.getElementById('currentDate').dataset.value = currentDate;
+}
 
-        // Function to update the date based on the input field
-        function updateDate() {
-            const dateInput = document.getElementById('dateInput');
-            const selectedDate = dateInput.value;
-            const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
-            if (datePattern.test(selectedDate)) {
-                document.getElementById('currentDate').dataset.value = selectedDate;
-            } else {
-                window.electronAPI?.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
-                setCurrentDate();
-            }
-        }
-
-        // Set the current date on page load
+// Function to update the date based on the input field
+function updateDate() {
+    const dateInput = document.getElementById('dateInput');
+    const selectedDate = dateInput.value;
+    const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (datePattern.test(selectedDate)) {
+        document.getElementById('currentDate').dataset.value = selectedDate;
+    } else {
+        window.electronAPI?.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
         setCurrentDate();
+    }
+}
 
-        // Function to add a new row to the invoice table
-        function addNewRow() {
-            const table = document.getElementById('invoiceTable');
-            const tbody = table.querySelector('tbody');
-            const rows = tbody.querySelectorAll('tr');
-            const lastRow = rows[rows.length - 2]; // Row before the total row
-            const newRowNum = parseInt(lastRow.cells[0].textContent) + 1;
+// Set the current date on page load
+setCurrentDate();
 
-            // Get all existing item descriptions
-            const existingItems = Array.from(tbody.querySelectorAll('tr td:nth-child(2) input, tr td:nth-child(2)'))
-                .map(td => td.querySelector('input')?.value || td.textContent)
-                .filter(item => item && item !== 'Total Amount');
+// Function to add a new row to the invoice table
+function addNewRow() {
+    const table = document.getElementById('invoiceTable');
+    const tbody = table.querySelector('tbody');
+    const rows = tbody.querySelectorAll('tr');
+    const lastRow = rows[rows.length - 2]; // Row before the total row
+    const newRowNum = parseInt(lastRow.cells[0].textContent) + 1;
 
-            // Create new row
-            const newRow = document.createElement('tr');
-            newRow.style.border = '2px solid black';
+    // Get all existing item descriptions
+    const existingItems = Array.from(tbody.querySelectorAll('tr td:nth-child(2) input, tr td:nth-child(2)'))
+        .map(td => td.querySelector('input')?.value || td.textContent)
+        .filter(item => item && item !== 'Total Amount');
 
-            // Cell 1: Row number
-            const cell1 = document.createElement('td');
-            cell1.style.border = '2px solid black';
-            cell1.style.padding = '10px';
-            cell1.textContent = newRowNum;
+    // Create new row
+    const newRow = document.createElement('tr');
+    newRow.style.border = '2px solid black';
 
-            // Cell 2: Item description
-            const cell2 = document.createElement('td');
-            cell2.style.border = '2px solid black';
-            cell2.style.padding = '10px';
-            const itemInput = document.createElement('input');
-            itemInput.type = 'text';
-            itemInput.style.width = '100%';
-            itemInput.style.border = '1px solid #ddd';
-            itemInput.style.padding = '5px';
-            itemInput.placeholder = 'Enter item description';
-            itemInput.onblur = function() {
-                const value = itemInput.value.trim();
-                if (value && existingItems.includes(value)) {
-                    window.electronAPI?.showErrorBox("Error", "This item already exists in the invoice.");
-                    itemInput.value = '';
-                    cell2.dataset.value = '';
-                } else {
-                    cell2.dataset.value = value || '';
-                }
-            };
-            cell2.appendChild(itemInput);
+    // Cell 1: Row number
+    const cell1 = document.createElement('td');
+    cell1.style.border = '2px solid black';
+    cell1.style.padding = '10px';
+    cell1.textContent = newRowNum;
+    cell1.dataset.value = newRowNum; // Set data-value for print
 
-            // Cell 3: Price
-            const cell3 = document.createElement('td');
-            cell3.style.border = '2px solid black';
-            cell3.style.padding = '10px';
-            cell3.style.textAlign = 'center';
-            const priceInput = document.createElement('input');
-            priceInput.type = 'text';
-            priceInput.className = 'rupee-input';
-            priceInput.value = '₹ 0';
-            priceInput.oninput = function() { calculateTotal(this); };
-            cell3.appendChild(priceInput);
-
-            // Cell 4: Delete button
-            const cell4 = document.createElement('td');
-            cell4.style.border = '2px solid black';
-            cell4.style.padding = '10px';
-            cell4.style.textAlign = 'center';
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-row-btn';
-            deleteBtn.innerHTML = 'Delete';
-            deleteBtn.onclick = function() { deleteRow(this); };
-            cell4.appendChild(deleteBtn);
-
-            // Append cells to the new row
-            newRow.appendChild(cell1);
-            newRow.appendChild(cell2);
-            newRow.appendChild(cell3);
-            newRow.appendChild(cell4);
-
-            // Insert the new row before the total row
-            tbody.insertBefore(newRow, rows[rows.length - 1]);
-
-            // Initialize the new input fields
-            initializeInputFields();
+    // Cell 2: Item description
+    const cell2 = document.createElement('td');
+    cell2.style.border = '2px solid black';
+    cell2.style.padding = '10px';
+    const itemInput = document.createElement('input');
+    itemInput.type = 'text';
+    itemInput.style.width = '100%';
+    itemInput.style.border = '1px solid #ddd';
+    itemInput.style.padding = '5px';
+    itemInput.placeholder = 'Enter item description';
+    itemInput.onblur = function() {
+        const value = itemInput.value.trim();
+        if (value && existingItems.includes(value)) {
+            window.electronAPI?.showErrorBox("Error", "This item already exists in the invoice.");
+            itemInput.value = '';
+            cell2.dataset.value = '';
+        } else {
+            cell2.dataset.value = value || '';
         }
+    };
+    cell2.appendChild(itemInput);
+    cell2.dataset.value = ''; // Initialize data-value
 
-        // Function to delete a row
-        function deleteRow(button) {
-            const row = button.closest('tr');
-            row.remove();
+    // Cell 3: Price
+    const cell3 = document.createElement('td');
+    cell3.style.border = '2px solid black';
+    cell3.style.padding = '10px';
+    cell3.style.textAlign = 'center';
+    const priceInput = document.createElement('input');
+    priceInput.type = 'text';
+    priceInput.className = 'rupee-input';
+    priceInput.value = '₹ 0';
+    priceInput.oninput = function() { calculateTotal(this); };
+    cell3.appendChild(priceInput);
+    cell3.dataset.value = '₹ 0'; // Initialize data-value
 
-            // Re-number the rows
-            const table = document.getElementById('invoiceTable');
-            const rows = table.querySelectorAll('tbody tr');
-            for (let i = 0; i < rows.length - 1; i++) {
-                rows[i].cells[0].textContent = i + 1;
-            }
+    // Cell 4: Delete button
+    const cell4 = document.createElement('td');
+    cell4.style.border = '2px solid black';
+    cell4.style.padding = '10px';
+    cell4.style.textAlign = 'center';
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-row-btn';
+    deleteBtn.innerHTML = 'Delete';
+    deleteBtn.onclick = function() { deleteRow(this); };
+    cell4.appendChild(deleteBtn);
 
-            // Recalculate the total
-            calculateTotal();
-        }
+    // Append cells to the new row
+    newRow.appendChild(cell1);
+    newRow.appendChild(cell2);
+    newRow.appendChild(cell3);
+    newRow.appendChild(cell4);
 
-        // Function to initialize input fields
-        function initializeInputFields() {
-            const inputs = document.querySelectorAll('#invoiceTable tbody input[type="text"]');
-            inputs.forEach(input => {
-                if (input.classList.contains('rupee-input')) {
-                    input.addEventListener('focus', () => {
-                        if (input.value === '₹ 0') {
-                            input.value = '₹ ';
-                        }
-                    });
-                    input.addEventListener('blur', () => {
-                        if (input.value === '₹ ' || input.value === '₹') {
-                            input.value = '₹ 0';
-                        }
-                        input.parentElement.dataset.value = input.value;
-                    });
-                    input.addEventListener('input', () => {
-                        input.parentElement.dataset.value = input.value;
-                    });
-                    input.parentElement.dataset.value = input.value;
-                } else {
-                    input.addEventListener('blur', () => {
-                        input.parentElement.dataset.value = input.value;
-                    });
-                    input.parentElement.dataset.value = input.value;
-                }
-            });
-        }
+    // Insert the new row before the total row
+    tbody.insertBefore(newRow, rows[rows.length - 1]);
 
-        // Function to calculate total and format input
-        function calculateTotal(input) {
-            if (input) {
-                let value = input.value.replace(/[^\d]/g, '');
-                if (value === '') {
+    // Initialize the new input fields
+    initializeInputFields();
+}
+
+// Function to delete a row
+function deleteRow(button) {
+    const row = button.closest('tr');
+    row.remove();
+
+    // Re-number the rows
+    const table = document.getElementById('invoiceTable');
+    const rows = table.querySelectorAll('tbody tr');
+    for (let i = 0; i < rows.length - 1; i++) {
+        rows[i].cells[0].textContent = i + 1;
+        rows[i].cells[0].dataset.value = i + 1; // Update data-value
+    }
+
+    // Recalculate the total
+    calculateTotal();
+}
+
+// Function to initialize input fields
+function initializeInputFields() {
+    const inputs = document.querySelectorAll('#invoiceTable tbody input[type="text"]');
+    inputs.forEach(input => {
+        if (input.classList.contains('rupee-input')) {
+            input.addEventListener('focus', () => {
+                if (input.value === '₹ 0') {
                     input.value = '₹ ';
+                }
+            });
+            input.addEventListener('blur', () => {
+                if (input.value === '₹ ' || input.value === '₹') {
+                    input.value = '₹ 0';
+                    input.parentElement.dataset.value = '₹ 0';
                 } else {
-                    input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
+                    input.parentElement.dataset.value = input.value;
                 }
+            });
+            input.addEventListener('input', () => {
                 input.parentElement.dataset.value = input.value;
-            }
-
-            let total = 0;
-            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text'].rupee-input");
-            inputs.forEach(inp => {
-                const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
-                total += numValue;
             });
-            document.querySelector(".total").innerText = `₹ ${total.toLocaleString('en-IN')}`;
-        }
-
-        // Updated printInvoice function
-        function printInvoice() {
-            const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text']");
-            inputs.forEach(input => {
-                const td = input.closest('td');
-                if (td) {
-                    td.dataset.value = input.value;
-                }
+            input.parentElement.dataset.value = input.value;
+        } else {
+            input.addEventListener('blur', () => {
+                input.parentElement.dataset.value = input.value;
             });
-
-            const tempDateStr = localStorage.getItem("tempDate");
-            const patientId = "P" + (appointment.id || "N/A");
-            let today;
-            if (tempDateStr) {
-                today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
-            } else {
-                today = new Date();
-            }
-            const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
-            const Docname = patientId + "_Bill_" + date;
-
-            if (window.electronAPI && window.electronAPI.printPage) {
-                window.electronAPI.printPage(patientId, date, Docname);
-            } else {
-                let printContents = document.querySelector('.invoice-container').innerHTML;
-                let originalContents = document.body.innerHTML;
-                document.body.innerHTML = printContents;
-                window.print();
-                document.body.innerHTML = originalContents;
-                location.reload();
-            }
+            input.parentElement.dataset.value = input.value;
         }
+    });
 
-        // Initialize input fields on page load
-        initializeInputFields();
-    </script>
+    // Initialize data-value for NO and PARTICULAR columns
+    const rows = document.querySelectorAll('#invoiceTable tbody tr');
+    rows.forEach((row, index) => {
+        if (index < rows.length - 1) { // Exclude total row
+            const noCell = row.cells[0];
+            const particularCell = row.cells[1];
+            noCell.dataset.value = noCell.textContent;
+            particularCell.dataset.value = particularCell.querySelector('input')?.value || particularCell.textContent;
+        }
+    });
+
+    // Calculate initial total
+    calculateTotal();
+}
+
+// Function to calculate total and format input
+function calculateTotal(input) {
+    if (input) {
+        let value = input.value.replace(/[^\d]/g, '');
+        if (value === '') {
+            input.value = '₹ ';
+            input.parentElement.dataset.value = '₹ 0';
+        } else {
+            input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
+            input.parentElement.dataset.value = input.value;
+        }
+    }
+
+    let total = 0;
+    const inputs = document.querySelectorAll("#invoiceTable tbody input[type='text'].rupee-input");
+    inputs.forEach(inp => {
+        const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
+        total += numValue;
+    });
+
+    const totalElement = document.querySelector(".total");
+    const formattedTotal = total.toLocaleString('en-IN');
+    totalElement.dataset.value = `₹ ${formattedTotal}`;
+    totalElement.textContent = `₹ ${formattedTotal}`; // Set text content for display
+}
+
+// Function to print the invoice
+function printInvoice() {
+    // Update all data-values and fix numbering
+    const rows = document.querySelectorAll("#invoiceTable tbody tr");
+    let visibleRowCount = 0;
+
+    // Process all rows except the total row
+    for (let i = 0; i < rows.length - 1; i++) {
+        const row = rows[i];
+        const priceCell = row.cells[2];
+        const priceInput = priceCell.querySelector('input');
+        const noCell = row.cells[0];
+        const particularCell = row.cells[1];
+
+        // Update data-values
+        priceCell.dataset.value = priceInput.value;
+        particularCell.dataset.value = particularCell.querySelector('input')?.value || particularCell.textContent;
+
+        // Update the NO column only for visible rows
+        if (priceInput && 
+            priceInput.value !== '₹ 0' && 
+            priceInput.value !== '₹ ' && 
+            priceInput.value !== '₹') {
+            visibleRowCount++;
+            noCell.textContent = visibleRowCount;
+            noCell.dataset.value = visibleRowCount;
+        } else {
+            noCell.dataset.value = '';
+        }
+    }
+
+    // Recalculate total before printing
+    calculateTotal();
+
+    // Ensure total element is correctly set for print
+    const totalElement = document.querySelector(".total");
+    totalElement.textContent = ''; // Clear text content to avoid duplication in print
+    totalElement.dataset.value = totalElement.dataset.value || '₹ 0';
+
+    // Prepare print metadata
+    const tempDateStr = localStorage.getItem("tempDate");
+    const patientId = "P" + (appointment.id || "N/A");
+    let today;
+    if (tempDateStr) {
+        today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+    } else {
+        today = new Date();
+    }
+    const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
+    const Docname = patientId + "_Bill_" + date;
+
+    // Trigger print
+    if (window.electronAPI && window.electronAPI.printPage) {
+        window.electronAPI.printPage(patientId, date, Docname);
+    } else {
+        let printContents = document.querySelector('.invoice-container').innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    }
+}
+
+// Initialize input fields on page load
+initializeInputFields();
+  </script>
 </body>
 </html>
