@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>रविकल्प हॉस्पिटल</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+  <!-- BOX ICONS CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../frontend/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+
+
+      /* CSS Reset */
+      
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #4a6fa5;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .filters-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filters-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #4a6fa5;
+            white-space: nowrap;
+        }
+
+        select, input, button {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        button {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background-color: #3a5a8f;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #4a6fa5;
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f5fd;
+        }
+
+        .amount-column {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
+        .export-btn {
+            background-color: #28a745;
+            padding: 12px 24px;
+            font-size: 1rem;
+            margin-left: auto;
+        }
+
+        .export-btn:hover {
+            background-color: #218838;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            min-width: 36px;
+        }
+
+        .active {
+            background-color: #3a5a8f;
+            font-weight: bold;
+        }
+
+        .records-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Loading indicator */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #4a6fa5;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .container, .container * {
+                visibility: visible;
+            }
+
+            .container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+                margin: 0;
+                background: white;
+                box-shadow: none;
+            }
+
+            .filters-container,
+            .actions-row,
+            .pagination,
+            header p,
+            .fa,
+            .records-info {
+                display: none !important;
+            }
+
+            header {
+                background: white !important;
+                color: black !important;
+                text-align: center !important;
+                padding: 10px 0 !important;
+                margin-bottom: 20px !important;
+                border-bottom: 2px solid #333 !important;
+                box-shadow: none !important;
+            }
+
+            h1 {
+                font-size: 18pt !important;
+                margin-bottom: 5px !important;
+                color: black !important;
+            }
+
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 10pt !important;
+            }
+
+            th, td {
+                padding: 8px 10px !important;
+                border: 1px solid #333 !important;
+                text-align: center !important;
+            }
+
+            th {
+                background-color: white !important;
+                color: black !important;
+                font-weight: bold !important;
+                border-bottom: 2px solid #333 !important;
+            }
+
+            .amount-column {
+                font-weight: bold !important;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9 !important;
+            }
+
+            tr:hover {
+                background-color: white !important;
+            }
+
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            .print-footer {
+                display: block !important;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 8pt;
+                color: #666;
+                text-align: center;
+                border-top: 1px solid #ddd;
+                padding: 5px 0;
+                background: white;
+            }
+
+            .print-footer div {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 20px;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filters-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            select, input {
+                width: 100%;
+            }
+
+            .actions-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .export-btn {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+</style>
+  
+</head>
+
+<body>
+  <!-- Side-Nav -->
+  <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white w-90">
+      <a href="#" class="nav-link h3 text-white my-2"
+        style="text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); font-weight: bold; display: inline-block; transform: perspective(500px) rotateX(10deg); font-size: 1.5rem;">
+        रविकल्प <span
+          style="color: #ff0000; text-shadow: 3px 3px 5px rgba(255, 0, 0, 0.5); font-size: 1.5rem;">हॉस्पिटल</span>
+      </a>
+      <hr>
+      <!-- Navigation Links for Upcoming Appointments and Dashboard History -->
+      <li class="nav-item" style="margin-top: 0px;">
+        <a href="./view_Appointments.html" class="nav-link text-white w-80 text-left"
+          style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
+          Upcoming Appointments
+        </a>
+        <a href="./Patient_Detail.html" class="nav-link text-white w-80 text-left"
+          style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
+          Update Patient Detail
+        </a>
+
+
+          <a href="./bill_Detail.html" class="nav-link text-white w-80 text-left"
+          style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
+           PatientnBill Detail
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Wrapper -->
+  <div class="p-1 my-container active-cont">
+    <!-- Top Nav -->
+    <nav class="navbar top-navbar navbar-light bg-light px-5 d-flex justify-content-between align-items-center"
+      style="height: 70px;">
+      <!-- Menu Button -->
+      <div class="d-flex align-items-center">
+        <a class="btn border-0" id="menu-btn"><i class="bx bx-menu" style="background-color: #fff;"></i></a>
+      </div>
+    </nav>
+    
+    <!-- Your content goes here -->
+
+
+
+
+
+
+ <!-- Loading indicator -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Generating PDF...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-invoice-dollar"></i> Patient Payment Records</h1>
+            <p style="font-weight: bold;">View and manage all patient payment transactions</p>
+        </header>
+
+        <div class="filters-container">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="year"><i class="fas fa-calendar-alt"></i> Year:</label>
+                    <select id="year">
+                        <option value="">Select Year</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="month"><i class="fas fa-calendar"></i> Month:</label>
+                    <select id="month">
+                        <option value="">Select Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="start-date"><i class="fas fa-calendar-day"></i> From:</label>
+                    <input type="date" id="start-date">
+                </div>
+
+                <div class="filter-group">
+                    <label for="end-date"><i class="fas fa-calendar-day"></i> To:</label>
+                    <input type="date" id="end-date">
+                </div>
+
+                <div class="filter-group">
+                    <label for="search"><i class="fas fa-search"></i> Search:</label>
+                    <input type="text" id="search" placeholder="Patient name or ID...">
+                    <button type="button" id="search-btn"><i class="fas fa-filter"></i> Filter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-row">
+            <button class="action-btn export-btn" id="export-pdf"><i class="fas fa-file-pdf"></i> Export to PDF</button>
+        </div>
+
+        <div class="table-container">
+            <table id="payment-table">
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Data will be loaded here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="records-info">
+            Showing <span id="start-record">1</span> to <span id="end-record">15</span> of <span id="total-records">15</span> records
+        </div>
+
+        <div class="pagination">
+            <button class="page-btn" id="first-page"><i class="fas fa-angle-double-left"></i></button>
+            <button class="page-btn" id="prev-page"><i class="fas fa-angle-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn" id="next-page"><i class="fas fa-angle-right"></i></button>
+            <button class="page-btn" id="last-page"><i class="fas fa-angle-double-right"></i></button>
+        </div>
+
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+  </div>
+  
+
+
+
+  <script>
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+
+        // Data aligned with payments.pdf
+        const sampleData = [
+            { id: "PT-1001", name: "Aarav Patel", amount: 11250, date: "2025-06-15" },
+            { id: "PT-1002", name: "Vihaan Sharma", amount: 13750, date: "2025-06-14" },
+            { id: "PT-1003", name: "Aditya Singh", amount: 12500, date: "2025-06-13" },
+            { id: "PT-1004", name: "Ananya Gupta", amount: 14200, date: "2025-06-12" },
+            { id: "PT-1005", name: "Diya Reddy", amount: 11800, date: "2025-06-11" },
+            { id: "PT-1006", name: "Ishaan Kumar", amount: 13000, date: "2025-06-10" },
+            { id: "PT-1007", name: "Myra Joshi", amount: 12750, date: "2025-06-09" },
+            { id: "PT-1008", name: "Reyansh Malhotra", amount: 11950, date: "2025-06-08" },
+            { id: "PT-1009", name: "Saanvi Iyer", amount: 13500, date: "2025-06-07" },
+            { id: "PT-1010", name: "Advait Choudhary", amount: 12250, date: "2025-06-06" },
+            { id: "PT-1011", name: "Anika Banerjee", amount: 14000, date: "2025-06-05" },
+            { id: "PT-1012", name: "Arjun Mehra", amount: 11500, date: "2025-06-04" },
+            { id: "PT-1013", name: "Kiara Nair", amount: 13250, date: "2025-06-03" },
+            { id: "PT-1014", name: "Vivaan Saxena", amount: 12800, date: "2025-06-02" },
+            { id: "PT-1015", name: "Ishita Desai", amount: 11950, date: "2025-06-01" }
+        ];
+
+        // Pagination variables
+        let currentPage = 1;
+        const recordsPerPage = 10;
+        let filteredData = [...sampleData];
+
+        // DOM elements
+        const tableBody = document.getElementById('table-body');
+        const startRecord = document.getElementById('start-record');
+        const endRecord = document.getElementById('end-record');
+        const totalRecords = document.getElementById('total-records');
+        const loadingIndicator = document.getElementById('loading');
+
+        // Render table
+        function renderTable() {
+            const startIndex = (currentPage - 1) * recordsPerPage;
+            const endIndex = Math.min(startIndex + recordsPerPage, filteredData.length);
+            const pageData = filteredData.slice(startIndex, endIndex);
+
+            tableBody.innerHTML = '';
+            pageData.forEach((patient) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${patient.id}</td>
+                    <td>${patient.name}</td>
+                    <td class="amount-column">Rs. ${formatAmount(patient.amount)}</td>
+                    <td>${formatDateForDisplay(patient.date)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            startRecord.textContent = startIndex + 1;
+            endRecord.textContent = endIndex;
+            totalRecords.textContent = filteredData.length;
+
+            updatePagination();
+        }
+
+        // Format amount (with Rs. prefix)
+        function formatAmount(amount) {
+            return new Intl.NumberFormat('en-IN').format(amount);
+        }
+
+        // Format date for display (DD-MMM-YYYY)
+        function formatDateForDisplay(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }).replace(',', '');
+        }
+
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+            const paginationContainer = document.querySelector('.pagination');
+            const navButtons = paginationContainer.querySelectorAll('#first-page, #prev-page, #next-page, #last-page');
+            paginationContainer.innerHTML = '';
+            navButtons.forEach(btn => paginationContainer.appendChild(btn.cloneNode(true)));
+
+            const maxVisiblePages = 5;
+            let startPage, endPage;
+
+            if (totalPages <= maxVisiblePages) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+                const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+                if (currentPage <= maxPagesBeforeCurrent) {
+                    startPage = 1;
+                    endPage = maxVisiblePages;
+                } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+                    startPage = totalPages - maxVisiblePages + 1;
+                    endPage = totalPages;
+                } else {
+                    startPage = currentPage - maxPagesBeforeCurrent;
+                    endPage = currentPage + maxPagesAfterCurrent;
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable();
+                });
+                paginationContainer.insertBefore(pageBtn, document.getElementById('next-page'));
+            }
+
+            document.getElementById('first-page').disabled = currentPage === 1;
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+            document.getElementById('last-page').disabled = currentPage === totalPages;
+        }
+
+        // Navigation button handlers
+        document.getElementById('first-page').addEventListener('click', () => {
+            currentPage = 1;
+            renderTable();
+        });
+
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTable();
+            }
+        });
+
+        document.getElementById('last-page').addEventListener('click', () => {
+            currentPage = Math.ceil(filteredData.length / recordsPerPage);
+            renderTable();
+        });
+
+        // Loading indicator
+        function showLoading() {
+            loadingIndicator.style.display = 'flex';
+        }
+
+        function hideLoading() {
+            loadingIndicator.style.display = 'none';
+        }
+
+        // Enhanced export to PDF function
+        function exportToPDF(data, filename, title) {
+            if (data.length === 0) {
+                alert('No records to export');
+                return;
+            }
+
+            showLoading();
+
+            setTimeout(() => {
+                const doc = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                // Set document metadata
+                doc.setProperties({
+                    title: title,
+                    subject: 'Patient Payment Records',
+                    author: 'Healthcare System',
+                    keywords: 'patient, payment, records',
+                    creator: 'Healthcare System'
+                });
+
+                // Page dimensions
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const margin = 15;
+                const contentWidth = pageWidth - (margin * 2);
+
+                // Header section
+                doc.setFontSize(18);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0, 0, 0); // Black for print
+                doc.text(title, margin, 20);
+
+                // Report details
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                
+                const currentDate = new Date();
+                const dateStr = currentDate.toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                    weekday: 'short'
+                });
+                const timeStr = currentDate.toLocaleTimeString('en-GB', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                doc.text(`Generated: ${dateStr}, ${timeStr}`, margin, 28);
+                doc.text(`Total Records: ${data.length}`, margin, 33);
+
+                // Calculate total amount
+                const totalAmount = data.reduce((sum, item) => sum + item.amount, 0);
+                const formattedTotal = `Rs. ${formatAmount(totalAmount)}`;
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Total Amount: ${formattedTotal}`, pageWidth - margin, 33, { align: 'right' });
+
+                // Add a horizontal line
+                doc.setDrawColor(51, 51, 51); // Match print border color
+                doc.setLineWidth(0.5);
+                doc.line(margin, 38, pageWidth - margin, 38);
+
+                // Prepare table data
+                const headers = [
+                    { title: "Patient ID", dataKey: "id" },
+                    { title: "Patient Name", dataKey: "name" },
+                    { title: "Amount", dataKey: "amount" },
+                    { title: "Date", dataKey: "date" }
+                ];
+
+                const tableData = data.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    amount: `Rs. ${formatAmount(item.amount)}`,
+                    date: formatDateForDisplay(item.date),
+                    rawDate: item.date // For sorting
+                }));
+
+                // Sort by date (newest first)
+                tableData.sort((a, b) => new Date(b.rawDate) - new Date(a.rawDate));
+
+                // AutoTable configuration
+                doc.autoTable({
+                    head: [headers.map(h => h.title)],
+                    body: tableData.map(row => headers.map(h => row[h.dataKey])),
+                    startY: 40,
+                    margin: { left: margin, right: margin },
+                    styles: {
+                        cellPadding: 3,
+                        fontSize: 10,
+                        valign: 'middle',
+                        textColor: [0, 0, 0], // Black for print
+                        lineColor: [51, 51, 51], // Match print border
+                        lineWidth: 0.3,
+                        font: 'helvetica',
+                        fillColor: [255, 255, 255]
+                    },
+                    headStyles: {
+                        fillColor: [255, 255, 255], // White for print
+                        textColor: [0, 0, 0], // Black
+                        fontStyle: 'bold',
+                        fontSize: 10,
+                        cellPadding: 4,
+                        lineWidth: 0.5,
+                        lineColor: [51, 51, 51],
+                        halign: 'center'
+                    },
+                    columnStyles: {
+                        0: { cellWidth: 30, halign: 'center' },   // Patient ID
+                        1: { cellWidth: 'auto', halign: 'center' }, // Patient Name
+                        2: { cellWidth: 40, halign: 'center' },   // Amount
+                        3: { cellWidth: 30, halign: 'center' }     // Date
+                    },
+                    alternateRowStyles: {
+                        fillColor: [249, 249, 249] // Light gray for even rows
+                    },
+                    didDrawPage: function(data) {
+                        // Footer
+                        doc.setFontSize(8);
+                        doc.setTextColor(100, 100, 100);
+                        doc.setFont('helvetica', 'normal');
+                        
+                      
+                    }
+                });
+
+                // Save the PDF
+                doc.save(filename);
+                hideLoading();
+            }, 500);
+        }
+
+        // Export all data
+        document.getElementById('export-pdf').addEventListener('click', function() {
+            exportToPDF(filteredData, 'patient_payments_report.pdf', 'Patient Payment Records');
+        });
+
+        // Search and filter
+        document.getElementById('search-btn').addEventListener('click', applyFilters);
+        document.getElementById('year').addEventListener('change', applyFilters);
+        document.getElementById('month').addEventListener('change', applyFilters);
+        document.getElementById('start-date').addEventListener('change', applyFilters);
+        document.getElementById('end-date').addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const year = document.getElementById('year').value;
+            const month = document.getElementById('month').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            filteredData = sampleData.filter(patient => {
+                // Search filter
+                const matchesSearch = searchTerm === '' ||
+                    patient.id.toLowerCase().includes(searchTerm) ||
+                    patient.name.toLowerCase().includes(searchTerm) ||
+                    `Rs. ${formatAmount(patient.amount)}`.toLowerCase().includes(searchTerm);
+                
+                // Year filter
+                const [rowYear] = patient.date.split('-');
+                const matchesYear = year === '' || rowYear === year;
+                
+                // Month filter
+                const [_, rowMonth] = patient.date.split('-');
+                const matchesMonth = month === '' || rowMonth === month.padStart(2, '0');
+                
+                // Date range filter
+                const patientDate = new Date(patient.date);
+                const startDateObj = startDate ? new Date(startDate) : null;
+                const endDateObj = endDate ? new Date(endDate) : null;
+                
+                let matchesDateRange = true;
+                if (startDateObj) {
+                    matchesDateRange = matchesDateRange && patientDate >= startDateObj;
+                }
+                if (endDateObj) {
+                    // Set end date to end of day
+                    const endOfDay = new Date(endDateObj);
+                    endOfDay.setHours(23, 59, 59, 999);
+                    matchesDateRange = matchesDateRange && patientDate <= endOfDay;
+                }
+                
+                return matchesSearch && matchesYear && matchesMonth && matchesDateRange;
+            });
+
+            currentPage = 1;
+            renderTable();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable();
+        });
+    </script>
+
+
+  <script>
+    var menu_btn = document.querySelector("#menu-btn");
+    var sidebar = document.querySelector("#sidebar");
+    var container = document.querySelector(".my-container");
+    menu_btn.addEventListener("click", () => {
+      sidebar.classList.toggle("active-nav");
+      container.classList.toggle("active-cont");
+    });
+  </script>
+
+
+
+
+  
+</body>
+
+</html>
