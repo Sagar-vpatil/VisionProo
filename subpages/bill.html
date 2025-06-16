@@ -384,7 +384,7 @@
         <div style="display: flex; align-items: center;"></div>
         <div class="buttons" style="margin-bottom: 10px;">
             <button onclick="window.location.href='./main.html';">🏠 Home</button>
-            <button onclick="printInvoice()">🖨️ Print Invoice</button>
+            <button onclick="printInvoice()" id="printInvoice">🖨️ Print Invoice</button>
         </div>
     </nav>
     <hr class="hr">
@@ -757,6 +757,10 @@ function calculateTotal(input) {
 
 // Function to print the invoice
 function printInvoice() {
+    // Disable printInvoice buttons to prevent multiple clicks
+    const printButton = document.getElementById('printInvoice');
+    printButton.disabled = true;
+    printButton.textContent = '⏳ Processing...';
     // Update all data-values and fix numbering
     const rows = document.querySelectorAll("#invoiceTable tbody tr");
     let visibleRowCount = 0;
@@ -795,8 +799,22 @@ function printInvoice() {
     totalElement.dataset.value = totalElement.dataset.value || '₹ 0';
 
     // Prepare print metadata
-    const tempDateStr = localStorage.getItem("tempDate");
+    // const tempDateStr = localStorage.getItem("tempDate");
+    // const patientId = "P" + (appointment.id || "N/A");
+    // let today;
+    // if (tempDateStr) {
+    //     today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+    // } else {
+    //     today = new Date();
+    // }
+    // const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
+    // const Docname = patientId + "_Bill_" + date;
+
+    // get Date from input field
+    const dateInput = document.getElementById('dateInput');
+    const tempDateStr = dateInput.value;
     const patientId = "P" + (appointment.id || "N/A");
+    console.log("tempDateStr:", tempDateStr);
     let today;
     if (tempDateStr) {
         today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
@@ -805,10 +823,24 @@ function printInvoice() {
     }
     const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
     const Docname = patientId + "_Bill_" + date;
+    console.log("Docname:", Docname);
 
     // Trigger print
     if (window.electronAPI && window.electronAPI.printPage) {
-        window.electronAPI.printPage(patientId, date, Docname);
+        saveRecordToFirebase(appointment.id, appointment.Name, date)
+        .then(() => {
+            // Only runs if save is successful
+            window.electronAPI.printPage(patientId, date, Docname);
+        })
+        .catch((error) => {
+            console.error('Error saving record to Firebase:', error);
+            window.electronAPI.showErrorBox("Error", "Failed to save the record. Please try again."+" "+ error.message);
+        })
+        .finally(() => {
+            // Always re-enable the button and reset text
+            printButton.disabled = false;
+            printButton.textContent = '🖨️ Print Invoice';
+        });
     } else {
         let printContents = document.querySelector('.invoice-container').innerHTML;
         let originalContents = document.body.innerHTML;
@@ -822,5 +854,38 @@ function printInvoice() {
 // Initialize input fields on page load
 initializeInputFields();
   </script>
+
+
+<script type="module">
+// Your module script
+  import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc } from "../backend/firebaseConfig.js";
+
+  console.log("Firebase initialized");
+
+ async function saveRecordToFirebase(patientId, patientName, formattedDate) {
+    const totalElement = document.querySelector(".total");
+    const totalAmount = totalElement?.dataset?.value || "₹ 0";
+
+    // Convert date from DD/MM/YYYY to DDMMYYYY
+    const dateCleaned = formattedDate.replace(/\D/g, ''); // removes all non-digit characters
+    const customDocId = "B" + patientId + dateCleaned; // e.g., BA000116062025
+
+    // Save to Firestore with custom doc ID
+    await setDoc(doc(db, "billsRecords", customDocId), {
+      patient_id: patientId,
+      patient_name: patientName,
+      date: formattedDate,
+      bill_amount: totalAmount
+    });
+
+    console.log("Bill saved with ID:", customDocId);
+  
+}
+
+  // Expose to global scope
+  window.saveRecordToFirebase = saveRecordToFirebase;
+</script>
+
+
 </body>
 </html>
