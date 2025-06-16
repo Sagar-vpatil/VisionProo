@@ -633,9 +633,9 @@
             <input type="date" id="end-date">
           </div>
           <div class="filter-group">
-            <label for="search"><i class="fas fa-search"></i> Search:</label>
+            <!-- <label for="search"><i class="fas fa-search"></i> Search:</label> -->
             <input type="text" id="search" placeholder="Patient name or ID...">
-            <button type="button" id="search-btn"><i class="fas fa-filter"></i> Filter</button>
+            <button type="button" id="search-btn"><i class="fas fa-search"></i> Search</button>
           </div>
         </div>
       </div>
@@ -652,6 +652,8 @@
               <th>Patient Name</th>
               <th>Amount</th>
               <th>Date</th>
+              <th>Action</th>
+
             </tr>
           </thead>
           <tbody id="table-body">
@@ -681,131 +683,317 @@
   <!-- Bootstrap 5 JS (includes Popper.js) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous" onerror="alert('Failed to load Bootstrap. Please check your internet connection.');"></script>
 
-  <script>
-    // Initialize jsPDF
+<!-- Add this script after your existing scripts, before the closing </body> tag -->
+<script type="module">
+  import { db, collection, getDocs, query, where, deleteDoc, doc, setDoc } from "../backend/firebaseConfig.js";
+   // Initialize jsPDF
     const { jsPDF } = window.jspdf;
 
-    // Data aligned with payments.pdf
-    const sampleData = [
-      { id: "PT-1001", name: "Aarav Patel", amount: 11250, date: "2025-06-15" },
-      { id: "PT-1002", name: "Vihaan Sharma", amount: 13750, date: "2025-06-14" },
-      { id: "PT-1003", name: "Aditya Singh", amount: 12500, date: "2025-06-13" },
-      { id: "PT-1004", name: "Ananya Gupta", amount: 14200, date: "2025-06-12" },
-      { id: "PT-1005", name: "Diya Reddy", amount: 11800, date: "2025-06-11" },
-      { id: "PT-1006", name: "Ishaan Kumar", amount: 13000, date: "2025-06-10" },
-      { id: "PT-1007", name: "Myra Joshi", amount: 12750, date: "2025-06-09" },
-      { id: "PT-1008", name: "Reyansh Malhotra", amount: 11950, date: "2025-06-08" },
-      { id: "PT-1009", name: "Saanvi Iyer", amount: 13500, date: "2025-06-07" },
-      { id: "PT-1010", name: "Advait Choudhary", amount: 12250, date: "2025-06-06" },
-      { id: "PT-1011", name: "Anika Banerjee", amount: 14000, date: "2025-06-05" },
-      { id: "PT-1012", name: "Arjun Mehra", amount: 11500, date: "2025-06-04" },
-      { id: "PT-1013", name: "Kiara Nair", amount: 13250, date: "2025-06-03" },
-      { id: "PT-1014", name: "Vivaan Saxena", amount: 12800, date: "2025-06-02" },
-      { id: "PT-1015", name: "Ishita Desai", amount: 11950, date: "2025-06-01" }
-    ];
 
-    // Pagination variables
-    let currentPage = 1;
-    const recordsPerPage = 10;
-    let filteredData = [...sampleData];
+  // DOM elements
+  const tableBody = document.getElementById('table-body');
+  const startRecord = document.getElementById('start-record');
+  const endRecord = document.getElementById('end-record');
+  const totalRecords = document.getElementById('total-records');
+  const loadingIndicator = document.getElementById('loading');
+  const editAmountModal = new bootstrap.Modal(document.getElementById('editAmountModal'));
 
-    // DOM elements
-    const tableBody = document.getElementById('table-body');
-    const startRecord = document.getElementById('start-record');
-    const endRecord = document.getElementById('end-record');
-    const totalRecords = document.getElementById('total-records');
-    const loadingIndicator = document.getElementById('loading');
-    const editAmountModal = new bootstrap.Modal(document.getElementById('editAmountModal'));
+  // Pagination variables
+  let currentPage = 1;
+  const recordsPerPage = 10;
+  let filteredData = [];
+  let allRecords = [];
 
-    // Render table
-    function renderTable() {
-      const startIndex = (currentPage - 1) * recordsPerPage;
-      const endIndex = Math.min(startIndex + recordsPerPage, filteredData.length);
-      const pageData = filteredData.slice(startIndex, endIndex);
+  // Helper functions
+  function formatAmount(amount) {
+    return new Intl.NumberFormat('en-IN').format(amount);
+  }
 
-      tableBody.innerHTML = '';
-      pageData.forEach((patient) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${patient.id}</td>
-          <td>${patient.name}</td>
-          <td class="amount-column">
-            <button class="edit-btn" onclick="openEditModal('${patient.id}')"><i class="fas fa-pencil-alt"></i></button>
-            Rs. ${formatAmount(patient.amount)}
-          </td>
-          <td>${formatDateForDisplay(patient.date)}</td>
-        `;
-        tableBody.appendChild(row);
-      });
+  //  function parseFirestoreDate(dateStr) {
+  //   if (!dateStr) return null;
+    
+  //   // Handle ISO string or timestamp
+  //   const dateFromISO = new Date(dateStr);
+  //   if (!isNaN(dateFromISO.getTime())) return dateFromISO;
+    
+  //   // Handle DD/MM/YYYY format
+  //   if (dateStr.includes('/')) {
+  //     const [day, month, year] = dateStr.split('/');
+  //     return new Date(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+  //   }
+    
+  //   // Handle DD-MM-YYYY format (new addition)
+  //   if (dateStr.includes('-')) {
+  //     const [day, month, year] = dateStr.split('-');
+  //     if (day.length === 2 && month.length === 2 && year.length === 4) {
+  //       return new Date(`${year}-${month}-${day}`);
+  //     }
+  //   }
+    
+  //   // Handle other cases
+  //   console.warn('Unrecognized date format:', dateStr);
+  //   return null;
+  // }
 
-      startRecord.textContent = startIndex + 1;
-      endRecord.textContent = endIndex;
-      totalRecords.textContent = filteredData.length;
+  function parseFirestoreDate(dateStr) {
+  if (!dateStr) return null;
 
-      updatePagination();
+  // Handle DD-MM-YYYY format
+  if (dateStr.includes('-')) {
+    const [day, month, year] = dateStr.split('-');
+    if (
+      day.length === 2 &&
+      month.length === 2 &&
+      year.length === 4
+    ) {
+      // Create Date object using numeric parts to avoid auto-format issues
+      return new Date(Number(year), Number(month) - 1, Number(day));
     }
+  }
 
-    // Format amount (with Rs. prefix)
-    function formatAmount(amount) {
-      return new Intl.NumberFormat('en-IN').format(amount);
-    }
+  // Fallback: ISO or timestamp
+  const dateFromISO = new Date(dateStr);
+  if (!isNaN(dateFromISO.getTime())) return dateFromISO;
 
-    // Format date for display (DD-MMM-YYYY)
-    function formatDateForDisplay(dateStr) {
-      const date = new Date(dateStr);
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = date.toLocaleString('en-GB', { month: 'short' });
-      const year = date.getFullYear();
-      return `${day}-${month}-${year}`;
-    }
+  console.warn('Unrecognized date format:', dateStr);
+  return null;
+}
 
-    // Update pagination
-    function updatePagination() {
-      const totalPages = Math.ceil(filteredData.length / recordsPerPage);
-      const paginationContainer = document.querySelector('.pagination');
-      const navButtons = paginationContainer.querySelectorAll('#first-page, #prev-page, #next-page, #last-page');
-      paginationContainer.innerHTML = '';
-      navButtons.forEach(btn => paginationContainer.appendChild(btn.cloneNode(true)));
 
-      const maxVisiblePages = 5;
-      let startPage, endPage;
 
-      if (totalPages <= maxVisiblePages) {
+  function formatDateForDisplay(dateStr) {
+    // console.log("Formatting date:", dateStr);
+    const date = parseFirestoreDate(dateStr);
+    // console.log("Formatted date:", date);
+    if (!date || isNaN(date.getTime())) return 'N/A';
+    
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = date.toLocaleString('en-GB', { month: 'short' });
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+
+  function showLoading() {
+    loadingIndicator.style.display = 'flex';
+  }
+
+  function hideLoading() {
+    loadingIndicator.style.display = 'none';
+  }
+
+  function updatePagination() {
+    const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+    const paginationContainer = document.querySelector('.pagination');
+    const navButtons = paginationContainer.querySelectorAll('#first-page, #prev-page, #next-page, #last-page');
+    paginationContainer.innerHTML = '';
+    navButtons.forEach(btn => paginationContainer.appendChild(btn.cloneNode(true)));
+
+    const maxVisiblePages = 5;
+    let startPage, endPage;
+
+    if (totalPages <= maxVisiblePages) {
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+      const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+      if (currentPage <= maxPagesBeforeCurrent) {
         startPage = 1;
+        endPage = maxVisiblePages;
+      } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+        startPage = totalPages - maxVisiblePages + 1;
         endPage = totalPages;
       } else {
-        const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
-        const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
-        if (currentPage <= maxPagesBeforeCurrent) {
-          startPage = 1;
-          endPage = maxVisiblePages;
-        } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
-          startPage = totalPages - maxVisiblePages + 1;
-          endPage = totalPages;
-        } else {
-          startPage = currentPage - maxPagesBeforeCurrent;
-          endPage = currentPage + maxPagesAfterCurrent;
-        }
+        startPage = currentPage - maxPagesBeforeCurrent;
+        endPage = currentPage + maxPagesAfterCurrent;
       }
-
-      for (let i = startPage; i <= endPage; i++) {
-        const pageBtn = document.createElement('button');
-        pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-        pageBtn.textContent = i;
-        pageBtn.addEventListener('click', () => {
-          currentPage = i;
-          renderTable();
-        });
-        paginationContainer.insertBefore(pageBtn, document.getElementById('next-page'));
-      }
-
-      document.getElementById('first-page').disabled = currentPage === 1;
-      document.getElementById('prev-page').disabled = currentPage === 1;
-      document.getElementById('next-page').disabled = currentPage === totalPages;
-      document.getElementById('last-page').disabled = currentPage === totalPages;
     }
 
-    // Navigation button handlers
+    for (let i = startPage; i <= endPage; i++) {
+      const pageBtn = document.createElement('button');
+      pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+      pageBtn.textContent = i;
+      pageBtn.addEventListener('click', () => {
+        currentPage = i;
+        renderTable();
+      });
+      paginationContainer.insertBefore(pageBtn, document.getElementById('next-page'));
+    }
+
+    document.getElementById('first-page').disabled = currentPage === 1;
+    document.getElementById('prev-page').disabled = currentPage === 1;
+    document.getElementById('next-page').disabled = currentPage === totalPages;
+    document.getElementById('last-page').disabled = currentPage === totalPages;
+  }
+
+  // Fetch records from Firestore
+  async function fetchRecords() {
+    try {
+      showLoading();
+      const q = query(collection(db, "billsRecords"));
+      const querySnapshot = await getDocs(q);
+      
+      allRecords = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const date = parseFirestoreDate(data.date);
+        
+        allRecords.push({
+          id: doc.id,
+          patient_id: data.patient_id,
+          patient_name: data.patient_name,
+          amount: parseFloat(data.bill_amount.replace(/[^0-9.]/g, '')),
+          date: date ? date.toISOString().split('T')[0] : '', // Store as YYYY-MM-DD
+          rawDate: data.date // Keep original for reference
+        });
+        // after push amount
+        console.log("Fetched record:", allRecords.amount);
+      });
+      // print amount 
+      console.log("Total records fetched:", allRecords.amount);
+      // Sort by date descending (newest first)
+      allRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
+      filteredData = [...allRecords];
+
+      currentPage = 1;
+      renderTable();
+    } catch (error) {
+      console.error("Error fetching records: ", error);
+      window.electronAPI.showErrorBox("Error", "Failed to fetch records from Firestore. Please check console for details.");
+    } finally {
+      hideLoading();
+    }
+  }
+
+  // Render table with data
+  function renderTable() {
+    const startIndex = (currentPage - 1) * recordsPerPage;
+    const endIndex = Math.min(startIndex + recordsPerPage, filteredData.length);
+    const pageData = filteredData.slice(startIndex, endIndex);
+
+    tableBody.innerHTML = '';
+    pageData.forEach((record) => {
+      const row = document.createElement('tr');
+      console.log("Rendering record:", record.amount);
+      row.innerHTML = `
+        <td>${record.patient_id}</td>
+        <td>${record.patient_name}</td>
+        <td class="amount-column">
+          <button class="edit-btn" onclick="openEditModal('${record.id}')"><i class="fas fa-pencil-alt"></i></button>
+          Rs. ${record.amount}
+        </td>
+        <td>${formatDateForDisplay(record.rawDate)}</td>
+        <td>
+          <button class="btn btn-danger btn-sm delete-btn" onclick="deleteRecord('${record.id}')">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    startRecord.textContent = startIndex + 1;
+    endRecord.textContent = endIndex;
+    totalRecords.textContent = filteredData.length;
+    updatePagination();
+  }
+
+  // Delete record from Firestore
+  async function deleteRecord(recordId) {
+    // Trigger confirmation dialog
+    const response = await window.electronAPI.showMessageBox(
+      "warning",
+      "Are you sure you want to delete this record?",
+      "Confirm Deletion",
+      ["Yes", "No"]
+    );
+    if (response === 1) {
+        return; // User chose not to delete
+    }
+   
+      try {
+        showLoading();
+        await deleteDoc(doc(db, "billsRecords", recordId));
+        await fetchRecords();
+      } catch (error) {
+        console.error("Error deleting record: ", error);
+        window.electronAPI.showErrorBox("Error", "Failed to delete record from Firestore. Please check console for details.");
+      } finally {
+        hideLoading();
+      }
+  }
+
+  // Open edit modal
+  function openEditModal(recordId) {
+    const record = allRecords.find(r => r.id === recordId);
+    if (record) {
+      document.getElementById('editAmount').value = record.amount;
+      document.getElementById('editPatientId').value = record.id;
+      editAmountModal.show();
+    }
+  }
+
+  // Apply filters
+  function applyFilters() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const year = document.getElementById('year').value;
+    const month = document.getElementById('month').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    filteredData = allRecords.filter(record => {
+      // Search filter
+      const matchesSearch = searchTerm === '' ||
+        record.patient_id.toLowerCase().includes(searchTerm) ||
+        record.patient_name.toLowerCase().includes(searchTerm) ||
+        `Rs. ${formatAmount(record.amount)}`.toLowerCase().includes(searchTerm);
+      
+      if (!matchesSearch) return false;
+      
+      // Date filters
+      const recordDate = record.date ? new Date(record.date) : null;
+      
+      // Year filter
+      if (year && recordDate && recordDate.getFullYear().toString() !== year) {
+        return false;
+      }
+      
+      // Month filter (1-12)
+      if (month && recordDate && (recordDate.getMonth() + 1).toString() !== month) {
+        return false;
+      }
+      
+      // Date range filter
+      if (startDate) {
+        const startDateObj = new Date(startDate);
+        if (recordDate && recordDate < startDateObj) return false;
+      }
+      
+      if (endDate) {
+        const endDateObj = new Date(endDate);
+        endDateObj.setHours(23, 59, 59, 999);
+        if (recordDate && recordDate > endDateObj) return false;
+      }
+      
+      return true;
+    });
+
+    currentPage = 1;
+    renderTable();
+  }
+
+  // Initialize and set up event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchRecords();
+    
+    // Filter event listeners
+    document.getElementById('search-btn').addEventListener('click', applyFilters);
+    document.getElementById('year').addEventListener('change', applyFilters);
+    document.getElementById('month').addEventListener('change', applyFilters);
+    document.getElementById('start-date').addEventListener('change', applyFilters);
+    document.getElementById('end-date').addEventListener('change', applyFilters);
+    
+    // Pagination controls
     document.getElementById('first-page').addEventListener('click', () => {
       currentPage = 1;
       renderTable();
@@ -831,55 +1019,67 @@
       renderTable();
     });
 
-    // Loading indicator
-    function showLoading() {
-      loadingIndicator.style.display = 'flex';
-    }
-
-    function hideLoading() {
-      loadingIndicator.style.display = 'none';
-    }
-
-    // Open edit modal
-    function openEditModal(patientId) {
-      const patient = sampleData.find(p => p.id === patientId);
-      if (patient) {
-        document.getElementById('editAmount').value = patient.amount;
-        document.getElementById('editPatientId').value = patient.id;
-        editAmountModal.show();
-      }
-    }
-
-    // Update amount
-    document.getElementById('updateAmountBtn').addEventListener('click', () => {
-      const patientId = document.getElementById('editPatientId').value;
+    // Edit amount handler
+    document.getElementById('updateAmountBtn').addEventListener('click', async () => {
+      const recordId = document.getElementById('editPatientId').value;
       const newAmount = parseFloat(document.getElementById('editAmount').value);
 
+
       if (isNaN(newAmount) || newAmount < 0) {
-        alert('Please enter a valid non-negative amount.');
+        window.electronAPI.showErrorBox("Invalid Amount", "Please enter a valid non-negative amount.");
+        editAmountModal.hide();
         return;
       }
 
-      // Update sampleData
-      const sampleIndex = sampleData.findIndex(p => p.id === patientId);
-      if (sampleIndex !== -1) {
-        sampleData[sampleIndex].amount = newAmount;
+      // Trigger confirmation dialog
+      const response = await window.electronAPI.showMessageBox(
+        "info",
+        "Are you sure you want to update the amount?",
+        "Confirm Update",
+        ["Yes", "No"]
+      );
+
+      if (response === 1) {
+          return;
       }
 
-      // Update filteredData
-      const filteredIndex = filteredData.findIndex(p => p.id === patientId);
-      if (filteredIndex !== -1) {
-        filteredData[filteredIndex].amount = newAmount;
+      try {
+        console.log("Updating record with ID:", recordId, "to new amount:", newAmount);
+        showLoading();
+        await setDoc(doc(db, "billsRecords", recordId), {
+          bill_amount: `₹ ${newAmount}`
+        }, { merge: true });
+        
+        editAmountModal.hide();
+        await fetchRecords();
+      } catch (error) {
+        console.error("Error updating record: ", error);
+        window.electronAPI.showErrorBox("Error", "Failed to update record in Firestore. Please check console for details.");
+        editAmountModal.hide();
+      } finally {
+        hideLoading();
       }
-
-      editAmountModal.hide();
-      renderTable();
     });
 
-    // Enhanced export to PDF function
+
+
+  // Export all data
+    // document.getElementById('export-pdf').addEventListener('click', function() {
+    //   exportToPDF(filteredData, 'patient_payments_report.pdf', 'Patient Payment Records');
+    // });
+
+    // export-pdf button click handler
+  document.getElementById('export-pdf').addEventListener('click', () => {
+    const title = 'Patient Payment Records';
+    const filename = `${title.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+    exportToPDF(filteredData, filename, title);
+  });
+
+
+      // Enhanced export to PDF function
     function exportToPDF(data, filename, title) {
       if (data.length === 0) {
-        alert('No records to export');
+        window.electronAPI.showErrorBox("No Data", "No records available to export.");
         return;
       }
 
@@ -951,10 +1151,11 @@
         ];
 
         const tableData = data.map(item => ({
-          id: item.id,
-          name: item.name,
+          id: item.patient_id,
+          name: item.patient_name,
           amount: `Rs. ${formatAmount(item.amount)}`,
-          date: formatDateForDisplay(item.date),
+          // date: formatDateForDisplay(item.date),
+          date: formatDateForDisplay(item.rawDate), // Use rawDate for display
           rawDate: item.date
         }));
 
@@ -1009,65 +1210,14 @@
         hideLoading();
       }, 500);
     }
+  });
 
-    // Export all data
-    document.getElementById('export-pdf').addEventListener('click', function() {
-      exportToPDF(filteredData, 'patient_payments_report.pdf', 'Patient Payment Records');
-    });
 
-    // Search and filter
-    document.getElementById('search-btn').addEventListener('click', applyFilters);
-    document.getElementById('year').addEventListener('change', applyFilters);
-    document.getElementById('month').addEventListener('change', applyFilters);
-    document.getElementById('start-date').addEventListener('change', applyFilters);
-    document.getElementById('end-date').addEventListener('change', applyFilters);
-
-    function applyFilters() {
-      const searchTerm = document.getElementById('search').value.toLowerCase();
-      const year = document.getElementById('year').value;
-      const month = document.getElementById('month').value;
-      const startDate = document.getElementById('start-date').value;
-      const endDate = document.getElementById('end-date').value;
-
-      filteredData = sampleData.filter(patient => {
-        const matchesSearch = searchTerm === '' ||
-          patient.id.toLowerCase().includes(searchTerm) ||
-          patient.name.toLowerCase().includes(searchTerm) ||
-          `Rs. ${formatAmount(patient.amount)}`.toLowerCase().includes(searchTerm);
-        
-        const [rowYear] = patient.date.split('-');
-        const matchesYear = year === '' || rowYear === year;
-        
-        const [_, rowMonth] = patient.date.split('-');
-        const matchesMonth = month === '' || rowMonth === month.padStart(2, '0');
-        
-        const patientDate = new Date(patient.date);
-        const startDateObj = startDate ? new Date(startDate) : null;
-        const endDateObj = endDate ? new Date(endDate) : null;
-        
-        let matchesDateRange = true;
-        if (startDateObj) {
-          matchesDateRange = matchesDateRange && patientDate >= startDateObj;
-        }
-        if (endDateObj) {
-          const endOfDay = new Date(endDateObj);
-          endOfDay.setHours(23, 59, 59, 999);
-          matchesDateRange = matchesDateRange && patientDate <= endOfDay;
-        }
-        
-        return matchesSearch && matchesYear && matchesMonth && matchesDateRange;
-      });
-
-      currentPage = 1;
-      renderTable();
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      renderTable();
-    });
-  </script>
-
+  // Expose functions to global scope
+  window.openEditModal = openEditModal;
+  window.deleteRecord = deleteRecord;
+  
+</script>
   <script>
     var menu_btn = document.querySelector("#menu-btn");
     var sidebar = document.querySelector("#sidebar");
