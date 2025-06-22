@@ -7,153 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-
-@media print {
-    /* Ensure the Eye Examination table does not split across pages */
-    .eye-examination-section {
-        page-break-inside: avoid; /* Prevent the table from splitting */
-    }
-
-    /* Ensure the Medicines Table does not split across pages */
-    .medicines-section {
-        page-break-inside: avoid; /* Prevent the table from splitting */
-        margin-bottom: 10px; /* Add some spacing after the section */
-    }
-
-    /* Selective coloring for Medicines Table header during printing */
-    #Medicines-Table thead th {
-        background-color: #e0e0e0; /* Light gray background for the header */
-        color: #000; /* Ensure text is black for readability */
-    }
-
-    /* Optional: Style for table rows for better readability */
-    #Medicines-Table tbody tr {
-        background-color: #f9f9f9; /* Very light gray for rows */
-    }
-
-    /* Adjust margins and padding for better printing */
-    .page {
-        margin: 0;
-        padding: 0;
-        width: 210mm;
-        height: 297mm;
-    }
-
-    /* Hide unnecessary elements */
-    .navbar, .print-btn, .buttons, .hr {
-        display: none !important;
-    }
-
-    /* Ensure headings and sections are styled properly */
-    .section-title {
-        font-size: 18pt; /* Larger font size for headings */
-        color: #004a99; /* Consistent color for headings */
-        border-bottom: 2px solid #004a99; /* Consistent border for headings */
-        padding-bottom: 8px;
-        margin-top: 25px; /* Add space above headings */
-        page-break-after: avoid; /* Prevent headings from being left alone */
-    }
-
-    /* Ensure tables and other elements don't break awkwardly */
-    table {
-        page-break-inside: auto; /* Allow tables to split across pages */
-    }
-
-    /* Ensure input fields are visible and styled in print */
-    input[type="text"],
-    input[type="date"] {
-        border: 1px solid #000; /* Add borders to inputs */
-        background: transparent; /* Remove background */
-        padding: 5px; /* Add padding for readability */
-        font-size: 12pt; /* Consistent font size */
-    }
-
-    /* Ensure checkboxes are visible in print */
-    .print-checkbox {
-        display: inline-block;
-        margin-right: 5px;
-    }
-
-    /* Ensure signature section is visible and styled */
-    .signature {
-        text-align: right;
-        font-style: italic;
-        margin-top: 20px; /* Add space above signature */
-    }
-
-    .signature::before {
-        content: "_______________"; /* Add a line for signature */
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    /* Ensure investigation items are visible and styled */
-    .investigation-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 10px; /* Add space between items */
-    }
-
-    .investigation-item span {
-        font-weight: bold; /* Bold labels for clarity */
-    }
-
-    .investigation-item input {
-        border: 1px solid #000; /* Add borders to inputs */
-        background: transparent; /* Remove background */
-        padding: 5px; /* Add padding for readability */
-        font-size: 12pt; /* Consistent font size */
-    }
-}
-
-
-        /* Investigation Section Styling */
-.investigation-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.investigation-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-}
-
-.investigation-item {
-    display: flex;
-    align-items: center;
-    gap: px;
-}
-
-.investigation-item span {
-    font-weight: bold;
-}
-
-.investigation-item input {
-    width: 100px; /* Adjust width as needed */
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-}
-           /* Base Styling */
-           @page {
+        /* Base Styling */
+        @page {
             size: A4;
             margin: 0;
         }
-        .small-input {
-        width: 80px; /* Adjust width */
-        padding: 5px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-        margin: 0 5px;
-    }
+
         .container {
             max-width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
@@ -164,8 +23,79 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        
+        .small-input {
+            width: 80px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            margin: 0 5px;
+        }
 
+        /* Header Section */
+        .letterhead {
+            border-bottom: 2px solid #070a0d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .hospital-logo {
+            width: 160px;
+            height: 110px;
+        }
+
+        .hospital-info {
+            text-align: right;
+        }
+
+        .hospital-name {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            color: red;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+
+        .hospital-address {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .doctor-name-left,
+        .doctor-name-right {
+            position: absolute;
+            top: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .doctor-name-left {
+            left: 0;
+        }
+
+        .doctor-name-right {
+            right: 0;
+        }
+
+        /* Clinical Sections */
+        .section-title {
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #004a99;
+            border-bottom: 1px solid #080e14;
+            padding-bottom: 8px;
+            margin: 25px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 18px;
+            page-break-after: avoid;
+        }
+
+        /* Patient Table */
         .patient-table {
             width: 100%;
             border-collapse: collapse;
@@ -174,8 +104,8 @@
         .patient-table th, .patient-table td {
             padding: 10px;
             border: 1px solid #ddd;
-            text-align: center; /* Center-align text horizontally */
-            vertical-align: middle; /* Center-align text vertically */
+            text-align: center;
+            vertical-align: middle;
         }
 
         .patient-table th {
@@ -183,89 +113,7 @@
             text-align: left;
         }
 
-        /* Clinical Sections */
-        .section-title {
-            font-family: 'Helvetica Neue', sans-serif;
-            color: #004a99;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-            margin: 25px 0 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 18px;
-        }
-
-        /* Print Optimization */
-        @media print {
-            body {
-                padding: 0;
-                font-size: 12pt;
-            }
-
-            .container {
-                padding: 15px;
-                min-height: auto;
-                page-break-after: always;
-                box-shadow: none;
-            }
-
-            .patient-info-card {
-                background: none;
-               
-            }
-
-            .buttons {
-                display: none;
-            }
-
-            .no-print {
-                display: none;
-            }
-
-            input[type="date"] {
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                border: none;
-                padding: 0;
-                background: transparent;
-                font-family: 'Helvetica Neue', sans-serif;
-                font-size: 12pt;
-                color: #333;
-                width: auto;
-           
-                font-size: 15px;
-                margin-left: 20px;
-            }
-
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-            }
-
-            input[type="date"]:before {
-                content: attr(value);
-            }
-
-            .print-checkbox {
-                display: inline-block;
-                margin-right: 5px;
-            }
-            .signature {
-                text-align: right;
-                font-style: italic;
-            }
-            .signature::before {
-                content: "_______________";
-                display: block;
-                margin-bottom: 10px;
-                margin-top: 30px;
-            }
-            
-            .navbar .buttons button {
-                display: none;
-            }
-        }
-
+        /* Procedure Boxes */
         .procedure-table {
             display: flex;
             justify-content: space-between;
@@ -299,6 +147,63 @@
             margin-bottom: 3px;
         }
 
+        /* Investigation Section */
+        .investigation-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .investigation-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .investigation-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .investigation-item span {
+            font-weight: bold;
+        }
+
+        .investigation-item input {
+            width: 100px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* IOL Sticker Section */
+        .iol-sticker-section {
+            display: block;
+        }
+
+        .iol-sticker {
+            width: 380px;
+            height: 80px;
+            border: 2px solid black;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            margin: 0 auto;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .print-checkbox {
+            margin-right: 10px;
+        }
+
+        /* Table Styling */
         .table th, .table td {
             border: 1px solid black;
             padding: 5px;
@@ -306,13 +211,13 @@
             font-size: 14px;
         }
 
-        .iol-sticker {
-            margin-top: 10px;
-            border: 1px solid black;
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
+        .table-bordered th, .table-bordered td {
+            border: 2px solid black !important;
+            border-collapse: collapse !important;
+        }
+
+        #Medicines-Table {
+            background-color: #f9f9f9;
         }
 
         /* Navbar Styling */
@@ -343,294 +248,178 @@
             cursor: pointer;
             border-radius: 5px;
         }
- /* Custom CSS for the table */
- .table-container {
-            width: 100%;
-            margin: 20px auto;
-            border-collapse: collapse;
+
+        /* Print-Specific Styling */
+        @media print {
+            body, .patient-details, .Pre-Operative-Details {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .container {
+                padding: 15px;
+                min-height: auto;
+                page-break-after: always;
+                box-shadow: none;
+            }
+
+            .navbar, .print-btn, .buttons, .hr {
+                display: none !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            input[type="text"], input[type="date"] {
+                border: none !important;
+                background: transparent !important;
+                padding: 0;
+                font-size: 12pt;
+                color: #000;
+                -webkit-appearance: none;
+                appearance: none;
+            }
+
+            input[type="text"]::after {
+                content: attr(value);
+                display: block;
+                text-align: start;
+                position: absolute;
+                left: 0;
+                width: 100%;
+                color: black;
+                font-family: inherit;
+                font-size: inherit;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+
+            .print-checkbox {
+                display: none !important;
+            }
+
+            .print-checkboex {
+               display: inline-block;
+            }
+            .signature {
+                text-align: right;
+                font-style: italic;
+                margin-top: 20px;
+            }
+
+            .signature::before {
+                content: "_______________";
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .hospital-logo {
+                width: 160px;
+                height: 110px;
+                margin-left: 20px;
+            }
+
+            /* Ensure sections don't split */
+            .eye-examination-section, .medicines-section, #A-Scan-Table, .iol-sticker-section {
+                page-break-inside: avoid;
+            }
+
+            /* Medicines Table */
+            #Medicines-Table thead th {
+                background-color: #e0e0e0;
+                color: #000;
+            }
+
+            #Medicines-Table tbody tr {
+                background-color: #f9f9f9;
+            }
+
+            /* Pre-Operative Table */
+            #Pre-Operative-Table {
+                width: 100% !important;
+                max-width: 400px !important;
+                margin: 0 auto !important;
+                border: 1pt solid #000 !important;
+                page-break-inside: avoid;
+            }
+
+            #Pre-Operative-Table th, #Pre-Operative-Table td {
+                padding: 3pt !important;
+                border: 1pt solid #000 !important;
+                font-size: 12pt !important;
+            }
+
+            #Pre-Operative-Table th {
+                background-color: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .complaints.show-BP {
+                min-width: 120px !important;
+                margin-left: 90px !important;
+                padding: 2px !important;
+                font-size: 10pt !important;
+            }
+
+            /* IOL Sticker Section */
+            .iol-sticker-section.hidden {
+                display: none !important;
+            }
+
+            .iol-sticker {
+                width: 100mm; /* Approx 380px at 96 DPI */
+                height: 25mm; /* Approx 110px at 96 DPI */
+                border: 2px solid black;
+                padding: 4mm;
+                font-size: 14pt;
+                background: #fff;
+            }
         }
-
-        .table-container th,
-        .table-container td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .table-container th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .table-container tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-
-
-
-
-           /* Print-specific styling */
-    @media print {
-        .print-investigation {
-            margin-top: 100%; /* Add top margin for printing */
-        }
-    }
-
-  /* Print-specific styles */
-@media print {
-    /* Style for text inputs */
-    input[type="text"] {
-        border: none !important;
-        background: transparent !important;
-        -webkit-appearance: none;
-        appearance: none;
-        box-shadow: none;
-        padding: 0;
-        position: relative; /* Added for positioning control */
-    }
-    
-    /* Display the input value with left alignment */
-    input[type="text"]::after {
-        content: attr(value);
-        display: block;
-        text-align: start; /* Explicitly aligns text to the left */
-        position: absolute;
-        left: 0; /* Positions at the start */
-        width: 100%; /* Maintains full width */
-        color: black; /* Ensures text is visible */
-        font-family: inherit; /* Inherits the font from the input */
-        font-size: inherit; /* Inherits the font size from the input */
-    }
-    
-    .hospital-logo {
-        width: 160px;
-        height: 110px;
-        margin-left: 20px;
-    }
-    
-    /* Optional: Ensure labels or static text are visible */
-    label {
-        color: black !important;
-    }
-}
-
-
-
-
-
-
-
-  /* Header Section */
-  .letterhead {
-        border-bottom: 2px solid #070a0d;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative; /* Added for positioning doctor names */
-        
-    }
-
-    .hospital-logo {
-        width: 160px;
-        height: 110px;
-    }
-
-    .hospital-info {
-        text-align: right;
-    }
-
-    .hospital-name {
-        font-family: 'Helvetica Neue', sans-serif;
-        font-weight: 700;
-        color: red;
-        font-size: 32px;
-        letter-spacing: 1.5px;
-    }
-
-    .hospital-address {
-        font-size: 18px;
-        color: #666;
-       
-    }
-
-    /* Doctor's Name Styling */
-    .doctor-name-left,
-    .doctor-name-right {
-        position: absolute;
-        top: 0;
-        font-family: 'Helvetica Neue', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-    }
-
-    .doctor-name-left {
-        left: 0; /* Position on the left corner */
-    }
-
-    .doctor-name-right {
-        right: 0; /* Position on the right corner */
-    }
-    .hospital-address-details {
-      
-        margin: 2; /* Remove default margin */
-    }
-
-
-
-
-    /* Ensure the Medicines table does not split */
-    #A-Scan-Table {
-        page-break-inside: avoid;
-    }
-    @media print {
-    /* Reset margins and padding */
-    body, .patient-details, .Pre-Operative-Details {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* Flex container adjustments */
-    .Pre-Operative-Details > div {
-        gap: 5px 30px !important;
-        margin-bottom: 5px !important;
-    }
-
-    /* Complaint items styling */
-    .complaints {
-        min-width: 100px !important;
-        margin: 0 !important;
-        padding: 2px !important;
-        font-size: 12pt !important;
-    }
-
-    /* Table container styling - CENTERS ONLY THE TABLE */
-    #Pre-Operative-Table {
-        width: 100% !important;
-        max-width: 400px !important;
-        margin: 0 auto !important; /* This centers only the table */
-        border: 1pt solid #000 !important;
-        page-break-inside: avoid;
-    }
-
-    /* Heading styling - remains left-aligned */
-    #Pre-Operative-Heading {
-        margin: 0 !important;
-        padding: 0 !important;
-        text-align: left !important; /* Explicitly left-align heading */
-        display: block !important;
-        width: 100% !important;
-    }
-
-    /* Table cell adjustments */
-    #Pre-Operative-Table th,
-    #Pre-Operative-Table td {
-        padding: 3pt !important;
-        border: 1pt solid #000 !important;
-        font-size: 12pt !important;
-    }
-
-    #Pre-Operative-Table th {
-        background-color: #f0f0f0 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-}
-
-
-@media print {
- 
-
-
-  
-    /* BP section - keeps 90px left margin in print */
-    .complaints.show-BP {
-        min-width: 120px !important;
-        margin-left: 90px !important; /* Specific left margin for BP */
-        padding: 2px !important;
-        font-size: 10pt !important;
-    }
-
-
-    #Pre-Operative-Table th,
-    #Pre-Operative-Table td {
-        padding: 3pt !important;
-        border: 1pt solid #000 !important;
-    }
-
-    #Pre-Operative-Table th {
-        background-color: #f0f0f0 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-}
     </style>
-
-
-
 </head>
 <body>
     <nav class="navbar">
-        <!-- Logo and Hospital Name -->
-        <div style="display: flex; align-items: center;">
-           
-          
-        </div>
-           
-        </div>
-    
-        <!-- Image on the Right Side -->
-        
-    
-        <!-- Action Buttons -->
+        <div style="display: flex; align-items: center;"></div>
         <div class="buttons" style="margin-bottom: 10px;">
             <button onclick="window.location.href='./main.html';">🏠 Home</button>
-            <button onclick="printFunction()" >🖨️ Print Discharge Card </button>
+            <button onclick="printFunction()">🖨️ Print Discharge Card</button>
         </div>
     </nav>
 
     <div class="container">
         <!-- Letterhead -->
         <div class="letterhead">
-            <!-- Left Corner - Doctor's Name -->
             <div class="doctor-name-left" style="margin-top: 70px;">
                 Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
             </div>
-        
-            <!-- Hospital Logo and Info -->
             <div style="margin-left: 125px;">
                 <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
             </div>
             <div class="hospital-info" style="margin-right: 192px; margin-bottom: 10px; margin-top: 10px;">
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
-                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
+                <div class="hospital-address">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
-        
-            <!-- Right Corner - Doctor's Name -->
             <div class="doctor-name-right" style="margin-top: 70px;">
-                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
+                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
             </div>
-            
         </div>
         <div class="address-section">
-    
-            <p class="hospital-address-details" style="margin-top: 5px;" >
-                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 20px; margin-left: 25px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+            <p class="hospital-address-details" style="margin-top: 5px;">
+                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 20px; margin-left: 25px; color: red;"></i> 518/1/6, Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
             </p>
             <hr style="border: 1px solid #070a0d;">
         </div>
 
+        <div style="text-align: center; margin: 20px 0;">
+            <h2 style="font-size: 24px; color: #004a99; text-decoration: underline;">DISCHARGE SUMMARY</h2>
+        </div>
 
-
-        <!-- Add this right after the address-section div and before the patient-info-card -->
-<div style="text-align: center; margin: 20px 0;">
-    <h2 style="font-size: 24px;  color: #004a99; text-decoration: underline;">DISCHARGE SUMMARY</h2>
-</div>
         <!-- Patient Information -->
-          <!-- Patient Information -->
-          <div class="patient-info-card" >
+        <div class="patient-info-card">
             <table class="table table-bordered patient-table">
                 <tbody>
                     <tr>
@@ -650,18 +439,12 @@
                         <td id="patient-dob">N/A</td>
                         <th>Address:</th>
                         <td id="patient-address">N/A</td>
-                        
                     </tr>
                     <tr>
                         <th>Admission Date:</th>
-                        <td>
-                            <input type="date" id="admission-input" oninput="updateDateField(this, 'admission-value')">
-                        </td>
+                        <td><input type="date" id="admission-input" oninput="updateDateField(this, 'admission-value')"></td>
                         <th>Discharge Date:</th>
-                        <td>
-                            <input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')">
-                        </td>
-                
+                        <td><input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')"></td>
                     </tr>
                     <tr>
                         <th>Surgeon Name:</th>
@@ -675,15 +458,13 @@
 
         <!-- Diagnosis Section -->
         <h4 class="section-title">Diagnosis</h4>
-        <div class="d-flex flex-wrap gap-2 show-diagnosis">
-            <!-- Diagnosis will be dynamically populated here -->
-        </div>
+        <div class="d-flex flex-wrap gap-2 show-diagnosis"></div>
 
         <!-- Operative Notes Section -->
         <h4 class="section-title">OPERATIVE NOTES</h4>
         <div class="procedure-table">
             <div class="procedure-box">
-                <input type="checkbox" class="print-checkbox" id="phaco-check"> <strong>Phaco</strong>
+                <input type="checkbox" class="print-checkboex" id="phaco-check"> <strong>Phaco</strong>
                 <ol>
                     <li>P & D With Betadin Solution.</li>
                     <li>Site Port with 15 Blade.</li>
@@ -698,7 +479,7 @@
                 </ol>
             </div>
             <div class="procedure-box">
-                <input type="checkbox" class="print-checkbox" id="sics-check"> <strong>SICS</strong>
+                <input type="checkbox" class="print-checkboex" id="sics-check"> <strong>SICS</strong>
                 <ol>
                     <li>P & D Dropping with Betadine.</li>
                     <li>Conjunctival Flap Done.</li>
@@ -716,7 +497,7 @@
                 </ol>
             </div>
             <div class="procedure-box">
-                <input type="checkbox" class="print-checkbox" id="pterygium-check"> <strong>Pterygium</strong>
+                <input type="checkbox" class="print-checkboex" id="pterygium-check"> <strong>Pterygium</strong>
                 <ol>
                     <li>P & D Done.</li>
                     <li>Subconj inj. given.</li>
@@ -729,17 +510,12 @@
             </div>
         </div>
 
-
         <!-- Investigation Section -->
         <h4 class="section-title" id="investigation-title">Investigation</h4>
         <div class="investigation-container">
-            <div class="investigation-list">
-                <!-- Investigations will be dynamically populated here -->
-            </div>
+            <div class="investigation-list"></div>
         </div>
 
-
-        
         <!-- A-Scan Table -->
         <h4 class="section-title" id="A-Scan-Heading">A-Scan Report</h4>
         <table class="table" style="width: 450px; margin: 0 auto;" id="A-Scan-Table">
@@ -751,290 +527,221 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="height: 10px;"> 
+                <tr style="height: 10px;">
                     <td style="font-size: 12px;">K1</td>
                     <td id="RightK1" style="font-size: 11px;"></td>
                     <td id="LeftK1" style="font-size: 11px;"></td>
                 </tr>
-                <tr style="height: 15px;"> 
+                <tr style="height: 15px;">
                     <td style="font-size: 12px;">K2</td>
                     <td id="RightK2" style="font-size: 11px;"></td>
                     <td id="LeftK2" style="font-size: 11px;"></td>
                 </tr>
                 <tr style="height: 15px;">
-                    <td style="font-size: 11px;" >LT</td>
-                    <td style="font-size: 11px;"id="RightLT"></td>
-                    <td style="font-size: 11px;"id="LeftLT"></td>
-                </tr> 
-
-                
-                <tr style="height: 15px;"> 
+                    <td style="font-size: 11px;">LT</td>
+                    <td id="RightLT" style="font-size: 11px;"></td>
+                    <td id="LeftLT" style="font-size: 11px;"></td>
+                </tr>
+                <tr style="height: 15px;">
                     <td style="font-size: 11px;">AXL</td>
                     <td id="RightAL" style="font-size: 11px;"></td>
                     <td id="LeftAL" style="font-size: 11px;"></td>
                 </tr>
-
-                 <tr style="height: 15px;"> 
+                <tr style="height: 15px;">
                     <td style="font-size: 11px;">ACD</td>
-                    <td style="font-size: 11px;" id="RightACD"></td>
-                    <td style="font-size: 11px;" id="LeftACD"></td>
-                </tr> 
-
+                    <td id="RightACD" style="font-size: 11px;"></td>
+                    <td id="LeftACD" style="font-size: 11px;"></td>
+                </tr>
                 <tr style="height: 15px;">
                     <td style="font-size: 11px;">L.Power</td>
-                    <td style="font-size: 11px;" id="RightLPower">1</td>
-                    <td style="font-size: 11px;" id="LeftLPower">1</td>
+                    <td id="RightLPower" style="font-size: 11px;">1</td>
+                    <td id="LeftLPower" style="font-size: 11px;">1</td>
                 </tr>
-
-                 <tr style="height: 15px;"> 
-                    <td style="font-size: 11px;" >A.Constant</td>
-                    <td style="font-size: 11px;" id="RightAConstant"></td>
-                    <td style="font-size: 11px;" id="LeftAConstant"></td>
+                <tr style="height: 15px;">
+                    <td style="font-size: 11px;">A.Constant</td>
+                    <td id="RightAConstant" style="font-size: 11px;"></td>
+                    <td id="LeftAConstant" style="font-size: 11px;"></td>
                 </tr>
-
-                <tr style="height: 15px;"> 
+                <tr style="height: 15px;">
                     <td style="font-size: 11px;">IOL</td>
                     <td id="RightIOL" style="font-size: 11px;"></td>
                     <td id="LeftIOL" style="font-size: 11px;"></td>
                 </tr>
-
             </tbody>
         </table>
+
         <!-- IOL Sticker Section -->
-        <h4 class="section-title">IOL STICKER</h4>
-        <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 110px;"></div>
-
-        <!-- Post Operative Treatment Section -->
-      
-        <!-- <div class="d-flex align-items-center" style="margin-top: 20px;">
-            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Gatiquin-P Eye Drop :</strong></label>
-            <input type="text" class="form-control" style="width: 200px;">
+        <div class="iol-sticker-section" id="iol-sticker-section">
+            <h4 class="section-title">
+                <input type="checkbox" class="print-checkbox" id="iol-sticker-check" checked> IOL STICKER
+            </h4>
+            <div class="iol-sticker" id="iol-sticker-content">IOL Sticker Details</div>
         </div>
-        <div class="d-flex align-items-center" style="margin-top: 20px;">
-            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Homide Eye Drop :</strong></label>
-            <input type="text" class="form-control" style="width: 200px;">
-        </div>
-        <div class="d-flex align-items-center" style="margin-top: 20px;">
-            <label for="surgeonName" class="form-label me-2" style="margin-left: 140px;"><strong>Tobastar Eye Drop :</strong></label>
-            <input type="text" class="form-control" style="width: 200px;">
-        </div> -->
 
-        <div class="patient-details Pre-Operative-Details">
-            <h4 class="section-title">Pre-Operative Workup Investigations</h4>  
+        <!-- Pre-Operative Workup Investigations -->
+        <div class="patient-details Pre-Operative-Details" style="height: 60px;">
+            <h4 class="section-title">Pre-Operative Workup Investigations</h4>
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 90px;">
                 <p class="complaints show-BP" style="min-width: 120px;"></p>
                 <p class="complaints show-Pulse-Rate" style="min-width: 120px;"></p>
                 <p class="complaints show-SAC" style="min-width: 120px;"></p>
                 <p class="complaints show-NCT"></p>
                 <p class="complaints show-additional"></p>
-            </div>                                          
+            </div>
         </div>
-        
-    <table id="Pre-Operative-Table" style="width: 470px; margin-left: 120px; border-collapse: collapse; text-align: center; border: 1px solid #000 ; margin-top: 0px;">
-        <h4 class="section-title " id="Pre-Operative-Heading" >NCT</h4>  
-        <thead>
-            <tr style="background-color: #f0f0f0; border: 1px solid #000;">
-                <th colspan="2" style="padding: 8px; border: 1px solid #000;">Right Eye</th>
-                <th colspan="2" style="padding: 8px; border: 1px solid #000;">Left Eye</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
-                    <span id="RightmmHg">Data</span>
-                    <span>mmHg</span>
-                </td>
-                <td style="padding: 5px; border: 1px solid #000;">
-                    <span id="RightmmHgTime">00:00</span>
-                </td>
-                <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
-                    <span id="LeftmmHg">Data</span>
-                    <span>mmHg</span>
-                </td>
-                <td style="padding: 5px; border: 1px solid #000;">
-                    <span id="LeftmmHgTime">00:00</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-   
 
-    <h4 class="section-title " id="Medicines-Heading">Post Operative Treatment</h4>
-    <table class="table table-responsive table-bordered" id="Medicines-Table" style="width: 500px; margin: 0 auto; background-color: #f9f9f9;">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Medicine Name</th>
-                <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Dose</th>
-            </tr>
-        </thead>
-        <tbody id="medicines-tbody">
-            <!-- Medicines will be dynamically inserted here -->
-            <tr>
-                <td class="text-start" style="padding: 10px;">Aspirin</td>
-                <td class="text-start" style="padding: 10px;">500mg</td>
-            </tr>
-            <tr>
-                <td class="text-start" style="padding: 10px;">Paracetamol</td>
-                <td class="text-start" style="padding: 10px;">1000mg</td>
-            </tr>
-        </tbody>
-    </table>
-    <h4 class="section-title " id="Post-Operative-Medicine-Heading">Post Operative Treatment</h4>
-    <table style="width: 80%; border-collapse: collapse; font-size: 14px; margin-left: 120px; margin-top: 20px; " id="Post-Operative-Medicine-Template">
-        <thead>
-            <tr style="height: 25px; background-color: #fff;">
-                <th style="border: 1px solid #0f0808; padding: 5px;">Medicine</th>
-                <th style="border: 1px solid #0f0d0d; padding: 5px;">Dose</th>
-                <th style="border: 1px solid #070707; padding: 5px;">Instructions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="height: 20px;" id="Medicine1">
-                <td style="border: 1px solid #0a0707; padding: 5px;">Gatiquin P Eye Drop</td>
-                <td style="border: 1px solid #131212; padding: 5px;">(01)</td>
-                <td style="border: 1px solid #0a0909; padding: 5px;">८ वेळा २-२ तासाने एक-एक थेंब.</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine2">
-                <td style="border: 1px solid #0e0d0d; padding: 5px;">Homide Eye Drop</td>
-                <td style="border: 1px solid #080808; padding: 5px;">(01)</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">२ वेळा एक-एक थेंब</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine3">
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">Tobastar eye drop</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">दिवसातून ४ वेळा.</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine4">
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Ciprobid 500mg</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">(10)</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">सकाळ... संध्याकाळी.</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine5">
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Pantosec DSR</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">(05)</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine6">
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Eyeview</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">(30)</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
-            </tr>
-            <tr style="height: 20px;" id="Medicine7">
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">Nepa OD eye drop</td>
-                <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
-                <td style="border: 1px solid #141414; padding: 5px;">२ वेळा एक-एक थेंब</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    
-    <style>
-        /* Custom CSS to match original border thickness and collapse */
-        .table-bordered th,
-        .table-bordered td {
-            border: 2px solid black !important;
-            border-collapse: collapse !important;
-        }
-    
-        /* Ensure table responsiveness and background */
-        #Medicines-Table {
-            background-color: #f9f9f9;
-        }
+        <table id="Pre-Operative-Table" style="width: 470px; margin-left: 120px; border-collapse: collapse; text-align: center; border: 1px solid #000; margin-top: 0px;">
+            <h4 class="section-title" id="Pre-Operative-Heading">NCT</h4>
+            <thead>
+                <tr style="background-color: #f0f0f0; border: 1px solid #000;">
+                    <th colspan="2" style="padding: 8px; border: 1px solid #000;">Right Eye</th>
+                    <th colspan="2" style="padding: 8px; border: 1px solid #000;">Left Eye</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
+                        <span id="RightmmHg">Data</span>
+                        <span>mmHg</span>
+                    </td>
+                    <td style="padding: 5px; border: 1px solid #000;">
+                        <span id="RightmmHgTime">00:00</span>
+                    </td>
+                    <td class="input-wrapper" style="padding: 5px; border: 1px solid #000;">
+                        <span id="LeftmmHg">Data</span>
+                        <span>mmHg</span>
+                    </td>
+                    <td style="padding: 5px; border: 1px solid #000;">
+                        <span id="LeftmmHgTime">00:00</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
+        <!-- Post Operative Treatment -->
+        <h4 class="section-title" id="Medicines-Heading">Post Operative Treatment</h4>
+        <table class="table table-responsive table-bordered" id="Medicines-Table" style="width: 500px; margin: 0 auto; background-color: #f9f9f9;">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Medicine Name</th>
+                    <th scope="col" class="text-center fw-bold" style="background-color: #e0e0e0; padding: 10px;">Dose</th>
+                </tr>
+            </thead>
+            <tbody id="medicines-tbody">
+                <tr>
+                    <td class="text-start" style="padding: 10px;">Aspirin</td>
+                    <td class="text-start" style="padding: 10px;">500mg</td>
+                </tr>
+                <tr>
+                    <td class="text-start" style="padding: 10px;">Paracetamol</td>
+                    <td class="text-start" style="padding: 10px;">1000mg</td>
+                </tr>
+            </tbody>
+        </table>
 
-        
-    </style>
-  <div class="footer" style="color: black;">
+        <h4 class="section-title" id="Post-Operative-Medicine-Heading">Post Operative Treatment</h4>
+        <table style="width: 80%; border-collapse: collapse; font-size: 14px; margin-left: 120px; margin-top: 20px;" id="Post-Operative-Medicine-Template">
+            <thead>
+                <tr style="height: 25px; background-color: #fff;">
+                    <th style="border: 1px solid #0f0808; padding: 5px;">Medicine</th>
+                    <th style="border: 1px solid #0f0d0d; padding: 5px;">Dose</th>
+                    <th style="border: 1px solid #070707; padding: 5px;">Instructions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 20px;" id="Medicine1">
+                    <td style="border: 1px solid #0a0707; padding: 5px;">Gatiquin P Eye Drop</td>
+                    <td style="border: 1px solid #131212; padding: 5px;">(01)</td>
+                    <td style="border: 1px solid #0a0909; padding: 5px;">८ वेळा २-२ तासाने एक-एक थेंब.</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine2">
+                    <td style="border: 1px solid #0e0d0d; padding: 5px;">Homide Eye Drop</td>
+                    <td style="border: 1px solid #080808; padding: 5px;">(01)</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">२ वेळा एक-एक थेंब</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine3">
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">Tobastar eye drop</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">दिवसातून ४ वेळा.</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine4">
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Ciprobid 500mg</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">(10)</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">सकाळ... संध्याकाळी.</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine5">
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Pantosec DSR</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">(05)</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine6">
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">Tab. Eyeview</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">(30)</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">1 वेळा</td>
+                </tr>
+                <tr style="height: 20px;" id="Medicine7">
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">Nepa OD eye drop</td>
+                    <td style="border: 1px solid #0c0b0b; padding: 5px;">(01)</td>
+                    <td style="border: 1px solid #141414; padding: 5px;">२ वेळा एक-एक थेंब</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">
                 <p>Dr. Alvin R Rane</p>
             </div>
         </div>
-
-        
     </div>
-<script>
-     const tempDateStr = localStorage.getItem("tempDate");
-     function printFunction() {
-            const patientId = "P"+appointment.id;
-            // Get todays date with dd-mm-yyyy format
+
+    <script>
+        const tempDateStr = localStorage.getItem("tempDate");
+        function printFunction() {
+            const patientId = "P" + appointment.id;
             let today;
             if (tempDateStr) {
                 today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
             } else {
-                today = new Date(); // Ensure `today` is always a Date object
+                today = new Date();
             }
             const date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
-            const Docname = patientId+"_DischargeCard" + "_" + date;
-
-            console.log(patientId,date,Docname);
-
+            const Docname = patientId + "_DischargeCard_" + date;
             window.electronAPI.printPage(patientId, date, Docname);
         }
-     // Retrieve the appointment object from localStorage
-     const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
 
-       // Function to format date from YYYY-MM-DD to DD-MM-YYYY
-    function formatDate(isoDate) {
-        if (!isoDate) return "N/A";  // Return "N/A" if date is missing
-        const [year, month, day] = isoDate.split("-");
-        return `${day}-${month}-${year}`;
-    }
+        const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
 
-    // Update the HTML elements with appointment data
-    document.getElementById("patient-id").textContent = appointment.id || "N/A";
-    document.getElementById("patient-name").textContent = appointment.Name || "N/A";
-    document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
-    document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
-    document.getElementById("patient-dob").textContent = appointment.BirthDate || "N/A";
-    document.getElementById("patient-dob").textContent = formatDate(appointment.BirthDate);
-    document.getElementById("patient-address").textContent = appointment. Address || "N/A";
+        function formatDate(isoDate) {
+            if (!isoDate) return "N/A";
+            const [year, month, day] = isoDate.split("-");
+            return `${day}-${month}-${year}`;
+        }
 
-    // Retrieve selected SurgicalTreatment from localStorage
-    const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+        // Update patient information
+        document.getElementById("patient-id").textContent = appointment.id || "N/A";
+        document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+        document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
+        document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
+        document.getElementById("patient-dob").textContent = formatDate(appointment.BirthDate);
+        document.getElementById("patient-address").textContent = appointment.Address || "N/A";
 
-    // Display selected SurgicalTreatment in the "SurgicalTreatment" section
-    // Get the SurgicalTreatment display section
-    const SurgicalTreatmentSection = document.querySelector(".show-SurgicalTreatment");
-    // Only update if there are SurgicalTreatment to show
-    if (selectedSurgicalTreatment.length > 0) {
-        SurgicalTreatmentSection.innerHTML = selectedSurgicalTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ');
-    } else {
-        SurgicalTreatmentSection.innerHTML = `N/A`;
-    }
+        // Surgical Treatment
+        const selectedSurgicalTreatment = JSON.parse(localStorage.getItem("selectedSurgicalTreatment")) || [];
+        const SurgicalTreatmentSection = document.querySelector(".show-SurgicalTreatment");
+        SurgicalTreatmentSection.innerHTML = selectedSurgicalTreatment.length > 0 ? selectedSurgicalTreatment.join(' <span style="font-weight: bold; color: black;">|</span> ') : "N/A";
 
-   
+        // Diagnosis
+        const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
+        const diagnosisSection = document.querySelector(".show-diagnosis");
+        diagnosisSection.innerHTML = selectedDiagnosis.length > 0 ? selectedDiagnosis.join(' <span style="font-weight: bold; color: black;">|</span> ') : "N/A";
 
-    // Retrieve selected diagnoses from localStorage
-    const selectedDiagnosis = JSON.parse(localStorage.getItem("selectedDiagnosis")) || [];
-
-    // Display selected diagnoses in the "Diagnosis" section
-    // Get the diagnosis display section
-    const diagnosisSection = document.querySelector(".show-diagnosis");
-    // Only update if there are diagnoses to show
-    if (selectedDiagnosis.length > 0) {
-        diagnosisSection.innerHTML = `
-        
-            ${selectedDiagnosis.join(' <span style="font-weight: bold; color: black;">|</span> ')}
-        `;
-    } else {
-        diagnosisSection.innerHTML = `
-        
-            N/A
-        `;
-    }
-
-    // Load the A-Scan table from local storage 
-    const aScanTable = JSON.parse(localStorage.getItem("aScanTable")) || {};
-        
-        // Get table and heading elements
+        // A-Scan Table
+        const aScanTable = JSON.parse(localStorage.getItem("aScanTable")) || {};
         const aScanTableElement = document.getElementById("A-Scan-Table");
         const aScanHeading = document.getElementById("A-Scan-Heading");
         const aScanRows = aScanTableElement.querySelectorAll("tbody tr");
-
-        // Define the mapping for each row and its respective keys in aScanTable
         const aScanRowMapping = [
-        { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
+            { rowIndex: 0, rightKey: "RightK1", leftKey: "LeftK1" },
             { rowIndex: 1, rightKey: "RightK2", leftKey: "LeftK2" },
             { rowIndex: 2, rightKey: "RightLT", leftKey: "LeftLT" },
             { rowIndex: 3, rightKey: "RightAL", leftKey: "LeftAL" },
@@ -1045,154 +752,77 @@
         ];
 
         let visibleAScanRowCount = 0;
-
         aScanRowMapping.forEach(({ rowIndex, rightKey, leftKey }) => {
             const rightValue = aScanTable[rightKey] || "";
             const leftValue = aScanTable[leftKey] || "";
-
-            // Hide the row if both values are empty
             if (rightValue === "" && leftValue === "") {
                 aScanRows[rowIndex].style.display = "none";
             } else {
-                aScanRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                aScanRows[rowIndex].style.display = "";
                 aScanRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
                 aScanRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
                 visibleAScanRowCount++;
             }
         });
-
-
-        // Show or hide the entire table if all rows are hidden
         aScanTableElement.style.display = visibleAScanRowCount > 0 ? "table" : "none";
-
-        // Show or hide the heading based on whether the table is visible
         aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
 
-// Retrieve selected investigations from localStorage
-const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
-
-// Get the investigation display container
-const investigationContainer = document.querySelector(".investigation-list");
-
-// Only update if there are investigations to show
-if (selectedInvestigations.length > 0) {
-    // Clear existing content
-    investigationContainer.innerHTML = "";
-
-    // Add each investigation with an input box
-    selectedInvestigations.forEach((investigation) => {
-        const investigationItem = document.createElement("div");
-        investigationItem.classList.add("investigation-item");
-
-        investigationItem.innerHTML = `
-            <span>${investigation}:</span>
-            <input type="text" class="small-input">|
-        `;
-
-        investigationContainer.appendChild(investigationItem);
-    });
-} else {
-    // Hide investigation section and title
-    document.getElementById("investigation-title").style.display = "none";
-    investigationContainer.style.display = "none";
-}
-
-</script>
-<script>
-    function updatePrintDate(inputId, spanId) {
-        let dateValue = document.getElementById(inputId).value;
-        if (dateValue) {
-            document.getElementById(spanId).textContent = formatDate(dateValue);
+        // Investigations
+        const selectedInvestigations = JSON.parse(localStorage.getItem("selectedInvestigation")) || [];
+        const investigationContainer = document.querySelector(".investigation-list");
+        if (selectedInvestigations.length > 0) {
+            investigationContainer.innerHTML = "";
+            selectedInvestigations.forEach((investigation) => {
+                const investigationItem = document.createElement("div");
+                investigationItem.classList.add("investigation-item");
+                investigationItem.innerHTML = `<span>${investigation}:</span><input type="text" class="small-input">|`;
+                investigationContainer.appendChild(investigationItem);
+            });
+        } else {
+            document.getElementById("investigation-title").style.display = "none";
+            investigationContainer.style.display = "none";
         }
-    }
 
-    function formatDate(dateStr) {
-        let date = new Date(dateStr);
-        let day = date.getDate().toString().padStart(2, '0'); // Ensure 2 digits
-        let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Ensure 2 digits
-        let year = date.getFullYear();
-        return `${day}/${month}/${year}`; // Format: DD/MM/YYYY
-    }
-
-
-
-
-
-
-
-        // Load the medicines table from local storage
+        // Medicines Table
         const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
-
         const medicinesTable = document.getElementById("Medicines-Table");
         const medicinesTbody = medicinesTable.querySelector("tbody");
         const medicinesHeading = document.getElementById("Medicines-Heading");
-
         if (medicines.length === 0) {
-            // Hide the table if no medicines are selected
             medicinesTable.style.display = "none";
             medicinesHeading.style.display = "none";
-
         } else {
-            // Show the table and update the content
             medicinesTable.style.display = "table";
-
-            // Clear the existing table body
             medicinesTbody.innerHTML = "";
-
-            // Add each medicine as a row in the table
             medicines.forEach((medicine) => {
                 const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${medicine.medicineSelect || "-"}</td>
-                    <td>${medicine.medicineDose || "-"}</td>
-                  
-                `;
+                row.innerHTML = `<td>${medicine.medicineSelect || "-"}</td><td>${medicine.medicineDose || "-"}</td>`;
                 medicinesTbody.appendChild(row);
             });
         }
 
-
-    
-
-
-     // Show or hide the entire table if all rows are hidden
-     aScanTableElement.style.display = visibleAScanRowCount > 0 ? "table" : "none";
-
-// Show or hide the heading based on whether the table is visible
-aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
-
-
-        // Load PreOperativeDetails data from local storage
+        // Pre-Operative Details
         const preOperativeDetails = JSON.parse(localStorage.getItem("PreOperativeDetails")) || {};
-
-        // Define field mappings
         const fieldMappings = [
             { key: "BPResult", className: "show-BP", label: "BP" },
             { key: "PulseRate", className: "show-Pulse-Rate", label: "P" },
         ];
-
         let visibleCount = 0;
-
-        // Iterate through each field and update the content
         fieldMappings.forEach(({ key, className, label }) => {
             const element = document.querySelector(`.${className}`);
-
             if (element) {
-                const value = preOperativeDetails[key]?.trim() || ""; // Trim to remove whitespace
-
+                const value = preOperativeDetails[key]?.trim() || "";
                 if (value) {
                     element.innerHTML = `<span style="font-weight: bold; font-size: 17px;">${label} :</span> ${value}`;
                     visibleCount++;
                 } else {
-                    element.style.display = "none"; // Hide element if value is empty
+                    element.style.display = "none";
                 }
             }
         });
-
         if (!preOperativeDetails.SACResultRE && !preOperativeDetails.SACResultLE) {
             document.querySelector(".show-SAC").style.display = "none";
-        }
-        else {
+        } else {
             let sacContent = `<span style="font-weight: bold; font-size: 17px;">SAC :</span>`;
             if (preOperativeDetails.SACResultRE) {
                 sacContent += ` <span style="font-weight: bold; font-size: 15px;">RE - </span>${preOperativeDetails.SACResultRE}`;
@@ -1206,102 +836,87 @@ aScanHeading.style.display = visibleAScanRowCount > 0 ? "block" : "none";
             document.querySelector(".show-SAC").innerHTML = sacContent;
             visibleCount++;
         }
+        const patientDetailsSection = document.querySelector(".Pre-Operative-Details");
+        if (visibleCount === 0 && patientDetailsSection) {
+            patientDetailsSection.style.display = "none";
+        }
 
-
-// Hide the entire section if no details are available
-const patientDetailsSection = document.querySelector(".Pre-Operative-Details");
-if (visibleCount === 0 && patientDetailsSection) {
-    patientDetailsSection.style.display = "none";
-}
-
-
-
-
-
-
-
-
-
-
-
-        // Load IOP/GAT data from local storage like eye examination table
+        // IOP/GAT Table
         const iopGatTable = JSON.parse(localStorage.getItem("iopGatTable")) || {};
-
-        // Get table and heading elements
         const iopGatTableElement = document.getElementById("Pre-Operative-Table");
         const iopGatHeading = document.getElementById("Pre-Operative-Heading");
-
-        // Get all rows in the IOP/GAT table body
         const iopGatRows = iopGatTableElement.querySelectorAll("tbody tr");
-
-        // Define row mappings
         const iopGatRowMappings = [
             { rowIndex: 0, rightKey: "RightmmHg", rightTimeKey: "RightmmHgTime", leftKey: "LeftmmHg", leftTimeKey: "LeftmmHgTime" }
         ];
-
         let visibleIopGatRowCount = 0;
-
-        // Iterate through each row mapping and update table cells
-
         iopGatRowMappings.forEach(({ rowIndex, rightKey, rightTimeKey, leftKey, leftTimeKey }) => {
             const rightValue = iopGatTable[rightKey] || "";
             const rightTimeValue = iopGatTable[rightTimeKey] || "";
             const leftValue = iopGatTable[leftKey] || "";
             const leftTimeValue = iopGatTable[leftTimeKey] || "";
-
-            // Hide the row if both values are empty
             if (rightValue === "" && leftValue === "") {
                 iopGatRows[rowIndex].style.display = "none";
             } else {
-                iopGatRows[rowIndex].style.display = ""; // Ensure it's visible if not empty
+                iopGatRows[rowIndex].style.display = "";
                 iopGatRows[rowIndex].querySelector(`#${rightKey}`).textContent = rightValue || "-";
                 iopGatRows[rowIndex].querySelector(`#${rightTimeKey}`).textContent = rightTimeValue || "-";
                 iopGatRows[rowIndex].querySelector(`#${leftKey}`).textContent = leftValue || "-";
-                iopGatRows[rowIndex].querySelector(`#${leftTimeKey}`).textContent = leftTimeValue || "-";
+                iopGatRows[rowIndex].querySelector(`#${leftTimeKey}`).textContent = leftValue || "-";
                 visibleIopGatRowCount++;
             }
         });
-
-        // Show or hide the entire table based on row visibility
         iopGatTableElement.style.display = visibleIopGatRowCount > 0 ? "table" : "none";
         iopGatHeading.style.display = visibleIopGatRowCount > 0 ? "block" : "none";
 
-
+        // Post Operative Medicine Template
         const postOperativeTemplate = JSON.parse(localStorage.getItem("postOperativeTemplate")) || {};
         const post_Operative_Medicine_Table = document.getElementById("Post-Operative-Medicine-Template");
         const postOperativeRows = post_Operative_Medicine_Table.querySelectorAll("tbody tr");
         const postOperativeHeading = document.getElementById("Post-Operative-Medicine-Heading");
-
-        // Function to update the visibility of rows based on postOperativeTemplate
         function updatePostOperativeTableVisibility() {
             let isAnyRowVisible = false;
-
             postOperativeRows.forEach(row => {
-                const medicineId = row.id; // Example: "Medicine1", "Medicine2", etc.
-
+                const medicineId = row.id;
                 if (postOperativeTemplate[medicineId] === "true") {
-                    row.style.display = ""; // Show row
+                    row.style.display = "";
                     isAnyRowVisible = true;
                 } else {
-                    row.style.display = "none"; // Hide row
+                    row.style.display = "none";
                 }
             });
-
-            // Hide entire table if no rows are visible or template is empty
             if (!isAnyRowVisible || Object.keys(postOperativeTemplate).length === 0) {
                 post_Operative_Medicine_Table.style.display = "none";
-                postOperativeHeading.style.display = "none"; // Hide heading if no rows are visible
+                postOperativeHeading.style.display = "none";
             } else {
-                post_Operative_Medicine_Table.style.display = ""; // Show table if any row is visible
-                postOperativeHeading.style.display = ""; // Show heading if any row is visible
+                post_Operative_Medicine_Table.style.display = "";
+                postOperativeHeading.style.display = "";
+            }
+        }
+        updatePostOperativeTableVisibility();
+
+        // IOL Sticker Checkbox Logic
+        const iolStickerCheck = document.getElementById("iol-sticker-check");
+        const iolStickerSection = document.getElementById("iol-sticker-section");
+
+        function updateIolStickerVisibility() {
+            if (iolStickerCheck.checked) {
+                iolStickerSection.classList.remove("hidden");
+            } else {
+                iolStickerSection.classList.add("hidden");
             }
         }
 
-        updatePostOperativeTableVisibility();
-</script>
+        iolStickerCheck.addEventListener("change", updateIolStickerVisibility);
+        updateIolStickerVisibility(); // Initial update
 
-
-
-
+        // Date Field Update (for admission/discharge inputs)
+        function updateDateField(input, spanId) {
+            let dateValue = input.value;
+            if (dateValue) {
+                document.getElementById(spanId).textContent = formatDate(dateValue);
+            }
+        }
+    </script>
 </body>
 </html>
