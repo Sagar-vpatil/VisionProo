@@ -307,42 +307,47 @@
         color: #6c757d;
         font-size: 0.9rem;
       }
-  
-      /* Loading indicator */
-      .loading {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      }
-  
-      .loading-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        text-align: center;
-      }
-  
-      .spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-radius: 50%;
-        border-top: 4px solid #4a6fa5;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 15px;
-      }
-  
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
+   /* Loading indicator */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+      z-index: 1000;
+      display: flex; /* Changed to flex to make it visible by default */
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .loading-content {
+      background-color: transparent;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid #ffffff;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-content p {
+      color: white;
+      margin-top: 10px;
+      font-size: 16px;
+    }
   
       /* Smaller modal */
       .modal-sm {
@@ -571,13 +576,14 @@
       </div>
     </nav>
 
-    <!-- Loading indicator -->
-    <div class="loading" id="loading">
-      <div class="loading-content">
-        <div class="spinner"></div>
-        <p>Generating PDF...</p>
-      </div>
+     <!-- Loading indicator - visible by default in this example -->
+  <div class="loading" id="loading">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Loading...</p>
     </div>
+  </div>
+
 
     <!-- Edit Amount Modal -->
     <div class="modal fade" id="editAmountModal" tabindex="-1" aria-labelledby="editAmountModalLabel" aria-describedby="editAmountModalDesc" aria-hidden="true">
@@ -607,8 +613,8 @@
 
     <div class="container">
       <header>
-        <h1></i> Patient Payment Records</h1>
-        <p style="font-weight: normal; color: white;">View and manage all patient payment transactions</p>
+        <h1> Patient Payment Records</h1>
+         <p style="font-weight: normal; color: white;">View and manage all patient payment transactions</p>
       </header>
 
       <div class="filters-container">
@@ -906,7 +912,7 @@
             <td>${record.patient_id}</td>
             <td>${record.patient_name}</td>
             <td class="amount-column">
-              <button class="edit-btn" onclick="openEditModal('${record.id}')"><i class="fas fa-pencil-alt"></i></button>
+              <!-- <button class="edit-btn" onclick="openEditModal('${record.id}')"><i class="fas fa-pencil-alt"></i></button> -->
               Rs. ${formatAmount(record.amount)}
             </td>
             <td>${formatDateForDisplay(record.rawDate)}</td>
