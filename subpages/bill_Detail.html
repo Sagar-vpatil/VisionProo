@@ -984,7 +984,7 @@
         if (!matchesSearch) return false;
         
         // Date filters
-        const recordDate = record.date ? new Date(record.date) : null;
+        const recordDate = parseFirestoreDate(record.rawDate);
         
         // Year filter
         if (year && recordDate && recordDate.getFullYear().toString() !== year) {

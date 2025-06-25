@@ -621,15 +621,33 @@ function setCurrentDate() {
 // Function to update the date based on the input field
 function updateDate() {
     const dateInput = document.getElementById('dateInput');
-    const selectedDate = dateInput.value;
-    const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
-    if (datePattern.test(selectedDate)) {
-        document.getElementById('currentDate').dataset.value = selectedDate;
-    } else {
-        window.electronAPI?.showErrorBox("Error", "Invalid date format. Please use DD/MM/YYYY.");
+    const selectedDate = dateInput.value.trim();
+    const currentDateElement = document.getElementById('currentDate');
+    const datePattern = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+
+    const showError = (msg) => {
+        window.electronAPI?.showErrorBox("Error", msg);
         setCurrentDate();
+    };
+
+    const match = selectedDate.match(datePattern);
+    if (!match) return showError("Invalid format. Use DD/MM/YYYY.");
+
+    const [ , dd, mm, yyyy ] = match.map(Number);
+    const date = new Date(yyyy, mm - 1, dd);
+
+    const isValidDate =
+        date.getFullYear() === yyyy &&
+        date.getMonth() === mm - 1 &&
+        date.getDate() === dd;
+
+    if (!isValidDate || yyyy < 2000 || yyyy > 2100) {
+        return showError("Invalid calendar date");
     }
+
+    currentDateElement.dataset.value = selectedDate;
 }
+
 
 // Set the current date on page load
 setCurrentDate();
