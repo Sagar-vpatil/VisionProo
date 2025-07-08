@@ -7,14 +7,14 @@ import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDo
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyD6RUMVTE0GpI6qEiHuI-uw4oDFIDDtItY",
-    authDomain: "eye-hospital-ee88e.firebaseapp.com",
-    projectId: "eye-hospital-ee88e",
-    storageBucket: "eye-hospital-ee88e.firebasestorage.app",
-    messagingSenderId: "173931536781",
-    appId: "1:173931536781:web:fbf50296e7b05d57235dc4",
-    measurementId: "G-GWM7MZ1FJC"
-  };
+  apiKey: "AIzaSyB97TAe4MUlVYayUwSNlLLkkxj4_wPuSMo",
+  authDomain: "fir-project-31ba5.firebaseapp.com",
+  projectId: "fir-project-31ba5",
+  storageBucket: "fir-project-31ba5.firebasestorage.app",
+  messagingSenderId: "1063443419004",
+  appId: "1:1063443419004:web:23e6fc58f1d03e57111ef9",
+  measurementId: "G-2B0HDYPFKS"
+};
   
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
