@@ -8,87 +8,7 @@
 
     <style>
 
-        /* Print-specific styles to prevent section splits */
-@media print {
-    /* Ensure these sections don't break across pages */
-    #Visual-Acuity-Table,
-    #AR-Table,
-    #Current-Power-Table,
-    #Refraction-Table,
-    #Eye-Examination-Table,
-    #Topography-Table,
-    #Pre-Operative-Table,
-    #A-Scan-Table,
-    #Medicines-Table,
-    #Pre-Operative-Medicine-Template,
-    .Pre-Operative-Details,
-    .eye-examination-section,
-    .medicines-section {
-        page-break-inside: avoid !important;
-    }
-
-    /* Ensure headings stay with their content */
-    #Visual-Acuity-Heading,
-    #AR-Heading,
-    #Current-Power-Heading,
-    #Refraction-Heading,
-    #Eye-Examination-Heading,
-    #Topography-Heading,
-    #Pre-Operative-Heading,
-    #NCT-Heading,
-    #A-Scan-Heading,
-    #Treatment-Heading,
-    #Medicines-Heading,
-    #Pre-Operative-Medicine-Heading {
-        page-break-after: avoid !important;
-    }
-
-    /* General print layout adjustments */
-    body, .page {
-        margin: 0;
-        padding: 0;
-        width: 210mm;
-        height: 297mm;
-        box-shadow: none;
-    }
-
-    @page {
-        size: A4;
-        margin: 10mm;
-    }
-
-    /* Hide unnecessary elements */
-    .navbar, .print-btn, .buttons, .hr {
-        display: none !important;
-    }
-
-    /* Ensure tables and borders are visible */
-    table, th, td {
-        border: 1px solid black !important;
-    }
-
-    /* Medicine table styling for print */
-    #Medicines-Table thead th {
-        background-color: #e0e0e0 !important;
-        color: #000 !important;
-    }
-
-    #Medicines-Table tbody tr {
-        background-color: #f9f9f9 !important;
-    }
-
-    /* Signature styling */
-    .signature {
-        text-align: right;
-        font-style: italic;
-    }
-
-    .signature::before {
-        content: "_______________";
-        display: block;
-        margin-bottom: 10px;
-    }
-}
+        
 
 @media print {
      /* Ensure the Visual Acuity table does not split */
@@ -151,8 +71,6 @@
     .eye-examination-section {
         page-break-inside: avoid; /* Prevent the table from splitting */
     }
-
-    
 
     /* Ensure the Medicines Table does not split across pages */
     .medicines-section {
