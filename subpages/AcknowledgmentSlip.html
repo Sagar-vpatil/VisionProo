@@ -384,6 +384,10 @@ body {
                             <span id="currentDate" class="print-visible" style="display: none;"></span>
                         </td>
                     </tr>
+                     <tr>
+                        <th>Ack No</th>
+                        <td id="ack-no"></td>
+                    </tr>
                     <tr>
                         <th>Patient ID</th>
                         <td id="patient-id"></td>
@@ -446,10 +450,22 @@ body {
         // Retrieve the appointment object from localStorage
         const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {};
         document.getElementById("patient-id").textContent = appointment.id || "N/A";
-    document.getElementById("patient-name").textContent = appointment.Name || "N/A";
-    document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
-    document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
-    document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+        document.getElementById("patient-name").textContent = appointment.Name || "N/A";
+        document.getElementById("patient-age").textContent = appointment.Age ? appointment.Age + " yrs" : "N/A";
+        document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
+        document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+        
+        // Generate and display the acknowledgment number
+        const appointmentId = appointment.id || "0";
+        const paddedId = appointmentId.replace(/\D/g, '').padStart(4, '0');
+
+        const curDate = new Date();
+        const format = (n) => n.toString().padStart(2, '0');
+
+        const ackNo = `${paddedId}${format(curDate.getDate())}${format(curDate.getMonth() + 1)}${curDate.getFullYear().toString().slice(-2)}${format(curDate.getHours())}${format(curDate.getMinutes())}${format(curDate.getSeconds())}`;
+
+        document.getElementById("ack-no").textContent = ackNo;
+
 
 
         // Set current date with the format DD/MM/YYYY
