@@ -427,6 +427,101 @@
         display: none !important;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Normal View - Always show input boxes */
+.insurance-input,
+.time-input {
+    width: 150px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+/* Print View */
+@media print {
+    /* Style inputs to look like plain text in print view */
+    .insurance-input,
+    .time-input {
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: auto;
+        display: inline;
+    }
+
+    /* Hide inputs and their labels when empty (placeholder shown) */
+    .value:has(.insurance-input:placeholder-shown),
+    .value:has(.time-input:placeholder-shown) {
+        display: none;
+    }
+
+    .label[data-insurance]:has(+ .value .insurance-input:placeholder-shown),
+    .label[data-time]:has(+ .value .time-input:placeholder-shown) {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+.final-bill-heading {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d32f2f; /* Solid red color */
+            margin: 20px 0;
+            font-family: 'Noto Sans Devanagari', 'Mangal', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .doctor-field {
+            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f; /* Solid red color */
+            margin: 10px 0;
+            font-family: 'Noto Sans Devanagari', 'Mangal', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        @media print {
+            .final-bill-heading {
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                color: #d32f2f; /* Red for print visibility */
+                margin: 10px 0;
+                page-break-inside: avoid;
+            }
+
+            .doctor-field {
+                text-align: left;
+                font-size: 16px;
+                font-weight: bold;
+                color: #d32f2f; /* Red for print visibility */
+                margin: 5px 0;
+                page-break-inside: avoid;
+            }
+        }
+
         
     </style>
 </head>
@@ -461,23 +556,36 @@
             </p>
             <hr style="border: 1px solid #070a0d;">
         </div>
-        <div class="invoice-details">
-            <div class="row">
-                <span class="label">Patient ID:</span>
-                <span class="value" id="patient-id">123456</span>
-                <span class="label">Date:</span>
-                <span id="currentDate" data-value="">
-                    <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
-                </span>
-            </div>
-            <div class="row" style="margin-left: 20px;">
-                <span class="label">Patient Name:</span>
-                <span class="value" id="patient-name">John Doe</span>
-                <span class="label" style="margin-left: 50px;">Mobile No:</span>
-                <span class="value" id="patient-mobile">+1234567890</span>
-            </div>
-        </div>
+      
+<div class="invoice-details">
+    <div class="row">
+        <span class="label">Patient ID:</span>
+        <span class="value" id="patient-id">123456</span>
+        <span class="label" style="margin-left: 30px;">Date:</span>
+        <span class="value" id="currentDate">
+            <input type="text" id="dateInput" placeholder="DD/MM/YYYY">
+        </span>
+    </div>
+    <div class="row" style="margin-left: 20px;">
+        <span class="label"  style="margin-left: 10px;">Patient Name:</span>
+        <span class="value" id="patient-name">John Doe</span>
+        <span class="label" style="margin-left: 45px;">Mobile No:</span>
+        <span class="value" id="patient-mobile">+1234567890</span>
+    </div>
+    <div class="row">
+        <span class="label" data-insurance >Insurance:</span>
+        <span class="value">
+            <input type="text" class="insurance-input" placeholder="Enter Insurance Company" id="insuranceInput" style="width: 190px;">
+        </span>
+        <span class="label" data-insurance style="margin-left: 65px;">Policy No:</span>
+        <span class="value">
+            <input type="text" class="insurance-input" placeholder="Enter Policy Number" id="policyInput" style="width: 190px;">
+        </span>
+    </div>
+   
+</div>
         <hr style="border: 1px solid #070a0d;">
+        <div class="final-bill-heading">Final Bill</div>
         <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
     <thead>
         <tr style="border: 2px solid black; background-color: #f2f2f2;">
