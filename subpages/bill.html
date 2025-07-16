@@ -522,6 +522,57 @@
             }
         }
 
+
+
+
+
+
+
+
+
+
+        @media print {
+    /* Ensure the total row is always visible */
+    #invoiceTable tr:last-child {
+        display: table-row !important;
+    }
+    
+    /* Style for the "Total Amount" text */
+    #invoiceTable tr:last-child td:nth-child(2) {
+        visibility: hidden;
+        position: relative;
+        font-weight: bold;
+    }
+    
+    #invoiceTable tr:last-child td:nth-child(2)::after {
+        content: attr(data-value);
+        visibility: visible;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-weight: bold;
+    }
+    
+    /* Style for the total amount value */
+    .total {
+        visibility: hidden;
+        position: relative;
+    }
+    
+    .total::after {
+        content: attr(data-value);
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+    }
+    
+    /* Hide the actual input elements */
+    .rupee-input, #dateInput, #invoiceTable input[type="text"] {
+        display: none !important;
+    }
+}
         
     </style>
 </head>
@@ -693,11 +744,11 @@
             <td style="border: 2px solid black; padding: 10px;"></td>
         </tr>
         <tr style="border: 2px solid black;">
-            <td style="border: 2px solid black; padding: 10px;"></td>
-            <td style="border: 2px solid black; padding: 10px;">Total Amount</td>
-            <td style="border: 2px solid black; padding: 10px; text-align: center;" class="total" data-value="₹ 0"></td>
-            <td style="border: 2px solid black; padding: 10px;"></td>
-        </tr>
+    <td style="border: 2px solid black; padding: 10px;"></td>
+    <td style="border: 2px solid black; padding: 10px;" data-value="Total Amount">Total Amount</td>
+    <td style="border: 2px solid black; padding: 10px; text-align: center;" class="total" data-value="₹ 0"></td>
+    <td style="border: 2px solid black; padding: 10px;"></td>
+</tr>
     </tbody>
 </table>
         <button class="add-row-btn" onclick="addNewRow()">+ Add New Item</button>
