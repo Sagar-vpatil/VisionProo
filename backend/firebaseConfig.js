@@ -1,9 +1,11 @@
 // Import the functions you need from the SDKs you need
 // Import the required Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc, deleteDoc,enableIndexedDbPersistence, startAfter, endBefore, limitToLast } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js'
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc, deleteDoc,enableIndexedDbPersistence, startAfter, endBefore, limitToLast} from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js'
+import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,11 +16,17 @@ const firebaseConfig = {
     messagingSenderId: "173931536781",
     appId: "1:173931536781:web:fbf50296e7b05d57235dc4",
     measurementId: "G-GWM7MZ1FJC"
+
   };
-  
+ 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
+// Auth initialization
+const auth = getAuth(firebaseApp);
+
+
+
 
 // Enable offline persistence
 enableIndexedDbPersistence(db)
@@ -35,4 +43,5 @@ enableIndexedDbPersistence(db)
         }
     });
 
-export { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc, deleteDoc, startAfter, endBefore, limitToLast };
+
+export { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, updateDoc, deleteDoc, startAfter, endBefore, limitToLast, auth, signInWithEmailAndPassword};

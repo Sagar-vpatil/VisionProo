@@ -1,62 +1,64 @@
-import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc} from "./firebaseConfig.js";
+import { db, auth, collection, getDocs, query, where, signInWithEmailAndPassword} from "./firebaseConfig.js";
 
 
-// Dom load event
-document.addEventListener("DOMContentLoaded", async () => {
-   console.log("DOM loaded");
+// DOM load event
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM loaded");
 });
+
+
 // Check Local Storage for existing user session
 const storedUser = JSON.parse(localStorage.getItem("user"));
 if (storedUser) {
     redirectUser(storedUser.position);
 }
 
+
 const loaderOverlay = document.getElementById("loader-overlay");
+
 
 // Login Form Submission
 const loginForm = document.getElementById("login-form");
 loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const username = document.getElementById("username").value.trim();
+
+    const email = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    console.log("Username:", username);
-    console.log("Password:", password);
+
     loaderOverlay.style.display = "flex";
 
+
     try {
-        // Create a Firestore query
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        console.log('Logged in as:', user.email);
+
+
         const usersRef = collection(db, "Users");
-        const q = query(usersRef, where("username", "==", username), where("password", "==", password));
+        const q = query(usersRef, where("uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
-        console.log("Query Snapshot:", querySnapshot);
+
 
         if (!querySnapshot.empty) {
-            // User authenticated successfully
-            const userDoc = querySnapshot.docs[0];
-            const userData = userDoc.data();
-
-            // Store user data in local storage
+            const userData = querySnapshot.docs[0].data();
             localStorage.setItem("user", JSON.stringify(userData));
-
-            // Hide the loader overlay after data loads
             loaderOverlay.style.display = "none";
-
-            // Redirect user based on position
             redirectUser(userData.position);
         } else {
-            window.electronAPI.showErrorBox("Error", "Invalid username or password. Please try again.");
-            // Hide the loader overlay after data loads
             loaderOverlay.style.display = "none";
+            window.electronAPI.showErrorBox("Error", "User role data not found in database. Please contact admin.");
         }
     } catch (error) {
-        console.error("Error during login:", error);
-        window.electronAPI.showErrorBox("Error", "An error occurred during login. Please try again.");
-        // Hide the loader overlay after data loads
+        console.error("Login failed:", error);
         loaderOverlay.style.display = "none";
+        window.electronAPI.showErrorBox("Error", "Invalid email or password. Please try again.");
     }
 });
+
+
+
 
 // Redirect user based on position
 function redirectUser(position) {
