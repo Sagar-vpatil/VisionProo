@@ -98,16 +98,25 @@
             margin-right: 100px;
         }
         .footer {
-            margin-top: 30px;
-            text-align: left;
-            font-size: 14px;
-            color: #d32f2f;
-        }
-        .signature {
-            margin-top: 30px;
-            text-align: right;
-            font-style: italic;
-        }
+    margin-top: 30px;
+    font-size: 14px;
+    color: #d32f2f;
+}
+.signature-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.signature {
+    margin-top: 30px;
+    font-style: italic;
+}
+.signature-left {
+    text-align: left;
+}
+.signature-right {
+    text-align: right;
+}
         .buttons {
             margin-top: 20px;
             text-align: center;
@@ -757,10 +766,17 @@
 </table>
         <button class="add-row-btn" onclick="addNewRow()">+ Add New Item</button>
         <div class="footer" style="color: black;">
-            <div class="signature" style="margin-right: 90px;">
-                <p>Dr. Alvin R Rane</p>
-            </div>
+    <div class="signature-container">
+        <div class="signature signature-left" style="margin-left: 90px;">
+             <p>Patient / Relative</p>
         </div>
+        <div class="signature signature-right" style="margin-right: 90px;">
+         
+             <p>Dr. Alvin R Rane</p>
+        </div>
+    </div>
+</div>
+        
     </div>
   <script>
   // Retrieve the appointment object from localStorage
