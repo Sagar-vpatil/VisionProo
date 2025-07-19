@@ -573,7 +573,11 @@
         display: none !important;
     }
 }
-        
+      
+
+
+
+
     </style>
 </head>
 <body>
@@ -612,10 +616,10 @@
     <div class="row">
         <span class="label">Patient ID:</span>
         <span class="value" id="patient-id">123456</span>
-        <span class="label" style="margin-left: 30px;">Date:</span>
-        <span class="value" id="currentDate">
-            <input type="text" id="dateInput" placeholder="DD/MM/YYYY">
-        </span>
+       <span class="label" style="margin-left: 30px;">Date:</span>
+<span class="value" id="currentDate">
+    <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
+</span>
     </div>
     <div class="row" style="margin-left: 20px;">
         <span class="label"  style="margin-left: 10px;">Patient Name:</span>
