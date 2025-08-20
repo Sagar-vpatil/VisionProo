@@ -3041,33 +3041,35 @@ overflow-y: auto; width: 50%;">
 
 
   <!-- ###################################### advice  end  ################################ -->
+
+
+
+<!-- ---------------------------------- Upload Images Start -------------------------------- -->
   <div class="tab-content " id="img">
    
 
     <div class="container">
-      <div class="upload-container" id="uploadContainer">
-          <h3>Upload Your Image</h3>
-          <p>Drag & drop an image or click below to upload</p>
-          <label for="imageUpload">Choose Image</label>
-          <input type="file" id="imageUpload" accept="image/*">
+        <div class="upload-container" id="uploadContainer">
+          <h3>Upload Images</h3>
+          <p>Drag & drop images or click below to upload (max 4)</p>
+          <label for="imageUpload">Choose Images</label>
+          <input type="file" id="imageUpload" accept="image/*" multiple>
       </div>
-  
-      <!-- Image preview will appear outside the upload box -->
-      <div id="imagePreview" style="text-align: center;">
-          <h3>Selected Image</h3>
-          <img id="previewImg" src="" alt="Image Preview">
-          <button class="gradient-button" style="display: none; margin: auto; margin-top: 20px;" id="delete-image-btn" type="button">
-            ✖ Delete Image
-          </button>
+
+  <!-- Image previews -->
+      <div id="imagePreview">
+          <h3>Selected Images</h3>
+          <div id="previewContainer"></div>
       </div>
-  </div>
-
-
-
-  
+   </div>
 
 
 </div>
+<!-- --------------X-------------------- Upload Images End ------------------X-------------- -->
+
+
+
+
 <!-- Summary Alert (Initially Hidden) -->
 <div id="historyAlert" class="custom-alert" style="display: none;">
   <span id="alertMessage" style="flex-grow: 1;">Patient History Opened for </span>
@@ -3761,19 +3763,69 @@ document.addEventListener("click", function(event) {
 
 </script>
 <script>
-  document.getElementById('imageUpload').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        console.log("file");
-          const reader = new FileReader();
-          reader.onload = function(e) {
-              const previewImg = document.getElementById('previewImg');
-              previewImg.src = e.target.result;
-              document.getElementById('imagePreview').style.display = 'block';
-          };
-          reader.readAsDataURL(file);
-      }
-  });
+const imageUpload = document.getElementById('imageUpload');
+const previewContainer = document.getElementById('previewContainer');
+const imagePreview = document.getElementById('imagePreview');
+
+let selectedFiles = []; // keep track of files manually
+
+imageUpload.addEventListener('change', function(event) {
+    selectedFiles = Array.from(event.target.files); // store in our array
+
+    // Limit max 4 images
+    if (selectedFiles.length > 4) {
+        window.electronAPI.showErrorBox("Error", "You can only upload a maximum of 4 images.");
+        imageUpload.value = "";
+        previewContainer.innerHTML = "";
+        imagePreview.style.display = "none";
+        selectedFiles = [];
+        return;
+    }
+
+    renderPreview();
+});
+
+function renderPreview() {
+    previewContainer.innerHTML = "";
+
+    if (selectedFiles.length > 0) {
+        imagePreview.style.display = "block";
+    } else {
+        imagePreview.style.display = "none";
+    }
+
+    selectedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const wrapper = document.createElement("div");
+
+            const img = document.createElement("img");
+            img.src = e.target.result;
+
+            const btn = document.createElement("button");
+            btn.innerText = "✖";
+
+            btn.addEventListener("click", () => {
+                selectedFiles.splice(index, 1); // remove file
+                updateFileInput(); // sync with input
+                renderPreview();   // re-render preview
+            });
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(btn);
+            previewContainer.appendChild(wrapper);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Keep input files in sync with selectedFiles
+function updateFileInput() {
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    imageUpload.files = dataTransfer.files; // overwrite input files
+}
+
 
 
 

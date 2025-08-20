@@ -462,42 +462,51 @@ async function savePatientHistory(getCondition) {
     loaderOverlay.style.display = "flex";
     // Save Eye Image
     const fileInput = document.getElementById('imageUpload');
-    const file = fileInput.files[0];
-    if (file) {
-      console.log('File:', file);
-      const reader = new FileReader();
+    const files = Array.from(fileInput.files);
+
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        const reader = new FileReader();
         reader.onload = async function(e) {
           console.log('Image data:', e.target.result);
           const imageData = e.target.result;
-          const patient_Id = "P"+appointment.id;
-          const tempDateStr = getTodaysDate(); // Assuming it returns "DD/MM/YYYY"
+
+          const patient_Id = "P" + appointment.id;
+          const tempDateStr = getTodaysDate(); // "DD/MM/YYYY"
           console.log('Temp Date:', tempDateStr);
 
-          const [day, month, year] = tempDateStr.split("/").map(Number); // Extract DD, MM, YYYY
-          const today = new Date(year, month - 1, day); // Correctly construct Date object
+          const [day, month, year] = tempDateStr.split("/").map(Number);
+          const today = new Date(year, month - 1, day);
 
           // Format to "DD-MM-YYYY"
           const img_date = today.toLocaleDateString("en-GB").replace(/\//g, "-");
-          // const img_date = `${today.getDate().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getFullYear()}`;
-          const img_name = `${patient_Id}_image_${img_date}`;
-          console.log('Image date:', img_date);
+
+          // Add index to filename if multiple images
+          const img_name = `${patient_Id}_image_${img_date}_${i + 1}`;
+
+          console.log('Image name:', img_name);
+
           try {
             const result = await window.electronAPI.saveImage(patient_Id, img_date, img_name, imageData);
             if (result.success) {
-                console.log('Image saved successfully at:', result.path);
+              console.log('Image saved successfully at:', result.path);
             } else {
-                console.error('Failed to save image:', result.error);
-                window.electronAPI.showErrorBox("Error", "Failed to save image: " + result.error);
+              console.error('Failed to save image:', result.error);
+              window.electronAPI.showErrorBox("Error", "Failed to save image: " + result.error);
             }
-        } catch (error) {
+          } catch (error) {
             console.error('Error saving image:', error);
             window.electronAPI.showErrorBox("Error", "Failed to save image: " + error.message);
-          // Hide the loader overlay after data loads
-          loaderOverlay.style.display = "none";
-        }
+            loaderOverlay.style.display = "none";
+          }
         };
+
         reader.readAsDataURL(file);
+      }
     }
+
     try {
       const todayDate = getFormattedDate();
       const documentId = `P${appointment.id}${todayDate}`;
@@ -1288,74 +1297,105 @@ function clearHistoryFromLocalStorage() {
   localStorage.removeItem("postOperativeTemplate");
 }
 
- // Show Eye Image function
- async function showEyeImage() {
+// Show Eye Images (up to 4)
+async function showEyeImage() {
   console.log("Show Eye Image");
-  const patientId = "P"+appointment.id; // Example Patient ID (Replace with dynamic value)
+  const patientId = "P" + appointment.id;
   const tempDateStr = localStorage.getItem("tempDate");
   if (!tempDateStr) {
-      console.log("No date found in localStorage");
-      return;
+    console.log("No date found in localStorage");
+    return;
   }
+
   console.log(tempDateStr);
-  const today = tempDateStr 
-      ? new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v))) 
-      : new Date();
+  const today = new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v)));
+  const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); // DD-MM-YYYY
 
-  const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); // Formats as DD-MM-YYYY
-  const imgName = `${patientId}_image_${imgDate}`;
-  console.log(imgName);
+  const previewContainer = document.getElementById("previewContainer");
+  const imagePreview = document.getElementById("imagePreview");
 
-  const imageElement = document.querySelector("#imagePreview img");
-  const deleteButton = document.getElementById("delete-image-btn");
+  // Clear any previous previews
+  previewContainer.innerHTML = "";
 
+  let foundAny = false;
 
-  // Call Electron API to check if image exists
-  const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
+  // Loop through possible 4 images
+  for (let i = 1; i <= 4; i++) {
+    const imgName = `${patientId}_image_${imgDate}_${i}`;
+    console.log("Checking:", imgName);
 
-  if (response.exists) {
-      imageElement.src = `file://${response.path}`;
-      document.getElementById('imagePreview').style.display = 'block';
-      deleteButton.style.display = "block";
-      // imageElement.style.display = "block"; // Show image
+    // Check if image exists
+    const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
 
-      // Double-click event to open in default viewer
-      imageElement.addEventListener("dblclick", function () {
-          window.electronAPI.openImage(response.path);
+    if (response.exists) {
+      foundAny = true;
+
+      // Create wrapper
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      wrapper.style.display = "inline-block";
+
+      // Image
+      const img = document.createElement("img");
+      img.src = `file://${response.path}`;
+      img.style.width = "180px";
+      img.style.height = "180px";
+      img.style.objectFit = "cover";
+      img.style.borderRadius = "10px";
+      img.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
+
+      // Double click = open in default viewer
+      img.addEventListener("dblclick", function () {
+        window.electronAPI.openImage(response.path);
       });
 
-      // Click event to delete image
-      deleteButton.addEventListener("click", async function () {
-      // Trigger confirmation dialog
-        const comfirmDelete = await window.electronAPI.showMessageBox(
+      // Delete button
+      const btn = document.createElement("button");
+      btn.innerText = "✖";
+      btn.style.position = "absolute";
+      btn.style.top = "6px";
+      btn.style.right = "6px";
+      btn.style.background = "rgba(255,0,0,0.8)";
+      btn.style.color = "white";
+      btn.style.border = "none";
+      btn.style.borderRadius = "50%";
+      btn.style.width = "28px";
+      btn.style.height = "28px";
+      btn.style.cursor = "pointer";
+
+      btn.addEventListener("click", async function () {
+        const confirmDelete = await window.electronAPI.showMessageBox(
           "warning",
-          'Are you sure you want to delete this image?',
+          "Are you sure you want to delete this image?",
           "Confirm",
           ["Yes", "No"]
-      );
+        );
 
-      if (comfirmDelete === 1) return;
-      
+        if (confirmDelete === 1) return;
 
         const deleteResponse = await window.electronAPI.deleteImage(response.path);
         if (deleteResponse.success) {
-            window.electronAPI.showSuccessBox("Success", "Image deleted successfully!");
-            // imageElement.style.display = "none";
-            deleteButton.style.display = "none";
-            document.getElementById('imagePreview').style.display = 'none';
+          window.electronAPI.showSuccessBox("Success", "Image deleted successfully!");
+          wrapper.remove();
+          if (previewContainer.children.length === 0) {
+            imagePreview.style.display = "none";
+          }
         } else {
-            console.log("Failed to delete image:", deleteResponse.error);
-            window.electronAPI.showErrorBox("Error", "Failed to delete image: " + deleteResponse.error);
+          console.log("Failed to delete image:", deleteResponse.error);
+          window.electronAPI.showErrorBox("Error", "Failed to delete image: " + deleteResponse.error);
         }
-    });
-  } else {
-      document.getElementById('imagePreview').style.display = 'none';
-      // imageElement.style.display = "none"; // Hide if not found
-      // hide Img-Section
-      // document.getElementById("Img-Section").style.display = "none";
-      // deleteButton.style.display = "none";
+      });
+
+      // Append to wrapper
+      wrapper.appendChild(img);
+      wrapper.appendChild(btn);
+      previewContainer.appendChild(wrapper);
+    }
   }
- }
+
+  // Show/hide preview section
+  imagePreview.style.display = foundAny ? "block" : "none";
+}
 
 
  document.addEventListener('DOMContentLoaded', () => {
