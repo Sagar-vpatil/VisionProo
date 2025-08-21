@@ -6,16 +6,27 @@
     <title>Ophthalmology Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    /* Image Container Styles */
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
 
-.image-container {
-            text-align: center;
-        }
-        img {
-            width: 400px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    .image-container img {
+        width: 180px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .image-container img:hover {
+        transform: scale(1.05);
+    }
+
           /* Side Navbar Styles */
   .side-navbar {
     position: fixed;
@@ -816,19 +827,15 @@
 
 
 
-        <div class="card mb-3" id="Img-Section">
-            <div class="card-header bg-success text-white">Image</div>
+       <div class="card mb-3" id="Img-Section">
+            <div class="card-header bg-success text-white">Images</div>
             <div class="card-body">
-               
-                <div class="image-container">
-                    <img src="" alt="Eye Image" style="display: none;">
+                <div class="image-container" id="imageContainer">
+                    <!-- Images will be inserted here dynamically -->
                 </div>
-              
             </div>
-
-
-            
         </div>
+
 
 
 
@@ -866,28 +873,38 @@
                 ? new Date(...tempDateStr.split("/").reverse().map((v, i) => (i === 1 ? v - 1 : +v))) 
                 : new Date();
 
-            const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); // Formats as DD-MM-YYYY
-            const imgName = `${patientId}_image_${imgDate}`;
-            console.log(imgName);
+            const imgDate = today.toLocaleDateString("en-GB").replace(/\//g, "-"); 
+            const container = document.getElementById("imageContainer");
 
-            const imageElement = document.querySelector(".image-container img");
+            // Clear old images before appending
+            container.innerHTML = "";
 
-            // Call Electron API to check if image exists
-            const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
+            // Loop through max 4 images
+            for (let i = 1; i <= 4; i++) {
+                const imgName = `${patientId}_image_${imgDate}_${i}`;
+                console.log("Checking:", imgName);
 
-            if (response.exists) {
-                imageElement.src = `file://${response.path}`;
-                imageElement.style.display = "block"; // Show image
+                const response = await window.electronAPI.checkImageExists(patientId, imgDate, imgName);
 
-                // Double-click event to open in default viewer
-                imageElement.addEventListener("dblclick", function () {
-                    window.electronAPI.openImage(response.path);
-                });
-            } else {
-                imageElement.style.display = "none"; // Hide if not found
-                // hide Img-Section
+                if (response.exists) {
+                    const img = document.createElement("img");
+                    img.src = `file://${response.path}`;
+                    img.alt = `Eye Image ${i}`;
+
+                    // Double click to open image
+                    img.addEventListener("dblclick", () => {
+                        window.electronAPI.openImage(response.path);
+                    });
+
+                    container.appendChild(img);
+                }
+            }
+
+            // If no images found → hide section
+            if (container.children.length === 0) {
                 document.getElementById("Img-Section").style.display = "none";
             }
+
         });
 
          const appointment = JSON.parse(window.localStorage.getItem("appointment"));
