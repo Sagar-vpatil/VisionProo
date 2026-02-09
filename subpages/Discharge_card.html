@@ -409,7 +409,7 @@
         </div>
         <div class="address-section">
             <p class="hospital-address-details" style="margin-top: 5px;">
-                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 20px; margin-left: 25px; color: red;"></i> 518/1/6, Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 20px; margin-left: 25px; color: red;"></i> 518/1/6, Near Panchamukhi Hanuman Mandir , Jalgaon | Phone: +91 9423902084
             </p>
             <hr style="border: 1px solid #070a0d;">
         </div>
@@ -418,43 +418,65 @@
             <h2 style="font-size: 24px; color: #004a99; text-decoration: underline;">DISCHARGE SUMMARY</h2>
         </div>
 
-        <!-- Patient Information -->
-        <div class="patient-info-card">
-            <table class="table table-bordered patient-table">
-                <tbody>
-                    <tr>
-                        <th>Patient ID:</th>
-                        <td id="patient-id"></td>
-                        <th>Name:</th>
-                        <td id="patient-name">Pratham Ganesh Mistari</td>
-                    </tr>
-                    <tr>
-                        <th>Age:</th>
-                        <td id="patient-age">40 yrs</td>
-                        <th>Gender:</th>
-                        <td id="patient-gender">Male</td>
-                    </tr>
-                    <tr>
-                        <th>Date of Birth:</th>
-                        <td id="patient-dob">N/A</td>
-                        <th>Address:</th>
-                        <td id="patient-address">N/A</td>
-                    </tr>
-                    <tr>
-                        <th>Admission Date:</th>
-                        <td><input type="date" id="admission-input" oninput="updateDateField(this, 'admission-value')"></td>
-                        <th>Discharge Date:</th>
-                        <td><input type="date" id="discharge-input" oninput="updateDateField(this, 'discharge-value')"></td>
-                    </tr>
-                    <tr>
-                        <th>Surgeon Name:</th>
-                        <td>Dr. Alvin R Rane</td>
-                        <th>Surgery Name:</th>
-                        <td class="show-SurgicalTreatment">Cataract Surgery</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <!-- Patient Information -->
+<div class="patient-info-card">
+    <table class="table table-bordered patient-table">
+        <tbody>
+            <tr>
+                <th>UHID No:</th>
+                <td id="patient-id">UH123456</td>
+
+                <th>IPD No:</th>
+                <td id="patient-ipd">IPD789012</td>
+            </tr>
+
+            <tr>
+                <th>Name:</th>
+                <td id="patient-name">Pratham Ganesh Mistari</td>
+
+                <th>Gender:</th>
+                <td id="patient-gender">Male</td>
+            </tr>
+
+            <tr>
+                <th>Age:</th>
+                <td id="patient-age">40 yrs</td>
+
+                <th>Date of Birth:</th>
+                <td id="patient-dob">N/A</td>
+            </tr>
+
+            <tr>
+                <th>Address:</th>
+                <td id="patient-address">N/A</td>
+
+                <th>Admission Date:</th>
+                <td>
+                    <input type="date" id="admission-input"
+                        oninput="updateDateField(this, 'admission-value')">
+                </td>
+            </tr>
+
+            <tr>
+                <th>Discharge Date:</th>
+                <td>
+                    <input type="date" id="discharge-input"
+                        oninput="updateDateField(this, 'discharge-value')">
+                </td>
+
+                <th>Surgeon Name:</th>
+                <td>Dr. Alvin R Rane</td>
+            </tr>
+
+            <tr>
+                <th>Surgery Name:</th>
+                <td colspan="3" class="show-SurgicalTreatment">
+                    Cataract Surgery
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
         <!-- Diagnosis Section -->
         <h4 class="section-title">Diagnosis</h4>
@@ -687,6 +709,7 @@
             </tbody>
         </table>
 
+
         <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">
                 <p>Dr. Alvin R Rane</p>
@@ -918,5 +941,31 @@
             }
         }
     </script>
+
+
+
+
+    <script>
+    function generateIPDNumber() {
+        // Get last IPD number from localStorage
+        let lastIPD = localStorage.getItem("lastIPDNumber");
+
+        // If not present, start from 1
+        let nextNumber = lastIPD ? parseInt(lastIPD) + 1 : 1;
+
+        // Save updated IPD number
+        localStorage.setItem("lastIPDNumber", nextNumber);
+
+        // Format number as 3 digits (001, 002, 003)
+        let formattedNumber = String(nextNumber).padStart(3, '0');
+
+        // Set IPD value
+        document.getElementById("patient-ipd").innerText = "IPD" + formattedNumber;
+    }
+
+    // Auto-generate on page load
+    window.onload = generateIPDNumber;
+</script>
+
 </body>
 </html>
