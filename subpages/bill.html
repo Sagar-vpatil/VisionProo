@@ -616,24 +616,31 @@
         </div>
         <div class="address-section" style="font-weight: bold;">
             <p class="hospital-address-details">
-                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 25px; margin-left: 30px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir Colony Road, Jalgaon | Phone: +91 9423902084
+                <i class="fa-solid fa-location-dot" style="font-size: 20px; width: 24px; height: 25px; margin-left: 30px; color: red;"></i> 518/1/6,Near Panchamukhi Hanuman Mandir, Jalgaon | Phone: +91 9423902084
             </p>
             <hr style="border: 1px solid #070a0d;">
         </div>
       
 <div class="invoice-details">
+
     <div class="row">
-        <span class="label">Patient ID:</span>
-        <span class="value" id="patient-id">123456</span>
-       <span class="label" style="margin-left: 30px;">Date:</span>
+       <span class="label" style="margin-left: -42px;">Date:</span>
 <span class="value" id="currentDate">
     <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
 </span>
+    <span class="label" style="margin-left: 119px;">Receipt No:</span>
+        <span class="value" id="bill-id">123456</span>
     </div>
     <div class="row" style="margin-left: 20px;">
         <span class="label"  style="margin-left: 10px;">Patient Name:</span>
         <span class="value" id="patient-name">John Doe</span>
-        <span class="label" style="margin-left: 45px;">Mobile No:</span>
+        <span class="label" style="margin-left: 30px;">UHID No:</span>
+        <span class="value" id="patient-id">+1234567890</span>
+    </div>
+    <div class="row" style="margin-left: 20px;">
+        <span class="label"  style="margin-left: -40px;">Gender:</span>
+        <span class="value" id="patient-name">Male</span>
+        <span class="label" style="margin-left: 93px;">Mobile No:</span>
         <span class="value" id="patient-mobile">+1234567890</span>
     </div>
     <div class="row">
@@ -784,6 +791,11 @@ const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {}
 document.getElementById("patient-id").textContent = appointment.id || "N/A";
 document.getElementById("patient-name").textContent = appointment.Name || "N/A";
 document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+document.getElementById("bill-id").textContent = appointment?.id
+  ? `${Math.floor(100 + Math.random() * 900)}${appointment.id.replace(/\D/g, "")}`
+  : "N/A";
+
+
 
 // Set current date with the format DD/MM/YYYY
 function setCurrentDate() {
