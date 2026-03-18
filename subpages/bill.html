@@ -639,7 +639,7 @@
     </div>
     <div class="row" style="margin-left: 20px;">
         <span class="label"  style="margin-left: -40px;">Gender:</span>
-        <span class="value" id="patient-name">Male</span>
+        <span class="value" id="patient-gender">Male</span>
         <span class="label" style="margin-left: 93px;">Mobile No:</span>
         <span class="value" id="patient-mobile">+1234567890</span>
     </div>
@@ -791,6 +791,7 @@ const appointment = JSON.parse(window.localStorage.getItem("appointment")) || {}
 document.getElementById("patient-id").textContent = appointment.id || "N/A";
 document.getElementById("patient-name").textContent = appointment.Name || "N/A";
 document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
+document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
 document.getElementById("bill-id").textContent = appointment?.id
   ? `${Math.floor(100 + Math.random() * 900)}${appointment.id.replace(/\D/g, "")}`
   : "N/A";
