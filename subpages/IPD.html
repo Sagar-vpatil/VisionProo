@@ -258,7 +258,7 @@
                 font-style: italic;
             }
             .signature::before {
-                content: "_______________";
+                content: "_________________________";
                 display: block;
                 margin-bottom: 10px;
                 margin-top: 30px;
@@ -958,7 +958,7 @@
             </div>
         
             <!-- Right Corner - Doctor's Name -->
-            <div class="doctor-name-right" style="margin-top: 70px;">
+            <div class="doctor-name-right" style="margin-top: 70px;" id="doctorLabel">
                 Dr. Selina A. Rane <br> M.D. (Ayu)<br>
             </div>
             
@@ -1382,7 +1382,7 @@ Eye Type of Surgery:
 
  <div class="footer" style="color: black;">
   <div class="signature" style="margin-right: 30px;">
-      <p>Dr. Alvin R Rane</p>
+      <p> Ophthalmologist signature</p>
   </div>
 </div>
     
@@ -1623,6 +1623,27 @@ Eye Type of Surgery:
 </script>
 
 
+
+<script>
+
+window.onload = function () {
+
+    let doctorName =
+        localStorage.getItem("doctorName");
+
+    let doctorDegree =
+        localStorage.getItem("doctorDegree");
+
+    if (doctorName) {
+
+        document.getElementById("doctorLabel").innerHTML =
+            doctorName + "<br>" + doctorDegree;
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>

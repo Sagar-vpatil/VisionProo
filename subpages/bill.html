@@ -309,7 +309,7 @@
                 color: #000;
             }
             .signature::before {
-                content: "_______________";
+                content: "_________________________";
                 display: block;
                 margin-bottom: 10px;
                 margin-top: 50px;
@@ -610,7 +610,7 @@
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
                 <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
-            <div class="doctor-name-right" style="margin-top: 78px; margin-right:9px">
+            <div class="doctor-name-right" style="margin-top: 78px; margin-right:9px" id="doctorLabel">
                 Dr. Selina A. Rane <br> M.D. (Ayu)<br>
             </div>
         </div>
@@ -763,6 +763,16 @@
             </td>
             <td style="border: 2px solid black; padding: 10px;"></td>
         </tr>
+
+     <tr id="discountRow" style="border: 2px solid black;">
+    <td style="border: 2px solid black; padding: 10px;"></td>
+    <td style="border: 2px solid black; padding: 10px;" data-value="Discount">Discount</td>
+    <td style="border: 2px solid black; padding: 10px; text-align: center;">
+        <input type="text" class="rupee-input discount-input" value="₹ 0" oninput="calculateTotal()">
+    </td>
+    <td style="border: 2px solid black; padding: 10px;"></td>
+</tr>
+        
         <tr style="border: 2px solid black;">
     <td style="border: 2px solid black; padding: 10px;"></td>
     <td style="border: 2px solid black; padding: 10px;" data-value="Total Amount">Total Amount</td>
@@ -779,7 +789,8 @@
         </div>
         <div class="signature signature-right" style="margin-right: 90px;">
          
-             <p>Dr. Alvin R Rane</p>
+             <p>Ophthalmologist Signature
+</p>
         </div>
     </div>
 </div>
@@ -922,7 +933,8 @@ function addNewRow() {
     newRow.appendChild(cell4);
 
     // Insert the new row before the total row
-    tbody.insertBefore(newRow, rows[rows.length - 1]);
+    const discountRow = document.getElementById("discountRow");
+tbody.insertBefore(newRow, discountRow);
 
     // Initialize the new input fields
     initializeInputFields();
@@ -1146,6 +1158,75 @@ initializeInputFields();
   // Expose to global scope
   window.saveRecordToFirebase = saveRecordToFirebase;
 </script>
+
+
+
+<script>
+
+window.onload = function () {
+
+    let doctorName =
+        localStorage.getItem("doctorName");
+
+    let doctorDegree =
+        localStorage.getItem("doctorDegree");
+
+    if (doctorName) {
+
+        document.getElementById("doctorLabel").innerHTML =
+            doctorName + "<br>" + doctorDegree;
+
+    }
+
+}
+
+
+</script>
+
+
+
+<script>
+    function calculateTotal(input) {
+    if (input) {
+        let value = input.value.replace(/[^\d]/g, '');
+        if (value === '') {
+            input.value = '₹ ';
+            input.parentElement.dataset.value = '₹ 0';
+        } else {
+            input.value = '₹ ' + parseFloat(value).toLocaleString('en-IN');
+            input.parentElement.dataset.value = input.value;
+        }
+    }
+
+    let total = 0;
+
+    // SUM all price inputs
+    const inputs = document.querySelectorAll("#invoiceTable tbody input.rupee-input:not(.discount-input)");
+    inputs.forEach(inp => {
+        const numValue = parseFloat(inp.value.replace(/[^\d]/g, '')) || 0;
+        total += numValue;
+    });
+
+    // GET discount
+    let discount = 0;
+    const discountInput = document.querySelector(".discount-input");
+    if (discountInput) {
+        discount = parseFloat(discountInput.value.replace(/[^\d]/g, '')) || 0;
+    }
+
+    // FINAL TOTAL (SUBTRACT DISCOUNT)
+    const finalTotal = total - discount;
+
+    const totalElement = document.querySelector(".total");
+
+    const formattedTotal = finalTotal.toLocaleString('en-IN');
+
+    totalElement.dataset.value = `₹ ${formattedTotal}`;
+    totalElement.textContent = `₹ ${formattedTotal}`;
+}
+</script>
+
+
 
 
 </body>

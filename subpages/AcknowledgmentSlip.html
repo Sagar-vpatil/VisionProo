@@ -171,7 +171,7 @@ body {
             }
 
             .signature::before {
-                content: "_______________";
+                content: "________________________________";
                 display: block;
                 margin-bottom: 10px;
                 margin-top: 100px;
@@ -361,7 +361,7 @@ body {
                 </div>
             
                 <!-- Right Corner - Doctor's Name -->
-                <div class="doctor-name-right" style="margin-top: 80px;">
+                <div class="doctor-name-right" style="margin-top: 80px;" id="doctorLabel">
                     Dr. Selina A. Rane <br> M.D. (Ayu)<br>
                 </div>
                 
@@ -440,7 +440,7 @@ body {
 
             <div class="footer" style="color: black;">
                 <div class="signature" style="margin-right: 30px;">
-                    <p>Dr. Alvin R Rane</p>
+                    <p>Ophthalmologist Signature</p>
                 </div>
             </div>
         </div>
@@ -540,6 +540,31 @@ body {
             input.value = "₹ " + parseFloat(value).toLocaleString("en-IN");
         }
     </script>
+
+    
+
+<script>
+
+window.onload = function () {
+
+    let doctorName =
+        localStorage.getItem("doctorName");
+
+    let doctorDegree =
+        localStorage.getItem("doctorDegree");
+
+    if (doctorName) {
+
+        document.getElementById("doctorLabel").innerHTML =
+            doctorName + "<br>" + doctorDegree;
+
+    }
+
+}
+
+
+</script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

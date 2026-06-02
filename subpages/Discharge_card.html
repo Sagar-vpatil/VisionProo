@@ -311,7 +311,7 @@
             }
 
             .signature::before {
-                content: "_______________";
+                content: "____________________________";
                 display: block;
                 margin-bottom: 10px;
             }
@@ -403,7 +403,7 @@
                 <div class="hospital-name">रविकल्प हॉस्पिटल</div>
                 <div class="hospital-address">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
             </div>
-            <div class="doctor-name-right" style="margin-top: 70px;">
+            <div class="doctor-name-right" style="margin-top: 70px;" id="doctorLabel">
                 Dr. Selina A. Rane <br> M.D. (Ayu)<br>
             </div>
         </div>
@@ -712,7 +712,7 @@
 
         <div class="footer" style="color: black;">
             <div class="signature" style="margin-right: 30px;">
-                <p>Dr. Alvin R Rane</p>
+                <p>Ophthalmologist Signature</p>
             </div>
         </div>
     </div>
@@ -965,6 +965,29 @@
 
     // Auto-generate on page load
     window.onload = generateIPDNumber;
+</script>
+
+
+<script>
+
+window.onload = function () {
+
+    let doctorName =
+        localStorage.getItem("doctorName");
+
+    let doctorDegree =
+        localStorage.getItem("doctorDegree");
+
+    if (doctorName) {
+
+        document.getElementById("doctorLabel").innerHTML =
+            doctorName + "<br>" + doctorDegree;
+
+    }
+
+}
+
+
 </script>
 
 </body>
