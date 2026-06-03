@@ -4068,7 +4068,7 @@ function saveDoctor() {
         data[1]
     );
 
-    alert("Doctor Selected Successfully");
+    window.electronAPI.showSuccessBox("Success", "Doctor Selected Successfully ✅");
 
     closeDoctorPopup();
 }
