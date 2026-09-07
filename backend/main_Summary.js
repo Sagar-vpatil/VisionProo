@@ -180,6 +180,44 @@ const dbName = "medicalOptionsDB";
 const storeName = "optionsStore";
 
 
+const examSectionMap = {
+    eyelids: "exam-eyelids",
+    conjunctiva: "exam-conjunctiva",
+    sclera: "exam-sclera",
+    cornea: "exam-cornea",
+    lens: "exam-lens",
+    anterior: "exam-anterior",
+    iris: "exam-iris",
+    pupil: "exam-pupil",
+    fundus: "exam-fundus"
+};
+
+
+const examPopupMap = {
+    eyelids: "eyelidsOptions",
+    conjunctiva: "conjunctivaOptions",
+    sclera: "scleraOptions",
+    cornea: "corneaOptions",
+    lens: "lensOptions",
+    anterior: "anteriorOptions",
+    iris: "irisOptions",
+    pupil: "pupilOptions",
+    fundus: "fundusOptions"
+};
+
+
+const examInputSectionMap = {
+    "eyelids-input": "eyelids",
+    "conjunctiva-input": "conjunctiva",
+    "sclera-input": "sclera",
+    "cornea-input": "cornea",
+    "lens-input": "lens",
+    "anterior-input": "anterior",
+    "iris-input": "iris",
+    "pupil-input": "pupil",
+    "fundus-input": "fundus"
+};
+
 function openDatabase() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, 1);
@@ -194,14 +232,61 @@ function openDatabase() {
   });
 }
 
-
+// Save option to IndexedDB and backup
 async function saveOption(baseName, className) {
-  openDatabase().then((db) => {
-    const tx = db.transaction(storeName, "readwrite");
-    const store = tx.objectStore(storeName);
-    store.put({ className, baseName });
-  });
-  await backupMedicalOptionsDB(); // Call the backup function after saving
+
+    if (!baseName || !className) {
+        throw new Error(
+            "Option name and class name are required."
+        );
+    }
+
+    const db = await openDatabase();
+
+    await new Promise((resolve, reject) => {
+
+        const tx = db.transaction(
+            storeName,
+            "readwrite"
+        );
+
+        const store = tx.objectStore(
+            storeName
+        );
+
+        store.put({
+            className,
+            baseName
+        });
+
+        tx.oncomplete = resolve;
+
+        tx.onerror = () => {
+            reject(
+                tx.error ||
+                new Error("Failed to save option.")
+            );
+        };
+
+        tx.onabort = () => {
+            reject(
+                tx.error ||
+                new Error("Option save transaction aborted.")
+            );
+        };
+
+    });
+
+    // Backup only after IndexedDB transaction succeeds
+    await backupMedicalOptionsDB();
+
+    console.log(
+        "Option saved and backed up successfully:",
+        {
+            className,
+            baseName
+        }
+    );
 }
 
 
@@ -218,13 +303,625 @@ function getAllOptions() {
 }
 
 
+// ============= Examination Options Manager =============
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    // EXAMINATION OPTIONS MANAGER ELEMENTS
+
+    const manageExamOptionsBtn =
+        document.getElementById("manageExamOptionsBtn");
+
+    const examOptionsModal =
+        document.getElementById("examOptionsModal");
+
+    const closeExamOptionsModal =
+        document.getElementById("closeExamOptionsModal");
+
+    const examSectionSelect =
+        document.getElementById("examSectionSelect");
+
+    const newExamOption =
+        document.getElementById("newExamOption");
+
+    const addExamOptionBtn =
+        document.getElementById("addExamOptionBtn");
+
+    const existingOptionsList =
+        document.getElementById("existingOptionsList");
+
+
+    // CHECK REQUIRED ELEMENTS
+
+    if (
+        !manageExamOptionsBtn ||
+        !examOptionsModal ||
+        !closeExamOptionsModal ||
+        !examSectionSelect ||
+        !newExamOption ||
+        !addExamOptionBtn ||
+        !existingOptionsList
+    ) {
+
+        console.warn(
+            "Examination Options Manager elements not found."
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "Examination Options Manager loaded."
+    );
+
+
+    // OPEN MANAGE EXAMINATION OPTIONS MODAL
+
+    manageExamOptionsBtn.addEventListener(
+        "click",
+        function () {
+
+            console.log(
+                "Manage Examination Options button clicked."
+            );
+
+            examOptionsModal.style.display = "block";
+
+
+            // Load options if a section is already selected
+
+            const section =
+                examSectionSelect.value;
+
+
+            if (section) {
+
+                loadExaminationOptions(section);
+
+            } else {
+
+                existingOptionsList.innerHTML =
+                    "<p>Select an examination section.</p>";
+
+            }
+
+        }
+    );
+
+
+    // CLOSE MODAL - CLOSE BUTTON
+
+    closeExamOptionsModal.addEventListener(
+        "click",
+        function () {
+
+            examOptionsModal.style.display = "none";
+
+        }
+    );
+
+
+    // CLOSE MODAL - CLICK OUTSIDE
+
+    examOptionsModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === examOptionsModal) {
+
+                examOptionsModal.style.display = "none";
+
+            }
+
+        }
+    );
+
+
+    // SECTION SELECTION
+
+    examSectionSelect.addEventListener(
+        "change",
+        function () {
+
+            const section =
+                this.value;
+
+
+            console.log(
+                "Selected examination section:",
+                section
+            );
+
+
+            if (!section) {
+
+                existingOptionsList.innerHTML =
+                    "<p>Select an examination section.</p>";
+
+                return;
+            }
+
+
+            loadExaminationOptions(section);
+
+        }
+    );
+
+
+    // ADD NEW EXAMINATION OPTION
+
+    addExamOptionBtn.addEventListener(
+        "click",
+        async function () {
+
+            try {
+
+                const section =
+                    examSectionSelect.value;
+
+
+                const optionValue =
+                    newExamOption.value.trim();
+
+
+                // Validate section
+
+                if (!section) {
+
+                    window.electronAPI.showErrorBox(
+                        "Error",
+                        "Please select an examination section."
+                    );
+
+                    return;
+                }
+
+
+                // Validate option
+
+                if (!optionValue) {
+
+                    window.electronAPI.showErrorBox(
+                        "Error",
+                        "Please enter an option name."
+                    );
+
+                    newExamOption.focus();
+
+                    return;
+                }
+
+
+                // Get IndexedDB class name
+
+                const className =
+                    examSectionMap[section];
+
+
+                if (!className) {
+
+                    console.error(
+                        "Invalid examination section:",
+                        section
+                    );
+
+                    window.electronAPI.showErrorBox(
+                        "Error",
+                        "Invalid examination section."
+                    );
+
+                    return;
+                }
+
+
+                console.log(
+                    "Adding examination option:",
+                    {
+                        section: section,
+                        className: className,
+                        option: optionValue
+                    }
+                );
+
+
+                // Get existing options
+
+                const allOptions =
+                    await getAllOptions();
+
+
+                // Check duplicate
+
+                const alreadyExists =
+                    allOptions.some(option => {
+
+                        return (
+                            option.className === className &&
+                            option.baseName &&
+                            option.baseName
+                                .trim()
+                                .toLowerCase() ===
+                            optionValue.toLowerCase()
+                        );
+
+                    });
+
+
+                if (alreadyExists) {
+
+                    window.electronAPI.showErrorBox(
+                        "Error",
+                        "This option already exists."
+                    );
+
+                    return;
+                }
+
+
+                // Save option
+
+                await saveOption(
+                    optionValue,
+                    className
+                );
+
+
+                console.log(
+                    "Examination option saved successfully."
+                );
+
+
+                // Clear input
+
+                newExamOption.value = "";
+
+
+                // Reload option list
+
+                await loadExaminationOptions(
+                    section
+                );
+
+
+                // Success message
+
+                window.electronAPI.showSuccessBox(
+                    "Success",
+                    "Examination option added successfully."
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error adding examination option:",
+                    error
+                );
+
+
+                window.electronAPI.showErrorBox(
+                    "Error",
+                    "Unable to add examination option."
+                );
+
+            }
+
+        }
+    );
+
+
+    // ENTER KEY SUPPORT
+
+    newExamOption.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                addExamOptionBtn.click();
+
+            }
+
+        }
+    );
+
+
+});
+
+
+// Load Examination Options into Manage Examination Options modal
+
+async function loadExaminationOptions(section) {
+
+    const existingOptionsList =
+        document.getElementById(
+            "existingOptionsList"
+        );
+
+
+    if (!existingOptionsList) {
+        return;
+    }
+
+
+    // Clear current list
+
+    existingOptionsList.innerHTML =
+        "<p>Loading...</p>";
+
+
+    try {
+
+        // Get existing records from medicalOptionsDB
+
+        const allOptions =
+            await getAllOptions();
+
+
+        // Convert dropdown value into
+        // examination className
+
+        const className =
+            examSectionMap[section];
+
+
+        // Safety check
+
+        if (!className) {
+
+            existingOptionsList.innerHTML =
+                "<p>Invalid examination section.</p>";
+
+            return;
+        }
+
+
+        // Only get options belonging
+        // to the selected examination section
+
+        const examOptions =
+            allOptions.filter(option =>
+                option.className === className
+            );
+
+
+        console.log(
+            `Custom options for ${section}:`,
+            examOptions
+        );
+
+
+        // No custom options
+
+        if (examOptions.length === 0) {
+
+            existingOptionsList.innerHTML =
+                "<p>No custom options added yet.</p>";
+
+            return;
+        }
+
+
+        // Clear loading message
+
+        existingOptionsList.innerHTML = "";
+
+
+        // DISPLAY CUSTOM OPTIONS
+
+        examOptions.forEach(option => {
+
+            const optionElement =
+                document.createElement("div");
+
+            optionElement.className =
+                "exam-option-item";
+
+
+            const optionText =
+                document.createElement("span");
+
+            optionText.textContent =
+                option.baseName;
+
+
+            optionElement.appendChild(
+                optionText
+            );
+
+
+            // TRIPLE CLICK DELETE
+        
+            let clickCount = 0;
+            let clickTimer = null;
+
+
+            optionElement.addEventListener(
+                "click",
+                async function () {
+
+                    clickCount++;
+
+
+                    // Triple click detected
+
+                    if (clickCount === 3) {
+
+                        clearTimeout(clickTimer);
+
+                        clickCount = 0;
+
+
+                        // Safety check:
+                        // only examination options can be deleted
+
+                        if (
+                            !option.className ||
+                            !option.className.startsWith(
+                                "exam-"
+                            )
+                        ) {
+
+                            console.warn(
+                                "Delete blocked:",
+                                option
+                            );
+
+                            return;
+                        }
+
+
+                        const response = await window.electronAPI.showMessageBox(
+                            "warning",
+                            `Delete "${option.baseName}"?`,
+                            "Confirm",
+                            ["Yes", "No"]
+                        );
+
+                        if (response === 1) {
+                            return;
+                        }
+
+
+                        // Delete from IndexedDB
+
+                        deleteOption(
+                            option.baseName,
+                            option.className
+                        )
+                        .then(async () => {
+
+                            console.log(
+                                "Examination option deleted:",
+                                option.baseName
+                            );
+
+
+                            // Reload Manage Examination
+                            // Options list
+
+                            await loadExaminationOptions(
+                                section
+                            );
+
+
+                            // Reload corresponding
+                            // Eye Examination popup
+
+                            await loadCustomExaminationOptions(
+                                section
+                            );
+
+
+                            window.electronAPI.showSuccessBox(
+                                "Success",
+                                "Examination option deleted successfully."
+                            );
+
+                        })
+                        .catch(error => {
+
+                            console.error(
+                                "Error deleting examination option:",
+                                error
+                            );
+
+
+                            window.electronAPI.showErrorBox(
+                                "Error",
+                                "Unable to delete examination option."
+                            );
+
+                        });
+
+
+                        return;
+                    }
+
+
+                    // Reset click count
+
+                    clearTimeout(clickTimer);
+
+
+                    clickTimer =
+                        setTimeout(() => {
+
+                            clickCount = 0;
+
+                        }, 600);
+
+                }
+            );
+
+
+            existingOptionsList.appendChild(
+                optionElement
+            );
+
+        });
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error loading examination options:",
+            error
+        );
+
+
+        existingOptionsList.innerHTML =
+            "<p>Unable to load options.</p>";
+
+    }
+
+}
+
+
+// ================ Delete Option from IndexedDB ================
+
 async function deleteOption(baseName, className) {
-  openDatabase().then((db) => {
-    const tx = db.transaction(storeName, "readwrite");
-    const store = tx.objectStore(storeName);
-    store.delete([className, baseName]);
-  });
-  await backupMedicalOptionsDB(); // Call the backup function after deleting
+
+    if (!baseName || !className) {
+        throw new Error("Option name and class name are required.");
+    }
+
+    const db = await openDatabase();
+
+    await new Promise((resolve, reject) => {
+
+        const tx = db.transaction(storeName, "readwrite");
+        const store = tx.objectStore(storeName);
+
+        store.delete([className, baseName]);
+
+        tx.oncomplete = resolve;
+
+        tx.onerror = () => {
+            reject(
+                tx.error ||
+                new Error("Failed to delete option.")
+            );
+        };
+
+        tx.onabort = () => {
+            reject(
+                tx.error ||
+                new Error("Delete transaction aborted.")
+            );
+        };
+
+    });
+
+    await backupMedicalOptionsDB();
+
+    console.log("Option deleted:", {
+        className,
+        baseName
+    });
 }
 
 
@@ -562,3 +1259,184 @@ async function restoreMedicalDB(dbName, restoredData) {
       console.error('Error opening IndexedDB:', event.target.error);
     };
   }
+
+
+
+// ================ Load Custom Examination Options Into Popup ================
+
+async function loadCustomExaminationOptions(section) {
+
+    try {
+
+        const className =
+            examSectionMap[section];
+
+        const popupId =
+            examPopupMap[section];
+
+
+        // VALIDATE SECTION
+
+        if (!className || !popupId) {
+
+            console.warn(
+                "Invalid examination section:",
+                section
+            );
+
+            return;
+        }
+
+
+        // FIND POPUP
+
+        const popup =
+            document.getElementById(popupId);
+
+
+        if (!popup) {
+
+            console.warn(
+                "Popup not found:",
+                popupId
+            );
+
+            return;
+        }
+
+
+        // FIND TABLE
+
+        const table =
+            popup.querySelector("table");
+
+
+        if (!table) {
+
+            console.warn(
+                "Table not found:",
+                popupId
+            );
+
+            return;
+        }
+
+
+        // GET OPTIONS FROM INDEXEDDB
+
+        const allOptions =
+            await getAllOptions();
+
+
+        // GET CUSTOM OPTIONS FOR THIS SECTION
+
+        const customOptions =
+            allOptions.filter(option =>
+                option.className === className
+            );
+
+
+        console.log(
+            `Custom options for ${section}:`,
+            customOptions
+        );
+
+
+        // REMOVE PREVIOUS CUSTOM OPTIONS
+
+        table
+            .querySelectorAll(
+                ".custom-examination-options-row"
+            )
+            .forEach(row => row.remove());
+
+
+        // NO CUSTOM OPTIONS
+
+        if (customOptions.length === 0) {
+
+            return;
+        }
+
+
+        // CREATE FIRST CUSTOM ROW
+
+        let row =
+            document.createElement("tr");
+
+        row.className =
+            "custom-examination-options-row";
+
+
+        // ADD CUSTOM OPTIONS
+
+        customOptions.forEach((option, index) => {
+
+            const td =
+                document.createElement("td");
+
+
+            td.className =
+                "custom-examination-option";
+
+
+            td.setAttribute(
+                "data-value",
+                option.baseName
+            );
+
+
+            td.textContent =
+                option.baseName;
+
+
+            // Add option to current row
+
+            row.appendChild(td);
+
+
+            // Three options per row
+
+            if (
+                (index + 1) % 3 === 0 &&
+                index !== customOptions.length - 1
+            ) {
+
+                table.appendChild(row);
+
+
+                row =
+                    document.createElement("tr");
+
+                row.className =
+                    "custom-examination-options-row";
+
+            }
+
+        });
+
+
+        // ADD LAST ROW
+
+        if (row.children.length > 0) {
+
+            table.appendChild(row);
+
+        }
+
+
+        console.log(
+            `Added ${customOptions.length} custom option(s) to ${popupId}.`
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading custom examination options:",
+            error
+        );
+
+    }
+
+}

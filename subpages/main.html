@@ -1474,7 +1474,13 @@
     <!-- 
     ############################################ eye Examination start #################################### -->
     <div id="section4" class="section" style="margin-bottom: 12%;">
-      <h3>Eye Examination:</h3>
+      <div class="examination-header">
+          <h3>Eye Examination:</h3>
+
+          <button type="button" id="manageExamOptionsBtn">
+              ⚙ Manage Examination Options
+          </button>
+      </div>
       <table class="table-container table-responsive" style=" height: 200px;
 overflow-y: auto; width: 50%;">
         <thead>
@@ -3271,6 +3277,107 @@ overflow-y: auto; width: 50%;">
 <!-- Popup Form for Patient Details end -->
 
 
+<!-- Manage Examination Options Modal -->
+
+<div id="examOptionsModal" class="exam-options-modal">
+
+    <div class="exam-options-content">
+
+        <div class="exam-options-header">
+
+            <h3>Manage Examination Options</h3>
+
+            <span id="closeExamOptionsModal"
+                  class="close-exam-modal">
+                &times;
+            </span>
+
+        </div>
+
+
+        <!-- Select Examination Field -->
+
+        <label for="examSectionSelect">
+            Select Examination Field
+        </label>
+
+        <select id="examSectionSelect" class="form-control">
+
+            <option value="eyelids">
+                Eyelids & Adnexa
+            </option>
+
+            <option value="conjunctiva">
+                Conjunctiva
+            </option>
+
+            <option value="sclera">
+                Sclera
+            </option>
+
+            <option value="cornea">
+                Cornea
+            </option>
+
+            <option value="lens">
+                Lens
+            </option>
+
+            <option value="anterior">
+                Anterior Chamber
+            </option>
+
+            <option value="iris">
+                Iris
+            </option>
+
+            <option value="pupil">
+                Pupil
+            </option>
+
+            <option value="fundus">
+                Fundus
+            </option>
+
+        </select>
+
+
+        <!-- Existing Custom Options -->
+
+        <h4 style="margin-top: 20px;">
+            Custom Options
+        </h4>
+
+        <div id="existingOptionsList"
+             class="existing-options-list">
+        </div>
+
+
+        <!-- Add New Option -->
+
+        <div class="add-option-container">
+
+            <input
+                type="text"
+                id="newExamOption"
+                class="form-control"
+                placeholder="Enter new option"
+            >
+
+            <button
+                type="button"
+                id="addExamOptionBtn">
+
+                + Add Option
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script>
   let db;
     const DB_NAME = "MedicalDB";
@@ -3996,35 +4103,152 @@ function updateFileInput() {
 </script>
 <script>
   function setupOptions(inputClass, optionsId) {
-    const inputs = document.querySelectorAll('.' + inputClass);
-    const optionsPanel = document.getElementById(optionsId);
+
+    const inputs = document.querySelectorAll("." + inputClass);
+    const optionsContainer = document.getElementById(optionsId);
+
+    if (!inputs.length || !optionsContainer) {
+        console.warn(
+            "Examination option elements not found:",
+            inputClass,
+            optionsId
+        );
+        return;
+    }
+
     let focusedInput = null;
 
+
+    // INPUT FOCUS
+
     inputs.forEach(input => {
-      input.addEventListener('focus', function () {
-        focusedInput = this;
-        const rect = this.getBoundingClientRect();
-        optionsPanel.style.top = `${rect.bottom + window.scrollY}px`;
-        optionsPanel.style.left = `${rect.left + window.scrollX}px`;
-        optionsPanel.style.display = 'block';
-      });
+
+        input.addEventListener("focus", async function () {
+
+            focusedInput = this;
+
+
+            // Load custom options from IndexedDB
+
+            const section = examInputSectionMap[inputClass];
+
+            if (section) {
+
+                try {
+
+                    await loadCustomExaminationOptions(section);
+
+                } catch (error) {
+
+                    console.error(
+                        "Unable to load custom examination options:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            // Show and position popup
+
+            const rect = this.getBoundingClientRect();
+
+            optionsContainer.style.display = "block";
+            optionsContainer.style.position = "absolute";
+
+            optionsContainer.style.left =
+                (rect.left + window.scrollX) + "px";
+
+            optionsContainer.style.top =
+                (rect.bottom + window.scrollY) + "px";
+
+        });
+
     });
 
-    document.addEventListener('click', function (e) {
-      if (!optionsPanel.contains(e.target) && !Array.from(inputs).includes(e.target)) {
-        optionsPanel.style.display = 'none';
-      }
-    });
 
-    optionsPanel.querySelectorAll('td').forEach(cell => {
-      cell.addEventListener('click', function () {
-        if (focusedInput) {
-          focusedInput.value = this.dataset.value;
-          optionsPanel.style.display = 'none';
+    // OPTION CLICK
+    // EVENT DELEGATION
+
+    optionsContainer.addEventListener("click", function (event) {
+
+        // Find the TD that was clicked
+        const optionCell = event.target.closest("td");
+
+
+        // Click was not on a TD
+        if (!optionCell) {
+            return;
         }
-      });
+
+
+
+        // Make sure TD belongs to this popup
+        if (!optionsContainer.contains(optionCell)) {
+            return;
+        }
+
+
+        // Ignore empty TD cells
+        const optionValue =
+            optionCell.getAttribute("data-value");
+
+
+        if (!optionValue) {
+            return;
+        }
+
+
+        event.stopPropagation();
+
+
+        // No examination input currently selected
+        if (!focusedInput) {
+            return;
+        }
+
+
+        // Set selected value
+
+        focusedInput.value = optionValue.trim();
+
+        // Trigger change event
+
+        focusedInput.dispatchEvent(
+            new Event("change", {
+                bubbles: true
+            })
+        );
+
+
+        // Close popup
+
+        optionsContainer.style.display = "none";
+
     });
-  }
+
+
+    // CLOSE POPUP WHEN CLICKING OUTSIDE
+
+    document.addEventListener("click", function (event) {
+
+        const clickedInput =
+            event.target.closest("." + inputClass);
+
+        const clickedPopup =
+            event.target.closest("#" + optionsId);
+
+
+        if (!clickedInput && !clickedPopup) {
+
+            optionsContainer.style.display = "none";
+
+        }
+
+    });
+
+}
 
   // Setup all sections
   setupOptions('eyelids-input', 'eyelidsOptions');
@@ -4036,9 +4260,6 @@ function updateFileInput() {
   setupOptions('pupil-input', 'pupilOptions');
   setupOptions('lens-input', 'lensOptions');
   setupOptions('fundus-input', 'fundusOptions');
-
-
-
 
 </script>
 <script>

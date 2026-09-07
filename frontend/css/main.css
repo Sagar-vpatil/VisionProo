@@ -1506,3 +1506,489 @@ h2 {
       left: 5% !important;
     }
   }
+
+
+
+  /*  ------- Examination Header --------- */
+
+.examination-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+
+/*  ------- Manage Examination Options Button --------- */
+
+#manageExamOptionsBtn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+
+    background: #A52A21;
+    color: #FFFFFF;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+#manageExamOptionsBtn:hover {
+    background: #8F241C;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+#manageExamOptionsBtn:active {
+    transform: translateY(1px);
+}
+
+
+/*  ------- Modal Background --------- */
+
+.exam-options-modal {
+    display: none;
+
+    position: fixed;
+    z-index: 9999;
+
+    inset: 0;
+
+    background: rgba(15, 23, 42, 0.48);
+
+    backdrop-filter: blur(2px);
+
+    overflow-y: auto;
+}
+
+
+/*  ------- Modal Content --------- */
+
+.exam-options-content {
+    width: 500px;
+    max-width: calc(100% - 32px);
+
+    margin: 7vh auto;
+
+    padding: 0;
+
+    background: #F8FAFC;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.20),
+        0 5px 15px rgba(15, 23, 42, 0.10);
+
+    animation: examModalOpen 0.18s ease-out;
+}
+
+
+/*  ------- Modal Animation --------- */
+
+@keyframes examModalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/*  ------- Modal Header --------- */
+
+.exam-options-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 24px;
+
+    background: #EFF6F3;
+
+    border-bottom: 1px solid #D7E7E0;
+}
+
+
+/*  ------- Modal Header Title --------- */
+
+.exam-options-header h3 {
+    margin: 0;
+
+    color: #173B32;
+
+    font-size: 23px;
+    font-weight: 600;
+
+    letter-spacing: -0.2px;
+}
+
+
+/*  ------- Close Button --------- */
+
+.close-exam-modal {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    color: #475569;
+
+    font-size: 26px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.close-exam-modal:hover {
+    background: #DCEBE5;
+    color: #173B32;
+}
+
+
+/*  ------- Form Label --------- */
+
+.exam-options-content > label {
+    display: block;
+
+    margin: 22px 24px 8px;
+
+    color: #334155;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/*  ------- Examination Field Select --------- */
+
+#examSectionSelect {
+    display: block;
+
+    width: calc(100% - 48px);
+    height: 46px;
+
+    margin: 0 24px;
+
+    padding: 0 13px;
+
+    border: 1px solid #CBD5E1;
+    border-radius: 9px;
+
+    background: #FFFFFF;
+
+    color: #1E293B;
+
+    font-size: 15px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#examSectionSelect:hover {
+    border-color: #A8C7BA;
+}
+
+#examSectionSelect:focus {
+    border-color: #79A995;
+
+    box-shadow:
+        0 0 0 3px rgba(121, 169, 149, 0.16);
+}
+
+
+/*  ------- Custom Options Title --------- */
+
+.exam-options-content h4 {
+    margin: 24px 24px 10px;
+
+    color: #334155;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/*  ------- Existing Options List --------- */
+
+.existing-options-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    min-height: 44px;
+
+    margin: 0 24px;
+
+    padding: 12px;
+
+    background: #F1F7F4;
+
+    border: 1px solid #D7E7E0;
+
+    border-radius: 9px;
+}
+
+
+/*  ------- Custom Option Item --------- */
+
+.exam-option-item {
+    display: flex;
+
+    align-items: center;
+
+    padding: 8px 13px;
+
+    border: 1px solid #BFD8CD;
+    border-radius: 7px;
+
+    background: #E8F3EE;
+
+    color: #245448;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.exam-option-item:hover {
+    background: #DCEEE6;
+
+    border-color: #9FC5B4;
+
+    transform: translateY(-1px);
+}
+
+.exam-option-item:active {
+    transform: scale(0.98);
+}
+
+
+/*  ------- Empty Options Message --------- */
+
+.existing-options-list p {
+    width: 100%;
+
+    margin: 4px 0;
+
+    color: #64748B;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+/*  ------- Add Option Container --------- */
+
+.add-option-container {
+    display: flex;
+
+    gap: 10px;
+
+    margin: 18px 24px 24px;
+}
+
+
+/*  ------- New Option Input --------- */
+
+#newExamOption {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 44px;
+
+    padding: 0 13px;
+
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #1E293B;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#newExamOption::placeholder {
+    color: #94A3B8;
+}
+
+#newExamOption:hover {
+    border-color: #A8C7BA;
+}
+
+#newExamOption:focus {
+    border-color: #79A995;
+
+    box-shadow:
+        0 0 0 3px rgba(121, 169, 149, 0.16);
+}
+
+
+/*  ------- Add Option Button --------- */
+
+#addExamOptionBtn {
+    height: 44px;
+
+    padding: 0 18px;
+
+    border: 1px solid #39A96B;
+    border-radius: 8px;
+
+    background: #39A96B;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 2px 5px rgba(57, 169, 107, 0.20);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+/*  ------- Add Option Hover --------- */
+
+#addExamOptionBtn:hover {
+    background: #2F965D;
+
+    border-color: #2F965D;
+
+    box-shadow:
+        0 4px 10px rgba(57, 169, 107, 0.28);
+}
+
+
+/*  ------- Add Option Active --------- */
+
+#addExamOptionBtn:active {
+    background: #27844F;
+
+    border-color: #27844F;
+
+    transform: translateY(1px);
+
+    box-shadow:
+        0 2px 5px rgba(57, 169, 107, 0.20);
+}
+
+
+/*  ------- Responsive --------- */
+
+@media (max-width: 600px) {
+
+    .exam-options-content {
+        width: auto;
+
+        max-width: calc(100% - 20px);
+
+        margin: 4vh 10px;
+    }
+
+
+    .exam-options-header {
+        padding: 17px 18px;
+    }
+
+
+    .exam-options-header h3 {
+        font-size: 20px;
+    }
+
+
+    .exam-options-content > label {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    #examSectionSelect {
+        width: calc(100% - 36px);
+
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    .exam-options-content h4 {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    .existing-options-list {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    .add-option-container {
+        flex-direction: column;
+
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+
+    #addExamOptionBtn {
+        width: 100%;
+    }
+
+}
