@@ -471,7 +471,8 @@
     }
 
     .hospital-info {
-        text-align: right;
+       text-align: center;
+        margin-top: 40PX;
     }
 
     .hospital-name {
@@ -488,6 +489,210 @@
        
     }
 
+@media print {
+
+    .doctor-name-left {
+        margin-top: 0 !important;
+        width: 130px !important;
+        text-align: left !important;
+        border-bottom: 2px solid #201f20 !important;
+        padding-bottom: 12px !important;
+    }
+
+    #doctorLabel {
+        margin-top: 70px !important;
+        right: 0 !important;
+        width: 140px !important;
+        text-align: left !important;
+        border-bottom: none !important;
+        padding-bottom: 8px !important;
+    }
+
+    .hospital-info {
+        text-align: center !important;
+        margin-right: 26% !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hospital-name {
+        text-align: center !important;
+    }
+
+    .hospital-address {
+        text-align: center !important;
+        margin-right: 0 !important;
+    }
+
+    .hospital-logo {
+        display: block !important;
+    }
+
+    .nabh-logo {
+        display: block !important;
+    }
+}
+.hospital-info {
+    margin-right: auto;
+    margin: 0 !important;
+    padding: 0 10px;
+}
+
+.hospital-name {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    color: red;
+    font-size: 30px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.hospital-address {
+    font-size: 17px;
+    color: #333;
+    line-height: 1.4;
+    margin-top: 5px;
+}
+
+/* =========================================
+   NABH LOGO - TOP RIGHT
+   ========================================= */
+
+.nabh-logo {
+    position: absolute;
+
+    top: -8px;
+    right: 0;
+
+    width: 85px;
+    height: 90px;
+
+    object-fit: contain;
+
+    z-index: 10;
+}
+
+/* =========================================
+   DOCTOR NAMES
+   ========================================= */
+
+.doctor-name-left,
+.doctor-name-right {
+    position: absolute;
+
+    top: 82px;
+
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #222;
+
+    line-height: 1.4;
+
+    z-index: 5;
+}
+
+.doctor-name-left {
+    left: 0;
+    text-align: left;
+}
+
+.doctor-name-right {
+    right: 0;
+    text-align: right;
+}
+
+/* =========================================
+   ADDRESS BELOW HEADER
+   ========================================= */
+
+.address-section {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.hospital-address-details {
+    font-size: 15px;
+    color: #111;
+    font-weight: bold;
+    line-height: 1.5;
+
+    margin: 0;
+    padding: 3px 0;
+
+    text-align: center;
+}
+
+/* =========================================
+   NAVBAR - SCREEN ONLY
+   ========================================= */
+
+.navbar {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 8px 15px;
+
+    background: #f8f8f8;
+
+    box-sizing: border-box;
+}
+
+.navbar .buttons {
+    display: flex;
+    gap: 10px;
+    margin: 0 !important;
+}
+
+.navbar .buttons button {
+    padding: 8px 16px;
+
+    font-size: 14px;
+
+    background: #d32f2f;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.navbar .buttons button:hover {
+    background: #b71c1c;
+}
+
+    /* NABH Logo Styling */
+    .nabh-logo {
+        position: absolute;
+        top: 20px;
+        right: -0px;
+        width: 120px;
+        height: 90px;
+        object-fit: contain;
+        z-index: 2;
+    }
+
+
+/* Print Settings */
+@media print {
+
+    .nabh-logo {
+        position: absolute;
+        top: -15px;
+        right: -3PX;
+        width: 170px;
+        height: 120px;
+        object-fit: contain;
+        z-index: 2;
+        display: block !important;
+    }
+
+}
     /* Doctor's Name Styling */
     .doctor-name-left,
     .doctor-name-right {
@@ -514,23 +719,17 @@
         line-height: 1.5;
         margin: 1; /* Remove default margin */
     }
+
+
+
+
+    
     </style>
 </head>
 <body>
 
  <!-- Top Navigation Bar -->
  <nav class="navbar">
-    <!-- Logo and Hospital Name -->
-    <div style="display: flex; align-items: center;">
-       
-      
-    </div>
-       
-    </div>
-
-    <!-- Image on the Right Side -->
-    
-
     <!-- Action Buttons -->
     <div class="buttons" style="margin-bottom: 10px;">
         <button onclick="window.location.href='./main.html';">🏠 Home</button>
@@ -542,28 +741,185 @@
 
 
     <div class="page">
-        <div class="letterhead">
-            <!-- Left Corner - Doctor's Name -->
-            <div class="doctor-name-left" style="margin-top: 70px;">
-                Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
-            </div>
-        
-            <!-- Hospital Logo and Info -->
-            <div style="margin-left: 150px;">
-                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
-            </div>
-            <div class="hospital-info" style="margin-right: 26%; margin-bottom: 10px;">
-                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
-                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
-            </div>
-        
-            <!-- Right Corner - Doctor's Name -->
-            <div class="doctor-name-right" style="margin-top: 70px;" id="doctorLabel">
-                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
-            </div>
-            
+<!-- ===================== LETTERHEAD ===================== -->
+<div class="letterhead" style="
+    position: relative;
+    width: 100%;
+    min-height: 125px;
+    display: grid;
+    grid-template-columns: 180px 1fr 180px;
+    align-items: center;
+    border-bottom: 2px solid #070a0d;
+    margin-top: 12mm;
+    padding: 8px 0 12px 0;
+    box-sizing: border-box;
+   
+">
+<!-- ================= LEFT DOCTOR ================= -->
+<div class="doctor-name-left" style="
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+    width: 130px;
+    text-align: left;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+
+    /* REMOVE OLD / DUPLICATE BORDER */
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+">
+    Dr. Alvin R. Rane.<br>
+    M.S. (Netrarog)
+
+    <!-- ONLY ONE 1px LINE -->
+    <div style="
+        width: 130px;
+        height: 1px !important;
+        min-height: 1px !important;
+        max-height: 1px !important;
+        margin-top: 12px;
+        padding: 0 !important;
+        border: 0 !important;
+        border-bottom: 0 !important;
+        background-color: #201f20 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        line-height: 0 !important;
+
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    "></div>
+</div>
+<!-- CENTER HOSPITAL -->
+<div style="
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0px;
+    text-align: center;
+">
+
+    <!-- Hospital Logo -->
+    <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+    ">
+        <img
+            src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png"
+            alt="Hospital Logo"
+            class="hospital-logo"
+            style="
+                width: 150px;
+                height: 100px;
+                object-fit: contain;
+                display: block;
+                margin: 0;
+                padding: 0;
+                margin-left: -20px;
+            "
+        >
+    </div>
+
+    <!-- Hospital Name + Address -->
+    <div class="hospital-info" style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+         transform: translateX(-10px);
+    ">
+
+        <div class="hospital-name" style="
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        ">
+            रविकल्प हॉस्पिटल
         </div>
-        
+
+        <div class="hospital-address" style="
+            text-align: center;
+            margin: 2px 0 0 0;
+            padding: 0;
+            line-height: 1.2;
+        ">
+            EYE & GENERAL HOSPITAL<br>
+            PHACO & LASER CENTER
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- ================= RIGHT DOCTOR ================= -->
+    <div 
+    id="doctorLabel" 
+    class="doctor-name-left" 
+    style=" 
+        position: absolute; 
+        right: 0; 
+        top: 0; 
+        margin-top: 70px; 
+        width: 140px; 
+        text-align: left; 
+        font-family: 'Helvetica Neue', sans-serif; 
+        font-size: 16px; 
+        font-weight: bold; 
+        color: #333; 
+        border-bottom: none !important; 
+        padding-bottom: 8px; 
+        box-sizing: border-box; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact; 
+    "
+> 
+    Dr. Selina A. Rane<br> 
+    M.D. (Ayu) 
+</div>
+
+
+    <!-- ================= NABH LOGO ================= -->
+    <img
+        src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
+        alt="NABH Pre-Accredited Logo"
+        class="nabh-logo"
+        style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 115px;
+            object-fit: contain;
+            z-index: 2;
+            display: block;
+        "
+    >
+
+</div>
+
+
 <!-- Address Section -->
 <div class="address-section">
     
