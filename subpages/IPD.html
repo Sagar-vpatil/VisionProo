@@ -942,27 +942,186 @@
 
     <div class="container">
         <!-- Letterhead -->
-        <div class="letterhead">
-            <!-- Left Corner - Doctor's Name -->
-            <div class="doctor-name-left" style="margin-top: 70px;">
-                Dr. Alvin R. Rane.<br> M.S. (Netrarog)<br>
-            </div>
-        
-            <!-- Hospital Logo and Info -->
-            <div style="margin-left: 125px;">
-                <img src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png" alt="Hospital Logo" class="hospital-logo">
-            </div>
-            <div class="hospital-info" style="margin-right: 192px; margin-bottom: 10px; margin-top: 10px;">
-                <div class="hospital-name">रविकल्प हॉस्पिटल</div>
-                <div class="hospital-address" style="margin-right: 0px;">EYE & GENERAL HOSPITAL<br>PHACO & LASER CENTER</div>
-            </div>
-        
-            <!-- Right Corner - Doctor's Name -->
-            <div class="doctor-name-right" style="margin-top: 70px;" id="doctorLabel">
-                Dr. Selina A. Rane <br> M.D. (Ayu)<br>
-            </div>
-            
+    <div class="letterhead" style="
+    position: relative;
+    width: 100%;
+    min-height: 125px;
+    display: grid;
+    grid-template-columns: 180px 1fr 180px;
+    align-items: center;
+    border-bottom: 2px solid #070a0d;
+    margin-top: 12mm;
+    padding: 8px 0 12px 0;
+    box-sizing: border-box;
+   
+">
+<!-- ================= LEFT DOCTOR ================= -->
+<div class="doctor-name-left" style="
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+    width: 130px;
+    text-align: left;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+
+    /* REMOVE OLD / DUPLICATE BORDER */
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+">
+    Dr. Alvin R. Rane.<br>
+    M.S. (Netrarog)
+
+    <!-- ONLY ONE 1px LINE -->
+    <div style="
+        width: 130px;
+        height: 1px !important;
+        min-height: 1px !important;
+        max-height: 1px !important;
+        margin-top: 12px;
+        padding: 0 !important;
+        border: 0 !important;
+        border-bottom: 0 !important;
+        background-color: #201f20 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        line-height: 0 !important;
+
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    "></div>
+</div>
+<!-- CENTER HOSPITAL -->
+<div style="
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0px;
+    text-align: center;
+">
+
+    <!-- Hospital Logo -->
+    <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin: 0;
+        padding: 0;
+    ">
+        <img
+            src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png"
+            alt="Hospital Logo"
+            class="hospital-logo"
+            style="
+                width: 150px;
+                height: 100px;
+                object-fit: contain;
+                display: block;
+                margin: 0;
+                padding: 0;
+                margin-left: -20px;
+            "
+        >
+    </div>
+
+    <!-- Hospital Name + Address -->
+    <div class="hospital-info" style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+         transform: translateX(-10px);
+    ">
+
+        <div class="hospital-name" style="
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        ">
+            रविकल्प हॉस्पिटल
         </div>
+
+        <div class="hospital-address" style="
+            text-align: center;
+            margin: 2px 0 0 0;
+            padding: 0;
+            line-height: 1.2;
+        ">
+            EYE & GENERAL HOSPITAL<br>
+            PHACO & LASER CENTER
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- ================= RIGHT DOCTOR ================= -->
+    <div 
+    id="doctorLabel" 
+    class="doctor-name-left" 
+    style=" 
+        position: absolute; 
+        right: 0; 
+        top: 0; 
+        margin-top: 70px; 
+        width: 140px; 
+        text-align: left; 
+        font-family: 'Helvetica Neue', sans-serif; 
+        font-size: 16px; 
+        font-weight: bold; 
+        color: #333; 
+        border-bottom: none !important; 
+        padding-bottom: 8px; 
+        box-sizing: border-box; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact; 
+    "
+> 
+    Dr. Selina A. Rane<br> 
+    M.D. (Ayu) 
+</div>
+
+
+    <!-- ================= NABH LOGO ================= -->
+    <img
+        src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
+        alt="NABH Pre-Accredited Logo"
+        class="nabh-logo"
+        style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 115px;
+            object-fit: contain;
+            z-index: 2;
+            display: block;
+        "
+    >
+
+</div>
+
+
+
+
         <div class="address-section">
     
             <p class="hospital-address-details" style="margin-top: 5px;" >
@@ -1146,42 +1305,42 @@
         </tr>
     </thead>
     <tbody>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">K1</td>
             <td id="RightK1" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftK1" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">K2</td>
             <td id="RightK2" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftK2" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">LT</td>
             <td id="RightLT" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftLT" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">AXL</td>
             <td id="RightAL" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftAL" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">ACD</td>
             <td id="RightACD" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftACD" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">L.Power</td>
             <td id="RightLPower" style="border: 1px solid #000; padding: 2px;">1</td>
             <td id="LeftLPower" style="border: 1px solid #000; padding: 2px;">1</td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">A.Constant</td>
             <td id="RightAConstant" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftAConstant" style="border: 1px solid #000; padding: 2px;"></td>
         </tr>
-        <tr style="height: 12px;">
+        <tr style="height: 10px;">
             <td style="border: 1px solid #000; padding: 2px;">IOL</td>
             <td id="RightIOL" style="border: 1px solid #000; padding: 2px;"></td>
             <td id="LeftIOL" style="border: 1px solid #000; padding: 2px;"></td>
@@ -1196,7 +1355,7 @@
 </div>
 
 
-<div style="display: flex; align-items: center; gap: 10px; margin: 5px 0;">
+<div style="display: flex; align-items: center; gap: 5px; margin: 5px 0;">
 
   <h4 style=" color: #004a99; padding: 5px 10px; 
   font-size: 18px; margin: 0;">
@@ -1309,8 +1468,8 @@ Eye Type of Surgery:
 
 
  <!-- IOL Sticker Section -->
- <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 150px; padding: 10px; display: flex; flex-direction: column;">
-    <strong style="text-align: center; margin-bottom: 10px;">ANAESTHESIA NOTES</strong>
+ <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 115px; padding: 10px; display: flex; flex-direction: column;">
+    <strong style="text-align: center; margin-bottom: 5px;">ANAESTHESIA NOTES</strong>
     <textarea style="flex-grow: 1; width: 100%; border: none; outline: none; resize: none; font-family: inherit; font-size: 14px; background: transparent;" 
            ></textarea>
 </div>
@@ -1368,20 +1527,20 @@ Eye Type of Surgery:
        
         <!-- IOL Sticker Section -->
         
-        <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 130px; margin-top: 10px;">IOL STICKER</div>
+        <div class="iol-sticker" style="width: 380px; margin: 0 auto; height: 80px; margin-top: 10px;">IOL STICKER</div>
 
 
 
 
          
-        <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 150px; margin-top: 20px; padding: 10px; display: flex; flex-direction: column;">
+        <div class="iol-sticker" style="width: 700px; margin: 0 auto; height: 130px; margin-top: 10px; padding: 10px; display: flex; flex-direction: column;">
             <strong style="text-align: center; margin-bottom: 10px;">Complication & Remark</strong>
             <textarea style="flex-grow: 1; width: 100%; border: none; outline: none; resize: none; font-family: inherit; font-size: 14px; background: transparent;" 
                      ></textarea>
         </div>
 
  <div class="footer" style="color: black;">
-  <div class="signature" style="margin-right: 30px;">
+  <div class="signature" style="margin-right: 30px; MARGIN-TOP: 0px;">
       <p> Ophthalmologist signature</p>
   </div>
 </div>
