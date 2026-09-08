@@ -1219,47 +1219,100 @@ document.addEventListener('keydown', async function (event) {
 
 
 async function restoreMedicalDB(dbName, restoredData) {
-  const request = indexedDB.open(dbName, 1);
+    return new Promise((resolve, reject) => {
 
-  request.onsuccess = function(event) {
-    const db = event.target.result;
+        const request = indexedDB.open(dbName, 1);
 
-    let storeName = '';
-    if (dbName === 'MedicalDB') {
-      storeName = 'OptionsStore';
-    } else if (dbName === 'medicalOptionsDB') {
-      storeName = 'optionsStore';
-    } else {
-      console.error('Unknown database:', dbName);
-      return;
-    }
+        request.onsuccess = function (event) {
+            const db = event.target.result;
 
-    const transaction = db.transaction(storeName, 'readwrite');
-    const store = transaction.objectStore(storeName);
-    const allRecords = store.getAll();
-    allRecords.onsuccess = function(event) {
-      const existingRecords = event.target.result;
-      const existingKeys = new Set(existingRecords.map(record => record.baseName)); // Assuming baseName is unique
+            let storeName = '';
 
-      for (const record of restoredData[storeName]) {
-        if (!existingKeys.has(record.baseName)) {
-          store.add(record);
-        }
-      }
-    };
-    transaction.oncomplete = function() {
-      console.log('Restoration complete!');
-    };
-    transaction.onerror = function(event) {
-      console.error('Transaction error:', event.target.error);
-    };
+            if (dbName === 'MedicalDB') {
+                storeName = 'OptionsStore';
+            } 
+            else if (dbName === 'medicalOptionsDB') {
+                storeName = 'optionsStore';
+            } 
+            else {
+                console.error('Unknown database:', dbName);
+                reject(new Error(`Unknown database: ${dbName}`));
+                return;
+            }
+
+            const transaction = db.transaction(storeName, 'readwrite');
+            const store = transaction.objectStore(storeName);
+
+            const allRecords = store.getAll();
+
+            allRecords.onsuccess = function (event) {
+
+                const existingRecords = event.target.result;
+
+                const existingKeys = new Set(
+                    existingRecords.map(record => record.baseName)
+                );
+
+                const records = restoredData[storeName] || [];
+
+                for (const record of records) {
+
+                    if (!existingKeys.has(record.baseName)) {
+                        store.add(record);
+                    }
+                }
+            };
+
+            allRecords.onerror = function (event) {
+                console.error(
+                    'Error getting existing records:',
+                    event.target.error
+                );
+
+                reject(event.target.error);
+            };
+
+            // IMPORTANT:
+            // This runs only after all store.add() operations
+            // in this transaction have completed.
+            transaction.oncomplete = function () {
+
+                console.log('Restoration complete!');
+
+                // Tell await restoreMedicalDB() that
+                // restoration is completely finished.
+                resolve();
+            };
+
+            transaction.onerror = function (event) {
+
+                console.error(
+                    'Transaction error:',
+                    event.target.error
+                );
+
+                reject(event.target.error);
+            };
+
+            transaction.onabort = function () {
+
+                console.error('Transaction aborted.');
+
+                reject(new Error('IndexedDB transaction was aborted.'));
+            };
+        };
+
+        request.onerror = function (event) {
+
+            console.error(
+                'Error opening IndexedDB:',
+                event.target.error
+            );
+
+            reject(event.target.error);
+        };
+    });
 }
-
-    request.onerror = function(event) {
-      console.error('Error opening IndexedDB:', event.target.error);
-    };
-  }
-
 
 
 // ================ Load Custom Examination Options Into Popup ================
