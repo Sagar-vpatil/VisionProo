@@ -19,6 +19,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
     checkInternet: () => navigator.onLine,
     saveIndexDbBackup: (backupJson, dbName) => ipcRenderer.invoke('save-indexdb-backup', backupJson, dbName),
     restoreIndexDbBackup: () => ipcRenderer.invoke('restore-indexdb-backup'),
+    viewBillPDF: (patientId, date, docName) =>
+    ipcRenderer.invoke('view-bill-pdf', patientId, date, docName),
+    deleteBillPDF: (patientId, date) =>
+        ipcRenderer.invoke("delete-bill-pdf", patientId, date)
 });
 
 // Inject the popup dynamically

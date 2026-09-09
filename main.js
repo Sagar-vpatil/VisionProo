@@ -138,6 +138,110 @@ function createMainWindow() {
         }
     });
 
+    ipcMain.handle('view-bill-pdf', async (event, patientId, date, docName) => {
+
+            try {
+
+                const baseDir = path.join(
+                    app.getPath('desktop'),
+                    'VisionProo'
+                );
+
+                const pdfPath = path.join(
+                    baseDir,
+                    patientId,
+                    date,
+                    `${docName}.pdf`
+                );
+
+                if (!fs.existsSync(pdfPath)) {
+                    return {
+                        success: false,
+                        error: "The PDF for this bill could not be found."
+                    };
+                }
+
+                const result = await shell.openPath(pdfPath);
+
+                if (result) {
+                    return {
+                        success: false,
+                        error: result
+                    };
+                }
+
+                return {
+                    success: true
+                };
+
+            } catch (error) {
+
+                console.error("Failed to open bill PDF:", error);
+
+                return {
+                    success: false,
+                    error: error.message
+                };
+            }
+        });
+
+    ipcMain.handle("delete-bill-pdf", async (event, patientId, date) => {
+
+            try {
+                const baseDir = path.join(
+                    app.getPath("desktop"),
+                    "VisionProo"
+                );
+
+                const pdfPatientId = `P${patientId}`;
+                const docName = `${pdfPatientId}_Bill_${date}`;
+
+                const patientDir = path.join(baseDir, pdfPatientId);
+                const dateDir = path.join(patientDir, date);
+                const pdfPath = path.join(dateDir, `${docName}.pdf`);
+
+                // PDF does not exist
+                if (!fs.existsSync(pdfPath)) {
+                    return {
+                        success: true,
+                        message: "PDF not found."
+                    };
+                }
+
+                // Delete PDF
+                fs.unlinkSync(pdfPath);
+
+                // Remove empty date folder
+                if (
+                    fs.existsSync(dateDir) &&
+                    fs.readdirSync(dateDir).length === 0
+                ) {
+                    fs.rmdirSync(dateDir);
+                }
+
+                // Remove empty patient folder
+                if (
+                    fs.existsSync(patientDir) &&
+                    fs.readdirSync(patientDir).length === 0
+                ) {
+                    fs.rmdirSync(patientDir);
+                }
+
+                return {
+                    success: true
+                };
+
+            } catch (error) {
+
+                console.error("Failed to delete bill PDF:", error);
+
+                return {
+                    success: false,
+                    error: error.message
+                };
+            }
+        });
+
         //  Get Patient PDF Records
     ipcMain.handle('get-patient-pdf-records', async (_, patientId) => {
         const visionProoPath = join(app.getPath('desktop'), 'VisionProo', patientId);

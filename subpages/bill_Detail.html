@@ -670,6 +670,7 @@
           <thead>
             <tr>
               <th>Patient ID</th>
+              <th>Bill No</th>
               <th>Patient Name</th>
               <th>Amount</th>
               <th>Date</th>
@@ -872,6 +873,7 @@
           allRecords.push({
             id: doc.id,
             patient_id: data.patient_id,
+            bill_no: data.bill_no || "—",
             patient_name: data.patient_name,
             amount: parseFloat(data.bill_amount.replace(/[^0-9.]/g, '')),
             date: date ? date.toISOString().split('T')[0] : '',
@@ -910,6 +912,7 @@
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${record.patient_id}</td>
+             <td>${record.bill_no}</td>
             <td>${record.patient_name}</td>
             <td class="amount-column">
               <!-- <button class="edit-btn" onclick="openEditModal('${record.id}')"><i class="fas fa-pencil-alt"></i></button> -->
@@ -917,7 +920,10 @@
             </td>
             <td>${formatDateForDisplay(record.rawDate)}</td>
             <td>
-              <button class="btn btn-danger btn-sm delete-btn" onclick="deleteRecord('${record.id}')">
+              <button class="btn btn-primary btn-sm" onclick="viewBill('${record.patient_id}', '${record.rawDate}')">
+                  <i class="fas fa-eye"></i> View
+              </button>
+              <button class="btn btn-danger btn-sm delete-btn" onclick="deleteRecord('${record.id}', '${record.patient_id}', '${record.rawDate}')">
                 <i class="fas fa-trash-alt"></i> Delete
               </button>
             </td>
@@ -935,26 +941,49 @@
     }
 
     // Delete record from Firestore
-    async function deleteRecord(recordId) {
-      const response = await window.electronAPI.showMessageBox(
+    async function deleteRecord(recordId, patientId, billDate) {
+    const response = await window.electronAPI.showMessageBox(
         "warning",
-        "Are you sure you want to delete this record?",
+        "Are you sure you want to delete this bill?",
         "Confirm Deletion",
         ["Yes", "No"]
-      );
-      if (response === 1) return;
+    );
 
-      try {
+    if (response === 1) return;
+
+    try {
         showLoading();
+
+        // Delete Firestore bill record
         await deleteDoc(doc(db, "billsRecords", recordId));
-        await fetchRecords();
-      } catch (error) {
-        console.error("Error deleting record: ", error);
-        window.electronAPI.showErrorBox("Error", "Failed to delete record from Firestore. Please check console for details.");
-      } finally {
+
+        // Delete corresponding bill PDF
+        const pdfResult = await window.electronAPI.deleteBillPDF(
+            patientId,
+            billDate
+        );
+
+        if (!pdfResult?.success) {
+            console.warn(
+                "Bill record deleted, but PDF could not be deleted:",
+                pdfResult?.error
+            );
+        }
+
+        // await fetchRecords();
+
+    } catch (error) {
+        console.error("Error deleting bill:", error);
+
+        await window.electronAPI.showErrorBox(
+            "Error",
+            `Failed to delete bill. ${error.message}`
+        );
+
+    } finally {
         hideLoading();
-      }
     }
+}
 
     // Open edit modal
     function openEditModal(recordId) {
@@ -979,6 +1008,7 @@
         const matchesSearch = searchTerm === '' ||
           record.patient_id.toLowerCase().includes(searchTerm) ||
           record.patient_name.toLowerCase().includes(searchTerm) ||
+          record.bill_no.toLowerCase().includes(searchTerm) ||
           `Rs. ${formatAmount(record.amount)}`.toLowerCase().includes(searchTerm);
         
         if (!matchesSearch) return false;
@@ -1014,6 +1044,29 @@
       currentPage = 1;
       renderTable();
     }
+
+    // Function to view bill PDF
+    async function viewBill(patientId, rawDate) {
+
+        const date = rawDate;
+        const pdfPatientId = `P${patientId}`;
+        const docName = `${pdfPatientId}_Bill_${date}`;
+
+        const result = await window.electronAPI.viewBillPDF(
+            pdfPatientId,
+            date,
+            docName
+        );
+
+        if (!result.success) {
+            await window.electronAPI.showErrorBox(
+                "View Bill Error",
+                result.error
+            );
+        }
+    }
+
+    window.viewBill = viewBill;
 
     // Initialize and set up event listeners
     document.addEventListener('DOMContentLoaded', function() {
