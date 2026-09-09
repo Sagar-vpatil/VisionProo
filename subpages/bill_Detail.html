@@ -16,46 +16,67 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" onerror="alert('Failed to load jsPDF AutoTable. Please check your internet connection.');"></script>
   <style>
     /* Side Navbar Styles */
+
     .side-navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 250px;
-      background-color: #343a40;
-      color: #fff;
-      padding-top: 20px;
-      transition: all 0.3s;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        background-color: #0F172A;
+        color: #FFFFFF;
+        padding-top: 20px;
+        transition: all 0.3s;
     }
-    
+
     .side-navbar.active-nav {
-      left: -250px;
+        left: -250px;
     }
-    
+
     .side-navbar .nav-item {
-      margin-bottom: 15px;
+        margin-bottom: 15px;
     }
-    
+
+    /* Normal Menu Item */
+
     .side-navbar .nav-link {
-      color: #fff;
-      text-decoration: none;
+        color: #CBD5E1;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent;
     }
-    
+
     .side-navbar .nav-link:hover {
-      color: #ff6700;
+        background-color: #1E293B;
+        color: #FFFFFF;
     }
-    
+
+    .side-navbar .nav-link.active {
+        background-color: #1E293B;
+        color: #FFFFFF;
+        border-left-color: #14B8A6;
+    }
+
+
+
     /* New Appointment Button */
+
     .side-navbar .btn {
-      background-color: #ff6700;
-      color: white;
-      border: none;
-      transition: background-color 0.3s ease;
+        background-color: #2563EB;
+        color: #FFFFFF;
+        border: none;
+        transition: background-color 0.3s ease;
     }
-    
+
+    /* Button Hover */
+
     .side-navbar .btn:hover {
-      background-color: #e05b00;
+        background-color: #1D4ED8;
+        color: #FFFFFF;
     }
+
     
     /* Search Bar */
     #search-bar {
@@ -558,7 +579,7 @@
           style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
           Update Patient Detail
         </a>
-        <a href="./bill_Detail.html" class="nav-link text-white w-80 text-left"
+        <a href="./bill_Detail.html" class="nav-link active text-white w-80 text-left"
           style="font-size: 16px; font-weight: 500; padding: 10px 15px; transition: background-color 0.3s;">
           Patient Bill Detail
         </a>
