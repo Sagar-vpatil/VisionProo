@@ -585,6 +585,151 @@
 
 
 
+
+    /* =========================================================
+   FINAL PRINT FIX - TOP GAP + PATIENT DETAILS ALIGNMENT
+   ========================================================= */
+
+@media print {
+
+    /* A4 print setup */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+    }
+
+    /* Main A4 page */
+    .page {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        height: auto !important;
+
+        margin: 0 !important;
+
+        /* TOP GAP कमी */
+        padding: 4mm 7mm 5mm 7mm !important;
+
+        box-sizing: border-box !important;
+
+        box-shadow: none !important;
+    }
+
+    /* =====================================================
+       LETTERHEAD
+       ===================================================== */
+
+    .letterhead {
+        margin-top: 10px !important;
+        padding-top: 0 !important;
+        padding-bottom: 6px !important;
+
+        min-height: 115px !important;
+
+        width: 100% !important;
+
+        box-sizing: border-box !important;
+    }
+
+    /* Left doctor */
+    .doctor-name-left {
+        left: 0 !important;
+        top: 5px !important;
+
+        width: 130px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Right doctor */
+    #doctorLabel {
+        right: 0 !important;
+        top: 62px !important;
+
+        width: 140px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        border: none !important;
+    }
+
+    /* NABH logo */
+    .nabh-logo {
+        top: -3px !important;
+        right: 0 !important;
+
+        width: 105px !important;
+        height: 95px !important;
+
+        object-fit: contain !important;
+    }
+
+    /* Hospital center */
+    .hospital-info {
+        margin: 0 !important;
+        padding: 0 !important;
+
+        transform: none !important;
+
+        text-align: center !important;
+    }
+
+    .hospital-name {
+        font-size: 30px !important;
+        line-height: 1.15 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+
+        white-space: nowrap !important;
+        text-align: center !important;
+    }
+
+    .hospital-address {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+        margin: 2px 0 0 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* Mobile No */
+    #patient-mobile {
+        display: inline-block !important;
+
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+    }
+
+   
+
+}
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -689,7 +834,7 @@
                 display: block;
                 margin: 0;
                 padding: 0;
-                margin-left: -10px;
+                margin-left: -20px;
             "
         >
     </div>
@@ -816,7 +961,7 @@
     <div class="row">
         <span class="label" data-insurance >Insurance:</span>
         <span class="value">
-            <input type="text" class="insurance-input" placeholder="Enter Insurance Company" id="insuranceInput" style="width: 190px;">
+            <input type="text" class="insurance-input" placeholder="Enter Insurance Company" id="insuranceInput" style="width: 190px; margin-top: -30px;">
         </span>
         <span class="label" data-insurance style="margin-left: 65px;">Policy No:</span>
         <span class="value">
@@ -825,9 +970,9 @@
     </div>
    
 </div>
-        <hr style="border: 1px solid #070a0d;">
-        <div class="final-bill-heading">FINAL BILL</div>
-        <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left;">
+        <hr style="border: 1px solid #070a0d; margin-top: -20px; ">
+        <div class="final-bill-heading" style="margin-top: -2px;">FINAL BILL</div>
+        <table id="invoiceTable" style="width: 630px; margin-left: 80px; border: 2px solid black; border-collapse: collapse; text-align: left; margin-top: -15px;">
     <thead>
         <tr style="border: 2px solid black; background-color: #f2f2f2;">
             <th style="border: 2px solid black; padding: 10px;">NO</th>
@@ -953,11 +1098,11 @@
 </table>
         <button class="add-row-btn" onclick="addNewRow()">+ Add New Item</button>
         <div class="footer" style="color: black;">
-    <div class="signature-container">
-        <div class="signature signature-left" style="margin-left: 90px;">
+    <div class="signature-container" >
+        <div class="signature signature-left" style="margin-left: 90px; Margin-top: -20px;">
              <p>Patient / Relative</p>
         </div>
-        <div class="signature signature-right" style="margin-right: 90px;">
+        <div class="signature signature-right" style="margin-right: 90px; Margin-top: -20px;">
          
              <p>Ophthalmologist Signature
 </p>

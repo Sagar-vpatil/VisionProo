@@ -918,6 +918,146 @@
     }
 
 
+
+
+       /* =========================================================
+   FINAL PRINT FIX - TOP GAP + PATIENT DETAILS ALIGNMENT
+   ========================================================= */
+
+@media print {
+
+    /* A4 print setup */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+    }
+
+    /* Main A4 page */
+    .page {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        height: auto !important;
+
+        margin: 0 !important;
+
+        /* TOP GAP कमी */
+        padding: 4mm 7mm 5mm 7mm !important;
+
+        box-sizing: border-box !important;
+
+        box-shadow: none !important;
+    }
+
+    /* =====================================================
+       LETTERHEAD
+       ===================================================== */
+
+    .letterhead {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 6px !important;
+
+        min-height: 115px !important;
+
+        width: 100% !important;
+
+        box-sizing: border-box !important;
+    }
+
+    /* Left doctor */
+    .doctor-name-left {
+        left: 0 !important;
+        top: 5px !important;
+
+        width: 130px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Right doctor */
+    #doctorLabel {
+        right: 0 !important;
+        top: 62px !important;
+
+        width: 140px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        border: none !important;
+    }
+
+    /* NABH logo */
+    .nabh-logo {
+        top: -3px !important;
+        right: 0 !important;
+
+        width: 105px !important;
+        height: 95px !important;
+
+        object-fit: contain !important;
+    }
+
+    /* Hospital center */
+    .hospital-info {
+        margin: 0 !important;
+        padding: 0 !important;
+
+        transform: none !important;
+
+        text-align: center !important;
+    }
+
+    .hospital-name {
+        font-size: 30px !important;
+        line-height: 1.15 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+
+        white-space: nowrap !important;
+        text-align: center !important;
+    }
+
+    .hospital-address {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+        margin: 2px 0 0 0 !important;
+        padding: 0 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* Mobile No */
+    #patient-mobile {
+        display: inline-block !important;
+
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+    }
+
+   
+
+}
+
+
     </style>
 </head>
 <body>
@@ -1540,8 +1680,8 @@ Eye Type of Surgery:
         </div>
 
  <div class="footer" style="color: black;">
-  <div class="signature" style="margin-right: 30px; MARGIN-TOP: 0px;">
-      <p> Ophthalmologist signature</p>
+  <div class="signature" style="margin-right: 30px; MARGIN-TOP: -10px;">
+      <p style="margin-top: -10px;"> Ophthalmologist signature</p>
   </div>
 </div>
     
