@@ -943,7 +943,7 @@
 <span class="value" id="currentDate">
     <input type="text" id="dateInput" placeholder="DD/MM/YYYY" onchange="updateDate()">
 </span>
-    <span class="label" style="margin-left: 119px;">Receipt No:</span>
+    <span class="label" style="margin-left: 85px;">Bill No:</span>
         <span class="value" id="bill-id">123456</span>
     </div>
     <div class="row" style="margin-left: 20px;">
@@ -1118,9 +1118,7 @@ document.getElementById("patient-id").textContent = appointment.id || "N/A";
 document.getElementById("patient-name").textContent = appointment.Name || "N/A";
 document.getElementById("patient-mobile").textContent = appointment.MobileNo || "N/A";
 document.getElementById("patient-gender").textContent = appointment.Gender || "N/A";
-document.getElementById("bill-id").textContent = appointment?.id
-  ? `${Math.floor(100 + Math.random() * 900)}${appointment.id.replace(/\D/g, "")}`
-  : "N/A";
+document.getElementById("bill-id").textContent = "N/A";
 
 
 
@@ -1416,8 +1414,11 @@ function printInvoice() {
     // Trigger print
     if (window.electronAPI && window.electronAPI.printPage) {
         saveRecordToFirebase(appointment.id, appointment.Name, date)
-        .then(() => {
-            // Only runs if save is successful
+        .then((billNo) => {
+            // Display the final Bill No before printing
+            document.getElementById("bill-id").textContent = billNo;
+
+            // Print only after the bill is successfully saved
             window.electronAPI.printPage(patientId, date, Docname);
         })
         .catch((error) => {
@@ -1446,32 +1447,97 @@ initializeInputFields();
 
 <script type="module">
 // Your module script
-  import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc } from "../backend/firebaseConfig.js";
+  import { db, collection, addDoc, getDocs, query, orderBy, limit, setDoc, doc, where, getDoc, runTransaction} from "../backend/firebaseConfig.js";
 
   console.log("Firebase initialized");
 
- async function saveRecordToFirebase(patientId, patientName, formattedDate) {
+  async function saveRecordToFirebase(patientId, patientName, formattedDate) {
+
     const totalElement = document.querySelector(".total");
     const totalAmount = totalElement?.dataset?.value || "₹ 0";
 
-    // Convert date from DD/MM/YYYY to DDMMYYYY
-    const dateCleaned = formattedDate.replace(/\D/g, ''); // removes all non-digit characters
-    const customDocId = "B" + patientId + dateCleaned; // e.g., BA000116062025
+    const cleanPatientId = patientId.toString().trim();
 
-    // Save to Firestore with custom doc ID
-    await setDoc(doc(db, "billsRecords", customDocId), {
-      patient_id: patientId,
-      patient_name: patientName,
-      date: formattedDate,
-      bill_amount: totalAmount
+    // formattedDate: DD-MM-YYYY
+    const [day, month, year] = formattedDate.split("-");
+
+    if (!day || !month || !year || !/^\d{4}$/.test(year)) {
+        throw new Error("Invalid bill date.");
+    }
+
+    // Create unique document ID using patient ID and bill date
+    const dateCleaned = `${day}${month}${year}`;
+    const billDocumentId = `B${cleanPatientId}${dateCleaned}`;
+
+    const billRef = doc(db, "billsRecords", billDocumentId);
+
+    // Single continuous Bill Number counter
+    const counterRef = doc(db, "billCounters", "counterNo");
+
+    const billNo = await runTransaction(db, async (transaction) => {
+
+        // Check whether a bill already exists for this patient and date
+        const existingBill = await transaction.get(billRef);
+
+        if (existingBill.exists()) {
+
+            const existingData = existingBill.data();
+
+            // Keep the existing Bill No
+            if (existingData.bill_no) {
+
+                transaction.update(billRef, {
+                    patient_id: cleanPatientId,
+                    patient_name: patientName,
+                    date: formattedDate,
+                    bill_amount: totalAmount
+                });
+
+                return existingData.bill_no;
+            }
+        }
+
+        // Get the current Bill Number sequence
+        const counterSnapshot = await transaction.get(counterRef);
+
+        let nextNumber = 1;
+
+        if (counterSnapshot.exists()) {
+            nextNumber =
+                Number(counterSnapshot.data().last_number || 0) + 1;
+        }
+
+        // Bill No: B + Year + 3-digit sequence
+        // Example: B2026001
+        const generatedBillNo =
+            `B${year}${String(nextNumber).padStart(3, "0")}`;
+
+        // Update the continuous counter
+        transaction.set(counterRef, {
+            last_number: nextNumber
+        });
+
+        // Save new bill
+        transaction.set(billRef, {
+            bill_no: generatedBillNo,
+            patient_id: cleanPatientId,
+            patient_name: patientName,
+            date: formattedDate,
+            bill_amount: totalAmount
+        });
+
+        return generatedBillNo;
     });
 
-    console.log("Bill saved with ID:", customDocId);
-  
+    // Display the final Bill No
+    document.getElementById("bill-id").textContent = billNo;
+
+    console.log("Bill saved/updated:", billNo);
+
+    return billNo;
 }
 
-  // Expose to global scope
-  window.saveRecordToFirebase = saveRecordToFirebase;
+window.saveRecordToFirebase = saveRecordToFirebase;
 </script>
 
 
