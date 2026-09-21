@@ -518,11 +518,98 @@
 
 }
 
+
+/* =========================================================
+   NAVBAR - SCREEN ONLY
+   ========================================================= */
+
+.navbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo-selector {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+}
+
+.logo-selector label {
+    margin: 0 !important;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1;
+}
+
+.logo-selector select {
+    min-width: 170px;
+    height: 36px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+}
+
+.navbar .buttons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+.navbar .buttons button {
+    height: 36px;
+    padding: 8px 16px;
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   PRINT - HIDE NAVBAR COMPLETELY
+   ========================================================= */
+
+@media print {
+
+    .navbar {
+        display: none !important;
+    }
+
+    .logo-selector {
+        display: none !important;
+    }
+
+    .navbar .buttons {
+        display: none !important;
+    }
+
+}
+
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div style="display: flex; align-items: center;"></div>
+        <!-- NABH LOGO SHOW / HIDE -->
+        <div class="logo-selector no-print">
+            <label for="logoSelect">NABH Logo:</label>
+            <select id="logoSelect" aria-label="NABH Logo visibility">
+                <option value="show">Show NABH Logo</option>
+                <option value="hide">Hide NABH Logo</option>
+            </select>
+        </div>
+
         <div class="buttons" style="margin-bottom: 10px;">
             <button onclick="window.location.href='./main.html';">🏠 Home</button>
             <button onclick="printFunction()">🖨️ Print Discharge Card</button>
@@ -695,6 +782,7 @@
     <img
         src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
         alt="NABH Pre-Accredited Logo"
+        id="selectedPrintLogo"
         class="nabh-logo"
         style="
             position: absolute;
@@ -1301,6 +1389,63 @@ window.onload = function () {
 
 
 </script>
+
+
+
+    <!-- =========================================================
+         NABH LOGO SHOW / HIDE FUNCTION
+         ========================================================= -->
+    <script>
+    (function () {
+        const STORAGE_KEY = "nabhLogoSetting";
+
+        function initNabhLogoSelector() {
+            const logoSelect = document.getElementById("logoSelect");
+            const nabhLogo = document.getElementById("selectedPrintLogo");
+
+            if (!logoSelect || !nabhLogo) {
+                console.error("NABH Logo selector or logo image not found.");
+                return;
+            }
+
+            // Restore previous selection
+            const savedSetting = localStorage.getItem(STORAGE_KEY);
+            logoSelect.value = savedSetting === "hide" ? "hide" : "show";
+
+            function updateNabhLogo() {
+                const hideLogo = logoSelect.value === "hide";
+
+                if (hideLogo) {
+                    nabhLogo.classList.add("nabh-logo-hidden");
+                    nabhLogo.style.setProperty("display", "none", "important");
+                    nabhLogo.style.setProperty("visibility", "hidden", "important");
+                    localStorage.setItem(STORAGE_KEY, "hide");
+                } else {
+                    nabhLogo.classList.remove("nabh-logo-hidden");
+                    nabhLogo.style.setProperty("display", "block", "important");
+                    nabhLogo.style.setProperty("visibility", "visible", "important");
+                    localStorage.setItem(STORAGE_KEY, "show");
+                }
+            }
+
+            // Change event
+            logoSelect.addEventListener("change", updateNabhLogo);
+
+            // Apply saved/default state immediately
+            updateNabhLogo();
+
+            // Make sure print uses the current selection
+            window.addEventListener("beforeprint", updateNabhLogo);
+        }
+
+        // IMPORTANT: correct function name here
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initNabhLogoSelector);
+        } else {
+            initNabhLogoSelector();
+        }
+    })();
+    </script>
 
 </body>
 </html>

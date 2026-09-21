@@ -728,19 +728,150 @@
 
 
 
+/* =========================================================
+   NABH LOGO SHOW / HIDE
+   ========================================================= */
 
+.logo-selector {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+}
+
+.logo-selector label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 !important;
+    white-space: nowrap;
+}
+
+.logo-selector select {
+    width: 190px;
+    height: 36px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+}
+
+.logo-selector select:focus {
+    border-color: #555;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+/* Hidden NABH logo */
+#selectedPrintLogo.nabh-logo-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* =========================================================
+   NAVBAR ALIGNMENT - SCREEN ONLY
+   ========================================================= */
+
+.navbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.navbar .logo-selector {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.navbar .buttons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+.navbar .buttons button {
+    height: 36px;
+    padding: 8px 16px;
+    margin: 0 !important;
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+    /* Hide controls from printed invoice */
+    .navbar,
+    .logo-selector,
+    .buttons,
+    .hr {
+        display: none !important;
+    }
+
+    /* Hide NABH logo when user selected Hide */
+    #selectedPrintLogo.nabh-logo-hidden {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+}
 
     </style>
 </head>
 <body>
+    
     <nav class="navbar" style="height: 50px;">
-        <div style="display: flex; align-items: center;"></div>
-        <div class="buttons" style="margin-bottom: 10px;">
-            <button onclick="window.location.href='./main.html';">🏠 Home</button>
-            <button onclick="printInvoice()" id="printInvoice">🖨️ Print Invoice</button>
-        </div>
-    </nav>
-    <hr class="hr">
+
+    <!-- NABH LOGO SELECTOR -->
+    <div class="logo-selector no-print">
+
+        <label for="logoSelect">
+            NABH Logo:
+        </label>
+
+        <select id="logoSelect" aria-label="NABH Logo visibility">
+
+            <option value="show">
+                Show NABH Logo
+            </option>
+
+            <option value="hide">
+                Hide NABH Logo
+            </option>
+
+        </select>
+
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="buttons">
+
+        <button onclick="window.location.href='./main.html';">
+            🏠 Home
+        </button>
+
+        <button
+            onclick="printInvoice()"
+            id="printInvoice">
+            🖨️ Print Invoice
+        </button>
+
+    </div>
+
+</nav>
+
+<hr class="hr">
 
 
     <div class="invoice-container">
@@ -904,22 +1035,22 @@
 
 
     <!-- ================= NABH LOGO ================= -->
-    <img
-        src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
-        alt="NABH Pre-Accredited Logo"
-        class="nabh-logo"
-        style="
-            position: absolute;
-            top: 0;
-            right: 16px;
-            width: 120px;
-            height: 115px;
-            object-fit: contain;
-            z-index: 2;
-       
-           
-        "
-    >
+<img 
+    id="selectedPrintLogo"
+    src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png" 
+    alt="NABH Pre-Accredited Logo" 
+    class="nabh-logo" 
+    style="
+        position: absolute; 
+        top: 0; 
+        right: 16px; 
+        width: 120px; 
+        height: 115px; 
+        object-fit: contain; 
+        z-index: 2; 
+        display: block;
+    "
+>
 
 </div>
 
@@ -1608,7 +1739,140 @@ window.onload = function () {
 </script>
 
 
+<script>
+(function () {
 
+    const STORAGE_KEY = "nabhLogoSetting";
+
+    function initNabhLogoSelector() {
+
+        const logoSelect =
+            document.getElementById("logoSelect");
+
+        const nabhLogo =
+            document.getElementById("selectedPrintLogo");
+
+        if (!logoSelect || !nabhLogo) {
+
+            console.error(
+                "NABH Logo selector or logo image not found."
+            );
+
+            return;
+        }
+
+        /* Get previously saved setting */
+        const savedSetting =
+            localStorage.getItem(STORAGE_KEY);
+
+        /*
+         * Default = SHOW
+         * If previously selected Hide,
+         * restore Hide.
+         */
+        logoSelect.value =
+            savedSetting === "hide"
+                ? "hide"
+                : "show";
+
+
+        function updateNabhLogo() {
+
+            const hideLogo =
+                logoSelect.value === "hide";
+
+
+            if (hideLogo) {
+
+                nabhLogo.classList.add(
+                    "nabh-logo-hidden"
+                );
+
+                nabhLogo.style.setProperty(
+                    "display",
+                    "none",
+                    "important"
+                );
+
+                nabhLogo.style.setProperty(
+                    "visibility",
+                    "hidden",
+                    "important"
+                );
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    "hide"
+                );
+
+            } else {
+
+                nabhLogo.classList.remove(
+                    "nabh-logo-hidden"
+                );
+
+                nabhLogo.style.setProperty(
+                    "display",
+                    "block",
+                    "important"
+                );
+
+                nabhLogo.style.setProperty(
+                    "visibility",
+                    "visible",
+                    "important"
+                );
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    "show"
+                );
+            }
+        }
+
+
+        /* When dropdown changes */
+        logoSelect.addEventListener(
+            "change",
+            updateNabhLogo
+        );
+
+
+        /* Apply saved setting */
+        updateNabhLogo();
+
+
+        /*
+         * Make sure the correct logo state
+         * is applied immediately before printing.
+         */
+        window.addEventListener(
+            "beforeprint",
+            updateNabhLogo
+        );
+
+    }
+
+
+    /*
+     * Safe initialization.
+     * Does not depend on window.onload.
+     */
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initNabhLogoSelector
+        );
+
+    } else {
+
+        initNabhLogoSelector();
+
+    }
+
+})();
+</script>
 
 </body>
 </html>

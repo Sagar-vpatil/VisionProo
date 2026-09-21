@@ -509,8 +509,8 @@
     }
 
     .hospital-info {
-        text-align: center !important;
-        margin-right: 26% !important;
+       
+        margin-right: 30% !important;
         margin-bottom: 10px !important;
     }
 
@@ -827,7 +827,7 @@
     }
 
     .hospital-name {
-        font-size: 30px !important;
+        font-size: 35px !important;
         line-height: 1.15 !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -874,17 +874,740 @@
         break-inside: avoid !important;
     }
 }
-    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* NABH LOGO SELECTOR */
+.nabh-logo-hidden {
+    display: none !important;
+}
+
+@media print {
+
+    /* Show NABH logo normally */
+    #selectedPrintLogo {
+        display: block !important;
+        position: absolute !important;
+        top: -3px !important;
+        right: 0 !important;
+        width: 105px !important;
+        height: 95px !important;
+        object-fit: contain !important;
+        z-index: 10 !important;
+    }
+
+    /* Hide NABH logo when user selects Hide */
+    #selectedPrintLogo.nabh-logo-hidden {
+        display: none !important;
+    }
+
+    /* Hide selector/buttons from print */
+    .logo-selector,
+    .navbar,
+    .buttons {
+        display: none !important;
+    }
+}
+    
+/* HOSPITAL LOGO - PERMANENT */
+.hospital-logo {
+    width: 160px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+}
+
+@media print {
+    .hospital-logo {
+        display: block !important;
+        width: 160px !important;
+        height: 110px !important;
+        object-fit: contain !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   FINAL HOSPITAL LETTERHEAD ALIGNMENT
+   SCREEN + A4 PRINT
+   ========================================================= */
+
+/* Main letterhead */
+.letterhead {
+    position: relative !important;
+
+    width: 100% !important;
+    height: 125px !important;
+    min-height: 125px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    border-bottom: 2px solid #070a0d !important;
+}
+
+
+/* =========================================================
+   CENTER HOSPITAL BLOCK
+   ========================================================= */
+
+.letterhead .hospital-center {
+    position: absolute !important;
+
+    left: 50% !important;
+    top: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    width: max-content !important;
+    max-width: 650px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    gap: 12px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   HOSPITAL LOGO
+   ========================================================= */
+
+.letterhead .hospital-main-logo {
+    width: 150px !important;
+    height: 105px !important;
+
+    object-fit: contain !important;
+
+    display: block !important;
+
+    flex-shrink: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* =========================================================
+   HOSPITAL NAME + SUB HEADING
+   ========================================================= */
+
+.letterhead .hospital-info-fixed {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* Hospital name */
+.letterhead .hospital-name-fixed {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+
+    font-family: "Helvetica Neue", Arial, sans-serif !important;
+
+    font-size: 32px !important;
+
+    font-weight: 700 !important;
+
+    color: red !important;
+
+    letter-spacing: 1px !important;
+
+    line-height: 1.15 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* EYE & GENERAL HOSPITAL */
+.letterhead .hospital-subheading-fixed {
+    margin: 3px 0 0 0 !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+
+    font-family: Arial, sans-serif !important;
+
+    font-size: 17px !important;
+
+    font-weight: 500 !important;
+
+    color: #333 !important;
+
+    line-height: 1.25 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* =========================================================
+   LEFT DOCTOR
+   ========================================================= */
+
+.letterhead .doctor-left-fixed {
+    position: absolute !important;
+
+    left: 0 !important;
+    top: 8px !important;
+
+    width: 145px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    text-align: left !important;
+
+    font-family: "Helvetica Neue", Arial, sans-serif !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    color: #333 !important;
+
+    line-height: 1.4 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* Doctor left underline */
+.letterhead .doctor-left-line {
+    width: 130px !important;
+
+    height: 1px !important;
+
+    margin-top: 10px !important;
+
+    background: #222 !important;
+
+    border: none !important;
+
+    display: block !important;
+}
+
+
+/* =========================================================
+   RIGHT DOCTOR
+   ========================================================= */
+
+.letterhead .doctor-right-fixed {
+    position: absolute !important;
+
+    right: 0 !important;
+    top: 65px !important;
+
+    width: 150px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    text-align: left !important;
+
+    font-family: "Helvetica Neue", Arial, sans-serif !important;
+
+    font-size: 15px !important;
+
+    font-weight: 600 !important;
+
+    color: #333 !important;
+
+    line-height: 1.4 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   NABH LOGO
+   ========================================================= */
+
+.letterhead #selectedPrintLogo {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+
+    width: 105px !important;
+    height: 95px !important;
+
+    object-fit: contain !important;
+
+    display: block !important;
+
+    z-index: 20 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Hide NABH logo */
+.letterhead #selectedPrintLogo.nabh-logo-hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ADDRESS
+   ========================================================= */
+
+.address-section {
+    width: 100% !important;
+
+    margin: 5px 0 0 0 !important;
+
+    padding: 0 !important;
+
+    box-sizing: border-box !important;
+}
+
+.hospital-address-details {
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 3px 0 !important;
+
+    text-align: center !important;
+
+    font-size: 15px !important;
+
+    color: #111 !important;
+
+    font-weight: bold !important;
+
+    line-height: 1.5 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   A4 PRINT
+   ========================================================= */
+
+@media print {
+
+    @page {
+        size: A4 portrait !important;
+        margin: 0 !important;
+    }
+
+    html,
+    body {
+        width: 210mm !important;
+        min-height: 297mm !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    .page {
+        width: 210mm !important;
+        min-height: 297mm !important;
+
+        margin: 0 !important;
+
+        padding: 5mm 7mm 5mm 7mm !important;
+
+        box-sizing: border-box !important;
+
+        box-shadow: none !important;
+    }
+
+
+    /* ===============================
+       LETTERHEAD PRINT
+       =============================== */
+
+    .letterhead {
+        position: relative !important;
+
+        width: 100% !important;
+        height: 125px !important;
+        min-height: 125px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        border-bottom: 2px solid #070a0d !important;
+
+        box-sizing: border-box !important;
+
+        overflow: visible !important;
+    }
+
+
+    /* ===============================
+       CENTER HOSPITAL PRINT
+       =============================== */
+
+    .letterhead .hospital-center {
+        position: absolute !important;
+
+        left: 50% !important;
+        top: 50% !important;
+
+        transform: translate(-50%, -50%) !important;
+
+        display: flex !important;
+
+        flex-direction: row !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: max-content !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        gap: 12px !important;
+
+        text-align: center !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* Hospital logo */
+    .letterhead .hospital-main-logo {
+        width: 150px !important;
+        height: 105px !important;
+
+        object-fit: contain !important;
+
+        display: block !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        flex-shrink: 0 !important;
+    }
+
+
+    /* Hospital information */
+    .letterhead .hospital-info-fixed {
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        text-align: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        transform: none !important;
+
+        line-height: 1 !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    /* रविकल्प हॉस्पिटल */
+    .letterhead .hospital-name-fixed {
+        font-size: 32px !important;
+
+        line-height: 1.15 !important;
+
+        text-align: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: red !important;
+
+        font-weight: 700 !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    /* EYE & GENERAL HOSPITAL */
+    .letterhead .hospital-subheading-fixed {
+        font-size: 17px !important;
+
+        line-height: 1.25 !important;
+
+        text-align: center !important;
+
+        margin: 3px 0 0 0 !important;
+        padding: 0 !important;
+
+        white-space: nowrap !important;
+
+        color: #333 !important;
+    }
+
+
+    /* ===============================
+       LEFT DOCTOR PRINT
+       =============================== */
+
+    .letterhead .doctor-left-fixed {
+        position: absolute !important;
+
+        left: 0 !important;
+        top: 8px !important;
+
+        width: 145px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        font-size: 15px !important;
+
+        line-height: 1.4 !important;
+
+        font-weight: 600 !important;
+
+        color: #333 !important;
+    }
+
+
+    .letterhead .doctor-left-line {
+        width: 130px !important;
+
+        height: 1px !important;
+
+        margin-top: 10px !important;
+
+        background: #222 !important;
+
+        display: block !important;
+    }
+
+
+    /* ===============================
+       RIGHT DOCTOR PRINT
+       =============================== */
+
+    .letterhead .doctor-right-fixed {
+        position: absolute !important;
+
+        right: 0 !important;
+        top: 65px !important;
+
+        width: 150px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        text-align: left !important;
+
+        font-size: 15px !important;
+
+        line-height: 1.4 !important;
+
+        font-weight: 600 !important;
+
+        color: #333 !important;
+    }
+
+
+    /* ===============================
+       NABH LOGO PRINT
+       =============================== */
+
+    .letterhead #selectedPrintLogo {
+        position: absolute !important;
+
+        top: 0 !important;
+        right: 0 !important;
+
+        width: 105px !important;
+        height: 95px !important;
+
+        object-fit: contain !important;
+
+        display: block !important;
+
+        z-index: 50 !important;
+    }
+
+
+    .letterhead #selectedPrintLogo.nabh-logo-hidden {
+        display: none !important;
+    }
+
+
+    /* ===============================
+       ADDRESS PRINT
+       =============================== */
+
+    .address-section {
+        width: 100% !important;
+
+        margin: 5px 0 0 0 !important;
+
+        padding: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+    .hospital-address-details {
+        width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 3px 0 !important;
+
+        text-align: center !important;
+
+        font-size: 15px !important;
+
+        line-height: 1.5 !important;
+
+        box-sizing: border-box !important;
+
+        page-break-inside: avoid !important;
+
+        break-inside: avoid !important;
+    }
+
+
+    /* Hide screen controls */
+    .navbar,
+    .print-btn,
+    .buttons,
+    .logo-selector,
+    .hr {
+        display: none !important;
+    }
+}
+
+
+
+/* NABH Logo Selector - Simple */
+.logo-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+    margin-right: 30px;}
+
+.logo-selector label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.logo-selector select {
+    width: 200px;
+    height: 34px;
+    padding: 5px 10px;
+
+    font-size: 14px;
+    color: #333;
+
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+
+    box-sizing: border-box;
+    outline: none;
+}
+
+.logo-selector select:focus {
+    border-color: #555;
+}
+
+</style>
 </head>
 <body>
 
  <!-- Top Navigation Bar -->
- <nav class="navbar">
+<nav class="navbar">
+
+    <!-- LOGO SELECTOR -->
+    <div class="logo-selector">
+    <label for="logoSelect">NABH Logo:</label>
+
+    <select id="logoSelect">
+        <option value="show">Show NABH Logo</option>
+        <option value="hide">Hide NABH Logo</option>
+    </select>
+</div>
+
     <!-- Action Buttons -->
     <div class="buttons" style="margin-bottom: 10px;">
-        <button onclick="window.location.href='./main.html';">🏠 Home</button>
-        <button onclick="printFunction()">🖨️ Print </button>
+        <button onclick="window.location.href='./main.html';">
+            🏠 Home
+        </button>
+
+        <button onclick="printFunction()">
+            🖨️ Print
+        </button>
     </div>
+
 </nav>
 <hr class="hr">
 
@@ -959,6 +1682,9 @@
     width: 100%;
     gap: 0px;
     text-align: center;
+
+
+
 ">
 
     <!-- Hospital Logo -->
@@ -970,20 +1696,33 @@
         margin: 0;
         padding: 0;
     ">
-        <img
-            src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png"
-            alt="Hospital Logo"
-            class="hospital-logo"
-            style="
-                width: 150px;
-                height: 100px;
-                object-fit: contain;
-                display: block;
-                margin: 0;
-                padding: 0;
-                margin-left: -20px;
-            "
-        >
+      <img
+    class="hospital-logo"
+    src="../assets/images/Ravikalp_Hospital__new_logo-removebg-preview.png"
+    alt="Ravikalp Hospital Logo"
+>
+
+<!-- ================= SELECTED PRINT LOGO ================= -->
+
+<img
+    id="selectedPrintLogo"
+    src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
+    alt="NABH Pre-Accredited Logo"
+    class="nabh-logo"
+    style="
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 120px;
+        height: 115px;
+        object-fit: contain;
+        z-index: 2;
+        display: block;
+      
+
+
+    "
+>
     </div>
 
     <!-- Hospital Name + Address -->
@@ -996,7 +1735,7 @@
         margin: 0;
         padding: 0;
         line-height: 1;
-         transform: translateX(-10px);
+         transform: translateX(-20px);
     ">
 
         <div class="hospital-name" style="
@@ -1004,6 +1743,7 @@
             margin: 0;
             padding: 0;
             white-space: nowrap;
+        
         ">
             रविकल्प हॉस्पिटल
         </div>
@@ -1051,21 +1791,7 @@
 
 
     <!-- ================= NABH LOGO ================= -->
-    <img
-        src="../assets/logo/ChatGPT_Image_Sep_6__2026__07_53_02_PM-removebg-preview.png"
-        alt="NABH Pre-Accredited Logo"
-        class="nabh-logo"
-        style="
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 120px;
-            height: 115px;
-            object-fit: contain;
-            z-index: 2;
-            display: block;
-        "
-    >
+    
 
 </div>
 
@@ -1171,7 +1897,7 @@
                 </table>
 
                 <h3 id="AR-Heading">AR </h3>
-                <table style="width: 450px; margin-left: 100px; margin-top:-3px;" border="1" id="AR-Table">
+                <table style="width: 450px; margin-left: 100px; margin-top:-35px;" border="1" id="AR-Table">
                   <thead>
                     <tr>
                       <th colspan="5">Right Eye</th>
@@ -1215,9 +1941,9 @@
 
                 <div class="form-step" id="step-3">
                     <div class="form-group">
-                      <h3 id="Current-Power-Heading">Old Glass Power  </h3>
+                      <h3 id="Current-Power-Heading" >Old Glass Power  </h3>
                       <div class="table-container" id="Current-Power-Section">
-                        <table id="Current-Power-Table" style="width: 390px; margin-left: 90px;">
+                        <table id="Current-Power-Table" style="width: 390px; margin-left: 110px; margin-top: -10px;" ">
                           <thead>
                             <tr>
                               <th></th>
@@ -1266,8 +1992,8 @@
                       </div>
                     </div>
                   </div>
-                  <h3 id="Refraction-Heading">Refraction </h3>
-                  <table id="Refraction-Table" style="width: 450px; margin-left: 60px;" >
+                  <h3 id="Refraction-Heading" style="margin-top: -1px;">Refraction </h3>
+                  <table id="Refraction-Table" style="width: 450px; margin-left: 60px; margin-top: -10px; " >
                     <thead>
                       <tr>
                         <th rowspan="2"></th>
@@ -1328,8 +2054,8 @@
                   
                 
                   <div class="eye-examination-section">
-                    <h3 id="Eye-Examination-Heading">Eye Examination</h3>
-                    <table class="table-container table-responsive" style="width: 360px; margin-left: 90px;" id="Eye-Examination-Table">
+                    <h3 id="Eye-Examination-Heading" style="margin-top: 3px;">Eye Examination</h3>
+                    <table class="table-container table-responsive" style="width: 360px; margin-left: 90px; margin-top: -7px;" id="Eye-Examination-Table">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -1473,10 +2199,10 @@
                         
                     </div>
 
-                    <h3 id="Treatment-Heading">Treatment -</h3>
+                    <h3 id="Treatment-Heading" style="margin-top: -3px;">Treatment -</h3>
                     <div class="medicines-section">
-                        <h4 id="Medicines-Heading">Medical Treatment</h4>
-                        <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px;">
+                        <h4 id="Medicines-Heading" style="margin-top: -14px;">Medical Treatment</h4>
+                        <table class="table-container table-responsive" id="Medicines-Table" style="width: 400px; margin-left: 80px; margin-top: -10px;">
                             <thead>
                                 <tr>
                                     <th scope="col">Medicine Name</th>
@@ -1497,8 +2223,8 @@
                         </table>
                     </div>
 
-                    <h4 id="Pre-Operative-Medicine-Heading">Pre-Operative Treatment</h4>
-                    <table class="table-container table-responsive" style="width: 600px; margin-left: 40px;" id="Pre-Operative-Medicine-Template">
+                    <h4 id="Pre-Operative-Medicine-Heading" style="margin-top: 6px;">Pre-Operative Treatment</h4>
+                    <table class="table-container table-responsive" style="width: 600px; margin-left: 40px; margin-top: -10px;" id="Pre-Operative-Medicine-Template">
                         <thead>
                           <tr>
                           
@@ -1545,23 +2271,23 @@
 
 
 
-                   <h4 id="Pre-Operative-Heading"> Pre-Operative Procedure </h4>
+                   <h4 id="Pre-Operative-Heading" style="margin-top:8px;"> Pre-Operative Procedure </h4>
                    <div class="patient-details Pre-Operative-Details">
                         
-                    <p class="complaints show-BP" style="margin-right: 120px;">
+                    <p class="complaints show-BP" style="margin-right: 120px; margin-top: -15px;">
       
                     </p>
 
-                    <p class="complaints show-Pulse-Rate" style="margin-right: 120px;">
+                    <p class="complaints show-Pulse-Rate" style="margin-right: 120px;  margin-top: -15px;">
                         
                     </p>
-                    <p class="complaints show-SAC" style="margin-right: 120px;">
+                    <p class="complaints show-SAC" style="margin-right: 120px;  margin-top: -15px;">
                         
                     </p>                                          
                   </div>
 
-                    <table style="width: 370px; margin-left: 90px;" id="Pre-Operative-Table">
-                        <h4 id="NCT-Heading"> NCT </h4>
+                    <table style="width: 370px; margin-left: 90px;  margin-top: -30px;" id="Pre-Operative-Table">
+                        <h4 id="NCT-Heading" style=" margin-top: 8px;"> NCT </h4>
                   
                         <thead>
                            
@@ -1586,8 +2312,8 @@
                         </tbody>
                       </table>
 
-                      <h4 id="A-Scan-Heading">A-Scan </h4>
-                      <table style="width: 280px; margin-left: 90px;" id="A-Scan-Table">
+                      <h4 id="A-Scan-Heading" style=" margin-top: 5px;">A-Scan </h4>
+                      <table style="width: 280px; margin-left: 90px; margin-top: -15px;" id="A-Scan-Table">
                         <thead>
                           <tr>
                             <th></th>
@@ -2456,5 +3182,35 @@ window.onload = function () {
 }
 
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const logoSelect = document.getElementById("logoSelect");
+    const nabhLogo = document.getElementById("selectedPrintLogo");
+
+    if (!logoSelect || !nabhLogo) {
+        console.error("NABH logo selector or NABH logo image not found.");
+        return;
+    }
+
+    const STORAGE_KEY = "nabhLogoSetting";
+    const savedSetting = localStorage.getItem(STORAGE_KEY);
+
+    // Default = SHOW NABH logo.
+    logoSelect.value = savedSetting === "hide" ? "hide" : "show";
+
+    function updateNabhLogo() {
+        const hideLogo = logoSelect.value === "hide";
+        nabhLogo.classList.toggle("nabh-logo-hidden", hideLogo);
+        localStorage.setItem(STORAGE_KEY, hideLogo ? "hide" : "show");
+    }
+
+    logoSelect.addEventListener("change", updateNabhLogo);
+    updateNabhLogo();
+    window.addEventListener("beforeprint", updateNabhLogo);
+});</script>
+
+
+
+
 </body>
 </html>
